@@ -1,0 +1,91 @@
+{
+  "name": "Typography",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Typekit",
+      "info": "Check enable Typekit fonts and input a Typekit ID to import fonts."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_typekit",
+      "label": "Enable Typekit fonts",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "typekit_id",
+      "label": "Typekit ID"
+    },
+    {
+      "type": "header",
+      "content": "Custom Font"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_custom_fonts",
+      "label": "Enable custom fonts",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Headings"
+    },
+    {
+      "type": "font_picker",
+      "id": "headings_font",
+      "label": "Font",
+      "default": "montserrat_n4"
+    },
+    {
+      "type": "text",
+      "id": "headings_typekit_font_family",
+      "label": "Typekit Font Family",
+      "info": "Prioritized list of one or more font family names and\/or generic family names. Font should be included in typekit specifed by 'Typekit ID' field."
+    },
+    {
+      "type": "text",
+      "id": "headings_custom_font_family",
+      "label": "Custom Font Family"
+    },
+    {
+      "type": "header",
+      "content": "Body Text"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Font",
+      "default": "lato_n4"
+    },
+    {
+      "type": "text",
+      "id": "body_typekit_font_family",
+      "label": "Typekit Font Family",
+      "info": "Prioritized list of one or more font family names and\/or generic family names. Font should be included in typekit specifed by 'Typekit ID' field."
+    },
+    {
+      "type": "text",
+      "id": "body_custom_font_family",
+      "label": "Custom Font Family"
+    },
+    {
+      "type": "font_picker",
+      "id": "buttons_font",
+      "label": "Font",
+      "default": "titillium_web_n7"
+    },
+    {
+      "type": "text",
+      "id": "buttons_typekit_font_family",
+      "label": "Typekit Font Family",
+      "info": "Prioritized list of one or more font family names and\/or generic family names. Font should be included in typekit specifed by 'Typekit ID' field."
+    },
+    {
+      "type": "text",
+      "id": "buttons_custom_font_family",
+      "label": "Custom Font Family",
+      "default": "BrownStd"
+    }
+  ]
+}

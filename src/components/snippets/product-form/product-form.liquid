@@ -1,0 +1,39 @@
+{%- assign isLogged = customer | default: false -%}
+
+<script>
+  var productState = {
+    initProduct: {{ product | json }},
+    initVariant: {{ product.selected_or_first_available_variant | json }},
+    afterpayEnable: {{ settings.product_afterpay_enable | json }},
+    lowStockThreshold: {{ settings.low_stock_threshold | default: 0 }},
+    lowStockMessage: {{ settings.low_stock_message | json }},
+    productNoteShipping: {{ settings.product_note_shipping | json }},
+    {%- unless isLogged -%}
+      productNoteOrder: {{ settings.product_note_order | json }}
+    {%- endunless -%}
+  }
+
+  function assignVariantMetafields() {
+    if (!productState || !productState.initProduct || !productState.initProduct.variants || !productState.initProduct.variants.length) {
+      return
+    }
+    {% for variant in product.variants %}
+      if (productState.initProduct.variants[{{- forloop.index0 -}}]) {
+        productState.initProduct.variants[{{- forloop.index0 -}}].metafields = {% render 'product-variant-json-meta', variant: variant %}
+      }
+    {% endfor %}
+  }
+  assignVariantMetafields()
+</script>
+
+<product-form></product-form>
+<wishlist-button />
+
+{%- capture wishlist_button_src -%}
+  {{- 'module-wishlist-button.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script',
+  src: wishlist_button_src,
+  priority: 'normal',
+  type: "defer"
+-%}

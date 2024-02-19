@@ -1,0 +1,33 @@
+{%- liquid
+  assign class = class | default: null
+  assign input = input | default: null
+  assign id = id | default: null
+  assign name = name | default: null
+  assign value = value | default: null
+  assign label = label | default: null
+  assign checked = checked | default: false
+  assign disabled = disabled | default: false
+-%}
+
+<div class="toggle-input flex items-center {{ class }}">
+  {% if input %}
+    {{ input }}
+  {% else %}
+    <input
+      id="{{ id }}"
+      class="toggle-input__input"
+      type="checkbox"
+      name="{{ name }}"
+      {% if checked %}
+        checked
+      {% endif %}
+      {% if disabled %}
+        disabled
+      {% endif %}
+    >
+  {% endif %}
+  <label for="{{ name }}" class="toggle-input__label">
+    <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+    {{ label }}
+  </label>
+</div>

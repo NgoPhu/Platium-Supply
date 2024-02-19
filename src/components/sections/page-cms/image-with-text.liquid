@@ -1,0 +1,105 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="container py-8 lg:py-[72px]" style="--text-color: {{ section.settings.text_color }};--heading-color: {{ section.settings.heading_color }}; background-color: {{ section.settings.bg_color }}">
+    {%- if section.settings.title != blank -%}
+      <h2 class="font-body text-3xl font-bold text-[var(--heading-color)] text-center mb-6 lg:mb-12 lg:text-4xl">{{- section.settings.title -}}</h2>
+    {%- endif -%}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-{{ section.blocks.size }} lg:gap-10">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'image' -%}
+          {%- if block.settings.url != blank -%}
+            <a href="{{- block.settings.url -}}" class="block relative rounded-tr-[40px] overflow-hidden {% if page.template_suffix == 'starlight' %} aspect-[344/264] lg:aspect-[400/300]{% else %} aspect-[344/400 lg:aspect-[400/472]{% endif %}">
+          {%- else -%}
+            <div class="block relative rounded-tr-[40px] overflow-hidden {% if page.template_suffix == 'starlight' %} aspect-[344/264] lg:aspect-[400/300]{% else %} aspect-[344/400] lg:aspect-[400/472]{% endif %}">
+          {%- endif -%}
+            {%- render 'image', image: block.settings.image, class: 'hover:zoom transition w-full h-full' -%}
+          {%- if block.settings.url != blank -%}
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+        {%- elsif block.type == 'content' -%}
+          <div class="wysiwyg wysiwyg-image-with-text {% if page.template_suffix == 'starlight' %}[&_strong]:!text-intro-text{% endif %}">
+            {{- block.settings.content -}}
+            {%- if block.settings.image != blank -%}
+              {%- render 'image',
+                image: block.settings.image,
+                class: 'w-[300px] lg:w-[250px] xl:w-[360px] h-auto aspect-[300/37] lg:aspect-[360/45]'
+              -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Image With Text",
+  "settings": [
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#343F57"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#445069"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image With Text"
+    }
+  ]
+}
+{% endschema %}

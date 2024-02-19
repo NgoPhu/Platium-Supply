@@ -1,0 +1,82 @@
+{%- liquid
+  assign mod_settings = section.settings
+  assign class = "[&>iframe]:w-full [&>iframe]:h-full"
+
+  if mod_settings.video_url_mobile != blank
+    assign class = class | append: ' md-max:hidden'
+  endif
+-%}
+
+<div class="container py-8 lg:py-[72px] relative">
+  <div class="relative rounded-[10px] overflow-hidden aspect-[344/224] lg:aspect-[1280/716]">
+    {%- render 'video-thumbnail',
+      video_url: mod_settings.video_url,
+      video_type: mod_settings.video_type,
+      thumbnail: mod_settings.thumbnail_image,
+      class: class
+    -%}
+    {% if mod_settings.video_url_mobile != blank %}
+      {%- render 'video-thumbnail',
+        video_url: mod_settings.video_url,
+        video_type: mod_settings.video_type,
+        thumbnail: mod_settings.thumbnail_image,
+        class: "md:hidden [&>iframe]:w-full [&>iframe]:h-full"
+      -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video CMS",
+  "settings": [
+    {
+      "type": "select",
+      "id": "video_type",
+      "label": "Video's type desktop",
+      "options": [
+        { "value": "mp4", "label": "MP4" },
+        { "value": "youtube", "label": "Youtube" },
+        { "value": "vimeo", "label": "Vimeo" }
+      ],
+      "default": "mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video's url desktop"
+    },
+    {
+      "type": "select",
+      "id": "video_type_mobile",
+      "label": "Video's type mobile",
+      "options": [
+        { "value": "mp4", "label": "MP4" },
+        { "value": "youtube", "label": "Youtube" },
+        { "value": "vimeo", "label": "Vimeo" }
+      ],
+      "default": "mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_url_mobile",
+      "label": "Video's url mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_image",
+      "label": "Video Thumbnail Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_image_mobile",
+      "label": "Video Thumbnail Mobile"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video CMS"
+    }
+  ]
+}
+{% endschema %}

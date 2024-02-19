@@ -1,0 +1,66 @@
+{%- liquid
+  assign url = url
+  assign image = image
+  assign image_mobile = image_mobile
+  assign image_acf = image_acf
+  assign image_mobile_acf = image_mobile_acf
+  assign content = content
+  assign class = class
+  assign content_class = content_class | prepend: 'container h-full w-full flex'
+  assign title_class = title_class
+  assign subtitle_class = subtitle_class
+  assign class_button = 'flex items-center gap-4 lg:gap-6'
+  assign content_position_horizontal = content_position_horizontal | default: 'justify-center'
+  assign content_position_vertical = content_position_vertical | default: 'items-center'
+  assign background_color = background_color | default: 'transparent'
+  assign content_inner_class = content_inner_class
+
+  case content_position_horizontal
+    when 'justify-start'
+      assign content_align_class = 'text-left'
+      assign description_align_class = 'mr-auto text-left'
+    when 'justify-center'
+      assign content_align_class = 'text-center'
+      assign description_align_class = 'mx-auto text-center'
+      assign class_button = class_button | append: ' justify-center'
+      assign title_class = title_class | append: ' md-max:mx-auto'
+    when 'justify-end'
+      assign content_align_class = 'text-right'
+      assign description_align_class = 'ml-auto text-right'
+      assign class_button = class_button | append: ' justify-end'
+      assign title_class = title_class | append: ' md-max:ml-auto'
+  endcase
+-%}
+
+{%- if title != blank or subtitle != blank -%}
+  {%- capture content -%}
+    <div class="{{ content_class }} {{ content_position_vertical }} {{ content_position_horizontal }}">
+      <div class="{{ content_align_class }} {{ content_inner_class }}" style="background: {{ background_color }};">
+        {%- if title != blank -%}
+          <h2 class="{{ title_class }}">{{- title -}}</h2>
+        {%- endif -%}
+        {%- if subtitle != blank -%}
+          <p class="{{ description_align_class }} {{ subtitle_class }}">{{- subtitle -}}</p>
+        {%- endif -%}
+        {%- if cta_text != blank and cta_link != blank -%}
+          <div class="{{ class_button }}">
+            {%- render 'button', class: class_button_first, link_text: cta_text, link_url: cta_link -%}
+            {%- if cta_text_second != blank and cta_link_second != blank -%}
+              {%- render 'button', class: class_button_second, link_text: cta_text_second, link_url: cta_link_second -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- render 'hero',
+  class: class,
+  image: image,
+  image_mobile: image_mobile,
+  image_acf: image_acf,
+  image_mobile_acf: image_mobile_acf,
+  url: url,
+  content: content
+-%}

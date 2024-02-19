@@ -1,0 +1,64 @@
+@layer components {
+  .modal-dialog,
+  modal-dialog {
+    @apply flex-center pointer-events-none fixed top-0 left-0 -z-50 h-full w-screen bg-overlay opacity-0 transition-all duration-150;
+  }
+
+  .modal-dialog-opened {
+    @apply pointer-events-auto z-50 opacity-100;
+  }
+
+  .modal-dialog-content {
+    @apply relative overflow-hidden bg-white;
+  }
+
+  .modal-dialog[data-type='slideout'],
+  modal-dialog[data-type='slideout'] {
+    @apply z-50 justify-end bg-transparent opacity-100;
+
+    &.modal-dialog-mini-cart {
+      @apply h-full lg:items-start;
+
+      &.modal-dialog-opened {
+        & .modal-dialog-content {
+          @apply opacity-100 visible;
+        }
+      }
+
+      & .modal-dialog-overlay {
+        @apply bg-transparent;
+      }
+
+      & .modal-dialog-content {
+        @apply transform-none h-fit max-h-[536px] top-[100px] opacity-0 invisible lg:relative lg:ml-auto lg:max-w-[344px] lg:top-[122px] lg:left-auto;
+
+        .is-sticky & {
+          @apply top-16 lg:top-20;
+        }
+      }
+    }
+
+    & .modal-dialog-overlay {
+      @apply absolute inset-0 h-full w-full bg-overlay opacity-0 transition-all duration-500 ease-out;
+    }
+
+    & .modal-dialog-content {
+      @apply absolute right-0 z-50 h-full translate-x-full bg-white transition-all duration-300 ease-out;
+    }
+
+    &.modal-dialog-opened {
+      & .modal-dialog-overlay {
+        @apply opacity-100;
+      }
+
+      & .modal-dialog-content {
+        @apply translate-x-0;
+      }
+    }
+  }
+
+  .modal-dialog[data-type='modal'],
+  modal-dialog[data-type='modal'] {
+    @apply z-50;
+  }
+}

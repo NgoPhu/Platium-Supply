@@ -1,0 +1,55 @@
+<script>
+  var productState = {
+    initProduct: {{ section.settings.product | json }},
+    initVariant: {{ section.settings.selected_or_first_available_variant | json }},
+    lowStockThreshold: {{ settings.low_stock_threshold | default: 0 }},
+    lowStockMessage: {{ settings.low_stock_message | json }},
+    view_product: {{ 'product_donate.view_product' | t | json }}
+  }
+</script>
+
+{%- if section.settings.product != blank -%}
+  <div class="bg-grey-100 py-8 lg:py-[72px]" style="--text-color: {{ section.settings.text_color }}">
+    <div class="container">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="text-3xl font-bold font-body text-[var(--text-color)] lg:text-4xl mb-12 w-full max-w-[648px] text-center mx-auto">{{- section.settings.heading -}}</h2>
+      {%- endif -%}
+      <product-donate></product-donate>
+    </div>
+  </div>
+{%- endif -%}
+
+{%- capture src_url -%}
+  {{- 'section-product-donate.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+
+{% schema %}
+{
+  "name": "Product Donate",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#3D1466"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Donate"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+<script>
+  var inlineBanner = {
+    "titleBanner": {{ collection.metafields.collection_banner.title | default: collection.title | json }},
+    "descriptionBanner": {{ collection.metafields.collection_banner.description | json }},
+    "imageBanner": {{ collection.metafields.collection_banner.image | first | json }},
+    "imageMobileBanner": {{ collection.metafields.collection_banner.image_mobile | first | json }}
+  }
+</script>

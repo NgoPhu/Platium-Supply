@@ -1,0 +1,46 @@
+{%- liquid
+  assign hide_label = hide_label | default: false
+  assign dropdown = dropdown | default: false
+  assign class = class | default: null
+  assign class_input = class_input | default: null
+  assign input = input | default: null
+  assign id = id | default: null
+  assign name = name | default: null
+  assign value = value | default: null
+  assign label = label | default: null
+  assign required = required | default: false
+  assign default = default | default: null
+  assign options = options | default: null
+  assign error = error | default: null
+  assign autocomplete = autocomplete | default: null
+-%}
+
+<div class="relative {{ class }}">
+  <select
+    id="{{ id }}"
+    name="{{ name }}"
+    class="input peer {{ class_input }}"
+    autocomplete="{{ autocomplete }}"
+    value="{{ value }}"
+    {% if required %}
+      required
+    {% endif %}
+    {% if default %}
+      data-default="{{ default }}"
+    {% endif %}
+  >
+    {{ options }}
+  </select>
+  {%- unless hide_label -%}
+    <label class="input-label {{ class_label }}" for="{{ id }}">
+      {{ label }}
+      {%- if required -%}*{%- endif -%}
+    </label>
+  {%- endunless -%}
+  {%- if error != blank -%}
+    <p class="input-error">{{- error -}}</p>
+  {%- endif -%}
+  {%- if dropdown == true -%}
+    <span class="select-icon">{%- render 'icon' with 'icon-arrow-down' %}</span>
+  {%- endif -%}
+</div>

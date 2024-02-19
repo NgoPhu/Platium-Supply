@@ -1,0 +1,117 @@
+{%- comment -%}
+  Render a hero
+
+  Accepts:
+  - image: {String|Object}
+  - image_mobile: {String|Object}
+  - image_acf: {String|Object}
+  - image_mobile_acf: {String|Object}
+  - image_class: {String}
+  - image_mobile_class: {String}
+  - class: {String} Set aspect ratio or something else
+  - content: {String}
+  - content_class: {String}
+  - use_video: {Boolean}
+  - video_url: {String}
+  - video_type: {String}
+  - video_autoplay: {Boolean}
+  - url: {String}
+{%- endcomment -%}
+
+{% liquid
+  assign url = url
+  assign image_acf = image_acf
+  assign image_mobile_acf = image_mobile_acf
+  assign image = image
+  assign image_mobile = image_mobile
+  assign content = content
+  assign class = class | default: 'aspect-[376/300] md:aspect-[1440/500]' | prepend: 'block w-full relative '
+  assign banner_class = banner_class | default: 'absolute fit '
+  assign content_class = content_class | default: 'absolute fit '
+  assign image_class = image_class | prepend: 'fit hidden md:block '
+  assign image_mobile_class = image_mobile_class | prepend: 'fit md:hidden'
+  assign video_type = video_type | default: 'mp4'
+  assign video_url = video_url
+  assign video_type_mobile = video_type_mobile | default: 'mp4'
+  assign video_url_mobile = video_url_mobile
+  assign use_video = use_video | default: false
+  assign video_autoplay = video_autoplay | default: false
+  assign loading = loading
+  assign video_loop = video_loop | default: false
+  assign class_video = class_video
+  assign video_muted = video_muted | default: false
+  assign play_intersection = play_intersection
+%}
+
+<div class="{{ class }}">
+  {%- if url != blank -%}
+    <a href="{{- url -}}" class="{{ banner_class }}" aria-label="hero">
+  {%- else -%}
+    <div class="{{ banner_class }}">
+  {%- endif -%}
+    {%- unless use_video -%}
+      {% liquid
+        if image_acf != nil or image_mobile_acf != nil
+          render 'image-acf', image: image_acf, class: image_class, loading: loading
+          render 'image-acf', image: image_mobile_acf, class: image_mobile_class, loading: loading
+        elsif image != nil and image_mobile != nil
+          render 'image', image: image, class: image_class
+          render 'image', image: image_mobile, class: image_mobile_class
+        else
+          if image != nil
+            assign image = image
+          elsif image_mobile != nil
+            assign image = image_mobile
+          endif
+          render 'image', image: image, class: 'fit'
+        endif
+      %}
+
+      {%- else -%}
+        <video-player
+          src="{{ video_url }}"
+          data-video-type="{{ video_type }}"
+          controls="true"
+          {%- if video_muted -%}
+            muted
+          {%- endif -%}
+          {% if play_intersection %}
+            data-play-intersection
+          {% endif %}
+          {% if video_autoplay == true %}
+            autoplay="true"
+          {% endif %}
+          {%- if video_loop == true -%}
+            loop="true"
+          {%- endif -%}
+          {% if video_url_mobile != blank %}
+            class="md-max:hidden video"
+          {% endif %}
+        ></video-player>
+        {% if video_url_mobile != blank %}
+          <video-player
+            src="{{ video_url_mobile }}"
+            data-video-type="{{ video_type_mobile }}"
+            controls="true"
+            muted
+            {% if video_autoplay == true %}
+              autoplay="true"
+            {% endif %}
+            {%- if video_loop == true -%}
+              loop="true"
+            {%- endif -%}
+            class="md:hidden video"
+          ></video-player>
+        {% endif %}
+    {%- endunless -%}
+  {%- if url != blank -%}
+    </a>
+  {%- else -%}
+    </div>
+  {%- endif -%}
+  {%- if content != blank -%}
+    <div class="{{ content_class }}">
+      {{- content -}}
+    </div>
+  {%- endif -%}
+</div>

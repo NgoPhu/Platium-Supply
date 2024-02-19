@@ -1,0 +1,81 @@
+{%- liquid
+  assign background_colour = background_colour
+  assign image = image
+  assign image_mobile = image_mobile | default: image
+  assign class_image = class_image
+  assign object_fit_class = object_fit_class
+  assign class_wrapper_image = class_wrapper_image
+  assign title = title
+  assign secondary_title = secondary_title
+  assign description = description
+  assign cta_text = cta_text
+  assign cta_link = cta_link
+  assign class_image = class_image | prepend: 'hidden md:block '
+  assign class_image_mobile = class_image_mobile | prepend: 'md:hidden '
+  assign is_acf = is_acf | default: false
+-%}
+
+{%- if background_colour != blank -%}
+  {%- capture bg_color -%}
+    background: {{ background_colour }}
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- if image != blank or title != blank or description != blank -%}
+  <div class="{{ class }}">
+    <div class="{{ class_container }}">
+      <div class="{{ class_wrapper_content }}" style=" {{ bg_color }}">
+        {%- if cta_link != blank -%}
+          <a href="{{- cta_link -}}" class="{{ class_wrapper_image }}">
+        {%- else -%}
+          <div class="{{ class_wrapper_image }}">
+        {%- endif -%}
+        {%- if is_acf -%}
+          {% render 'image-acf',
+            image: image,
+            class: class_image,
+            object_fit: object_fit_class
+          %}
+          {% render 'image-acf',
+            image: image_mobile,
+            class: class_image_mobile,
+            object_fit: object_fit_class
+          %}
+        {%- else -%}
+          {% render 'image',
+            image: image,
+            class: class_image,
+            object_fit: object_fit_class
+          %}
+          {% render 'image',
+            image: image_mobile,
+            class: class_image_mobile,
+            object_fit: object_fit_class
+          %}
+        {%- endif -%}
+        {%- if cta_link != blank -%}
+          </a>
+        {%- else -%}
+          </div>
+        {%- endif -%}
+        <div class="{{ class_inner_content }}">
+          {%- if title != blank -%}
+            <h2 class="{{ class_title }}">{{ title }}</h2>
+          {%- endif -%}
+          {%- if secondary_title != blank -%}
+            <div class="{{ class_secondary_title }}">{{ secondary_title }}</div>
+          {%- endif -%}
+          <div class="{{ class_description }}">{{ description }}</div>
+          {%- if cta_text != blank -%}
+            {%- render 'button',
+              class: class_button,
+              class_text: class_text_button,
+              link_text: cta_text,
+              link_url: cta_link
+            -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

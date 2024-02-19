@@ -1,0 +1,31 @@
+{%- liquid
+  assign main_menu = main_menu | default: nil
+  assign menu_list_class = 'block text-sm text-grey-900 mb-2 link no-underline hover:underline w-fit'
+-%}
+
+<div class="relative hidden lg:block shadow-sm [&.is-active>.header-sticky>.menu-overlay]:opacity-100">
+  <div class="top-0 z-30 hidden w-full bg-white border-b header-sticky js-header-sticky border-default md:block">
+    <div class="container">
+      <div class="flex items-center justify-between">
+        <nav class="hidden md:flex-center js-menu-navigation">
+          {%- for link in main_menu -%}
+            <a
+              href="{{- link.url -}}"
+              class="
+                relative py-[18px] px-6 xl:px-8 text-grey-900 text-sm
+                after:content-[''] after:absolute after:right-0 after:h-[22px] after:w-px after:bg-default last:after:content-none
+                hover:bg-success-bg hover:text-secondary
+                [&.active]:bg-success-bg [&.active]:text-secondary
+                js-menu-item
+              "
+              title="{{ link.title }}"
+              data-title="{{ link.title | handleize }}"
+            >
+              {{- link.title -}}
+            </a>
+          {%- endfor -%}
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

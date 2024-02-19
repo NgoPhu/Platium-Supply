@@ -1,0 +1,78 @@
+{%- liquid
+  assign title_class = title_class | prepend: 'product-card-title font-body text-lg text-grey-900 mt-3 md:text-xl md:mt-5 '
+  assign image_wrapper_class = image_wrapper_class
+  assign class = class | prepend: 'product-card '
+  assign background_color = background_color
+  assign price_class = price_class | prepend: 'product-card-price font-body text-3xl text-grey-900 '
+  assign sale_price_class = sale_price_class | prepend: 'product-card-price-sale font-body text-3xl font-bold text-secondary '
+  assign label_class = label_class | prepend: 'product-card-label font-body rounded-tl-xl rounded-br-xl bg-primary py-[5px] px-4 w-fit overflow-hidden text-accent-1 '
+  assign content_class = content_class
+  assign price = price | default: nil
+  assign price_sale = price_sale | default: nil
+  assign url = url | default: nil
+  assign show_label = show_label | default: true, allow_false: true
+  assign class_wrapper_price = class_wrapper_price | default: 'flex items-center gap-1.5 mt-3 md:mt-5'
+  assign moneyFormat = moneyFormat
+-%}
+
+{%- if image != blank -%}
+  {%- if show_label == true -%}
+    {%- capture label_sale -%}
+      {%- if price and price_sale != blank and price_sale < price -%}
+        {%- if moneyFormat == true -%}
+          {%- assign save_number = price | minus: price_sale | money | remove: '$' -%}
+        {%- else -%}
+          {%- assign save_number = price | minus: price_sale -%}
+        {%- endif -%}
+        <div class="{{ label_class }}">
+          <span class="text-base font-bold">{{- 'product.general.save_label' | t : money: save_number -}}</span>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+  {%- endif -%}
+
+  {%- capture product_price -%}
+    {%- if price != blank -%}
+      {%- if moneyFormat == true -%}
+        <div class="{{- class_wrapper_price -}}">
+          {%- if price_sale != blank and price_sale < price -%}
+            <span class="{{ sale_price_class }}">{{- price_sale | money -}}</span>
+            <span class="{{ price_class }} line-through decoration-2">{{- price | money -}}</span>
+          {%- else -%}
+            <span class="{{ price_class }}">{{- price | money -}}</span>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="{{- class_wrapper_price -}}">
+          {%- if price_sale != blank and price_sale < price -%}
+            <span class="{{ sale_price_class }}">{{- price_sale | prepend: '$' -}}</span>
+            <span class="{{ price_class }} line-through decoration-2">{{- price | prepend: '$' -}}</span>
+          {%- else -%}
+            <span class="{{ price_class }}">{{- price | prepend: '$' -}}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- capture background_color -%}
+    {%- if background_color != blank -%}
+      style="background-color: {{ background_color }};"
+    {%- endif -%}
+  {%- endcapture -%}
+    {%- render 'card',
+      url: url,
+      image: image,
+      image_mobile: image_mobile,
+      title: title,
+      before_content: label_sale,
+      after_content: product_price,
+      image_wrapper_class: image_wrapper_class,
+      class: class,
+      title_class: title_class,
+      style_inline: background_color,
+      content_class: content_class,
+      is_acf: is_acf,
+      object_fit: object_fit
+    -%}
+{%- endif -%}

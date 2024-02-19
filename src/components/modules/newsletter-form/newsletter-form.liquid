@@ -1,0 +1,160 @@
+{%- liquid
+  assign cta_text = cta_text | default: settings.newsletter_popup_button_text
+  assign title = title | default: settings.newsletter_popup_title
+  assign description = description | default: settings.newsletter_popup_description
+  assign newsletter_note = settings.text_form
+  assign first_name = 'newsletter-form-placeholder.first_name' | t
+  assign newsletter_email_placeholder = 'newsletter-form-placeholder.email' | t
+  assign newsletter_phone_placeholder = 'newsletter-form-placeholder.mobile_number' | t
+  assign newsletter_image = settings.newsletter_image
+  assign newsletter_background = newsletter_background
+  assign newsletter_background_mobile = newsletter_background_mobile
+  assign list_id = settings.klaviyo_list_id
+  assign title = title | default: ''
+  assign message_duplicate = settings.klaviyo_message_duplicate
+  assign message_success = settings.klaviyo_message_success
+  assign notice_global = notice_global | default: false
+  assign notice_custom = notice_custom | default: false
+  assign newsletter_form_cancel_class = newsletter_form_cancel_class | default: ''
+  assign newsletter_form_class = newsletter_form_class | default: ''
+  assign wrapper_class = wrapper_class | default: ''
+
+  assign newsletter_wrapper_class = newsletter_wrapper_class | default: 'container'
+  assign newsletter_inner_class = newsletter_inner_class | default: 'items-center justify-center lg:flex lg:flex-row lg:justify-items-stretch lg:items-stretch rounded-[10px] overflow-hidden'
+  assign newsletter_image_class = newsletter_image_class
+  assign newsletter_image_ratio_class = newsletter_image_ratio_class | default: 'w-full h-full'
+  assign newsletter_content_class = newsletter_content_class | default: 'w-full py-6 px-4 lg:w-1/2 lg:px-10 lg:py-[62px]'
+  assign newsletter_title_class = newsletter_title_class | default: 'text-2xl text-grey-900 font-sans lg:text-4xl'
+  assign newsletter_description_class = newsletter_description_class | default: 'text-sm text-grey-900 mt-2'
+  assign newsletter_body_class = newsletter_body_class | default: 'flex flex-col flex-wrap items-center'
+  assign newsletter_input_class = newsletter_input_class | default: 'w-full'
+  assign input_class = input_class | default: 'input-newsletter'
+  assign newsletter_button_class = newsletter_button_class | default: 'button-primary w-full mt-4 '
+  assign newsletter_message_class = newsletter_message_class | default: 'text-white'
+  assign newsletter_form_id = newsletter_form_id
+-%}
+
+<style>
+  .newsletter__background {
+    background-image: url({{ newsletter_background | img_url: 'master' }});
+    background-size: cover;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .newsletter__background {
+      background-image: url({{ newsletter_background_mobile | img_url: 'master' }});
+      background-size: cover;
+    }
+  }
+</style>
+
+<newsletter-form>
+  <div class="js-newsletter-form {{ newsletter_form_class }}">
+    <div class="{{ newsletter_wrapper_class }}">
+      <div class="{{ newsletter_inner_class }} {% if newsletter_background != blank or newsletter_background_mobile != blank %} newsletter__background {% else %} bg-primary{% endif %}">
+        {%- if newsletter_image != blank -%}
+          <div class="hidden {{ newsletter_image_class }}">
+            {%- render 'image',
+              image: newsletter_image,
+              class: newsletter_image_ratio_class
+            -%}
+          </div>
+        {%- endif -%}
+        <form id="{{ newsletter_form_id }}" class="{{ newsletter_content_class }}">
+          <div class="{{ wrapper_class }}">
+            <div class="text-center">
+              {%- if title != blank -%}
+                <h3 class="{{ newsletter_title_class }}">{{- title -}}</h3>
+              {%- endif -%}
+              {%- if description != blank -%}
+                <div class="{{ newsletter_description_class }}">{{ description }}</div>
+              {%- endif -%}
+            </div>
+            <input type="hidden" name="g" value="{{ list_id }}">
+            <input type="hidden" name="$field" value="$email">
+            <div class="{{ newsletter_body_class }}">
+              {%- render 'text-input',
+                id: 'NewsletterForm_first_name',
+                name: '$first_name',
+                type: 'text',
+                class: newsletter_input_class,
+                class_input: input_class,
+                label: first_name,
+                placeholder: first_name,
+                show_label: true,
+                required: true
+              %}
+              {%- render 'text-input',
+                id: 'NewsletterForm_email',
+                name: '$email',
+                type: 'email',
+                class: newsletter_input_class,
+                class_input: input_class,
+                label: newsletter_email_placeholder,
+                placeholder: newsletter_email_placeholder,
+                show_label: true,
+                required: true
+              %}
+              {%- render 'text-input',
+                id: 'NewsletterForm_phone',
+                name: '$phone',
+                type: 'tel',
+                class: newsletter_input_class,
+                class_input: input_class,
+                label: newsletter_phone_placeholder,
+                placeholder: newsletter_phone_placeholder,
+                show_label: true,
+                required: true
+              %}
+              <button type="submit" class="{{ newsletter_button_class }}" name="commit" id="SubscribeButton">
+                {{- cta_text -}}
+              </button>
+              {%- if newsletter_note != blank -%}
+                <div class="text-xs text-grey-500 font-body {{ newsletter_note_class }}">{{- newsletter_note -}}</div>
+              {%- endif -%}
+            </div>
+            <div class="submit-failed js-newsletter-form-duplicate hidden text-center">
+              {%- capture content_duplicated -%}
+                <h4 class="text-error-content text-sm !mb-0 {{ message_duplicate_class }}">{{- message_duplicate -}}</h4>
+              {%- endcapture -%}
+              {%- render 'notice-main', class: "mt-4 pt-[18px] pb-[14px]" , content: content_duplicated, type: 'error' -%}
+            </div>
+            <div class="submit-failed js-newsletter-form-notice-failed hidden">
+              {%- capture content_error -%}
+                <h4 class="!text-error-content js-newsletter-form-failed text-sm !mb-0 {{ newsletter_message_class }}"></h4>
+              {%- endcapture -%}
+              {%- render 'notice-main', class: "mt-4 pt-[18px] pb-[14px]", content: content_error, type: 'error' -%}
+            </div>
+            <button
+              type="button"
+              class="hover:text-sm newsletter-form__cancel js-close-modal mt-4 hidden text-center text-base text-grey-500 underline {{ newsletter_form_cancel_class }}"
+            >
+              {{- 'general.newsletter.no_thank_you' | t -}}
+            </button>
+          </div>
+          <div class="submit-success js-newsletter-form-success hidden text-center">
+            {%- if notice_custom -%}
+              {%- if message_success != blank -%}
+                <h3 class="mb-4 text-xl font-semibold lg:text-2xl">{{- message_success -}}</h3>
+              {%- endif -%}
+              <a href="/" class="mt-4 text-center text-base text-grey-500 underline">{{- 'general.newsletter.continue_shopping' | t -}}</a>
+            {%- endif -%}
+            {%- if notice_global -%}
+              {%- capture content_success -%}
+                <h4>{{- 'general.newsletter.thank_you_signing_up' | t -}}</h4>
+              {%- endcapture -%}
+              {%- render 'notice-main', class: "mt-4 pt-[18px] pb-[14px]", content: content_success, type: 'success' -%}
+            {%- endif -%}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</newsletter-form>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-newsletter-form.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

@@ -1,0 +1,10 @@
+{%- layout none -%}
+
+{%- if recommendations.performed -%}
+  [
+    {%- for product in recommendations.products -%}
+      {%- render 'product-json', item: product -%}
+      {%- if forloop.last == false -%},{%- endif -%}
+    {%- endfor -%}
+  ]
+{%- endif -%}

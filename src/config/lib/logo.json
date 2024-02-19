@@ -1,0 +1,10 @@
+{
+  "name": "Logo",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    }
+  ]
+}

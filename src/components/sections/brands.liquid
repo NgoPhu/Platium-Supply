@@ -1,0 +1,128 @@
+{%- liquid
+  assign mod_settings = section.settings
+  assign label_button_desktop = mod_settings.cta_text
+  assign label_button_mobile = label_button_desktop | remove: 'Brands' | remove: 'brands'
+-%}
+
+{%- capture carousel_options -%}
+  {
+    "slidesPerView": "3.5",
+    "spaceBetween": 16,
+    "scrollbar": {
+      "draggable": true
+    },
+    "breakpoints": {
+      "768": {
+        "slidesPerView": "5",
+        "spaceBetween": 40
+      }
+    }
+  }
+{%- endcapture -%}
+
+{%- if mod_settings.title != blank and section.blocks.size > 0 -%}
+  <div class="container pb-8 lg:pb-[72px] overflow-hidden">
+    <div class="flex flex-col lg:flex-row lg:items-center">
+      {%- if mod_settings.cta_link != blank -%}
+        <a href="{{- mod_settings.cta_link -}}" class="block relative w-full lg:w-[230px] lg:aspect-[230/161] lg:rounded-be-[32px] lg:overflow-hidden lg:flex-none">
+      {%- else -%}
+        <div class="relative w-full lg:w-[230px] lg:aspect-[230/159] lg:rounded-br-[32px] lg:overflow-hidden">
+      {%- endif -%}
+        {%- render 'image', image: mod_settings.image, class: 'fit lg-max:hidden' -%}
+        <div class="flex flex-row items-center justify-between lg:fit lg:items-start lg:flex-col lg:p-8">
+          <h3 class="font-bold font-body text-grey-900 lg:text-white h4">{{- mod_settings.title -}}</h3>
+          {%- if mod_settings.cta_text != blank -%}
+            <button class="text-sm font-bold font-body text-accent-1 hover:text-accent-1-hover md-max:hidden">{{- label_button_desktop -}}</button>
+            <button class="text-sm font-bold font-body text-secondary hover:text-secondary-hover md:hidden">{{- label_button_mobile -}}</button>
+          {%- endif -%}
+        </div>
+      {%- if mod_settings.cta_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+
+      <div class="w-full lg-max:pt-4 lg:w-[calc(100%-230px)] lg:pl-8">
+        {%- capture carousel_content -%}
+          {%- for block in section.blocks -%}
+            <swiper-slide class="relative flex flex-shrink-0 carousel-item min-h-[60px] after:absolute after:content-[''] after:top-1/2 after:-translate-y-1/2 after:w-[1px] md:after:h-[71px] md:after:border-r md:after:border-custom last:after:content-none md:after:-right-5 md-max:after:h-full md-max:after:bg-[linear-gradient(180deg,#FFF_0%,#E2E7EF_50.52%,#FFF_100%)] md-max:after:-right-2">
+              {%- if block.settings.url != blank -%}
+                <a href="{{- block.settings.url -}}" class="flex items-center justify-center w-full p-2">
+              {%- else -%}
+                <div class="flex items-center justify-center w-full h-full p-2">
+              {%- endif -%}
+                {%- render 'image', image: block.settings.brand, class: 'w-full h-full mix-blend-multiply hover:zoom transition' -%}
+              {%- if block.settings.url != blank -%}
+                </a>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+            </swiper-slide>
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- render 'carousel-swiper',
+          options: carousel_options,
+          contents: carousel_content,
+          include_scrollbar: true,
+          class: 'carousel-swiper-brands'
+        -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Brands",
+  "class": "bg-grey-100",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Only show on desktop"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Brands we work with"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "+ Shop All Brands"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand",
+          "label": "Logo Brand"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brands"
+    }
+  ]
+}
+{% endschema %}

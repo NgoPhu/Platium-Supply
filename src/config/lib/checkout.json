@@ -1,0 +1,48 @@
+{
+  "name": "Checkouts",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Checkout"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_checkout",
+      "label": "Banner Checkout"
+    },
+    {
+      "type": "header",
+      "content": "Footer Info"
+    },
+    {
+      "type": "text",
+      "id": "text_footer",
+      "label": "Text Footer"
+    },
+    {
+      "type": "url",
+      "id": "link_text_footer",
+      "label": "Link Text Footer"
+    },
+    {
+      "type": "text",
+      "id": "text_footer_2",
+      "label": "Text Footer 2"
+    },
+    {
+      "type": "url",
+      "id": "link_text_footer_2",
+      "label": "Link Text Footer 2"
+    },
+    {
+      "type": "text",
+      "id": "text_footer_3",
+      "label": "Text Footer 3"
+    },
+    {
+      "type": "url",
+      "id": "link_text_footer_3",
+      "label": "Link Text Footer 3"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{%- assign purchased_message = 'product.general.purchased' | t -%}
+{%- assign is_show_message = false -%}
+{% if shop.customer_accounts_enabled %}
+  {% if customer %}
+    {%- for order in customer.orders -%}
+      {%- for item in order.line_items -%}
+        {%- if product.id == item.product.id -%}
+          {%- assign is_show_message = true -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+
+    {%- if is_show_message -%}
+      {%- render 'notice-main',
+        class: 'my-3 notice-main-success',
+        icon: 'icon-faild',
+        content_class: 'flex items-center',
+        btn_close_class: 'p-[15px]',
+        content: purchased_message
+      -%}
+    {%- endif -%}
+  {% endif %}
+{% endif %}

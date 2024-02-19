@@ -1,0 +1,15 @@
+/* Apply typography styles to content using utility classes or .wysiwyg container */
+@layer base {
+  .text-error-content-content,
+  .text-warning-content-content,
+  .text-success-content-content,
+  .text-grey-900-content,
+  .text-secondary-content,
+  .text-primary-content {
+    @apply text-white;
+  }
+
+  .border-focus {
+    @apply border-primary;
+  }
+}

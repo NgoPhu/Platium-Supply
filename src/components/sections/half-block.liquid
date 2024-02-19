@@ -1,0 +1,77 @@
+{%- liquid
+  assign wrapper_class = 'grid grid-cols-1 lg:grid-cols-2'
+  assign image_class = 'w-full h-full aspect-[376/324]'
+  assign content_class = 'bg-primary p-6 flex flex-col gap-6 text-white lg:px-20 lg:py-28 lg:gap-5'
+  assign title_class = 'text-2xl font-body font-bold lg:text-3xl'
+  assign description_class = 'text-intro-text'
+
+  if section.settings.is_reversed
+    assign image_class = image_class | append: ' order-2'
+    assign content_class = content_class | append: ' order-1'
+  endif
+-%}
+
+<section>
+  <div class="{{ wrapper_class }}">
+    <div class="{{ image_class }}">
+      {% render 'image', image: section.settings.image, class: 'w-full h-full' %}
+    </div>
+    <div class="{{ content_class }}">
+      {%- if section.settings.icon != blank -%}
+        {%- render 'image', image: section.settings.icon, class: 'w-12 aspect-1' -%}
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="{{ title_class }}">
+          {{- section.settings.title -}}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="{{ description_class }}">
+          {{- section.settings.description -}}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Haft block",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "is_reversed",
+      "label": "Reverse two block",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Haft blocks"
+    }
+  ]
+}
+{% endschema %}

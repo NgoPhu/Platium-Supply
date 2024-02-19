@@ -1,0 +1,44 @@
+{% liquid
+  assign class = class | prepend: 'block w-full h-full absolute '
+  assign class_thumbnail = class_thumbnail
+  assign thumbnail = thumbnail
+  assign image_mobile = image_mobile
+  assign video_type = video_type
+  assign video_url = video_url
+  assign show_play_button = show_play_button | default: true, allow_false: true 
+  assign video_autoplay = video_autoplay
+  assign play_button = play_button
+  assign play_intersection = play_intersection
+  assign is_acf = is_acf
+  assign icon_play_class = icon_play_class | default: 'w-14 h-14 text-white'
+  assign image_class = image_class | prepend: 'fit '
+%}
+
+<video-thumbnail
+  class="{{ class }}"
+  src="{{ video_url }}"
+  data-video-type="{{ video_type }}"
+  {% if play_intersection %}
+    data-play-intersection
+  {% endif %}
+  controls="true"
+  playsinline
+  {% if video_autoplay == true %}
+    autoplay="true"
+  {% endif %}
+>
+  {%- if thumbnail != blank -%}
+    <div class="flex-center absolute inset-0 video-thumbnail z-[2] js-thumbnail">
+      {%- if is_acf -%}
+        {%- render 'image-acf', image: thumbnail, class: image_class -%}
+      {%- else -%}
+        {%- render 'image', image: thumbnail, class: image_class -%}
+      {%- endif -%}
+      {%- if show_play_button -%}
+        <button type="button" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          {%- render 'icon' with 'icon-play', class: icon_play_class -%}
+        </button>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</video-thumbnail>

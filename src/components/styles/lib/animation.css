@@ -1,0 +1,68 @@
+@layer base {
+  @keyframes translate-infinite {
+    100% {
+      transform: translateX(calc(-100%));
+    }
+    0% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      transform: translate(-50%, 100%);
+    }
+    100% {
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    @keyframes fade-in-up {
+      0% {
+        transform: translate(-50%, 100%);
+      }
+      100% {
+        transform: translate(-50%, 0);
+      }
+    }
+  }
+
+  @keyframes fade-in-down {
+    0% {
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      transform: translate(-50%, 100%);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    @keyframes fade-in-down {
+      0% {
+        transform: translate(-50%, 0);
+      }
+      100% {
+        transform: translate(-50%, 100%);
+      }
+    }
+  }
+
+  @keyframes slide-in-up {
+    0% {
+      transform: translate(-50%, 100%);
+    }
+    100% {
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{%- liquid
+  assign product_card_class = 'product-card-banner rounded-[10px] overflow-hidden flex items-center gap-2 md-max:mb-6 md-max:last:mb-6 card-hover'
+  assign image_wrapper_product_class = 'md-max:w-[calc(164/344*100%)] md-max:aspect-[164/210]'
+  assign content_product_class = 'flex-1 p-4 pl-0'
+-%}
+
+{%- if blocks.size > 0 -%}
+  {%- capture product_column -%}
+    {%- liquid
+      assign class = product_card_class | append: ' md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-3 md:flex-col-reverse md:justify-between md:rounded-bl-[40px] md:rounded-tr-[40px] md:rounded-br-none md:rounded-tl-none overflow-hidden md:items-start bg-[linear-gradient(90deg,#253047_0%,#005872_100%)]'
+      assign image_wrapper_class = image_wrapper_product_class | append: ' md:w-full md:aspect-[398/336]'
+      assign content_class = content_product_class | append: ' md:p-6 xl:p-12 xl:pr-20'
+    -%}
+    {%- for block in blocks -%}
+      {%- if block.type == 'product_column' -%}
+        {%- if block.settings.image != blank -%}
+          {%- if block.settings.product != blank -%}
+            {%- assign mod_product = all_products[block.settings.product] -%}
+            {%- assign product_price = mod_product.compare_at_price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_price_sale = mod_product.price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_title = mod_product.title -%}
+            {%- assign product_url = mod_product.url -%}
+          {%- else -%}
+            {%- assign product_title = block.settings.title -%}
+            {%- assign product_url = block.settings.product_url -%}
+            {%- assign  product_price = block.settings.price -%}
+            {%- assign product_price_sale = block.settings.price_sale -%}
+          {%- endif -%}
+          {%- if product_title != blank -%}
+            {%- render 'product-card',
+              image: block.settings.image,
+              image_mobile: block.settings.image_mobile,
+              title: product_title,
+              url: product_url,
+              image_wrapper_class: image_wrapper_class,
+              class: class,
+              background_color: block.settings.background_color,
+              price: product_price,
+              price_sale: product_price_sale,
+              content_class: content_class,
+              title_class: 'text-white md:max-w-[270px] md:text-2xl',
+              price_class: '!text-white',
+              sale_price_class: '!text-accent-1',
+              label_class: '!bg-accent-1 [&_span]:!text-primary',
+              format_money: false
+            -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- capture product_two_columns -%}
+    {%- for block in blocks -%}
+      {%- if block.type == 'product_two_columns' -%}
+        {%- if block.settings.image_first != blank and block.settings.image_second != blank -%}
+          {%- assign image_wrapper_class = image_wrapper_product_class | append: ' md:w-[calc(216/417*100%)] md:aspect-[215/210]' -%}
+          {%- assign content_class = content_product_class | append: ' md:py-8 xl:py-12' -%}
+          {%- assign class_first = product_card_class | append: ' md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2' -%} 
+          {%- assign class_second = product_card_class | append: ' md:col-start-3 md:col-end-4 md:row-start-1 md:row-end-2' -%}
+          {%- if block.settings.product_first != blank -%}
+            {%- assign mod_product_first = all_products[block.settings.product_first] -%}
+            {%- assign product_price_first = mod_product_first.compare_at_price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_price_sale_first = mod_product_first.price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_title_first = mod_product_first.title -%}
+            {%- assign produt_url_first = mod_product_first.url -%}
+          {%- else -%}
+            {%- assign product_title_first = block.settings.title_first -%}
+            {%- assign produt_url_first = block.settings.product_url_first -%}
+            {%- assign product_price_first = block.settings.price_first -%}
+            {%- assign product_price_sale_first = block.settings.price_sale_first -%}
+          {%- endif -%}
+          {%- if product_title_first != blank -%}
+            {%- render 'product-card',
+              image: block.settings.image_first,
+              image_mobile: block.settings.image_first_mobile,
+              title: product_title_first,
+              url: produt_url_first,
+              image_wrapper_class: image_wrapper_class,
+              class: class_first,
+              background_color: block.settings.background_color_first,
+              price: product_price_first,
+              price_sale: product_price_sale_first,
+              content_class: content_class,
+              format_money: false
+            -%}
+          {%- endif -%}
+          {%- if block.settings.product_second != blank -%}
+            {%- assign mod_product_second = all_products[block.settings.product_second] -%}
+            {%- assign product_price_second = mod_product_second.compare_at_price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_price_sale_second = mod_product_second.price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_title_second = mod_product_second.title -%}
+            {%- assign product_url_second = mod_product_second.url -%}
+          {%- else -%}
+            {%- assign product_title_second = block.settings.title_second -%}
+            {%- assign product_url_second = block.settings.product_url_second -%}
+            {%- assign product_price_second = block.settings.price_second -%}
+            {%- assign product_price_sale_second = block.settings.price_sale_second -%}
+          {%- endif -%}
+          {%- if product_title_second != blank -%}
+            {%- render 'product-card',
+              image: block.settings.image_second,
+              image_mobile: block.settings.image_second_mobile,
+              title: product_title_second,
+              url: product_url_second,
+              image_wrapper_class: image_wrapper_class,
+              class: class_second,
+              background_color: block.settings.background_color_second,
+              price: product_price_second,
+              price_sale: product_price_sale_second
+              content_class: content_class,
+              format_money: false
+            -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- capture product_row -%}
+    {%- liquid
+      assign class = product_card_class | append: ' md:col-start-2 md:col-end-4 md:row-start-2 md:row-end-3 md:gap-[66px]'
+      assign image_wrapper_class = image_wrapper_product_class | append: ' md:w-[calc(436/858*100%)] md:aspect-[436/312] md:self-end'
+      assign content_class = content_product_class | append: ' md:max-w-[209px]'
+    -%}
+    {%- for block in blocks -%}
+      {%- if block.type == 'product_row' -%}
+        {%- if block.settings.image != blank -%}
+          {%- if block.settings.product != blank -%}
+            {%- assign mod_product = all_products[block.settings.product] -%}
+            {%- assign product_price = mod_product.compare_at_price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_price_sale = mod_product.price | times: 1.0 | divided_by: 100 -%}
+            {%- assign product_title = mod_product.title -%}
+            {%- assign product_url = mod_product.url -%}
+          {%- else -%}
+            {%- assign product_title = block.settings.title -%}
+            {%- assign product_url = block.settings.product_url -%}
+            {%- assign  product_price = block.settings.price -%}
+            {%- assign product_price_sale = block.settings.price_sale -%}
+          {%- endif -%}
+          {%- if product_title != blank -%}
+            {%- render 'product-card',
+              image: block.settings.image,
+              image_mobile: block.settings.image_mobile,
+              title: product_title,
+              url: product_url,
+              image_wrapper_class: image_wrapper_class,
+              class: class,
+              background_color: block.settings.background_color,
+              price: product_price,
+              price_sale: product_price_sale,
+              content_class: content_class,
+              format_money: false
+            -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- if product_column != blank and product_two_columns != blank and product_row -%}
+    <div class="product-banner bg-grey-100">
+      <div class="container pb-8 lg:pb-[72px]">
+        <div class="flex items-end justify-between md:items-center">
+          {%- if heading != blank -%}
+            <h2 class="h4 pr-6 font-body md-max:max-w-[254px]">{{- heading -}}</h2>
+          {%- endif -%}
+          {%- if cta_url != blank and cta_text != blank -%}
+            <a class="text-sm font-bold text-secondary whitespace-nowrap font-body hover:text-secondary-hover" href="{{ cta_url }}">{{ cta_text }}</a>
+          {%- endif -%}
+        </div>
+        <div class="mt-4 md:mt-6 md:grid md:grid-cols-3 md:gap-6">
+          {{ product_column }}
+          {{ product_two_columns }}
+          {{ product_row }}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+{%- endif -%}
+

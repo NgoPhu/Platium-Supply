@@ -1,0 +1,24 @@
+{%- assign content_class = 'p-6 flex-1 md:p-12 ' | append: class_modify -%}
+
+{%- if blocks.size > 0 -%}
+  <div class="container two-column-cms">
+    <div class="flex flex-col justify-center md:flex-row gap-6 py-8 md:gap-12 md:py-[72px]">
+      {%- for block in blocks -%}
+        {%- if block.settings.image != blank -%}
+          {%- render 'card',
+            image: block.settings.image,
+            title: block.settings.title,
+            url: block.settings.cta_url,
+            description: block.settings.description,
+            class: 'w-full flex flex-col md:w-[calc(50%_-_24px)] rounded-bl-[40px] rounded-tr-[40px] overflow-hidden bg-grey-100',
+            image_wrapper_class: 'w-full aspect-[344/200] mix-blend-multiply md:aspect-[616/308]',
+            image_class: 'hover:!scale-100 hover:!duration-0 hover:!transform-none',
+            title_class: 'text-2xl font-bold font-body text-grey-900 mb-4',
+            content_class: content_class,
+            description_class: 'text-intro-text font-sans text-grey-600 mt-auto'
+          -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

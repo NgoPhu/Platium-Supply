@@ -1,0 +1,35 @@
+{%- capture variants_data -%}
+  {
+  {%- for variant in item.variants -%}
+    "{{- variant.id -}}": {
+      "id": {{- variant.id -}},
+      "inventory_quantity": {{- variant.inventory_quantity -}},
+      "inventory_management": "{{- variant.inventory_management -}}",
+      "inventory_policy": "{{- variant.inventory_policy -}}",
+      "weight_unit": "{{- variant.weight_unit -}}"
+    }
+    {%- unless forloop.last -%},{% endunless %}
+  {%- endfor -%}
+  }
+{%- endcapture -%}
+
+{
+  "id": {{ item.id | json }},
+  "available": {{ item.available | json }},
+  "handle": {{ item.handle | json }},
+  "title": {{ item.title | json }},
+  "description": {{ item.description | json }},
+  "url": {{ item.url | json }},
+  "price":{{- item.price | json -}},
+  "compareAtPriceMin": {{- item.compare_at_price_min | json -}},
+  "variants": {{- item.variants | json -}},
+  "initVariant": {{- item.selected_or_first_available_variant | json -}},
+  "options": {{- item.options | json -}},
+  "options_with_values": {{ item.options_with_values | json }},
+  "has_only_default_variant": {{ item.has_only_default_variant | json }},
+  "tags": {{- item.tags | json -}},
+  "featuredImage": {{- item.featured_image | image_url: 'small' | json -}},
+  "images": {{- item.images | image_url: 'small' | json -}},
+  "variants_data": {{- variants_data -}},
+  "metafields": {%- render 'product-json-meta', product: item -%}
+}

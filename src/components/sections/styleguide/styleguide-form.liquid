@@ -1,0 +1,17 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+{%- render 'styleguide-form' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Forms",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Forms"
+    }
+  ]
+}
+{% endschema %}

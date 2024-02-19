@@ -1,0 +1,108 @@
+@layer components {
+  .notice-main {
+    @apply relative flex w-full flex-row items-center justify-start align-middle border border-default py-[11px] pl-4 pr-8 rounded-lg;
+
+    h4 {
+      @apply text-sm;
+    }
+
+    ul, p {
+      @apply text-sm font-normal;
+    }
+
+    ul {
+      @apply list-disc ml-4;
+    }
+
+    button {
+      @apply absolute top-1/2 -translate-y-1/2 right-0 cursor-pointer;
+      svg {
+        @apply w-4 h-4;
+      }
+    }
+  }
+
+  .notice-default {
+    @apply notice-main;
+
+    & h4 {
+      @apply text-sm;
+    }
+
+    button {
+      @apply absolute top-1/2 -translate-y-1/2 right-0 cursor-pointer;
+
+      svg {
+        @apply w-4 h-4;
+      }
+    }
+  }
+
+  .notice-main-content {
+    @apply text-sm text-inherit font-body font-normal;
+  }
+
+  .notice-warning {
+    @apply notice-main bg-warning-bg text-warning-content border border-warning-content ;
+
+    & h4 {
+      @apply text-warning-content;
+    }
+  }
+
+  .notice-success {
+    @apply notice-main bg-success-bg text-success-content border border-success-content;
+
+    & h4 {
+      @apply text-success-content;
+    }
+  }
+
+  .notice-error {
+    @apply notice-main bg-error-bg text-error-content border border-error;
+
+    & h4 {
+      @apply text-error-content;
+    }
+  }
+
+  .notice-global {
+    @apply px-4 py-3 flex-row items-center rounded-none;
+  }
+
+  .notice-main-success {
+    @apply bg-primary;
+  }
+
+  .notice-main-icon {
+    @apply mr-2;
+
+    & svg {
+      @apply w-[18px] h-[18px];
+    }
+  }
+
+  .notice-hidden {
+    @apply hidden;
+  }
+
+  .notice-main-wishlist {
+    @apply !z-50;
+
+    & .notice-main-success {
+      @apply border border-success-bright bg-[#EDF4EB] min-w-[244px] lg:min-w-[261px];
+    }
+
+    & .notice-main-content {
+      @apply bg-transparent !text-[#37981D] font-semibold;
+    }
+
+    & .icon-success {
+      @apply !text-[#37981D];
+    }
+
+    & .notice-main-icon {
+      @apply mr-4;
+    }
+  }
+}

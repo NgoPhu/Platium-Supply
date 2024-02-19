@@ -1,0 +1,31 @@
+{%- comment -%}
+  Render notice of form
+
+  Accepts:
+  - form
+  - class
+{%- endcomment -%}
+{%- if form.errors -%}
+  {%- assign class = class | append: ' notice-error' -%}
+  {%- capture notice_content -%}
+    {% for error in form.errors %}
+      {% if error == 'form' %}
+        {{ form.errors.messages[error] }}
+      {% else %}
+        {{ form.errors.translated_fields[error] }} - {{ form.errors.messages[error] }}
+      {% endif %}
+    {% endfor %}
+  {%- endcapture -%}
+  {%- render 'notice-main', content: notice_content, class: class, auto_close_notice: true, type: 'error' -%}
+{%- endif -%}
+
+{%- if form.posted_successfully? -%}
+  {%- assign class = class | append: ' notice-success' -%}
+  {%- assign posted_success_message = 'templates.contact.form.posted_success' | t -%}
+  {%- capture notice_content -%}
+    <p>
+      {{- success_message | default: posted_success_message -}}
+    </p>
+  {%- endcapture -%}
+  {%- render 'notice-main', content: notice_content, class: class, auto_close_notice: true, type: 'success' -%}
+{%- endif -%}

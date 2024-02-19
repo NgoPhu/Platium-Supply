@@ -1,0 +1,32 @@
+{%- unless template contains 'gift-card' or product.gift_card? -%}
+  {%- render 'yotpo-reviews-form-snippet' -%}
+  {{- 'module-yotpo-reviews-form.css' | asset_url | stylesheet_tag -}}
+  <div
+    class="reviews-form js-anchor-section border-t border-default"
+    id="product-reviews"
+    data-title="Reviews"
+  >
+    <div class="container">
+      <div class="py-8">
+        <div
+          class="yotpo-widget-instance"
+          data-yotpo-instance-id="305853"
+          data-yotpo-product-id="{{ product.id }}"
+          data-yotpo-name="{{ product.title | escape }}"
+          data-yotpo-url="{{ shop.url }}{{ product.url }}"
+          data-yotpo-image-url="{{ product.featured_image | image_url: "large" | escape }}"
+          data-yotpo-description="{{ product.description | escape }}"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  {%- unless ignore_script == true -%}
+    {%- capture src_url -%}
+      {{- 'module-yotpo-reviews-form.js' | asset_url -}}
+    {%- endcapture -%}
+
+    {%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+  {%- endunless -%}
+  {%- render 'yotpo-reviews-form-snippet' -%}
+{%- endunless -%}

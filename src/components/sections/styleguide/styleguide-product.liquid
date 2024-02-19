@@ -1,0 +1,17 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+{%- render 'styleguide-product' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Products",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,58 @@
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+{%- assign page_url = contentForQuerystring
+  | split: '"pageurl":"'
+  | last
+  | split: '"'
+  | first
+  | split: '.myshopify.com'
+  | last
+  | replace: '\/', '/'
+  | replace: '%20', ' '
+  | replace: '\u0026', '&'
+-%}
+{%- assign page_url = page_url | remove: '?_fd=0&pb=0' | remove: '&_fd=0&pb=0' -%}
+
+<div class="bg-grey-100">
+  <div class="container">
+    <div class="flex flex-col gap-4 pb-8 lg:items-start lg:gap-12 lg:pb-[72px]">
+      <div class="w-full">
+        {%- case page_url -%}
+          {%- when '/account' -%}
+            {%- assign recent_orders_tittle = 'customer.account.recent_orders' | t -%}
+            {%- render 'account-orders', show_view_orders: true, limit: 3, title: recent_orders_tittle -%}
+          {%- when '/account/addresses' -%}
+            {%- render 'account-addresses' -%}
+          {%- when '/account?view=preferences' -%}
+            {%- render 'account-preferences' -%}
+        {%- endcase -%}
+
+        {%- if page_url contains '/account/orders/' -%}
+          {%- render 'account-order-detail' -%}
+        {%- endif -%}
+
+        {%- if page_url contains 'view=orders' -%}
+          {%- assign order_title = 'customer.orders.title' | t -%}
+          {%- assign empty_order = 'customer.orders.none' | t -%}
+          {%- render 'account-orders', title: order_title, empty_order: empty_order -%}
+        {%- endif -%}
+
+        {%- if page_url contains 'view=favourites' and settings.enable_wishlist -%}
+          {%- render 'wishlist-page' -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Account Addresses",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "account_sidebar",
+      "label": "Account Sidebar"
+    }
+  ]
+}
+{% endschema %}

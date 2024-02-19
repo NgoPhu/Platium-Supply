@@ -1,0 +1,29 @@
+<!-- Google Tag Manager -->
+{%- if settings.gtm_id != blank -%}
+  <script>
+    ;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', '{{- settings.gtm_id -}}')
+  </script>
+{%- endif -%}
+<!-- End Google Tag Manager -->
+
+{%- if settings.gtag_id != blank -%}
+  <!-- Global site tag (gtag.js) - Google Ads: {{ settings.gtag_id }} -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.gtag_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+    gtag('config', '{{ settings.gtag_id }}')
+  </script>
+{% endif %}

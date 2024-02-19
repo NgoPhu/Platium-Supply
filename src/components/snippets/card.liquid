@@ -1,0 +1,124 @@
+{%- comment -%}
+  Render card with image + title + desription
+
+  Accepts:
+    - image: {String}
+    - mobile_width: {Number},
+    - sm_width: {Number},
+    - md_width: {Number},
+    - lg_width: {Number},
+    - title: {String}
+    - description: {String}
+    - class: {String}
+    - image_class: {String}
+    - image_wrapper_class: {String}
+    - title_class: {String}
+    - description_class: {String}
+    - content_class: {String}
+    - after_content: {String}
+    - before_content: {String}
+    - is_acf: {Boolean}
+    - url: {String}
+    - cta_text: {String}
+    - cta_class: {String}
+{%- endcomment -%}
+
+{% liquid
+  assign url = url | default: nil
+  assign class = class | prepend: 'overflow-hidden '
+  assign image_class = image_class | prepend: 'hover:zoom duration-300 fit '
+  assign title_class = title_class | default: 'h5 lg:h4'
+  assign description_class = description_class | default: 'text-sm'
+  assign content_class = content_class | default: nil
+  assign title = title | default: nil
+  assign description = description | default: nil
+  assign after_content = after_content | default: nil
+  assign before_content = before_content | default: nil
+  assign is_acf = is_acf | default: false
+  assign image_wrapper_class = image_wrapper_class | default: 'aspect-[348/306] lg:aspect-[416/440]' | prepend: 'relative w-full overflow-hidden '
+  assign cta_text = cta_text | default: nil
+  assign cta_class = cta_class | default: 'button-outlined'
+  assign info_button = info_button | default: nil
+  assign info_button_class = info_button_class | default: 'text-xs text-link'
+  assign style_inline =  style_inline | default: nil
+  assign image_mobile = image_mobile | default: nil
+  assign image_mobile_class = image_class | prepend: 'md:hidden '
+  if image_mobile != blank
+    assign image_class = image_class | prepend: 'hidden md:block '
+  endif
+%}
+
+{%- if url != blank -%}
+  <a
+    href="{{ url }}"
+    class="{{ class }}"
+    title="{{- title -}}"
+    {% if style_inline != blank %}
+      {{ style_inline }}
+    {% endif %}
+  >
+{%- else -%}
+  <div class="{{ class }}" {% if style_inline != blank %}{{ style_inline }}{% endif %}>
+{%- endif -%}
+  <div class="{{ image_wrapper_class }}">
+    {%- if is_acf == true -%}
+      {%- render 'image-acf',
+        image: image,
+        class: image_class,
+        mobile_width: mobile_width,
+        sm_width: sm_width,
+        md_width: md_width,
+        lg_width: lg_width,
+        object_fit: object_fit
+      -%}
+      {%- if image_mobile != blank -%}
+        {%- render 'image-acf',
+          image: image_mobile,
+          class: image_mobile_class,
+          object_fit: object_fit
+        -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- render 'image',
+        image: image,
+        class: image_class,
+        mobile_width: mobile_width,
+        sm_width: sm_width,
+        md_width: md_width,
+        lg_width: lg_width,
+        object_fit: object_fit
+      -%}
+      {%- if image_mobile != blank -%}
+        {%- render 'image',
+          image: image_mobile,
+          class: image_mobile_class,
+          object_fit: object_fit
+        -%}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+  <div class="{{ content_class }}">
+    {%- if before_content != blank -%}
+      {{- before_content -}}
+    {%- endif -%}
+    {%- if title != blank -%}
+      <h3 class="{{ title_class }}">{{- title -}}</h3>
+    {%- endif -%}
+    {%- if description != blank -%}
+      <p class="{{ description_class }}">{{- description -}}</p>
+    {%- endif -%}
+    {%- if cta_text != blank -%}
+      <button type="button" class="{{ cta_class }}">{{- cta_text -}}</button>
+    {%- endif -%}
+    {%- if after_content != blank -%}
+      {{- after_content -}}
+    {%- endif -%}
+    {%- if info_button != blank -%}
+      <p class="{{ info_button_class }}">{{- info_button -}}</p>
+    {%- endif -%}
+  </div>
+{%- if url != blank -%}
+  </a>
+{%- else -%}
+  </div>
+{%- endif -%}

@@ -1,0 +1,58 @@
+{% render 'two-up-card', blocks: section.blocks %}
+
+{% schema %}
+{
+  "name": "Two Up Card",
+  "blocks": [
+    {
+      "name": "Block",
+      "type": "block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color",
+          "default": "#87A38A"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Url"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 2,
+  "presets": [
+    {
+      "name": "Two Up Card",
+      "category": "Card Grid",
+      "blocks": [
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,52 @@
+{% liquid
+  assign title = section.settings.title | default: page.title
+  assign image_acf = page.metafields.page_header.image | first
+  assign image_mobile_acf = page.metafields.page_header.image_mobile | first
+  assign mod_link_image = page.metafields.page_header.link_image
+%}
+
+{%- render 'page-header',
+  class_wrap: '',
+  class_title: '',
+  heading: title,
+  description: section.settings.description,
+  image: section.settings.image,
+  image_mobile: section.settings.image_mobile,
+  image_acf: image_acf,
+  image_mobile_acf: image_mobile_acf,
+  link_image: mod_link_image
+-%}
+
+{% schema %}
+{
+  "name": "Page Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Header",
+      "name": "Page header"
+    }
+  ]
+}
+{% endschema %}

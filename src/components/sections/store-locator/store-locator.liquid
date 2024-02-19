@@ -1,0 +1,10 @@
+{{- 'section-store-locator.css' | asset_url | stylesheet_tag -}}
+
+<store-locator>
+  {{- page.content -}}
+</store-locator>
+
+{%- capture src_url -%}
+  {{- 'section-store-locator.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

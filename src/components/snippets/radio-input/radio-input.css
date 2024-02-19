@@ -1,0 +1,29 @@
+@layer components {
+  .radio-input__input {
+    @apply h-[18px] w-[18px] border-default text-secondary cursor-pointer focus:shadow-0 disabled:bg-grey-300 disabled:checked:border-default;
+
+    &:checked {
+      @apply border-secondary;
+
+      background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='4' cy='4' r='4' fill='%23fff'/%3E%3C/svg%3E");
+      background-size: 8px 8px;
+    }
+
+    &:disabled:checked {
+      background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='4' cy='4' r='4' fill='%23E5E5E5'/%3E%3C/svg%3E");
+      background-size: 8px 8px;
+
+      & + .radio-input__label {
+        @apply pointer-events-none;
+      }
+    }
+
+    &:disabled {
+      @apply pointer-events-none;
+    }
+  }
+
+  .radio-input__label {
+    @apply ml-2 block text-sm text-grey-600;
+  }
+}

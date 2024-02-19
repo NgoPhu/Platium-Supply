@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "colour": {
+      "type": "styleguide-colour",
+      "settings": {}
+    },
+    "typo": {
+      "type": "styleguide-typo",
+      "settings": {}
+    },
+    "button": {
+      "type": "styleguide-button",
+      "settings": {}
+    },
+    "icon": {
+      "type": "styleguide-icon",
+      "settings": {}
+    },
+    "form": {
+      "type": "styleguide-form",
+      "settings": {}
+    },
+    "module": {
+      "type": "styleguide-module",
+      "settings": {}
+    },
+    "additional": {
+      "type": "styleguide-additional",
+      "settings": {}
+    },
+    "carousel": {
+      "type": "styleguide-carousel",
+      "settings": {}
+    }
+  },
+  "order": [
+    "colour",
+    "typo",
+    "button",
+    "form",
+    "module",
+    "additional",
+    "carousel",
+    "icon"
+  ]
+}

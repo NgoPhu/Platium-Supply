@@ -1,0 +1,63 @@
+{
+  "name": "Sale Contact",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sale Contact Logged Out"
+    },
+    {
+      "type": "image_picker",
+      "id": "sale_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "sale_question",
+      "label": "Question"
+    },
+    {
+      "type": "text",
+      "id": "sale_description",
+      "label": "Info"
+    },
+    {
+      "type": "header",
+      "content": "Sale Contact Logged"
+    },
+    {
+      "type": "image_picker",
+      "id": "sale_image_logged",
+      "label": "Image Logged"
+    },
+    {
+      "type": "text",
+      "id": "sale_title_mobile",
+      "label": "Title Accordion",
+      "default": "Your Sales Contact"
+    },
+    {
+      "type": "text",
+      "id": "sale_info_logged",
+      "label": "Info Contact"
+    },
+    {
+      "type": "richtext",
+      "id": "sale_description_logged",
+      "label": "Email"
+    },
+    {
+      "type": "header",
+      "content": "Contact"
+    },
+    {
+      "type": "richtext",
+      "id": "sale_phone_number",
+      "label": "Phone"
+    },
+    {
+      "type": "richtext",
+      "id": "sale_live_chat",
+      "label": "Live Chat"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{%- comment -%}
+  Render article card
+
+  Accepts:
+  - article: {Object}
+{%- endcomment -%}
+
+{%- liquid
+  assign title = article.title
+  assign tags = article.tags
+  assign url = article.url
+  assign excerpt_or_content = excerpt_or_content
+  assign image = article.image
+  assign cta_text = cta_text | default: '+ Read'
+  assign class = class
+  assign content_class = content_class | default: 'flex-auto flex flex-col'
+  assign cta_class = cta_class | default: 'text-sm font-bold text-secondary hover:text-secondary-hover font-body w-fit mt-2 '
+  assign image_wrapper_class = image_wrapper_class
+  assign title_class = title_class
+  assign tag_class = tag_class | default: 'flex flex-wrap items-center mt-5 mb-2 gap-y-2'
+-%}
+
+{%- capture before_content -%}
+  <div class="{{ tag_class }}">
+    {%- for tag in tags -%}
+      <span class="mr-2 bg-success-bg text-secondary py-0.5 px-2 border-secondary border rounded-lg text-sm font-bold whitespace-nowrap last:mr-0">{{ tag }}</span>
+    {%- endfor -%}
+  </div>
+{%- endcapture -%}
+
+{%- render 'card',
+  image: image,
+  mobile_width: 263,
+  md_width: 347,
+  title: title,
+  description: excerpt_or_content,
+  description_class: description_class,
+  class: class,
+  image_wrapper_class: image_wrapper_class,
+  title_class: title_class,
+  content_class: content_class,
+  before_content: before_content,
+  url: url,
+  cta_text: cta_text,
+  cta_class: cta_class
+-%}

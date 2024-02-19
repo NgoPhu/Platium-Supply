@@ -1,0 +1,49 @@
+@layer components {
+  .checkbox-input__input {
+    @apply w-[18px] h-[18px] rounded-[3px] border border-default text-secondary cursor-pointer focus:shadow-0;
+
+    &:checked {
+      @apply border-secondary;
+
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.75 3 4.5 9 2.25 6.75' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 12px 12px;
+    }
+
+    &:disabled:checked {
+      @apply border-default;
+
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.75 3 4.5 9 2.25 6.75' stroke='%23E5E5E5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 12px 12px;
+
+      & + .checkbox-input__label {
+        @apply pointer-events-none;
+      }
+    }
+
+    &:disabled {
+      @apply bg-grey-300 pointer-events-none;
+    }
+  }
+
+  .checkbox-input__label {
+    @apply ml-2 block text-sm tracking-normal text-grey-600;
+  }
+
+  .checkbox-input--checkout {
+    input {
+      @apply border border-solid border-default checked:text-secondary;
+    }
+
+    &.checked + .section__gift-card-message {
+      @apply my-4 h-12 py-[12px] opacity-100;
+    }
+  }
+}
+
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

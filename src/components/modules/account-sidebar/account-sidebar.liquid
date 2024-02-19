@@ -1,0 +1,60 @@
+{%- unless ignore_style == true -%}
+  {{- 'module-account-sidebar.css' | asset_url | stylesheet_tag -}}
+{%- endunless -%}
+
+{%- liquid
+  assign page_url = page_url | default: '/account'
+  assign account_sidebar = account_sidebar | default: 'account-sidebar'
+  assign sidebar_menu = linklists[account_sidebar]
+-%}
+
+{%- if page_url contains '/account/orders' -%}
+  {%- assign page_url = '/account?view=orders' -%}
+{%- endif -%}
+
+{%- if sidebar_menu.links.size > 0 -%}
+  <account-sidebar class="relative flex bg-white">
+    <div class="js-sidebar-current flex w-full justify-between p-4 md:px-6 lg:hidden">
+      <span class="js-sidebar-current-text flex items-center justify-start text-sm font-bold text-grey-900"></span>
+      {%- render 'icon' with 'icon-chevron-up-outline', class: 'transition-transform rotate-180 js-sidebar-current-icon' -%}
+    </div>
+    <nav class="js-sidebar-nav absolute left-0 top-full z-10 hidden h-fit w-full border-y border-default bg-white lg:static lg:block lg:border-none lg:px-6 [&.active]:block">
+      <div class="account-sidebar-scrollbar mx-4 my-6 overflow-auto bg-white lg:m-0 lg-max:max-h-[274px] lg-max:pr-4">
+        {%- for item in sidebar_menu.links -%}
+          {%- liquid
+            assign mod_title = item.title | split: ']' | last | strip
+            assign mod_icon = item.title | split: ']' | first | remove: '[' | strip
+            assign mod_class = ''
+            if item.url == page_url
+              assign mod_class = 'active'
+            endif
+            if page_url contains 'view=orders'
+              if item.url contains '/account?view=orders'
+                assign mod_class = 'active'
+              endif
+            endif
+          -%}
+          <a
+            href="{{ item.url }}"
+            class="
+              flex-items-center js-sidebar-item justify-start border-b border-default py-6 text-sm
+              font-bold text-grey-500 last:border-b-0 lg-max:first:pt-0
+              lg-max:last:pb-0 [&.active]:text-grey-900 [&.active]:underline [&.active]:after:ml-auto [&.active]:after:mr-2.5 [&.active]:after:h-1.5 [&.active]:after:w-1.5 [&.active]:after:rounded-full [&.active]:after:bg-secondary
+              [&.active]:after:content-[''] {{ mod_class }}
+            "
+          >
+            {%- render 'icon' with mod_icon, class: 'mr-3' -%}
+            {{- mod_title -}}
+          </a>
+        {%- endfor -%}
+      </div>
+    </nav>
+  </account-sidebar>
+{%- endif -%}
+
+{%- unless ignore_script -%}
+  {%- capture src_url -%}
+    {{- 'module-account-sidebar.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

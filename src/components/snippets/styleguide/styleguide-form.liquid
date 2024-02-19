@@ -1,0 +1,92 @@
+<section class="mb-12 py-2">
+  <div class="container">
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Text inputs</h4>
+        {%- render 'text-input', id: 'text-1', name: 'text-1', class: 'mb-6', class_input: 'w-full', placeholder: 'Default field', label: 'Default field' %}
+        {%- render 'text-input', id: 'text-3', name: 'text-3', type: 'email', class: 'mb-6', label: 'Email Address', placeholder: 'Email Address', value: 'max.citizen@email.com' %}
+        {%- render 'text-input',
+          id: 'text-2',
+          name: 'text-2',
+          type: 'email',
+          required: true,
+          class: 'mb-6',
+          class_input: 'is-invalid',
+          label: 'Input label',
+          placeholder: 'Input label',
+          value: 'max.citizen@emaixyz',
+          error: 'Invalid email address'
+        %}
+        {%- render 'text-input', id: 'text-4', name: 'text-4', class: 'mb-6', placeholder: 'Input text', label: 'Input label', disabled: true %}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Text area</h4>
+        {%- render 'text-area',
+          id: 'text-5',
+          name: 'text-5',
+          class_input: 'w-full h-32',
+          label: 'Text area',
+          show_placeholder: true,
+          placeholder: 'Text area'
+        %}
+        {%- render 'text-area',
+          id: 'text-6',
+          name: 'text-5',
+          class: 'mt-6',
+          class_input: 'w-full h-48',
+          label: 'Text area',
+          show_placeholder: true,
+          placeholder: 'Text area'
+        %}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Dropdown</h4>
+        {%- capture select_options %}
+          <option value="">Name</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        {%- endcapture -%}
+        {%- render 'select-input', id: 'select-demo', name: 'select-demo', label: 'Label', options: select_options %}
+      </div>
+    </div>
+    <div class="mt-6 grid gap-6 md:grid-cols-3">
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Radio button</h4>
+        {%- render 'radio-input', id: 'radio-demo-1', class: 'mb-4', name: 'radio-demo', value: 1, label: 'Radio Off' -%}
+        {%- render 'radio-input', id: 'radio-demo-2', class: 'mb-4', name: 'radio-demo', value: 2, label: 'Radio On', checked: true -%}
+        {%- render 'radio-input', id: 'radio-demo-3', class: 'mb-4', name: 'radio-demo-disabled', value: 1, label: 'Radio Disabled Off', disabled: true -%}
+        {%- render 'radio-input',
+          id: 'radio-demo-4',
+          class: 'mb-4',
+          name: 'radio-demo-disabled',
+          value: 2,
+          label: 'Radio Disabled On',
+          checked: true,
+          disabled: true
+        -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Checkboxes</h4>
+        {%- render 'checkbox-input', id: 'checkbox-demo', class: 'mb-4', name: 'checkbox-demo', label: 'Checkbox Off' -%}
+        {%- render 'checkbox-input', id: 'checkbox-demo-2', class: 'mb-4', name: 'checkbox-demo-2', label: 'Checkbox On', checked: true -%}
+        {%- render 'checkbox-input', id: 'checkbox-demo-3', class: 'mb-4', name: 'checkbox-demo-3', label: 'Checkbox Disabled Off', disabled: true -%}
+        {%- render 'checkbox-input',
+          id: 'checkbox-demo-4',
+          class: 'mb-4',
+          name: 'checkbox-demo-4',
+          label: 'Checkbox Disabled On',
+          checked: true,
+          disabled: true
+        -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Toggle</h4>
+        {%- render 'toggle-input', id: 'toggle-demo', class: 'mb-4', name: 'toggle-demo', label: 'Toggle Off' -%}
+        {%- render 'toggle-input', id: 'toggle-demo-2', class: 'mb-4', name: 'toggle-demo-2', label: 'Toggle On', checked: true -%}
+        {%- render 'toggle-input', id: 'toggle-demo-3', class: 'mb-4', name: 'toggle-demo-3', label: 'Toggle Disabled Off', disabled: true -%}
+        {%- render 'toggle-input', id: 'toggle-demo-4', class: 'mb-4', name: 'toggle-demo-4', label: 'Toggle Disabled On', checked: true, disabled: true -%}
+      </div>
+    </div>
+  </div>
+</section>

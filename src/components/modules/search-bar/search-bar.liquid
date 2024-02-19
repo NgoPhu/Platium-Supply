@@ -1,0 +1,17 @@
+{% if settings.searchspring_enable != blank and settings.searchspring_site_id != blank %}
+  {%- render 'search-bar-searchspring'
+    section_settings: section_settings
+  -%}
+  {%- capture src_url -%}
+    {{- 'module-search-bar-searchspring.js' | asset_url -}}
+  {%- endcapture -%}
+{% else %}
+  {%- render 'search-bar-native'
+    section_settings: section_settings
+  -%}
+  {%- capture src_url -%}
+    {{- 'module-search-bar-native.js' | asset_url -}}
+  {%- endcapture -%}
+{% endif %}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

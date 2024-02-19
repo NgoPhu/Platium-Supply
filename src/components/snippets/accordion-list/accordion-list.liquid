@@ -1,0 +1,16 @@
+{%- comment -%}
+  Parameters
+  * items
+  * class
+{%- endcomment -%}
+
+{%- liquid
+  assign items = items
+  assign class = class | default: null
+-%}
+
+{%- if items != blank -%}
+  <accordion-list class="{% if class != blank %}{{ class }}{% endif %}">
+    {{ items }}
+  </accordion-list>
+{%- endif -%}

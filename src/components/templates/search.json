@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "plp",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

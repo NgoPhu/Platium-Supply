@@ -1,0 +1,52 @@
+{%- liquid
+  assign title = shop.metafields.payment_security.title
+  assign description = shop.metafields.payment_security.description
+  assign images = shop.metafields.payment_method.image
+  assign urls = shop.metafields.payment_method.url
+-%}
+
+{%- if title != blank -%}
+  <div class="border border-default shadow-base rounded-[10px] mt-4 lg:mt-6">
+    <div class="bg-white px-4 py-5 rounded-t-[10px] lg:p-8">
+      <h4 class="mb-4 text-lg font-bold font-body text-grey-900">{{- title -}}</h4>
+      {%- if images.size > 0 -%}
+        <div class="flex gap-3">
+          {%- for image in images -%}
+            {%- assign mod_image = images[forloop.index0] | first -%}
+            {%- assign mod_url = urls[forloop.index0] -%}
+            <a href="{{- mod_url -}}">
+              {%- render 'image-acf',
+                image: mod_image,
+                class: 'w-[35px] aspect-[35/24] lg:w-[46px] lg:aspect-[46/32] object-contain'
+              -%}
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        {%- assign enabled_payment_types = 'master,visa,american_express,paypal,apple_pay,afterpay' | remove: ' ' | split: ',' -%}
+        <div class="flex gap-x-3 gap-y-2">
+          {%- for type in enabled_payment_types -%}
+            <div class="w-auto h-6 rounded">
+              <img
+                src="{{- type | payment_type_img_url -}}"
+                alt="{{- type -}}"
+                loading="lazy"
+                class="object-contain w-full h-full"
+                width="35"
+                height="24"
+              >
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- render 'product-bnpl' -%}
+    </div>
+    {%- if description != blank -%}
+      <div class="bg-success-bg flex items-center gap-4 px-4 py-5 rounded-b-[10px] lg:px-6 lg:py-8">
+        {%- render 'icon' with 'icon-lock-closed', class: 'w-8 h-8 lg:w-10 lg:h-10 text-success-content' -%}
+        <div class="flex-1 text-sm font-bold text-success-content">{{- description -}}</div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+{%- render 'product-bnpl-modal' -%}

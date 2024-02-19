@@ -1,0 +1,23 @@
+{% liquid
+  assign class = class
+  assign class_inner = class_inner
+%}
+
+{%- if title != blank or content != blank -%}
+  <tab-list class="{% if class != blank %}{{ class }}{% endif %}">
+    <div class="tab-wrapper {{ class_inner }}">
+      {{ title }}
+      {{ content }}
+    </div>
+  </tab-list>
+{%- endif -%}
+
+{%- capture src_url -%}
+  {{- 'module-tabs.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script',
+  src: src_url,
+  priority: 'normal',
+  type: 'defer'
+-%}

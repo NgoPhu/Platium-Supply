@@ -1,0 +1,135 @@
+{%- liquid
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign img_title = section.settings.img_title
+  assign subtitle = section.settings.subtitle
+  assign cta_text = section.settings.cta_text
+  assign cta_link = section.settings.cta_link
+
+  assign content_class = 'absolute md:!w-fit md:!h-fit'
+  assign button_class = 'button-outlined-white !overflow-visible'
+  case section.settings.content_position_horizontal
+    when 'left'
+      assign content_class = content_class | append: ' !left-0 text-left'
+      assign button_class = button_class | append: ' mr-auto'
+    when 'right'
+      assign content_class = content_class | append: ' !right-0 text-right'
+      assign button_class = button_class | append: ' ml-auto'
+    when 'center'
+      assign content_class = content_class | append: ' !left-1/2 -translate-x-1/2 text-center'
+      assign button_class = button_class | append: ' mx-auto'
+  endcase
+
+  case section.settings.content_position_vertical
+    when 'top'
+      assign content_class = content_class | append: ' !top-0'
+    when 'center'
+      assign content_class = content_class | append: ' !top-1/2 -translate-y-1/2'
+    when 'bottom'
+      assign content_class = content_class | append: ' !bottom-0'
+  endcase
+-%}
+
+{%- if subtitle != blank or cta_link != blank -%}
+  {%- capture hero_content -%}
+    <div class="flex flex-col h-full px-4 md:px-12 py-7 md:py-16">
+      {%- render 'image',
+        image: img_title,
+        class: 'w-64 md:w-96 mb-2',
+        mobile_width: 256,
+        sm_width: 384,
+      -%}
+      {%- if subtitle != blank -%}
+        <p class="text-3xl font-bold text-white lg:text-4xl max-w-[296px] md:max-w-[456px] mb-6 md:mb-8">{{- subtitle -}}</p>
+      {%- endif -%}
+      {%- assign link_img = cta_link -%}
+      {%- if cta_text != blank and cta_link != blank -%}
+        {%- render 'button',
+          class: button_class,
+          link_text: cta_text,
+          link_url: cta_link
+        -%}
+      {%- endif -%}
+    </div>
+  {%- endcapture -%}
+{%- endif -%}
+
+<div class="mx-auto my-6 px-4 md:my-6 md:px-6 xl:my-12 xl:px-8">
+  {%- render 'hero',
+    class: 'aspect-[345/316] md:aspect-[720/366] lg:aspect-[976/366] xl:aspect-[1376/524] rounded-2xl overflow-hidden',
+    image_class: 'hover:zoom transition',
+    content_class: content_class,
+    image: image,
+    image_mobile: image_mobile,
+    url: link_img,
+    content: hero_content
+  -%}
+</div>
+
+{% schema %}
+{
+  "name": "Home Banner",
+  "class": "shopify-section--home-banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "content_position_vertical",
+      "label": "Position of content vertically",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "content_position_horizontal",
+      "label": "Position of content horizontally",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_title",
+      "label": "Image Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Banner",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-404",
+      "settings": {
+        "title": "Page not found",
+        "content": "We can't seem to find the page you're looking for.",
+        "cta_text": "Back to home",
+        "cta_link": "https:\/\/platinum-health-supply-b2b.myshopify.com\/"
+      }
+    }
+  },
+  "order": [
+    "template"
+  ]
+}

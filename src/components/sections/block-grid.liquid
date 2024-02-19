@@ -1,0 +1,103 @@
+{%- liquid
+  assign blocks = section.blocks
+  assign bg_color = section.settings.bg_color
+-%}
+
+{%- if blocks.size > 0 -%}
+  <div class="py-8 lg:py-[72px]" {%- if bg_color != blank -%}style="background-color: {{ bg_color }}"{%- endif -%}>
+    <div class="container">
+      <div class="flex flex-col flex-wrap justify-center gap-5 md:flex-row lg:gap-12">
+        {%- for block in blocks -%}
+          {%- liquid
+            assign block_bg_color = block.settings.block_bg_color
+            assign image = block.settings.image
+            assign title = block.settings.title
+            assign description = block.settings.description
+            assign cta_text = block.settings.cta_text
+            assign cta_link = block.settings.cta_link
+          -%}
+          {%- if image != blank or title != blank or description != blank -%}
+            {%- if cta_link != blank -%}
+              <a href="{{- cta_link -}}" class="group w-full flex flex-col items-center justify-center text-center rounded-tr-[40px] rounded-bl-[40px] px-4 py-8 md:w-[calc(50%-16px)] lg:w-[calc(25%-36px)] lg:px-5 lg:py-10" {%- if block_bg_color != blank -%}style="background-color: {{ block_bg_color }}"{%- endif -%}>
+            {%- else -%}
+              <div class="group w-full flex flex-col items-center justify-center text-center rounded-tr-[40px] rounded-bl-[40px] px-4 py-8 md:w-[calc(50%-16px)] lg:w-[calc(25%-36px)] lg:px-5 lg:py-10" {%- if block_bg_color != blank -%}style="background-color: {{ block_bg_color }}"{%- endif -%}>
+            {%- endif -%}
+              {%- render 'image', image: image, class: 'w-[124px] h-[124px]' -%}
+              <h4 class="mt-6 text-xl font-bold text-center text-grey-900">{{- title -}}</h4>
+              <div class= "mt-2 text-sm text-center text-grey-600">{{- description -}}</div>
+              {%- if cta_text != blank and cta_link != blank -%}
+                <button class="mt-4 link text-secondary">{{- cta_text -}}</button>
+              {%- endif -%}
+            {%- if cta_link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Block Grid",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#343F57"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "color",
+          "id": "block_bg_color",
+          "label": "Block Background Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Block Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA Text",
+          "default": "Block link"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Block Grid"
+    }
+  ]
+}
+{% endschema %}

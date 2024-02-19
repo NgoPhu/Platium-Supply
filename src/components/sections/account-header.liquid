@@ -1,0 +1,98 @@
+{%- liquid
+  assign page_url = page_url | default: '/account'
+  assign account_sidebar = account_sidebar | default: 'account-sidebar'
+  assign sidebar_menu = linklists[account_sidebar]
+-%}
+
+{%- if page_url contains '/account/orders' -%}
+  {%- assign page_url = '/account?view=orders' -%}
+  {%- elsif template contains 'addresses' -%}
+    {%- assign page_url = '/account/addresses' -%}
+{%- endif -%}
+
+{%- render 'breadcrumbs', class: 'bg-grey-100 py-4 lg:py-8' -%}
+
+{%- capture sidebar_content -%}
+  {%- for item in sidebar_menu.links -%}
+    {%- liquid
+      assign mod_title = item.title | split: ']' | last | strip
+      assign mod_icon = item.title | split: ']' | first | remove: '[' | strip
+      assign mod_class = ''
+      assign active_class = '[&.active]:py-1.5 [&.active]:text-secondary [&.active]:font-bold [&.active]:bg-success-bg [&.active]:border-success-content [&.active]:border-[1.5px]'
+
+      if item.url == page_url
+        assign mod_class = 'active'
+      endif
+      if page_url contains 'view=orders'
+        if item.url contains '/account?view=orders'
+          assign mod_class = 'active'
+        endif
+      endif
+    -%}
+    <a
+      href="{{ item.url }}"
+      class="
+        flex-items-center flex-auto js-sidebar-item justify-center border border-default text-sm px-[18px] py-[7px] text-grey-900 rounded-[10px] bg-white
+        hover:text-secondary hover:bg-success-bg hover:border-success-content {{ mod_class }}
+        {% if request.path == item.url %}{{ active_class }}{% elsif item.url == '/account' and template contains 'order' %}{{ active_class }}{% endif %}
+      "
+    >
+      {{- mod_title -}}
+    </a>
+  {%- endfor -%}
+  <a
+    href="{{- routes.account_logout_url -}}"
+    class=" flex-auto
+      flex-items-center js-sidebar-item justify-center border border-default text-sm px-[18px] py-[7px] text-grey-900 rounded-[10px] bg-white md-max:mr-4
+      hover:text-secondary hover:bg-success-bg hover:border-success-content {{ mod_class }}
+      {% if request.path == item.url %}{{ active_class }}{% elsif item.url == '/account' and template contains 'order' %}{{ active_class }}{% endif %}
+      js-account-logout
+    "
+  >
+    {%- render 'icon' with 'icon-logout', class: 'w-4 h-4 mr-2 text-grey-900 hover:text-secondary' -%}
+    {{- 'customer.account.logout' | t -}}
+  </a>
+{%- endcapture -%}
+
+<account-header>
+  <div class="pt-4 pb-5 bg-grey-100 md:pt-4 md:pb-10">
+    <div class="container flex flex-wrap items-center justify-between lg-max:gap-4">
+      <div class="flex items-center">
+        {% if template contains 'addresses' %}
+          <h1 class="text-2xl font-bold text-grey-900 font-body md:text-3xl">{{- 'customer.addresses.title' | t -}}</h1>
+        {% elsif template contains 'order' %}
+          <h1 class="text-2xl font-bold text-grey-900 font-body md:text-3xl">{{- 'customer.order.order_title' | t -}}</h1>
+        {% else %}
+          <h1 class="text-2xl font-bold text-grey-900 font-body md:text-3xl">{{- 'customer.account.title' | t -}}</h1>
+        {% endif %}
+        <div class="flex items-center gap-4 ml-6 md-max:hidden">
+          {%- if sidebar_menu.links.size > 0 -%}
+            {{- sidebar_content -}}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="">
+        <a href="https://shopify.com/{{ shop.id }}/account" class="button-primary flex items-center justify-center min-h-[40px] py-[6px] truncate">
+          <p class="w-full md-max:max-w-[70px] overflow-hidden">{{- 'customer.account.trade' | t -}}</p>
+          {%- render 'icon' with 'icon-arrow-up-right', class: 'w-5 h-5 text-white ml-1.5' -%}
+        </a>
+      </div>
+      <div class="flex flex-col items-start w-full md:hidden">
+        {%- if sidebar_menu.links.size > 0 -%}
+          <div class="w-[calc(100%_-_1px)] flex items-center gap-2 overflow-x-auto">
+            {{- sidebar_content -}}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</account-header>
+
+{%- capture src_url -%}
+  {{- 'section-account-header.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script',
+  src: src_url,
+  priority: 'normal',
+  type: "defer"
+-%}

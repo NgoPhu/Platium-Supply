@@ -1,0 +1,15 @@
+{
+  "name": "Search Settings",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Search behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "predictive_search_enabled",
+      "default": true,
+      "label": "Enable product suggestions"
+    }
+  ]
+}

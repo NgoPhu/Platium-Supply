@@ -1,0 +1,69 @@
+{%- liquid
+  assign mod_heading = product.metafields.related_collections.heading | default: 'Explore related collections'
+  assign mod_heading_mobile = product.metafields.related_collection.heading_mobile | default: 'Explore collections'
+  assign mod_bg_colors = product.metafields.related_collections.background_color
+  assign mod_images = product.metafields.related_collections.image
+  assign mod_titles = product.metafields.related_collections.title
+  assign mod_urls = product.metafields.related_collections.url
+-%}
+
+{%- capture carousel_options -%}
+  {
+    "slidesPerView": "auto",
+    "spaceBetween": 16,
+    "scrollbar": {
+      "draggable": true
+    },
+    "breakpoints": {
+      "1024": {
+        "slidesPerView": "auto",
+        "spaceBetween": 25
+      }
+    }
+  }
+{%- endcapture -%}
+
+{%- if mod_images != blank -%}
+  {%- capture carousel_content -%}
+    {%- for item in mod_images -%}
+      {%- liquid
+        assign mod_bg_color = mod_bg_colors[forloop.index0]
+        assign mod_image = mod_images[forloop.index0]
+        assign image = mod_image | first
+        assign mod_title = mod_titles[forloop.index0]
+        assign mod_url = mod_urls[forloop.index0]
+      -%}
+      <swiper-slide class="relative flex flex-shrink-0 carousel-item w-[236px] lg-max:first:pl-4 lg-max:last:pr-4 carousel-swiper-related-collections-items card-hover">
+        {%- if mod_url != blank -%}
+          <a href="{{- mod_url -}}" class="flex flex-col items-center justify-center w-full h-full rounded-[10px] overflow-hidden carousel-swiper-related-collections-item" style="background-color: {{ mod_bg_color }}">
+        {%- else -%}
+          <div class="flex flex-col items-center justify-center w-full h-full rounded-[10px] overflow-hidden carousel-swiper-related-collections-item" style="background-color: {{ mod_bg_color }}">
+        {%- endif -%}
+          {%- render 'image-acf', image: image, class: 'w-full h-full' -%}
+          <div class="flex justify-between w-full p-5">
+            <h4 class="flex-1 mr-4 text-xl font-bold font-body text-grey-900">{{- mod_title -}}</h4>
+            {%- render 'icon' with 'icon-arrow-forward-outline', class: 'text-secondary hover:text-secondary-hover w-6 h-6' -%}
+          </div>
+        {%- if mod_url != blank -%}
+          </a>
+        {%- else -%}
+          </div>
+        {%- endif -%}
+      </swiper-slide>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  <div class="bg-grey-100 pb-8 lg:pb-[72px] relative overflow-hidden">
+    <div class="lg:container">
+      <h3 class="py-1 mb-8 font-bold font-body text-grey-900 h4 lg-max:hidden">{{- mod_heading -}}</h3>
+      <h3 class="font-bold font-body text-grey-900 h4 py-1.5 mb-4 px-4 lg:hidden">{{- mod_heading_mobile -}}</h3>
+      {%- render 'carousel-swiper',
+        options: carousel_options,
+        contents: carousel_content,
+        include_navigation: true 
+        class_wrap: 'carousel-swiper-related-collections',
+        class: 'overflow-hidden'
+      -%}
+    </div>
+  </div>
+{%- endif -%}

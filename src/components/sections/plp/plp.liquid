@@ -1,0 +1,41 @@
+{%- assign section_settings = section.settings -%}
+
+{%- render 'plp-translate' -%}
+
+{% if settings.searchspring_enable != blank and settings.searchspring_site_id != blank %}
+  {%- render 'plp-searchspring'
+    section_settings: section_settings
+  -%}
+  {%- capture src_url -%}
+    {{- 'section-plp-searchspring.js' | asset_url -}}
+  {%- endcapture -%}
+{% else %}
+  {%- render 'plp-native'
+    section_settings: section_settings
+  -%}
+  {%- capture src_url -%}
+    {{- 'section-plp-native.js' | asset_url -}}
+  {%- endcapture -%}
+{% endif %}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+
+{% schema %}
+  {
+    "name": "Plp Settings",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "hide_sort",
+        "label": "Hide Sort",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_total_items",
+        "label": "Hide Total Item",
+        "default": true
+      }
+    ]
+  }
+  {% endschema %}

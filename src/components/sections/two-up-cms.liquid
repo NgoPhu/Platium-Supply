@@ -1,0 +1,62 @@
+{%- liquid
+  assign container_class = container_class | append: ' lg:py-20'
+  assign section_class = section_class | append: ' xl:max-w-[1088px]'
+  assign class_wrapper = class_wrapper | append: ' flex-col lg:flex-row lg:gap-24'
+  assign banner_class = banner_class | append: ' aspect-[344/236] lg:w-1/2 lg:aspect-[496/342]'
+  assign content_class = content_class | append: ' lg:w-1/2'
+  assign title_class = title_class | append: ' text-2xl lg:text-3xl'
+-%}
+
+{%- render 'image-with-text',
+  container_class: container_class,
+  section_class: section_class,
+  class_wrapper: class_wrapper,
+  banner_class: banner_class,
+  content_class: content_class,
+  title_class: title_class,
+  image: section.settings.image,
+  icon: section.settings.icon,
+  title: section.settings.title,
+  description: section.settings.description,
+  cta_link: section.settings.cta_link
+-%}
+
+{% schema %}
+{
+  "name": "Two up CMS",
+  "class": "bg-primary",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two up CMS"
+    }
+  ]
+}
+{% endschema %}

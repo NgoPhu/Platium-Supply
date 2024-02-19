@@ -1,0 +1,47 @@
+{%- comment -%}
+  Render accordion item
+
+  Accepts:
+  - title: {String}
+  - description: {String}
+  - class: {String}
+  - title_class: {String}
+  - description_class: {String}
+  - open_first: {Boolean}
+{%- endcomment -%}
+{% liquid
+  assign open_first = open_first | default: false
+  assign title = title | strip
+  assign description = description
+  assign class = class | prepend: 'accordion-item js-accordion-item '
+  assign title_class = title_class | prepend: 'accordion-item-title js-accordion-button '
+  assign description_class = description_class | prepend: 'accordion-item-description js-accordion-content '
+  assign enable_wysiwyg = enable_wysiwyg | default: false, allow_false: true
+  assign wysiwyg_class = wysiwyg_class
+%}
+
+{%- if title != blank -%}
+  <div
+    class="{{ class }}"
+    {% if open_first %}
+      open
+    {% endif %}
+    data-aria-accordion
+  >
+    <button class="{{ title_class }}" aria-controls="" aria-expanded="false" type="button">
+      <span class="text">
+        {{ title }}
+      </span>
+      <span class="accordion-item-icon">
+        {%- render 'icon' with 'icon-chevron-down-outline', class: 'accordion-item-icon-open' -%}
+        {%- render 'icon' with 'icon-chevron-up-outline-2', class: 'accordion-item-icon-close' -%}
+      </span>
+    </button>
+    <div id="" class="{{ description_class }}" data-aria-accordion-panel>
+      <div class="{% if enable_wysiwyg %}wysiwyg {{ wysiwyg_class }}{% endif %} accordion-item-description-content pb-5">
+        {%- capture force_description_string -%}{{ description }}{%- endcapture -%}
+        {{ force_description_string | replace: '<img', '<img loading="lazy" alt=""' }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

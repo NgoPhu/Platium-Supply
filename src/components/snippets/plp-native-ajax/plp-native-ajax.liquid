@@ -1,0 +1,102 @@
+{%- assign product_per_page = settings.per_page -%}
+{%- assign global_labels = shop.metafields.filter_global.label -%}
+{%- assign global_prefix_tags = shop.metafields.filter_global.prefix_tag -%}
+{%- assign paginate = nil -%}
+
+{%- if template contains 'collection' -%}
+  {%- assign target = collection -%}
+{%- elsif template contains 'search' -%}
+  {%- assign target = search -%}
+{%- endif -%}
+
+{%- capture filter_configs -%}
+  {%- if global_labels.size > 0 -%}
+    {%- for label in global_labels -%}
+      {%- assign prefix_tag = global_prefix_tags[forloop.index0] -%}
+      {%- if label != blank and prefix_tag != blank -%}
+        ,{
+          "label": {{ label | json }},
+          "prefix_tag": {{ prefix_tag | json }}
+        }
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture results -%}
+  {%- if template contains 'collection' -%}
+    {%- assign results_count = collection.products_count -%}
+    {%- paginate collection.products by product_per_page -%}
+      {%- for item in collection.products -%}
+        {%- if item and item.id -%}
+          ,{% render 'product-json', item: item %}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign paginate = paginate -%}
+    {%- endpaginate -%}
+  {%- elsif template contains 'search' -%}
+    {%- assign results_count = search.results_count -%}
+    {%- paginate search.results by product_per_page -%}
+      {%- for item in search.results -%}
+        {%- if item and item.id -%}
+          ,{% render 'product-json', item: item %}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign paginate = paginate -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture filters -%}
+  {%- for item in target.filters -%}
+    {% if item.param_name != 'filter.p.tag'  %}
+      ,{% render 'plp-native-filter-json', item: item %}
+    {% else %}
+      {%- if global_labels.size > 0 -%}
+        {%- for label in global_labels -%}
+          {%- assign prefix_tag = global_prefix_tags[forloop.index0] -%}
+          {%- if label != blank and prefix_tag != blank -%}
+            ,{% render 'plp-native-filter-json', item: item, prefix: prefix_tag, label: label %}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        ,{% render 'plp-native-filter-json', item: item %}
+      {%- endif -%}
+    {% endif %}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture sort_options -%}
+  {%- for item in target.sort_options -%}
+    ,{
+      "direction": {{ item.value | json }},
+      "label": {{ item.name | json }},
+      "field": {{ item.value | json }}
+    }
+  {%- endfor -%}
+{%- endcapture -%}
+
+{
+  "filters": [
+    {{ filters | remove_first: ',' }}
+  ],
+  "filter_configs": [
+    {{ filter_configs | remove_first: ',' }}
+  ],
+  "sorting": {
+    "sort_by": "{{ target.sort_by | default: target.default_sort_by }}",
+    "options": [
+      {{ sort_options | remove_first: ',' }}
+    ]
+  },
+  "products": [
+    {{ results | remove_first: ',' }}
+  ],
+  "pagination" :{
+    "totalResults": {{ paginate.items | json }},
+    "pages": {{ paginate.pages | json }},
+    "currentPage": {{ paginate.current_page | json }},
+    "totalPages": {{ paginate.pages | json }},
+    "perPage": {{ paginate.page_size | json }}
+  }
+}

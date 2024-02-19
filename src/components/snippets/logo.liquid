@@ -1,0 +1,11 @@
+{%- assign class = class | default: null -%}
+
+<div class="flex justify-center truncate {{ class }}">
+  <a href="/" title="{{- shop.name -}}" class="truncate text-center text-xl font-bold">
+    {%- if settings.logo != blank -%}
+      {%- render 'image', image: settings.logo, class: 'w-full h-auto', loading: 'eager' -%}
+    {%- else -%}
+      {{- shop.name -}}
+    {%- endif -%}
+  </a>
+</div>

@@ -1,0 +1,10 @@
+{
+  "name": "Apps",
+  "settings": [
+    {
+      "type": "header",
+      "content": "App Integrations",
+      "info": "This theme contains some built-in support for several third-party apps. Please install the apps before enabling the integration here."
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{%- unless ignore_style == true -%}
+  {{- 'module-account-order-detail.css' | asset_url | stylesheet_tag -}}
+{%- endunless -%}
+
+{%- liquid
+  assign mod_invoid = order.metafields.dear.attachments.value
+  for invoid in mod_invoid
+    assign invoid_url = invoid.url
+  endfor
+-%}
+{%- capture tracking_number -%}
+  {%- if order.line_items[0].fulfillment.tracking_number -%}
+    {{- order.line_items[0].fulfillment.tracking_number -}}
+  {%- else -%}
+    &mdash;
+  {%- endif -%}
+{%- endcapture -%}
+<div class="account-order-detail flex flex-col w-full gap-5 lg:gap-12 lg:flex-row">
+  <div class="flex-1 w-full bg-white px-4 py-5 lg:p-8 rounded-[10px] border border-default shadow-base">
+    <div class="header flex justify-between items-center mb-1">
+      {%- assign order_number = order.order_number | prepend: '#' -%}
+      <h2 class="text-lg lg:text-xl text-grey-900 font-body font-bold">{{- 'customer.order.title' | t: no: order_number -}}</h2>
+      {%- if invoid_url != blank -%}
+        <a href="{{- invoid_url -}}" class="link text-secondary hover:text-primary">{{- 'customer.order.print' | t -}}</a>
+      {%- endif -%}
+    </div>
+    <p class="pb-2 inline-block w-full text-sm text-link border-b border-default lg:pb-4 lg:border-none">{{- order.created_at | date: '%B %d, %Y - %l:%M%P' -}}</p>
+    <table class="w-full">
+      <thead class="hidden border-b font-bold lg:table-header-group">
+        <tr>
+          {%- assign heading_table_class = 'hidden lg:table-cell pb-2 lg:pb-4 text-sm text-grey-900 font-bold' -%}
+          <td class="{{ heading_table_class }}">{{- 'customer.order.product' | t -}}</td>
+          <td class="{{ heading_table_class }} lg:text-start lg:lg:w-[calc(100/868*100%)]">{{- 'customer.order.price' | t -}}</td>
+          <td class="{{ heading_table_class }} lg:text-center lg:lg:w-[calc(188/868*100%)]">{{- 'customer.order.quantity' | t -}}</td>
+          <td class="{{ heading_table_class }} lg:text-right lg:w-[calc(100/868*100%)]">{{- 'customer.order.total' | t -}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for item in order.line_items -%}
+          {%- assign product_image = item.product.featured_image -%}
+          <tr class="flex flex-wrap flex-col border-t border-b-0 lg-max:pt-4 lg-max:pb-4 first:border-t-0 first:lg-max:pt-5 lg:table-row">
+            <td class="flex text-base text-grey-700 lg:table-cell lg:pt-5 lg:pr-6 lg:pb-6 lg-max:w-full" data-label="{{- 'customer.order.product' | t -}}">
+              <div class="flex lg-max:items-center">
+                <div class="flex-shrink-0">
+                  {%- render 'image', image: product_image, class: 'relative w-[60px] lg:w-20 aspect-1 [&>span]:w-full [&>span]:h-full' -%}
+                </div>
+                <div class="ml-3 lg:ml-4 flex flex-col">
+                  <div class="text-sm font-bold text-grey-900">{{- item.title -}}</div>
+                  <div class="mt-2 text-sm text-link">
+                    {%- for option in item.options_with_values -%}
+                      {%- unless option.value == 'Default Title' -%}
+                        <span class="text-sm text-link">
+                          {%- unless forloop.first and forloop.index == 1 %} | {% endunless -%}
+                          {{ option.name }}: {{ option.value }}
+                        </span>
+                      {%- endunless -%}
+                    {%- endfor -%}
+                    <read-more class="text-sm text-link" data-limit="76">
+                      {%- for option in item.properties -%}
+                        {%- assign value = option | first -%}
+                        {%- if value != 'null' and value != 'timestamp' and value != 'Add Message color' and value != 'isCartGift' -%}
+                          {% unless forloop.first and forloop.index == 1 %} , {% endunless %}
+                          {{- value -}}
+                          {% if forloop.last and forloop.index != 1 %}.{% endif %}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </read-more>
+                  </div>
+                  {%- if item.selling_plan_allocation != blank -%}
+                    <div class="flex items-center">
+                      {%- render 'icon' with 'icon-sync', class: 'w-2.5 h-2.5' -%}
+                      <span class="ml-1 text-base text-link lg:text-xs">{{- item.selling_plan_allocation.selling_plan.name -}}</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </td>
+            {%- assign lineitems_info_class = 'flex flex-row lg-max:w-full lg:table-cell text-sm text-grey-900 before:content-[attr(data-label)] before:w-1/2 before:block before:text-grey-900 before:text-sm before:font-bold lg:before:hidden lg:p-6 align-middle' -%}
+            <td class="{{ lineitems_info_class }} pt-4 lg:!p-0 lg:text-start" data-label="{{- 'customer.order.price' | t -}}">
+              <span class="lg-max:w-1/2 ">{{- item.price | money -}}</span>
+            </td>
+            <td class="{{ lineitems_info_class }} !text-grey-700 lg:text-center lg:px-0" data-label="{{- 'customer.order.quantity_label' | t -}}">
+              {{- item.quantity -}}
+            </td>
+            <td class="{{ lineitems_info_class }} lg:text-right lg:pr-0" data-label="{{- 'customer.order.total' | t -}}">
+              {{- item.final_line_price | money -}}
+            </td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+      <tfoot class="table-order__bottom">
+        <tr class="relative border-t border-default">
+          <td colspan="3" class="hidden pt-4 lg:pt-5 pb-1 text-sm text-link lg:table-cell">{{- 'customer.order.subtotal' | t -}}</td>
+          <td
+            class="flex justify-between pt-4 lg:pt-5 pb-1 text-sm text-link before:mr-10 before:block before:w-fit before:text-sm before:text-link before:content-[attr(data-label)] lg:table-cell lg:text-right lg:before:hidden"
+            data-label="{{- 'customer.order.subtotal' | t -}}"
+          >
+            <span>{{- order.subtotal_price | plus: order.total_discounts | money -}}</span>
+          </td>
+        </tr>
+        {%- for discount in order.discounts -%}
+          {%- capture discount_label -%}
+          {{- 'customer.order.discount' | t -}}
+          {%- if order.discount_applications.size > 0 -%}
+            :
+          {%- endif -%}
+          {% for discount_application in order.discount_applications %}
+            {{ discount_application.title }}
+          {% endfor %}
+        {%- endcapture -%}
+          <tr>
+            <td colspan="3" class="hidden pb-1 text-sm text-link lg:table-cell">
+              {{- discount.code -}}
+              {{- discount_label -}}
+            </td>
+            <td
+              class="flex justify-between pb-1 text-sm text-link before:mr-10 before:block before:w-fit before:text-sm before:text-link before:content-[attr(data-label)] lg:table-cell lg:text-right lg:before:hidden"
+              data-label="{{- discount_label -}}"
+            >
+              <span
+                >-
+                {{- discount.savings | remove: '-' | money -}}
+              </span>
+            </td>
+          </tr>
+        {%- endfor -%}
+        {%- for tax_line in order.tax_lines -%}
+          <tr>
+            <td colspan="3" class="hidden pb-1 text-sm text-link lg:table-cell">{{- tax_line.title -}}</td>
+            <td
+              class="flex justify-between pb-1 text-sm text-link before:mr-10 before:block before:w-fit before:text-sm before:text-link before:content-[attr(data-label)] lg:table-cell lg:text-right lg:before:hidden"
+              data-label="{{- tax_line.title -}}"
+            >
+              <span>{{- tax_line.price | money -}}</span>
+            </td>
+          </tr>
+        {%- endfor -%}
+        {%- for tax_price in order.tax_price -%}
+          <tr>
+            <td colspan="3" class="hidden pb-1 text-sm text-link lg:table-cell">{{- 'customer.order.gst' | t -}}</td>
+            <td
+              class="flex justify-between pb-1 text-sm text-link before:mr-10 before:block before:w-fit before:text-sm before:text-link before:content-[attr(data-label)] lg:table-cell lg:text-right lg:before:hidden"
+              data-label="{{- 'customer.order.gst' | t -}}"
+            >
+              <span>{{- order.tax_price | money -}}</span>
+            </td>
+          </tr>
+        {%- endfor -%}
+        {%- for shipping_method in order.shipping_methods -%}
+          {%- if forloop.last -%}
+            {%- assign class_order_shipping = 'pb-4 lg:pb-6' -%}
+          {%- endif -%}
+          <tr>
+            <td colspan="3" class="hidden pb-4 lg:pb-6 text-sm text-link lg:table-cell {{ class_order_shipping }}">{{- 'customer.order.shipping' | t -}}</td>
+            <td
+              class="flex justify-between pb-4 lg:pb-6 text-sm text-link before:mr-10 before:block before:w-fit before:text-sm before:text-link before:content-[attr(data-label)] lg:table-cell lg:text-right lg:before:hidden {{ class_order_shipping }}"
+              data-label="{{- 'customer.order.shipping' | t -}}"
+            >
+              <span>{{- shipping_method.price | money -}}</span>
+            </td>
+          </tr>
+        {%- endfor -%}
+        <tr class="relative border-t border-default">
+          <td colspan="3" class="hidden pt-4 lg:pt-5 text-sm font-bold text-grey-900 lg:table-cell">{{- 'customer.order.total' | t -}}</td>
+          <td
+            class="flex justify-between pt-4 lg:pt-5 text-sm font-bold text-grey-900 before:mr-10 before:block before:w-fit before:text-base before:font-bold before:text-grey-900 before:content-[attr(data-label)] lg:table-cell lg:text-right lg:before:hidden"
+            data-label="{{- 'customer.orders.total' | t -}}"
+          >
+            <span>{{- order.total_price | money_with_currency -}}</span>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  {%- if order.shipping_address.name or order.billing_address.name -%}
+    <div class="flex flex-col gap-5 w-full lg:max-w-[300px] lg:gap-6">
+      <div class="min-w-36 w-full bg-white px-4 py-5 lg:p-6 rounded-[10px] border border-default shadow-base">
+        <h3 class="mb-4 text-lg font-body font-bold text-grey-900">{{- 'customer.order.billing_address' | t -}}</h3>
+          <p class="text-sm font-bold text-grey-900">
+            {{- 'customer.order.payment_status' | t -}}
+            : {{ order.financial_status_label }}
+          </p>
+          {%- if order.billing_address.name != blank -%}
+            <div class="mt-4 text-sm text-link">
+              <p>{{- order.billing_address.name -}}</p>
+              <p>{{- order.billing_address.company -}}</p>
+              <p>{{- order.billing_address.address1 -}}</p>
+              <p>
+                {{- order.billing_address.city -}}
+                {%- if order.billing_address.province_code != blank -%}
+                  ,&nbsp
+                  {{- order.billing_address.province_code -}}
+                {%- endif -%}
+                {%- if order.billing_address.zip != blank -%}
+                  &nbsp
+                  {{- order.billing_address.zip -}}
+                {%- endif -%}
+              </p>
+              <p>{{- order.billing_address.country -}}</p>
+            </div>
+          {%- endif -%}
+      </div>
+      <div class="min-w-36 w-full bg-white px-4 py-5 lg:p-6 rounded-[10px] border border-default shadow-base">
+        <h3 class="mb-4 text-lg font-body font-bold text-grey-900">{{- 'customer.order.shipping_address' | t -}}</h3>
+        <p class="text-sm font-bold text-grey-900">
+          {{- 'customer.order.fulfillment_status' | t -}}
+          : {{ order.fulfillment_status_label }}
+        </p>
+        {%- if order.shipping_address.name != blank -%}
+          <div class="mt-4 text-sm text-link">
+            <p>{{- order.shipping_address.name -}}</p>
+            <p>{{- order.shipping_address.company -}}</p>
+            <p>{{- order.shipping_address.address1 -}}</p>
+            <p>
+              {{- order.shipping_address.city -}}
+              {%- if order.shipping_address.province_code != blank -%}
+                ,&nbsp
+                {{- order.shipping_address.province_code -}}
+              {%- endif -%}
+              {%- if order.shipping_address.zip != blank -%}
+                &nbsp
+                {{- order.shipping_address.zip -}}
+              {%- endif -%}
+            </p>
+            <p>{{- order.shipping_address.country -}}</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>

@@ -1,0 +1,44 @@
+{%- liquid
+  assign heading = heading
+  assign border_top = border_top
+  assign background_color = background_color
+  assign blocks = blocks
+  assign border_class = "relative after:content-[''] after:absolute after:top-0 after:w-[1px] after:bg-default after:h-full after:left-1/2 after:-translate-x-1/2"
+  assign card_class = 'grid grid-cols-2 border-b border-default ' | append: border_class
+-%}
+
+{%- if blocks.size > 0 -%}
+  <div style="background-color: {{ background_color }};">
+    {%- if heading != blank -%}
+      <h1 class="px-4 py-6 text-2xl font-bold text-grey-900 md:text-3xl md:p-8{% if border_top %} border-t border-default{% endif %}">
+        {{ heading }}
+      </h1>
+    {%- endif -%}
+    <div class="grid md:grid-cols-2 border-t {{ border_class }}">
+      <div class="{{ card_class }}">
+        {%- for block in blocks -%}
+          {%- liquid
+            assign index_modulo = forloop.index | modulo: 2
+            assign mod_category_handle = block.settings.category
+            assign mod_category = collections[mod_category_handle]
+            assign mod_category_featured = block.settings.image
+            assign mod_category_title = block.settings.title | default: mod_category.title
+          -%}
+          {%- render 'card',
+            class: 'w-full p-4 md:p-8 border-default',
+            content_class: 'flex flex-col grow',
+            image_wrapper_class: 'rounded-2xl aspect-1',
+            image: mod_category_featured,
+            title: mod_category_title,
+            title_class: 'text-lg lg:text-xl pt-4 font-bold text-grey-900',
+            url: mod_category.url
+          -%}
+          {%- if index_modulo == 0 and forloop.index < blocks.size -%}
+            </div>
+            <div class="{{ card_class }}">
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

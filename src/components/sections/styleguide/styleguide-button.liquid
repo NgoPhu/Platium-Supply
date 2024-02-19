@@ -1,0 +1,18 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+
+{%- render 'styleguide-button' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Buttons",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Buttons"
+    }
+  ]
+}
+{% endschema %}

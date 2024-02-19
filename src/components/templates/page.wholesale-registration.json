@@ -1,0 +1,401 @@
+{
+  "sections": {
+    "755c584c-b4f6-42e4-a056-a229a1bcbdb7": {
+      "type": "full-width-banner",
+      "settings": {
+        "enable_background": false,
+        "background_color": "",
+        "content_position_vertical": "items-center",
+        "content_position_horizontal": "justify-start",
+        "title": "",
+        "subtitle": "",
+        "cta_text": "Shop Now",
+        "cta_link": "shopify:\/\/collections",
+        "cta_text_second": "",
+        "cta_link_second": "",
+        "image_mobile": "shopify:\/\/shop_images\/Wholesale-Mobile-Hero-Banner.png",
+        "image": "shopify:\/\/shop_images\/Wholesale-Desktop-Hero-Banner.png"
+      }
+    },
+    "71d651fb-d912-4cb2-9057-858490f9d223": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Wholesale-Page_Hero-Banner_01.jpg",
+        "title": "Wholesale & Retail Healthcare with Platinum Health",
+        "description": "<p>At Platinum Health Supply Group, we're more than just a healthcare supplier; we're your dedicated partner in improving quality of life.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "template": {
+      "type": "wholesale-registration",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Image_d28108e5-38ae-4e9e-8d56-f055e4623f84.svg",
+        "banner_title": "Wholesale Registration",
+        "text": "Apply for a Wholesale account by filling out your details below.",
+        "industry_options": "NDIS| Home Caring| Healthcare| Aged Care| Government| Education| Distributor| Manufacturers| Retail | Construction| Logistics |"
+      }
+    },
+    "e593b94c-40d6-4634-808a-e4fbb86d0c13": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Wholesale-Page_Hero-Banner_01.jpg",
+        "title": "Why Choose Platinum Health for Your Wholesale Healthcare Needs?",
+        "description": "",
+        "cta_link": ""
+      }
+    },
+    "7f81e789-ec3d-4bc8-8004-5f877388bfdb": {
+      "type": "block-carousel",
+      "blocks": {
+        "00a8bed6-e565-4e8f-98c3-349c96217742": {
+          "type": "block",
+          "settings": {
+            "title": "Tiered Pricing",
+            "description": "We believe in rewarding loyalty. As a Platinum partner, you'll enjoy exclusive tiered pricing based on your monthly spend. The more you invest in us, the more you save.",
+            "url": ""
+          }
+        },
+        "4255e559-5a3f-4faa-9366-25b375eb2d29": {
+          "type": "block",
+          "settings": {
+            "title": "Same-Day Dispatch",
+            "description": "Time is of the essence, especially in healthcare. All orders placed before 1 pm are dispatched on the same day, ensuring you receive critical supplies promptly.",
+            "url": ""
+          }
+        },
+        "3443dc78-4bed-4c79-961a-10ba19c4ac02": {
+          "type": "block",
+          "settings": {
+            "title": "Free Shipping",
+            "description": "We're dedicated to your convenience. Orders over $399 (excluding Furniture & Fittings, + Rehabilitation & Mobility Range) qualify for free shipping, so you can focus on what matters most - care.",
+            "url": ""
+          }
+        },
+        "171b9605-faeb-481a-9cbc-de81ef2ff9dd": {
+          "type": "block",
+          "settings": {
+            "title": "Premium Quality, Proven Results",
+            "description": "With over 8000+ products available and backed by 3000+ five-star reviews, our commitment to premium-quality healthcare is validated by our satisfied customers.",
+            "url": ""
+          }
+        },
+        "5c16ac71-8d83-4581-bed5-959d5fa02892": {
+          "type": "block",
+          "settings": {
+            "title": "Dedicated Account Manager",
+            "description": "Your journey with us is personalised. Access a dedicated account manager who will handle your inquiries, ensuring you have a seamless experience.",
+            "url": ""
+          }
+        },
+        "f2222a56-2f60-4566-827a-a19c6c79704b": {
+          "type": "block",
+          "settings": {
+            "title": "Loyalty Program",
+            "description": "Because your loyalty matters, we've designed a loyalty program that rewards you for the trust you place in our products. Your purchases not only improve lives but also earn you valuable rewards.",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "00a8bed6-e565-4e8f-98c3-349c96217742",
+        "4255e559-5a3f-4faa-9366-25b375eb2d29",
+        "3443dc78-4bed-4c79-961a-10ba19c4ac02",
+        "171b9605-faeb-481a-9cbc-de81ef2ff9dd",
+        "5c16ac71-8d83-4581-bed5-959d5fa02892",
+        "f2222a56-2f60-4566-827a-a19c6c79704b"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Why Choose Platinum Health for Your Wholesale Healthcare Needs?"
+      }
+    },
+    "2e34415d-5a5e-4cc3-b7cf-be9435c510e2": {
+      "type": "text-block",
+      "disabled": true,
+      "settings": {
+        "heading": "Why Choose Platinum Health for Your Wholesale Healthcare Needs?",
+        "subheading": "",
+        "content": ""
+      }
+    },
+    "c2253ba6-168a-4ac8-8602-a18a35008b9c": {
+      "type": "two-up-card",
+      "blocks": {
+        "template--21257067561280__c2253ba6-168a-4ac8-8602-a18a35008b9c-block-1": {
+          "type": "block",
+          "settings": {
+            "background_color": "#87a38a",
+            "title": "Tiered Pricing",
+            "description": "We believe in rewarding loyalty. As a Platinum partner, you'll enjoy exclusive tiered pricing based on your monthly spend. The more you invest in us, the more you save.",
+            "link": ""
+          }
+        },
+        "template--21257067561280__c2253ba6-168a-4ac8-8602-a18a35008b9c-block-2": {
+          "type": "block",
+          "settings": {
+            "background_color": "#87a38a",
+            "title": "Same-Day Dispatch",
+            "description": "Time is of the essence, especially in healthcare. All orders placed before 1 pm are dispatched on the same day, ensuring you receive critical supplies promptly.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--21257067561280__c2253ba6-168a-4ac8-8602-a18a35008b9c-block-1",
+        "template--21257067561280__c2253ba6-168a-4ac8-8602-a18a35008b9c-block-2"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "76c4009c-542a-43fa-8fe7-e2ce236f2b1e": {
+      "type": "two-up-card",
+      "blocks": {
+        "template--21257067561280__76c4009c-542a-43fa-8fe7-e2ce236f2b1e-block-1": {
+          "type": "block",
+          "settings": {
+            "background_color": "#87a38a",
+            "title": "Title",
+            "description": "Description",
+            "link": ""
+          }
+        },
+        "template--21257067561280__76c4009c-542a-43fa-8fe7-e2ce236f2b1e-block-2": {
+          "type": "block",
+          "settings": {
+            "background_color": "#87a38a",
+            "title": "Title",
+            "description": "Description",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--21257067561280__76c4009c-542a-43fa-8fe7-e2ce236f2b1e-block-1",
+        "template--21257067561280__76c4009c-542a-43fa-8fe7-e2ce236f2b1e-block-2"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "738c122f-742a-4adc-bc0d-d57781d397f2": {
+      "type": "two-up-card",
+      "blocks": {
+        "template--21257067561280__738c122f-742a-4adc-bc0d-d57781d397f2-block-1": {
+          "type": "block",
+          "settings": {
+            "background_color": "#87a38a",
+            "title": "Title",
+            "description": "Description",
+            "link": ""
+          }
+        },
+        "template--21257067561280__738c122f-742a-4adc-bc0d-d57781d397f2-block-2": {
+          "type": "block",
+          "settings": {
+            "background_color": "#87a38a",
+            "title": "Title",
+            "description": "Description",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--21257067561280__738c122f-742a-4adc-bc0d-d57781d397f2-block-1",
+        "template--21257067561280__738c122f-742a-4adc-bc0d-d57781d397f2-block-2"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "9793e53c-5e2d-4bba-a617-8ecc10674634": {
+      "type": "icon-with-text",
+      "blocks": {
+        "template--21257067561280__9793e53c-5e2d-4bba-a617-8ecc10674634-item-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/sale-tag.png",
+            "title": "Tiered Pricing",
+            "description": "<p>We believe in rewarding loyalty. As a Platinum partner, you'll enjoy exclusive tiered pricing based on your monthly spend. The more you invest in us, the more you save.<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        },
+        "template--21257067561280__9793e53c-5e2d-4bba-a617-8ecc10674634-item-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Quality.png",
+            "title": "Premium Quality, Proven Results",
+            "description": "<p>With over 8000+ products available and backed by 3000+ five-star reviews, our commitment to premium-quality healthcare is validated by our satisfied customers.<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        },
+        "template--21257067561280__9793e53c-5e2d-4bba-a617-8ecc10674634-item-3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Free-Shipping.png",
+            "title": "Free Shipping",
+            "description": "<p>We're dedicated to your convenience. Orders over $399 (excluding Furniture & Fittings, + Rehabilitation & Mobility Range) qualify for free shipping, so you can focus on what matters most - care.<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        }
+      },
+      "block_order": [
+        "template--21257067561280__9793e53c-5e2d-4bba-a617-8ecc10674634-item-1",
+        "template--21257067561280__9793e53c-5e2d-4bba-a617-8ecc10674634-item-2",
+        "template--21257067561280__9793e53c-5e2d-4bba-a617-8ecc10674634-item-3"
+      ],
+      "settings": {
+        "title": "Why Choose Platinum Health for Your Wholesale Healthcare Needs?"
+      }
+    },
+    "d29d3e85-da18-46a1-9dc0-0d4026a7e10d": {
+      "type": "icon-with-text",
+      "blocks": {
+        "f073a0e9-f2fb-45ba-a8a8-c04d5c52bec8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Quality.png",
+            "title": "Premium Quality, Proven Results",
+            "description": "<p>With over 8000+ products available and backed by 3000+ five-star reviews, our commitment to premium-quality healthcare is validated by our satisfied customers.<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        },
+        "f8c9073f-14b7-4a48-81a2-e403a9c14fe7": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Account-Manager.png",
+            "title": "Dedicated Account Manager",
+            "description": "<p>Your journey with us is personalised. Access a dedicated account manager who will handle your inquiries, ensuring you have a seamless experience.<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        },
+        "9502437f-1cb5-4e2c-a656-92d1f431a3f9": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Loyalty.png",
+            "title": "Loyalty Program",
+            "description": "<p>Because your loyalty matters, we've designed a loyalty program that rewards you for the trust you place in our products. Your purchases not only improve lives but also earn you valuable rewards.<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        }
+      },
+      "block_order": [
+        "f073a0e9-f2fb-45ba-a8a8-c04d5c52bec8",
+        "f8c9073f-14b7-4a48-81a2-e403a9c14fe7",
+        "9502437f-1cb5-4e2c-a656-92d1f431a3f9"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": ""
+      }
+    },
+    "620b44f2-4df6-48bb-8ff2-c5890a55970e": {
+      "type": "grid-card",
+      "blocks": {
+        "ed304307-4f82-408b-8538-ebe8437d5d31": {
+          "type": "item",
+          "settings": {
+            "title": "Tiered Pricing",
+            "description": "We believe in rewarding loyalty. As a Platinum partner, you'll enjoy exclusive tiered pricing based on your monthly spend. The more you invest in us, the more you save.",
+            "cta_link": ""
+          }
+        },
+        "7a09f94c-7ee3-48b3-a718-b3970e1e4d8b": {
+          "type": "item",
+          "settings": {
+            "title": "Same-Day Dispatch",
+            "description": "Time is of the essence, especially in healthcare. All orders placed before 1 pm are dispatched on the same day, ensuring you receive critical supplies promptly.",
+            "cta_link": ""
+          }
+        },
+        "6f3f8e6a-7754-4e9e-8743-7db87d7a4028": {
+          "type": "item",
+          "settings": {
+            "title": "Free Shipping",
+            "description": "We're dedicated to your convenience. Orders over $399 (excluding Furniture & Fittings, + Rehabilitation & Mobility Range) qualify for free shipping, so you can focus on what matters most - care.",
+            "cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "ed304307-4f82-408b-8538-ebe8437d5d31",
+        "7a09f94c-7ee3-48b3-a718-b3970e1e4d8b",
+        "6f3f8e6a-7754-4e9e-8743-7db87d7a4028"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "fcbfe13a-0fc6-47b9-8095-962e6c9e61a1": {
+      "type": "grid-card",
+      "blocks": {
+        "2709ff88-06ac-45c3-a6b4-f3668a0366c8": {
+          "type": "item",
+          "settings": {
+            "title": "Premium Quality, Proven Results",
+            "description": "With over 8000+ products available and backed by 3000+ five-star reviews, our commitment to premium-quality healthcare is validated by our satisfied customers.",
+            "cta_link": ""
+          }
+        },
+        "fd0029f0-d4c5-41f1-a559-5dbc357f323e": {
+          "type": "item",
+          "settings": {
+            "title": "Dedicated Account Manager",
+            "description": "Your journey with us is personalised. Access a dedicated account manager who will handle your inquiries, ensuring you have a seamless experience.",
+            "cta_link": ""
+          }
+        },
+        "b6f69fc9-3742-4f44-9125-06c1474b869c": {
+          "type": "item",
+          "settings": {
+            "title": "Loyalty Program",
+            "description": "Because your loyalty matters, we've designed a loyalty program that rewards you for the trust you place in our products. Your purchases not only improve lives but also earn you valuable rewards.",
+            "cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "2709ff88-06ac-45c3-a6b4-f3668a0366c8",
+        "fd0029f0-d4c5-41f1-a559-5dbc357f323e",
+        "b6f69fc9-3742-4f44-9125-06c1474b869c"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "fcb61c5c-989d-4b86-81ba-69ffcde10b83": {
+      "type": "column-banner",
+      "settings": {
+        "class_modify": "",
+        "bg_color": "#f5f5f6",
+        "image_mobile": "shopify:\/\/shop_images\/Why-Platinum-Mobile_df9d25d9-0b44-4513-a110-291abe1a77b2.png",
+        "image": "shopify:\/\/shop_images\/Why-Platinum-Health-Column-Banner-Desktop_77841a13-4371-47a8-ab33-bf01fa789e32.png",
+        "url": ""
+      }
+    }
+  },
+  "order": [
+    "755c584c-b4f6-42e4-a056-a229a1bcbdb7",
+    "71d651fb-d912-4cb2-9057-858490f9d223",
+    "template",
+    "e593b94c-40d6-4634-808a-e4fbb86d0c13",
+    "7f81e789-ec3d-4bc8-8004-5f877388bfdb",
+    "2e34415d-5a5e-4cc3-b7cf-be9435c510e2",
+    "c2253ba6-168a-4ac8-8602-a18a35008b9c",
+    "76c4009c-542a-43fa-8fe7-e2ce236f2b1e",
+    "738c122f-742a-4adc-bc0d-d57781d397f2",
+    "9793e53c-5e2d-4bba-a617-8ecc10674634",
+    "d29d3e85-da18-46a1-9dc0-0d4026a7e10d",
+    "620b44f2-4df6-48bb-8ff2-c5890a55970e",
+    "fcbfe13a-0fc6-47b9-8095-962e6c9e61a1",
+    "fcb61c5c-989d-4b86-81ba-69ffcde10b83"
+  ]
+}

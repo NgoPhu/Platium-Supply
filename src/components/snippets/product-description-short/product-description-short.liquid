@@ -1,0 +1,5 @@
+{%- if product.metafields.product_description.description != blank -%}
+  <read-more class="wysiwyg--product-description mt-4 block text-sm" data-limit="196">
+    {{ product.metafields.product_description.description }}
+  </read-more>
+{%- endif -%}

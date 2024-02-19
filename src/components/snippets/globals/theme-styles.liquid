@@ -1,0 +1,27 @@
+{%- comment -%}
+  Renders the styles of the theme
+{%- endcomment -%}
+<link rel="preload" href="{{- 'theme.css' | asset_url -}}" as="style">
+<link type="text/css" href="{{- 'theme.css' | asset_url -}}" rel="stylesheet">
+
+<!--
+  {%- if template.name == 'index' -%}
+    <link type="text/css" href="{{- 'template-index.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template.name == 'product' -%}
+    <link type="text/css" href="{{- 'template-product.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template.name == 'collection' -%}
+    <link type="text/css" href="{{- 'template-collection.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template.name == 'search' -%}
+    <link type="text/css" href="{{- 'template-search.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template contains 'customers' -%}
+    <link type="text/css" href="{{- 'template-account.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template.name == 'article' -%}
+    <link type="text/css" href="{{- 'template-article.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template.name == 'blog' -%}
+    <link type="text/css" href="{{- 'template-blog.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template.name == 'cart' -%}
+    <link type="text/css" href="{{- 'template-cart.css' | asset_url -}}" rel="stylesheet">
+  {%- elsif template.name == 'page' -%}
+    <link type="text/css" href="{{- 'template-page.css' | asset_url -}}" rel="stylesheet">
+  {%- endif -%}
+-->

@@ -1,0 +1,28 @@
+{%- liquid
+  assign menu_footer = menu_footer | default: nil 
+-%}
+
+{%- if menu_footer != blank -%}
+  {%- for link in menu_footer -%}
+    <div class="hidden md:mr-4 md:block md:w-[160px] lg:mr-10 lg:w-[190px]">
+      {%- if link.links != blank -%}
+        <h6 class="pb-2 text-sm font-bold text-white font-body">{{- link.title -}}</h6>
+      {%- endif -%}
+      <ul class="w-full">
+        {%- for child_link in link.links -%}
+          <li class="mb-2 w-fit last:mb-0">
+            <a
+              href="{{- child_link.url -}}"
+              class="font-sans text-sm text-white hover:text-link-hover hover:underline"
+              title="{{- child_link.title -}}"
+              target="_self"
+              rel="noopener"
+            >
+              {{- child_link.title -}}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {% endfor %}
+{%- endif -%}

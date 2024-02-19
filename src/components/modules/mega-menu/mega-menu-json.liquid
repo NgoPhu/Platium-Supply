@@ -1,0 +1,23 @@
+{%- assign menu = menu | default: nil -%}
+{%- assign level = level | default: 0 -%}
+{%- assign next_level = level | plus: 1 -%}
+
+{%- capture menu_data -%}
+  {%- for link in menu -%}
+    {%- assign handleLink = link.url | replace: '/collections/', '' | split: '/' -%}
+    {%- assign handleLink = handleLink[0] -%}
+    {%- assign countProductCollection = collections[handleLink].all_products_count -%}
+
+    ,{
+      "title": "{{ link.title }}",
+      "url": "{{ link.url }}",
+      "level": {{ level }},
+      "countCollection": "{{ countProductCollection }}", 
+      "children": {%- render 'mega-menu-json', menu: link.links, level: next_level -%}
+    }
+  {%- endfor -%}
+{%- endcapture -%}
+
+[
+  {{ menu_data | remove_first: ',' }}
+]

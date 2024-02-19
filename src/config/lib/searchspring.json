@@ -1,0 +1,43 @@
+{
+  "name": "Searchspring API",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Searchspring API",
+      "info": "This is config for Searchspring API"
+    },
+    {
+      "type": "checkbox",
+      "id": "searchspring_enable",
+      "label": "Enable Searchspring",
+      "info": "Product Filter & Search from Searchspring",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "searchspring_site_id",
+      "label": "Searchspring site ID"
+    },
+    {
+      "type": "header",
+      "content": "Searchspring Collection Config",
+      "info": "This is config for Searchspring Collection page"
+    },
+    {
+      "type": "range",
+      "id": "searchspring_products_per_page",
+      "label": "Number products per page",
+      "min": 12,
+      "max": 60,
+      "step": 12,
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "searchspring_recommendation_cart",
+      "label": "Profile for mini cart",
+      "info": "You may also like",
+      "default": "view-cart"
+    }
+  ]
+}

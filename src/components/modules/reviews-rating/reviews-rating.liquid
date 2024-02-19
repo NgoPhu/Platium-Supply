@@ -1,0 +1,15 @@
+{%- unless template contains 'gift-card' or product.gift_card? -%}
+  <reviews-rating>
+    <div class="reviews-rating">
+      <div class="yotpo-widget-instance" data-yotpo-instance-id="305851" data-yotpo-product-id="{{- product.id -}}"></div>
+    </div>
+  </reviews-rating>
+{%- endunless -%}
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-reviews-rating.js' | asset_url -}}
+  {%- endcapture -%}
+
+  {%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+{%- endunless -%}

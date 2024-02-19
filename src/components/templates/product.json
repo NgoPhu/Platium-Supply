@@ -1,0 +1,99 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "enable_gallery_zoom": true
+      }
+    },
+    "related-collections": {
+      "type": "explore-related-collections",
+      "settings": {
+      }
+    },
+    "product-highlight": {
+      "type": "product-carousel-acf",
+      "settings": {
+      }
+    },
+    "review": {
+      "type": "review-carousel",
+      "settings": {
+      }
+    },
+    "product-recommendation": {
+      "type": "product-recommendation",
+      "settings": {
+      }
+    },
+    "recently": {
+      "type": "product-recently",
+      "settings": {
+      }
+    },
+    "afterpay": {
+      "type": "product-afterpay",
+      "settings": {
+      }
+    },
+    "share": {
+      "type": "product-share",
+      "settings": {
+      }
+    },
+    "e00e6e1a-aee8-4be2-8b45-f8e5416da728": {
+      "type": "icon-with-text",
+      "blocks": {
+        "template--19920474374464__e00e6e1a-aee8-4be2-8b45-f8e5416da728-item-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_52_8c67189a-28c8-4163-b753-bf0ea3b42ef9.png",
+            "title": "Live Chat",
+            "description": "<p>Our experts will get back to you in less than 24 hours.<\/p>"
+          }
+        },
+        "template--19920474374464__e00e6e1a-aee8-4be2-8b45-f8e5416da728-item-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_53_32e94ac2-6949-48a4-b1e0-ab9806520d7f.png",
+            "title": "Call Us",
+            "description": "<p><a href=\"tel:03 6407 7001\" target=\"_blank\" title=\"tel:03 6407 7001\">On 03 6407 7001<\/a><\/p><p>9am - 5pm (Monday to Friday)<\/p>"
+          }
+        },
+        "template--19920474374464__e00e6e1a-aee8-4be2-8b45-f8e5416da728-item-3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_54_7cd201fc-03aa-4710-9ac4-ddf402ba5a00.png",
+            "title": "Email Us",
+            "description": "<p>Feel free to send enquiries via our contact form. <a href=\"#\" target=\"_blank\" title=\"#\">Email us<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--19920474374464__e00e6e1a-aee8-4be2-8b45-f8e5416da728-item-1",
+        "template--19920474374464__e00e6e1a-aee8-4be2-8b45-f8e5416da728-item-2",
+        "template--19920474374464__e00e6e1a-aee8-4be2-8b45-f8e5416da728-item-3"
+      ],
+      "settings": {
+        "title": "How Can We Help?"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "related-collections",
+    "product-recommendation",
+    "product-highlight",
+    "review",
+    "recently",
+    "afterpay",
+    "share",
+    "e00e6e1a-aee8-4be2-8b45-f8e5416da728"
+  ]
+}

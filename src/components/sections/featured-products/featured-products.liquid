@@ -1,0 +1,83 @@
+{% liquid
+  assign blocks = section.blocks
+  assign mod_collection = section.settings.collection
+  assign is_show = false
+%}
+
+{%- if blocks.size > 0 -%}
+  <script>
+    var featuredProducts = [
+      {%- for block in blocks -%}
+        {%- assign mod_product = all_products[block.settings.product] -%}
+        {%- if mod_product != nil -%}
+          {%- render 'product-json', item: mod_product -%}
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
+  </script>
+  {%- assign is_show = true -%}
+{%- elsif mod_collection.products.size > 0 -%}
+  <script>
+    var featuredProducts = [
+      {%- for mod_product in mod_collection.products -%}
+        {%- if mod_product != nil -%}
+          {%- render 'product-json', item: mod_product -%}
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
+  </script>
+  {%- assign is_show = true -%}
+{%- endif -%}
+
+{%- if is_show -%}
+  <section class="{{ class }} featured-products">
+    <featured-products title="{{- section.settings.title -}}" />
+  </section>
+  {%- unless ignore_script == true -%}
+    {%- capture src_url -%}
+      {{- 'section-featured-products.js' | asset_url -}}
+    {%- endcapture -%}
+    {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "class": "bg-grey-100",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Popular Right Now"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products",
+      "category": "Card Grid"
+    }
+  ]
+}
+{% endschema %}

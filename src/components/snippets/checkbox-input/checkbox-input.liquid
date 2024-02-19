@@ -1,0 +1,32 @@
+{%- liquid
+  assign class = class | default: null
+  assign input = input | default: null
+  assign id = id | default: null
+  assign name = name | default: null
+  assign value = value | default: null, allow_false: true
+  assign label = label | default: null
+  assign checked = checked | default: false
+  assign disabled = disabled | default: false
+-%}
+
+<div class="checkbox-input relative flex items-center {{ class }}">
+  {% if input %}
+    {{ input }}
+  {% else %}
+    <input
+      id="{{ id }}"
+      aria-describedby="comments-description"
+      name="{{ name }}"
+      type="checkbox"
+      value="{{ value }}"
+      class="checkbox-input__input"
+      {% if checked %}
+        checked
+      {% endif %}
+      {% if disabled %}
+        disabled
+      {% endif %}
+    >
+  {% endif %}
+  <label for="{{ id }}" class="checkbox-input__label">{{ label }}</label>
+</div>

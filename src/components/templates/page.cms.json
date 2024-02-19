@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-page",
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "description": ""
+      }
+    },
+    "page-cms": {
+      "type": "page-cms",
+      "settings": {}
+    }
+  },
+  "order": [
+    "template",
+    "page-cms"
+  ]
+}

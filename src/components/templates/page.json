@@ -1,0 +1,192 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-page",
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "description": ""
+      }
+    },
+    "83fd9562-106e-4be8-aad5-b4c32a855fa7": {
+      "type": "full-width-banner",
+      "settings": {
+        "enable_background": false,
+        "background_color": "",
+        "content_position_vertical": "items-center",
+        "content_position_horizontal": "justify-center",
+        "title": "",
+        "subtitle": "",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_text_second": "",
+        "cta_link_second": "",
+        "image_mobile": "shopify:\/\/shop_images\/NDIS-Hero-Banner-Mobile_1f86ebcf-3422-446b-b936-e7c4eebd4b5c.png",
+        "image": "shopify:\/\/shop_images\/NDIS-Hero-Banner-Desktop_38bb949e-1bbc-4fab-a9fa-22b8e5fc0bf2.png"
+      }
+    },
+    "b41c01d6-7905-4de6-b1a8-aa891b9b16e4": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/NDIS_MainBanner_02b.jpg",
+        "title": "Platinum Health is a Registered NDIS Provider",
+        "description": "<p>Our mission is to provide people with disability the support they need to live an independent and fulfilling life, and to reach their full potential.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "363c7baa-03c6-4ea7-a142-92d507ffc1f5": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/NDIS-Image-1_e0dbd2f3-f935-45a9-a924-5020127e4ac3.png",
+        "is_reversed": true,
+        "background_color": "#ffffff",
+        "title": "We are dedicated to supporting individuals with disabilities to live a fulfilling life by providing high-quality products that meet their unique needs.",
+        "description": "As an NDIS registered provider, we offer a range of products that are funded by the National Disability Insurance Scheme (NDIS), ensuring that our clients receive the best possible care and support.Our passionate and committed team here at Platinum are experienced in helping people of all ages and varied conditions achieve their goals. Our goal is to strengthen independence and boost our customers' confidence. We can put together a plan to help you or your loved one now and into the future.",
+        "cta_as_button": false,
+        "cta_text": "",
+        "cta_url": "",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "492bd00d-d22d-4a58-bd4e-3c92a93e502f": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/NDIS-Image-2_bd08da2c-1699-4cc7-93c9-7e4894291eb4.png",
+        "is_reversed": false,
+        "background_color": "#ffffff",
+        "title": "NDIS Self-Managed, Plan Managed and Support Coordinators",
+        "description": "We work closely with Local Area Coordinators, NDIS Support Coordinators and Plan Managers throughout Australia, to ensure our expertise is readily available to all NDIS participants who may benefit from working with us. We can also assist self-managed NDIS participants with bookings and enquiries.Should you have any questions regarding your NDIS Agreement or how to make the most of your funding, please contact your local clinic or drop us a line and we’ll be more than happy to assist.",
+        "cta_as_button": false,
+        "cta_text": "PH: 03 6407 7001",
+        "cta_url": "",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "2f5ba4a6-b5b3-4376-8d41-0d25c9142342": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/NDIS-Plan-Manged-Image.png",
+        "is_reversed": true,
+        "background_color": "#ffffff",
+        "title": "Plan Managed",
+        "description": "In case your NDIS Plan includes funding for a Plan Manager, we can organise billing through the Plan Manager provided that we receive a duly completed Biller Authorisation Form from the relevant Plan Management Agency",
+        "cta_as_button": true,
+        "cta_text": "Download the Biller Authorisation Form",
+        "cta_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0794\/5938\/5664\/files\/Biller_Authorisation_Form.pdf?v=1701450879",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "e1d6018a-4a57-4737-99af-9c811739e20d": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/NDIS-Agency-Provider-Managed-Image.png",
+        "is_reversed": false,
+        "background_color": "#ffffff",
+        "title": "Agency Provider Managed",
+        "description": "As a registered NDIS provider, Platinum Health Supply can directly claim payment through the NDIS Portal. To enable this option, it is necessary to complete a Service Agreement.",
+        "cta_as_button": true,
+        "cta_text": "Download the Service Agreement Form",
+        "cta_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0794\/5938\/5664\/files\/NDIS_Service_Agreement.pdf?v=1701450880",
+        "margin_top": 0,
+        "margin_bottom": 40,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "two_columns_cms_T46MPW": {
+      "type": "two-columns-cms",
+      "blocks": {
+        "block_N7RXVD": {
+          "type": "block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/NDIS-Image-02a.png",
+            "title": "Plan Managed",
+            "description": "In case your NDIS Plan includes funding for a Plan Manager, we can organise billing through the Plan Manager provided that we receive a duly completed Biller Authorisation Form from the relevant Plan Management Agency. Download the form by clicking this banner.",
+            "cta_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0794\/5938\/5664\/files\/Biller_Authorisation_Form.pdf?v=1701450879"
+          }
+        },
+        "block_RbHWnN": {
+          "type": "block",
+          "settings": {
+            "title": "",
+            "description": "",
+            "cta_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "block_N7RXVD",
+        "block_RbHWnN"
+      ],
+      "disabled": true,
+      "settings": {
+        "class_modify": ""
+      }
+    },
+    "b587d604-e46a-444e-b7b7-ffec161d318b": {
+      "type": "multi-columns",
+      "blocks": {
+        "template--19920474538304__b587d604-e46a-444e-b7b7-ffec161d318b-item-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Plan-Managed-01.jpg",
+            "title": "Plan Managed",
+            "description": "In case your NDIS Plan includes funding for a Plan Manager, we can organise billing through the Plan Manager provided that we receive a duly completed Biller Authorisation Form from the relevant Plan Management Agency",
+            "cta_text": "Get Biller Authorisation Form",
+            "cta_url": "",
+            "info_button": ""
+          }
+        },
+        "template--19920474538304__b587d604-e46a-444e-b7b7-ffec161d318b-item-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Agency-Provider-01.jpg",
+            "title": "Agency Provider Managed",
+            "description": "As a registered NDIS provider, Platinum Health Supply can directly claim payment through the NDIS Portal. To enable this option, it is necessary to complete a Service Agreement.",
+            "cta_text": "Get Service Agreement",
+            "cta_url": "",
+            "info_button": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--19920474538304__b587d604-e46a-444e-b7b7-ffec161d318b-item-1",
+        "template--19920474538304__b587d604-e46a-444e-b7b7-ffec161d318b-item-2"
+      ],
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "3d749797-8ef8-4232-8306-3ea775141787": {
+      "type": "contact-module",
+      "settings": {
+        "text_color": "#343f57",
+        "heading": "NDIS Consumables Enquiry Form",
+        "description": "<p>If you would like to access your NDIS consumables online with Platinum Health Supply, please fill out the form below.<\/p>",
+        "form_script": "<script src=\"\/\/customercare.platinumhealthsupply.com.au\/resources\/sharing\/embed.js?sharing=lp-embed&domain=customercare.platinumhealthsupply.com.au&id=7L45-A2R%2F%22\"><\/script>"
+      }
+    }
+  },
+  "order": [
+    "template",
+    "83fd9562-106e-4be8-aad5-b4c32a855fa7",
+    "b41c01d6-7905-4de6-b1a8-aa891b9b16e4",
+    "363c7baa-03c6-4ea7-a142-92d507ffc1f5",
+    "492bd00d-d22d-4a58-bd4e-3c92a93e502f",
+    "2f5ba4a6-b5b3-4376-8d41-0d25c9142342",
+    "e1d6018a-4a57-4737-99af-9c811739e20d",
+    "two_columns_cms_T46MPW",
+    "b587d604-e46a-444e-b7b7-ffec161d318b",
+    "3d749797-8ef8-4232-8306-3ea775141787"
+  ]
+}

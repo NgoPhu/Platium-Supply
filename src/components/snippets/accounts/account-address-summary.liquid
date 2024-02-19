@@ -1,0 +1,44 @@
+{%- assign class_text = 'text-sm tracking-normal text-link' -%}
+
+<div class="border rounded-[10px] border-default bg-white shadow-base px-4 py-[19px] lg:px-6 lg:py-[23px] min-h-[240px] lg:min-h-[248px] last:hidden {% if default_address %}order-first{% endif %}">
+  {%- if type != 'new_address' -%}
+    <div>
+      {%- if default_address -%}
+        <h3 class="mb-4 text-lg font-bold font-body text-grey-900">{{- title -}}</h3>
+      {%- endif -%}
+      <p class="{{ class_text }}">
+        {{ address.first_name }}
+        {{ address.last_name }}
+      </p>
+      {%- unless address.company == blank -%}
+        <p class="{{ class_text }}">{{- address.company -}}</p>
+      {%- endunless -%}
+      {%- unless address.address1 == blank and address.address2 == blank -%}
+        <p class="{{ class_text }}">
+          {{ address.address1 }}
+          {{ address.address2 }}
+        </p>
+      {%- endunless -%}
+      {%- unless address.city == blank and address.province == blank -%}
+        <p class="{{ class_text }}">
+          {{- address.city -}}
+          , {{ address.province_code }}
+          {{ address.zip }}
+        </p>
+      {%- endunless -%}
+      <p class="{{ class_text }}">{{- address.country -}}</p>
+    </div>
+    <div class="mt-4">
+      <button
+        class="link mr-4 inline-block"
+        onclick="this.closest('account-addresses').toggleForm('{{- address.id -}}')"
+      >
+        {{- 'customer.addresses.edit' | t -}}
+      </button>
+      <form class="inline" method="post" action="/account/addresses/{{- address.id -}}">
+        <input type="hidden" name="_method" value="delete">
+        <button class="link inline-block" type="submit">{{- 'customer.addresses.delete' | t -}}</button>
+      </form>
+    </div>
+  {%- endif -%}
+</div>

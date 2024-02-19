@@ -1,0 +1,27 @@
+@import './lib/typography.css';
+@import './lib/color.css';
+@import './lib/layout.css';
+@import './lib/animation.css';
+@import './lib/wysiwyg.css';
+@import './lib/utilities.css';
+@import './lib/variables.css';
+
+@import '../snippets/icon/icon.css';
+@import '../snippets/button/button.css';
+@import '../snippets/checkbox-input/checkbox-input.css';
+@import '../snippets/radio-input/radio-input.css';
+@import '../snippets/select-input/select-input.css';
+@import '../snippets/text-input/text-input.css';
+@import '../snippets/toggle-input/toggle-input.css';
+@import '../snippets/notice-main/notice-main.css';
+@import '../snippets/modal-dialog/modal-dialog.css';
+@import '../snippets/accordion-item/accordion-item.css';
+@import '../snippets/menu/menu.css';
+@import '../snippets/carousel/carousel.css';
+@import '../snippets/video-player/video-player.css';
+@import '../snippets/badge/badge.css';
+@import '../snippets/plp-card/plp-card.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

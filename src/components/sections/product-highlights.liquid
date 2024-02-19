@@ -1,0 +1,153 @@
+{%- liquid
+  assign mod_settings = section.settings
+  assign label_button_desktop = mod_settings.cta_text
+  assign label_button_mobile = label_button_desktop | remove: 'Products' | remove: 'products'
+  assign title_desktop = mod_settings.title
+  assign title_mobile = mod_settings.title_mobile | default: title_desktop
+-%}
+
+{%- capture carousel_options -%}
+  {
+    "slidesPerView": "auto",
+    "spaceBetween": 16,
+    "scrollbar": {
+      "draggable": true
+    },
+    "breakpoints": {
+      "1024": {
+        "slidesPerView": "auto",
+        "spaceBetween": 24
+      }
+    }
+  }
+{%- endcapture -%}
+
+{%- if mod_settings.title != blank and section.blocks.size > 0 -%}
+  <div class="container pb-8 lg:pb-[72px] overflow-hidden">
+    <div class="flex flex-col lg:flex-row lg:items-start">
+      {%- if mod_settings.cta_link != blank -%}
+        <a href="{{- mod_settings.cta_link -}}" class="block relative w-full lg:w-[240px] lg:aspect-[240/332] lg:rounded-be-[32px] lg:overflow-hidden lg:flex-none">
+      {%- else -%}
+        <div class="relative w-full lg:w-[230px] lg:aspect-[230/159] lg:rounded-br-[32px] lg:overflow-hidden">
+      {%- endif -%}
+        {%- render 'image', image: mod_settings.image, class: 'fit lg-max:hidden' -%}
+        <div class="flex flex-row items-center justify-between lg:fit lg:justify-center lg:items-center lg:flex-col lg:px-2 lg:py-5">
+          <h3 class="font-bold text-center font-body text-grey-900 lg:text-white h4 lg:px-1 lg-max:hidden">{{- title_desktop -}}</h3>
+          <h3 class="font-bold text-center font-body text-grey-900 lg:text-white h4 lg:px-1 lg:hidden">{{- title_mobile -}}</h3>
+          {%- if mod_settings.cta_text != blank -%}
+            <button class="mt-3 text-sm font-bold font-body text-accent-1 hover:text-accent-1-hover md-max:hidden">{{- label_button_desktop -}}</button>
+            <button class="text-sm font-bold font-body text-secondary hover:text-secondary-hover md:hidden">{{- label_button_mobile -}}</button>
+          {%- endif -%}
+        </div>
+      {%- if mod_settings.cta_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+
+      <div class="w-full lg-max:pt-4 lg:w-[calc(100%-240px)] lg:pl-6">
+        {%- capture carousel_content -%}
+          {%- for block in section.blocks -%}
+            <swiper-slide class="relative flex flex-shrink-0 carousel-item w-[236px] carousel-swiper-highlights-items card-hover">
+              {%- if block.settings.url != blank -%}
+                <a href="{{- block.settings.url -}}" class="flex flex-col items-center justify-center w-full h-full rounded-[10px] overflow-hidden carousel-swiper-highlights-item" style="background-color: {{ block.settings.bg_color }}">
+              {%- else -%}
+                <div class="flex flex-col items-center justify-center w-full h-full rounded-[10px] overflow-hidden carousel-swiper-highlights-item" style="background-color: {{ block.settings.bg_color }}">
+              {%- endif -%}
+                {%- render 'image', image: block.settings.image, class: 'w-full h-full hover:zoom transition' -%}
+                <div class="flex justify-between w-full p-5">
+                  <h4 class="flex-1 mr-4 text-xl font-bold font-body text-grey-900">{{- block.settings.title -}}</h4>
+                  {%- render 'icon' with 'icon-arrow-forward-outline', class: 'text-secondary hover:text-secondary-hover w-6 h-6' -%}
+                </div>
+              {%- if block.settings.url != blank -%}
+                </a>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+            </swiper-slide>
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- render 'carousel-swiper',
+          options: carousel_options,
+          contents: carousel_content,
+          include_scrollbar: true,
+          include_navigation: true,
+          class: 'carousel-swiper-highlights'
+          class_wrap: 'carousel-swiper-highlights-wrapper'
+        -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Hightlights",
+  "class": "bg-grey-100",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Only show on desktop"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title Desktop",
+      "default": "Browse over 3000+ items"
+    },
+    {
+      "type": "text",
+      "id": "title_mobile",
+      "label": "Title Mobile",
+      "default": "Browse 3000+ items"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "+ Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Hightlights"
+    }
+  ]
+}
+{% endschema %}

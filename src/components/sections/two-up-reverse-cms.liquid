@@ -1,0 +1,61 @@
+{%- liquid
+  assign container_class = container_class | append: ' lg:py-[72px]'
+  assign class_wrapper = class_wrapper | append: ' flex-col-reverse lg:flex-row-reverse lg:gap-12'
+  assign banner_class = banner_class | append: ' aspect-[344/170] lg:aspect-[854/422]'
+  assign content_class = content_class | append: ' lg:max-w-[371px]'
+  assign title_class = title_class | append: ' text-3xl lg:text-4xl'
+-%}
+
+{%- render 'image-with-text',
+  container_class: container_class,
+  section_class: section_class,
+  class_wrapper: class_wrapper,
+  banner_class: banner_class,
+  content_class: content_class,
+  title_class: title_class,
+  image: section.settings.image,
+  icon: section.settings.icon,
+  title: section.settings.title,
+  description: section.settings.description,
+  cta_link: section.settings.cta_link
+-%}
+
+{% schema %}
+{
+  "name": "Two Up Reverse CMS",
+  "class": "bg-primary",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Footprint is Nationwide"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two Up Reverse CMS"
+    }
+  ]
+}
+{% endschema %}

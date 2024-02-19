@@ -1,0 +1,229 @@
+{%- render 'product-banner',
+  heading: section.settings.heading,
+  cta_text: section.settings.cta_text,
+  cta_url: section.settings.cta_url,
+  blocks: section.blocks
+-%}
+
+{% schema %}
+  {
+    "name": "Product Banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "cta_url"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product_column",
+        "name": "Product Columm",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image Mobile"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "price",
+            "label": "Price"
+          },
+          {
+            "type": "text",
+            "id": "price_sale",
+            "label": "Price Sale"
+          },
+          {
+            "type": "url",
+            "id": "product_url",
+            "label": "URL"
+          }
+        ]
+      },
+      {
+        "type": "product_two_columns",
+        "name": "Product Two Columms",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product First"
+          },
+          {
+            "type": "product",
+            "id": "product_first",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_first",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_first_mobile",
+            "label": "Image Mobile"
+          },
+          {
+            "type": "color",
+            "id": "background_color_first",
+            "label": "Background Color"
+          },
+          {
+            "type": "text",
+            "id": "title_first",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "price_first",
+            "label": "Price"
+          },
+          {
+            "type": "text",
+            "id": "price_sale_first",
+            "label": "Price Sale"
+          },
+          {
+            "type": "url",
+            "id": "product_url_first",
+            "label": "URL"
+          },
+          {
+            "type": "header",
+            "content": "Product Second"
+          },
+          {
+            "type": "product",
+            "id": "product_second",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_second",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_second_mobile",
+            "label": "Image Mobile"
+          },
+          {
+            "type": "color",
+            "id": "background_color_second",
+            "label": "Background Color"
+          },
+          {
+            "type": "text",
+            "id": "title_second",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "price_second",
+            "label": "Price"
+          },
+          {
+            "type": "text",
+            "id": "price_sale_second",
+            "label": "Price Sale"
+          },
+          {
+            "type": "url",
+            "id": "product_url_second",
+            "label": "URL"
+          }
+        ]
+      },
+      {
+        "type": "product_row",
+        "name": "Product Row",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image Mobile"
+          },
+          {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "price",
+            "label": "Price"
+          },
+          {
+            "type": "text",
+            "id": "price_sale",
+            "label": "Price Sale"
+          },
+          {
+            "type": "url",
+            "id": "product_url",
+            "label": "URL"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 3,
+    "presets": [
+      {
+        "name": "Product Banner",
+        "blocks": [
+          {
+            "type": "product_column"
+          },
+          {
+            "type": "product_two_columns"
+          },
+          {
+            "type": "product_row"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

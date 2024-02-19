@@ -1,0 +1,214 @@
+#stockist-widget {
+  @apply border-t border-default pt-5 pb-6 md:pt-6 md:pb-0;
+
+  & .stockist-search-form {
+    @apply mb-4 border-b border-solid border-default px-4 pb-5 md:mb-6 md:px-6 md:pb-6 xl:px-8;
+
+    & .stockist-query-entry {
+      @apply before:mb-2 before:block before:font-sans
+      before:text-xl before:font-bold before:text-grey-900
+      before:content-['Store_loctions'] md:before:text-2xl;
+    }
+
+    & .stockist-search-button {
+      @apply align-bottom;
+    }
+
+    & .stockist-search-field {
+      @apply h-12 w-full rounded border border-solid
+      border-default px-3.5 py-[13px] text-sm text-grey-900 transition-[border] duration-300 ease-in-out;
+    }
+
+    & .stockist-search-button {
+      & .stockist-feature-bg-color {
+        @apply relative ml-3 h-12 overflow-hidden rounded border
+        border-solid border-primary bg-primary px-6 text-center transition-colors duration-300
+        ease-in-out hover:border-primary-hover hover:bg-primary-hover;
+      }
+
+      & .stockist-icon-search {
+        @apply before:block before:font-sans before:!text-sm
+        before:font-bold before:uppercase before:text-white before:content-['Search'];
+      }
+    }
+
+    & .stockist-search-filters {
+      @apply mt-4;
+    }
+
+    & .stockist-search-filter-checkbox {
+      @apply mr-4;
+
+      & label {
+        @apply block text-grey-900 file:text-base;
+      }
+
+      & input {
+        @apply mt-0.5 mr-3 h-5 w-5 rounded border border-solid border-default text-secondary;
+      }
+    }
+  }
+
+  & .stockist-result-list {
+    @apply !h-full md:pl-6 xl:pl-8;
+
+    & ul {
+      @apply mr-0;
+    }
+
+    & .stockist-list-result {
+      @apply border-l-0 border-solid border-t-default py-6 first:border-t-0 first:pt-0
+      [&:first-child>.stockist-result-distance]:top-0 [&>.stockist-result-distance]:top-6;
+
+      & > div {
+        @apply pl-10 first:pl-0;
+      }
+    }
+
+    & .stockist-result-distance {
+      @apply top-0;
+    }
+  }
+
+  & .stockist-result-name {
+    @apply text-base font-bold text-grey-900;
+  }
+
+  & .stockist-result-custom-fields {
+    @apply !mt-2;
+  }
+
+  & .stockist-result-custom-field {
+    & span {
+      @apply after:hidden;
+    }
+  }
+
+  & .stockist-result-filters,
+  & .stockist-result-addr-1,
+  & .stockist-powered-by-link {
+    @apply hidden;
+  }
+
+  & .stockist-result-addr-locality {
+    @apply text-sm text-grey-900;
+  }
+
+  & .stockist-horizontal {
+    @apply flex flex-col-reverse px-4 md:px-0;
+
+    & .stockist-side-panel {
+      @apply h-[664px] md:h-[860px] md:w-[416px];
+    }
+  }
+
+  & .stockist-icon.stockist-icon-marker {
+    @apply block h-6 w-6 before:hidden;
+
+    background: url('data:image/svg+xml;utf8,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M12%202C7.58333%202%204%205.95159%204%209.58687C4%2013.7698%209.33333%2019.3985%2011.2917%2021.688C11.373%2021.7846%2011.4795%2021.8633%2011.6026%2021.9175C11.7257%2021.9717%2011.8619%2022%2012%2022C12.1381%2022%2012.2743%2021.9717%2012.3974%2021.9175C12.5205%2021.8633%2012.627%2021.7846%2012.7083%2021.688C14.6667%2019.3994%2020%2013.7731%2020%209.58687C20%205.95159%2016.4167%202%2012%202Z%22%20stroke%3D%22%2304B4A1%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M12%2013C13.6569%2013%2015%2011.6569%2015%2010C15%208.34315%2013.6569%207%2012%207C10.3431%207%209%208.34315%209%2010C9%2011.6569%2010.3431%2013%2012%2013Z%22%20stroke%3D%22%2304B4A1%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3C%2Fsvg%3E');
+  }
+
+  & .gm-style-iw.gm-style-iw-c {
+    max-height: 192px !important;
+    overflow: scroll;
+  }
+
+  & .stockist-map {
+    @apply left-[448px] !mb-6 h-full lg:!mb-0;
+
+    & .gm-ui-hover-effect {
+      @apply !top-2 !right-2;
+    }
+  }
+
+  & .stockist-map-result {
+    @apply relative !p-0;
+  }
+
+  & .gm-style-iw-c {
+    @apply !max-h-[none] !w-[230px] !max-w-[none] !p-6 !pb-3;
+  }
+
+  & .gm-style-iw-d {
+    @apply !max-h-[none];
+  }
+
+  & .accordion-item-title {
+    @apply justify-start text-sm font-bold text-grey-900;
+
+    & .accordion-item-icon-open,
+    & .accordion-item-icon-close {
+      @apply text-black;
+    }
+
+    & .accordion-item-icon {
+      @apply ml-0.5 h-4 w-4;
+    }
+  }
+
+  & .accordion-item-description-content {
+    & li {
+      @apply !pt-0 !pb-0;
+    }
+
+    & span {
+      @apply text-sm !font-normal !text-grey-900 after:hidden;
+    }
+  }
+
+  & .accordion-item-description {
+    & li {
+      @apply relative flex items-center justify-between !border-0;
+    }
+
+    & span {
+      @apply w-1/2;
+    }
+  }
+
+  & .stockist-map-google .stockist-result-custom-field--link {
+    @apply absolute left-[86px] bottom-0;
+
+    & span {
+      @apply hidden;
+    }
+
+    & a {
+      @apply text-sm text-grey-500 underline;
+    }
+  }
+
+  & .stockist-result-custom-field--link {
+    @apply absolute left-[130px] bottom-6;
+
+    & span {
+      @apply hidden;
+    }
+
+    & a {
+      @apply text-sm text-grey-500 underline transition-all duration-300 ease-in-out hover:text-grey-900;
+    }
+  }
+
+  & .stockist-result-directions-link {
+    @apply !mt-2 !block;
+
+    & a {
+      @apply text-sm text-grey-500 underline transition-all duration-300 ease-in-out hover:text-grey-900;
+    }
+  }
+
+  & .stockist-result-details {
+    @apply !mt-2;
+  }
+
+  & .stockist-result-phone {
+    & a {
+      @apply text-sm font-normal text-grey-900 before:content-['Ph._'];
+    }
+  }
+
+  & .stockist-result-distance-text {
+    display: none;
+  }
+}

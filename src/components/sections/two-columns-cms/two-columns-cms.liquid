@@ -1,0 +1,47 @@
+{%- render 'two-columns-cms', class_modify: section.settings.class_modify, blocks: section.blocks -%}
+{% schema %}
+  {
+    "name": "Two Columns CMS",
+    "settings": [
+      {
+        "type": "text",
+        "id": "class_modify",
+        "label": "Class Modify"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA URL"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 2,
+    "presets": [
+      {
+        "name": "Two Columns CMS"
+      }
+    ]
+  }
+{% endschema %}

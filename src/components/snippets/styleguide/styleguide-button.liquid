@@ -1,0 +1,79 @@
+<section class="mb-12 py-2">
+  <div class="container">
+    <table class="min-w-full border">
+      <thead>
+        <tr>
+          <th class="border p-4 text-left">Role</th>
+          <th class="border p-4 text-left">Token</th>
+          <th class="border p-4 text-left">Enable</th>
+          <th class="border p-4 text-left">Disabled</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-4">Primary button</td>
+          <td class="border p-4">
+            <span class="rounded-md bg-grey-100 p-2">button-primary</span>
+          </td>
+          <td class="border p-4">
+            <button class="button-primary">Button default</button>
+          </td>
+          <td class="border p-4">
+            <button class="button-primary" disabled>Button default</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="border p-4">Outlined button</td>
+          <td class="border p-4">
+            <span class="rounded-md bg-grey-100 p-2">button-outlined</span>
+          </td>
+          <td class="border p-4">
+            <button class="button-outlined">Button default</button>
+          </td>
+          <td class="border p-4">
+            <button class="button-outlined" disabled>Button default</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="border p-4">Buttons with Icon</td>
+          <td class="border p-4">
+            <span class="rounded-md bg-grey-100 p-2">button-icon</span>
+          </td>
+          <td class="border p-4">
+            <button class="button-icon">
+              Button default
+              {%- render 'icon' with 'icon-arrow-forward-outline', class: 'w-5 h-5 ml-2 text-white' -%}
+            </button>
+          </td>
+          <td class="border p-4">
+            <button class="button-icon" disabled>Button default {%- render 'icon' with 'icon-arrow-forward-outline', class: 'w-5 h-5 ml-2 text-grey-400' -%}</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="border p-4">Button Small</td>
+          <td class="border p-4">
+            <span class="rounded-md bg-grey-100 p-2">button-primary button-small</span>
+          </td>
+          <td class="border p-4">
+            <button class="button-primary button-small">Button default</button>
+          </td>
+          <td class="border p-4">
+            <button class="button-primary button-small" disabled>Button default</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="border p-4">Button Large</td>
+          <td class="border p-4">
+            <span class="rounded-md bg-grey-100 p-2">button-primary button-large</span>
+          </td>
+          <td class="border p-4">
+            <button class="button-primary button-large">Button default</button>
+          </td>
+          <td class="border p-4">
+            <button class="button-primary button-large" disabled>Button default</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

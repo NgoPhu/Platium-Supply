@@ -1,0 +1,66 @@
+{%- liquid
+  assign class = class
+  assign id = id
+  assign options = options
+  assign contents = contents
+  assign no_init = no_init | default: false
+  assign include_pagination = include_pagination | default: false
+  assign include_navigation = include_navigation | default: false
+  assign include_scrollbar = include_scrollbar | default: false
+  assign include_thumbnail = include_thumbnail | default: nil
+-%}
+
+{%- capture config -%}
+  {
+    "pagination": {{ include_pagination }},
+    "navigation": {{ include_navigation }},
+    "scrollbar": {{ include_scrollbar }},
+    "thumbnail": {{ include_thumbnail | json }}
+  }
+{%- endcapture -%}
+
+<carousel-swiper-custom
+  class="swiper-wrapper {{ class_wrap }}"
+  {% if options != blank %}data-options='{{ options }}'{% endif %}
+  data-config='{{ config }}'
+>
+  {%- if custom_navigation == true -%}
+    <div class="swiper-button-prev js-carousel-prev">
+      {%- if chevron_left != blank -%}
+        {{ chevron_left }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <swiper-container
+    class="{{ class }} js-carousel-swiper"
+    {%- if id != blank -%}id="{{ id }}"{%- endif -%}
+    init="false"
+  >
+    {{- contents -}}
+  </swiper-container>
+
+  {%- if include_pagination -%}
+    <div class="swiper-pagination js-carousel-pagination"></div>
+  {%- endif -%}
+
+  {%- if include_navigation -%}
+    {%- if custom_navigation == true -%}
+      <div class="swiper-button-next js-carousel-next">
+        {%- if chevron_right != blank -%}
+          {{ chevron_right }}
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="swiper-button swiper-button-prev js-carousel-prev">
+        {%- render 'icon' with 'icon-chevron-back-outline', class: 'w-4 h-4 text-secondary' -%}
+      </div>
+      <div class="swiper-button swiper-button-next js-carousel-next">
+        {%- render 'icon' with 'icon-chevron-forward-outline', class: 'w-4 h-4 text-secondary' -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if include_scrollbar -%}
+    <div class="swiper-scrollbar js-carousel-scrollbar"></div>
+  {%- endif -%}
+</carousel-swiper-custom>

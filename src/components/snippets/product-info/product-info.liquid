@@ -1,0 +1,15 @@
+{%- liquid
+  assign is_gift_card = false
+  if template contains 'gift-card' or product.gift_card?
+    assign is_gift_card = true
+  endif
+-%}
+
+<div class="relative">
+  <div class="flex items-center justify-between mb-5 md:mb-6">
+    <product-available></product-available>
+    {%- render 'reviews-rating' -%}
+  </div>
+  <product-info></product-info>
+  {%- render 'product-description-short' -%}
+</div>

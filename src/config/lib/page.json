@@ -1,0 +1,10 @@
+{
+  "name": "Page",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "page_sidebar_menu",
+      "label": "Page Sidebar Menu"
+    }
+  ]
+}

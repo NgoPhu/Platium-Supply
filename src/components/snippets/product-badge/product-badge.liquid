@@ -1,0 +1,9 @@
+{%- capture tags_json -%}
+  {{ product.tags | json }}
+{%- endcapture -%}
+
+<script type="text/javascript">
+  var ProductBadge = {{ tags_json }}
+</script>
+
+<product-badge target="ProductBadge" class="[&>div]:mb-4"></product-badge>

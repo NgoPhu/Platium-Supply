@@ -1,0 +1,75 @@
+<div class="layout-hidden">
+  <div class="reduction-section js-gift-card-section">
+    <div class="field">
+      <div class="field__input-btn-wrapper">
+        <div class="field__input-wrapper">
+          <label class="field__label field__label--visible" for="checkout_gift_card_code">
+            {{ 'shopify.checkout.order_summary.gift_card_and_discount_placeholder' | t }}
+          </label>
+          <input
+            placeholder="{{ 'shopify.checkout.order_summary.gift_card_and_discount_placeholder' | t }}"
+            class="field__input js-gift-card"
+            id="checkout_gift_card_code"
+            autocomplete="off"
+            aria-required="true"
+            size="30"
+            type="text"
+          >
+        </div>
+        <button
+          type="button"
+          class="field__input-btn btn btn--disabled js-gift-card-apply"
+          aria-busy="false"
+          disabled="disabled"
+        >
+          <span class="btn__content" aria-hidden="true">
+            {{ 'shopify.checkout.order_summary.apply_button_label' | t }}
+          </span>
+          <svg class="button__spinner" aria-hidden="true" focusable="false">
+            <use fill="currentColor" xlink:href="#spinner-button"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <p class="reduction-section__error js-gift-card-message-text"></p>
+  </div>
+  <div class="reduction-section reduction-section--discount-code js-discount-code-section">
+    <div class="field reduction-section__discount-code js-discount-code-wrapper">
+      <div class="field__input-btn-wrapper">
+        <div class="field__input-wrapper">
+          <label class="field__label field__label--visible" for="checkout_discount_code">
+            {{- 'shopify.checkout.order_summary.discount_placeholder' | t -}}
+          </label>
+          <input
+            placeholder="{{ 'shopify.checkout.order_summary.discount_placeholder' | t }}"
+            class="field__input js-discount-code"
+            id="checkout_discount_code"
+            autocomplete="off"
+            aria-required="true"
+            size="30"
+            type="text"
+          >
+        </div>
+
+        <button
+          type="button"
+          class="field__input-btn btn btn--disabled js-discount-code-apply"
+          disabled="disabled"
+        >
+          <span class="btn__content" aria-hidden="true">
+            {{ 'shopify.checkout.order_summary.apply_button_label' | t }}
+          </span>
+          <svg class="button__spinner" aria-hidden="true" focusable="false">
+            <use fill="currentColor" xlink:href="#spinner-button"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="reduction-section__message reduction-section__message--error js-reduction-message mt-4">
+        <svg class="reduction-section__message-icon mr-1 h-5 w-5 text-grey-900" viewBox="0 0 512 512">
+          <path fill="currentColor" d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/>
+        </svg>
+        <span class="js-reduction-message-text text-sm tracking-normal text-grey-900"></span>
+      </div>
+    </div>
+  </div>
+</div>

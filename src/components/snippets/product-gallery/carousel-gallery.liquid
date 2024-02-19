@@ -1,0 +1,178 @@
+{% if enable_zoom %}
+  {{- 'module-image-zoom.css' | asset_url | stylesheet_tag -}}
+{% endif %}
+
+{%- capture carousel_options -%}
+  {
+    "slidesPerView": "1",
+    "spaceBetween": 24
+  }
+{%- endcapture -%}
+
+{%- capture carousel_thumbnail_options -%}
+  {
+    "direction": "vertical",
+    "slidesPerView": "auto",
+    "spaceBetween": 16,
+    "draggable": true
+  }
+{%- endcapture -%}
+
+{%- capture carousel_contents -%}
+  {%- if product.media.size > 0 -%}
+    {%- for media in product.media -%}
+      <swiper-slide class="flex flex-shrink-0 w-full h-auto cursor-pointer">
+        <div class="w-full h-full overflow-hidden js-gallery-item" data-media-type="{{- media.media_type -}}" data-media-id="{{- media.id -}}">
+          {% case media.media_type %}
+            {% when 'image' %}
+              <div class="w-full bg-center bg-cover bg-no-repeat js-gallery-image" style="background-image: url({{- media | image_url -}});">
+                {%- render 'image',
+                  image: media,
+                  loading: 'eager',
+                  class: 'w-full aspect-1 bg-white',
+                  object_fit: 'cover'
+                -%}
+            </div>
+          {% when 'external_video' %}
+            <video-player class="aspect-1" src="{{ media.src }}" data-video-type="{{ media.host }}" data-thumbnail="{{ media.preview_image | image_url }}" data-external-id="{{ media.external_id }}" controls="true" muted playsinline loop></video-player>
+          {% when 'video' %}
+            {%- assign sources = media.sources | where: 'format', 'mp4' | first -%}
+            <video-player class="aspect-1" src="{{ sources.url }}" data-video-type="mp4" data-thumbnail="{{ media.preview_image | image_url }}" controls="true" muted playsinline loop></video-player>
+          {% when 'model' %}
+            {{ media | model_viewer_tag }}
+            </div>
+          {% else %}
+            {{ media | media_tag }}
+          {% endcase %}
+          <div class="absolute items-center justify-center font-sans text-sm whitespace-nowrap pointer-events-none -translate-x-1/2 -bottom-1 left-1/2 text-grey-600 z-[2] cursor-pointer select-none md-max:-bottom-[11px] hidden [.carousel-swiper-gallery_&]:lg:flex">
+            {%- render 'icon' with 'icon-zoom', class: 'w-5 h-5 text-secondary mr-2' -%}{{ 'product.general.zoom_image' | t }}
+          </div>
+        </div>
+      </swiper-slide>
+    {%- endfor -%}
+  {%- else -%}
+    {%- render 'image',
+      image: settings.default_image,
+      loading: 'eager',
+      class: 'aspect-1 w-full',
+      object_fit: 'contain'
+    -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if product.media.size > 0 -%}
+  <product-gallery class="relative product-gallery is-skeleton" {%- if enable_zoom -%}data-enable-zoom{%- endif -%}>
+    <div class="[.is-skeleton_&]:hidden flex">
+      <div class="flex-[1_0_88px] py-5 px-4 md-max:hidden md:max-h-[468px]">
+        {%- render 'carousel-swiper',
+          class: 'js-carousel-gallery-thumbnail w-full h-full'
+          options: carousel_thumbnail_options,
+          contents: carousel_contents
+        -%}
+      </div>
+      <div class="relative flex-auto px-6 py-6 overflow-hidden bg-white lg:px-[63px] lg:py-8 js-gallery-main">
+        {%- render 'carousel-swiper',
+          class_wrap: 'carousel-swiper-gallery js-carousel-gallery'
+          options: carousel_options,
+          contents: carousel_contents,
+          include_navigation: true,
+          include_thumbnail: '.js-carousel-gallery-thumbnail'
+        -%}
+      </div>
+    </div>
+    <div class="bg-white w-full h-[468px] md-max:h-[344px] [.is-skeleton_&]:block hidden"></div>
+    <div class="product-gallery-zoom">
+      <modal-dialog>
+        <button type="button" class="absolute z-10 rounded-full w-14 h-14 md:w-12 md:h-12 top-6 right-6 bg-grey-100 lg-max:bottom-6 lg-max:right-1/2 lg-max:translate-x-1/2 lg-max:top-auto js-close-modal" aria-label="close modal">
+          {%- render 'icon' with 'icon-close-outline', class: "w-6 h-6 mx-auto md-max:w-8 md-max:h-8 text-secondary" -%}
+        </button>
+        <div class="w-full h-[100dvh] bg-white modal-dialog-content js-content-modal-dialog">
+          <div class="w-full h-full flex-center">
+            <div class="w-full h-full carousel-swiper-product-gallery-zoom product-gallery-zoom-main js-gallery-zoom-main flex-center">
+              {%- capture carousel_gallery_zoom -%}
+                {%- if product.media.size > 0 -%}
+                  {%- for media in product.media -%}
+                    {%- if media.media_type == 'image' -%}
+                      <swiper-slide class="flex flex-shrink-0 w-full h-auto js-main-gallery-zoom-item" data-media-id="{{ media.id }}">
+                        <div class="h-full swiper-zoom-container">
+                          {%- render 'image',
+                            image: media,
+                            class: 'w-full h-full',
+                            object_fit: 'contain',
+                            loading: 'lazy'
+                          -%}
+                        </div>
+                      </swiper-slide>
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- render 'image',
+                    image: settings.default_image,
+                    class: 'w-full h-full',
+                    object_fit: 'contain'
+                  -%}
+                {%- endif -%}
+              {%- endcapture -%}
+              {%- capture options -%}
+                {
+                  "lazy": true,
+                  "zoom": true,
+                  "spaceBetween": 20,
+                  "slidesPerView": 1,
+                  "speed": 600,
+                  "freeMode": {
+                    "enabled": true,
+                    "sticky": true
+                  },
+                  "grabCursor": true,
+                  "pagination": {
+                    "el": ".product-gallery-zoom-main .js-carousel-pagination",
+                    "clickable": true
+                  }
+                }
+              {%- endcapture -%}
+
+              <div class="flex justify-center items-center w-full h-full md:max-w-[800px] md-max:-px-4 max-h-[70dvh]">
+                <div class="flex-[1_0_88px] py-5 px-4 md-max:hidden">
+                  {%- render 'carousel-swiper',
+                    class: 'js-carousel-gallery-zoom-thumbnail'
+                    options: carousel_thumbnail_options,
+                    contents: carousel_gallery_zoom
+                  -%}
+                </div>
+                <div class="relative flex-auto px-6 py-6 overflow-hidden js-gallery-main-modal bg-white lg:px-[63px] lg:py-20">
+                  {%- render 'carousel-swiper',
+                    options: options,
+                    contents: carousel_gallery_zoom,
+                    include_navigation: true,
+                    include_thumbnail: '.js-carousel-gallery-zoom-thumbnail'
+                  -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </modal-dialog>
+    </div>
+  </product-gallery>
+
+  {%- capture src_url -%}
+    {{- 'module-product-gallery.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script',
+    src: src_url,
+    priority: 'important',
+    type: "defer"
+  -%}
+
+  {%- if enable_zoom -%}
+    {%- capture zoom_url -%}
+      {{- 'module-image-zoom.js' | asset_url -}}
+    {%- endcapture -%}
+    {%- render 'atom_script',
+      src: zoom_url,
+      priority: 'normal',
+      type: "defer"
+    -%}
+  {%- endif -%}
+{%- endif -%}

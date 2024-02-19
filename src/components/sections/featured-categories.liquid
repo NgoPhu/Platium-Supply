@@ -1,0 +1,133 @@
+{%- case section.settings.type_display -%}
+  {%- when 'carousel' -%}
+    {%- capture carousel_contents -%}
+      {% for block in section.blocks %}
+        {%- render 'card',
+          url: block.settings.cta_link,
+          class: 'group carousel-item snap-start shrink-0 max-w-[132px] md:max-w-[172px] xl:max-w-[188px] px-3 md:px-6 xl:px-8 transition duration-300 ease-in-out flex flex-col justify-start items-center',
+          image_wrapper_class: 'relative overflow-hidden aspect-[108/102] md:aspect-[124/118] w-[108px] md:w-[124px]',
+          image: block.settings.image,
+          image_class: 'fit object-cover hover:zoom',
+          subtitle: block.settings.subtitle,
+          subtitle_class: 'mt-3 text-text-xs text-center font-bold group-hover:text-secondary-hover text-primary uppercase break-words'
+          title: block.settings.title,
+          title_class: 'mt-3 text-text-xs text-center text-primary uppercase break-words'
+        -%}
+      {% endfor %}
+    {%- endcapture -%}
+
+    {%- if carousel_contents != blank -%}
+      {%- render 'carousel',
+        class: 'xl:justify-center items-start carousel-enable',
+        content: carousel_contents,
+        class_buttons: "!hidden",
+        class_dots: "hidden",
+        class_main: 'pl-1 pr-0 md:px-0 py-8 lg:py-12'
+      -%}
+    {%- endif -%}
+  {%- when 'grid' -%}
+  <div class="mx-auto px-5 md:px-0 py-8 lg:py-12 md:max-w-[976px] xl:max-w-[1064px]">
+    <div class="lg:-mx-8 grid grid-cols-3 lg:flex lg:flex-wrap gap-x-6 gap-y-4 lg:gap-x-0 justify-items-center justify-center">
+      {% for block in section.blocks %}
+        <div class="relative px-0 lg:px-8 lg:w-1/6">
+          <div class="max-w-[96px] md:max-w-[124px] w-full flex flex-col justify-start items-center">
+            {%- if block.settings.cta_link != blank -%}
+              <a href="{{- block.settings.cta_link -}}" aria-label="{{ block.settings.title }}">
+            {%- endif -%}
+              {% render 'image',
+                image: block.settings.image,
+                class: 'aspect-[96/84] md:aspect-[124/118] w-24 md:w-[124px] hover:zoom',
+                mobile_width: 96,
+                md_width: 124
+              %}
+            {%- if block.settings.cta_link != blank -%}
+              </a>
+            {%- endif -%}
+            {%- if block.settings.cta_link != blank -%}
+              <a href="{{- block.settings.cta_link -}}" class="mt-3 text-text-xs text-center hover:text-secondary-hover font-bold text-primary uppercase {{ truncate_word }}">
+            {%- else -%}
+              <h2 class="mt-3 text-text-xs text-center font-bold text-primary uppercase {{ truncate_word }}">
+            {%- endif -%}
+              {{- block.settings.title -}}
+            {%- if block.settings.cta_link == blank -%}
+              </h2>
+            {%- else -%}
+              </a>
+            {%- endif -%}
+            {%- if block.settings.subtitle != blank -%}
+              <h3 class="mt-1 text-text-xs text-center text-primary break-words">{{- block.settings.subtitle -}}</h3>
+            {%- endif -%}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{%- endcase -%}
+
+{% schema %}
+{
+  "name": "Featured Categories",
+  "settings": [
+    {
+      "type": "select",
+      "id": "type_display",
+      "label": "Choose types of display",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "grid"
+    }
+  ],
+  "blocks": [
+    {
+      "type":"item",
+      "name":"Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default": "Title"
+        },
+        {
+          "type":"text",
+          "id":"subtitle",
+          "label":"Subtitle",
+          "default": "Subtitle"
+        },
+        {
+          "type":"url",
+          "id":"cta_link",
+          "label":"CTA Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Categories",
+      "category": "Card Grid",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

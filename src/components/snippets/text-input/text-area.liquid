@@ -1,0 +1,29 @@
+{% liquid
+  assign show_placeholder = show_placeholder | default: true
+  assign class = class | prepend: 'overflow-hidden rounded-[10px] '
+%}
+<div class="relative {{ class }}">
+  <textarea
+    class="input scrollbar peer {{ class_input }}"
+    id="{{ id }}"
+    name="{{ name }}"
+    value="{{ value }}"
+    aria-label="{{ label }}"
+    {% if show_placeholder %}
+      placeholder="{{ placeholder }}"
+    {% endif %}
+    autocomplete="{{ autocomplete }}"
+    {% if required %}
+      required
+    {% endif %}
+    {% if disabled %}
+      disabled
+    {% endif %}
+  ></textarea>
+  {%- if label != blank -%}
+    <label class="input-label after:-top-[5px] peer-focus:after:-top-[5px] bg-white after:bg-white" for="{{ id }}">{{ label }} {%- if required -%}*{%- endif -%}</label>
+  {%- endif -%}
+  {%- if error != blank -%}
+    <p class="input-error">{{- error -}}</p>
+  {%- endif -%}
+</div>

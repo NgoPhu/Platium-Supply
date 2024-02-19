@@ -1,0 +1,5 @@
+{%- capture src_url -%}
+  {{- 'module-searchspring-custom.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

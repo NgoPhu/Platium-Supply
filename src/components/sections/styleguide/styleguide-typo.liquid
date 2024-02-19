@@ -1,0 +1,17 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+{%- render 'styleguide-typo' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Typographys",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Typographys"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+{
+  "name": "Favicon",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use [this tool](https:\/\/realfavicongenerator.net\/) to generate your favicon pack. "
+    },
+    {
+      "type": "image_picker",
+      "id": "apple_touch_icon",
+      "label": "Favicon (Apple Touch Devices)",
+      "info": "Upload PNG of 180x180px PNG for users on iOS devices."
+    },
+    {
+      "type": "image_picker",
+      "id": "favicon_png_32",
+      "label": "Favicon (32x32)",
+      "info": "Upload PNG of 32x32px."
+    },
+    {
+      "type": "image_picker",
+      "id": "favicon_png_16",
+      "label": "Favicon (16x16)",
+      "info": "Upload PNG of 16x16px."
+    },
+    {
+      "type": "color",
+      "id": "color_windows_tile",
+      "label": "Windows Tile Color",
+      "info": "Pick the Windows Tile color for Microsoft Windows devices."
+    },
+    {
+      "type": "color",
+      "id": "color_android_theme",
+      "label": "Android Theme Color",
+      "info": "Pick the Android Theme color for the browser titlebar style."
+    },
+    {
+      "type": "header",
+      "content": "Web App Manifest",
+      "info": "Please upload site.webmanifest to the store files section with remaining icon files. Make sure to update paths to each of the icon files inside of the site.webmanifest file. See: https:\/\/developer.mozilla.org\/en-US\/docs\/Web\/Manifest"
+    }
+  ]
+}

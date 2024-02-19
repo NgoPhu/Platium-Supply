@@ -1,0 +1,36 @@
+{%- liquid
+  assign my_details_label = 'customer.account.dashboard.my_details' | t
+  assign addresses_label = 'customer.account.dashboard.addresses' | t
+  assign my_orders_label = 'customer.account.dashboard.my_orders' | t
+  assign favourites_label = 'customer.account.dashboard.favourites' | t
+  assign edit_details_label = 'customer.account.dashboard.edit_details' | t
+  assign view_details_label = 'customer.account.dashboard.view_details' | t
+  assign goto_favourites_label = 'customer.account.dashboard.goto_favourites' | t
+  assign icon_class = 'w-8 h-8 mb-3'
+  assign label_class = 'font-bold text-grey-900 mb-1 capitalize'
+  assign link_class = 'link'
+  assign item_class = 'flex flex-col items-center justify-center p-6 border rounded border-default mb-4 xs:mb-0 last:mb-0'
+-%}
+
+<div class="xs:grid xs:grid-cols-2 xs:gap-4 lg:pt-0 xs:lg:gap-8 [.orders-have-items+&]:mt-4 [.orders-have-items+&]:border-t [.orders-have-items+&]:border-default [.orders-have-items+&]:pt-4 [.orders-have-items+&]:lg:!mt-8 [.orders-have-items+&]:lg:border-t-0 [.orders-have-items+&]:lg:pt-0">
+  <div class="{{ item_class }}">
+    {%- render 'icon' with 'icon-info-circle', class: icon_class -%}
+    <span class="{{ label_class }}">{{- my_details_label -}}</span>
+    <a href="/account?view=details" title="{{- my_details_label -}}" class="{{ link_class }}">{{- edit_details_label -}}</a>
+  </div>
+  <div class="{{ item_class }}">
+    {%- render 'icon' with 'icon-home', class: icon_class -%}
+    <span class="{{ label_class }}">{{- addresses_label -}}</span>
+    <a href="/account/addresses" title="{{- addresses_label -}}" class="{{ link_class }}">{{- edit_details_label -}}</a>
+  </div>
+  <div class="{{ item_class }}">
+    {%- render 'icon' with 'icon-receipt', class: icon_class -%}
+    <span class="{{ label_class }}">{{- my_orders_label -}}</span>
+    <a href="/account?view=orders" title=" {{- my_orders_label -}}" class="{{ link_class }}">{{- view_details_label -}}</a>
+  </div>
+  <div class="{{ item_class }}">
+    {%- render 'icon' with 'icon-heart-2', class: icon_class -%}
+    <span class="{{ label_class }}">{{- favourites_label -}}</span>
+    <a href="/account?view=favourites" title="{{- favourites_label -}}" class="{{ link_class }}">{{- goto_favourites_label -}}</a>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+{%- liquid
+  assign title = 'customer.addresses.title' | t
+  assign add_new_title = 'customer.addresses.add_new' | t
+  assign edit_address = 'customer.addresses.edit_address' | t
+-%}
+
+<account-addresses>
+  <div class="grid lg:grid-cols-[218px_1fr] gap-5 lg:gap-8">
+    <button class="button-primary w-full h-[48px] normal-case" onclick="this.closest('account-addresses').toggleForm('new')">{{- add_new_title -}}</button>
+    <div class="grid grid-cols-1 gap-5 {% if customer.addresses.size > 0 %}lg:grid-cols-3{% endif %} lg:gap-8 xl:mr-[66px]">
+      {%- assign address_index = 1 -%}
+      {%- for address in customer.addresses -%}
+        {%- assign is_default_address = false -%}
+        {%- if address.id == customer.default_address.id -%}
+          {%- assign is_default_address = true -%}
+        {%- endif -%}
+        {%- if is_default_address -%}
+          {%- assign address_title = 'customer.addresses.default' | t -%}
+        {%- else -%}
+          {%- assign address_title = 'Address ' | append: address_index -%}
+          {%- assign address_index = address_index | plus: 1 -%}
+        {%- endif -%}
+        {%- render 'account-address-summary', address: address, title: address_title, default_address: is_default_address -%}
+      {%- endfor -%}
+      {%- render 'account-address-summary', type: 'new_address' -%}
+    </div>
+
+    {%- capture modal_content -%}
+      {%- render 'account-address-form',
+        address: customer.new_address,
+        class: 'hidden',
+        heading: add_new_title
+      -%}
+      {%- for address in customer.addresses -%}
+        {%- assign is_default_address = false -%}
+        {%- if address.id == customer.default_address.id -%}
+          {%- assign is_default_address = true -%}
+        {%- endif -%}
+
+        {%- render 'account-address-form',
+          address: address,
+          class: 'hidden',
+          heading: edit_address,
+          default_address: is_default_address,
+          ignore_script: true
+        -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- render 'modal-dialog',
+      content: modal_content,
+      content_class: 'max-w-[480px] rounded-[10px] border border-default shadow-base mx-4 lg:mx-0 bg-white',
+      class: 'p-0 bg-transparent',
+      icon_close_class: 'w-6 h-6 lg:w-8 lg:h-8'
+      close_button_class: ' right-10 top-4 lg:right-7 lg:top-6 absolute text-grey-900',
+      scroll_target: '.js-address-form-content'
+    -%}
+    </div>
+</account-addresses>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-account-addresses.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

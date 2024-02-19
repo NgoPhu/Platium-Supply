@@ -1,0 +1,20 @@
+<style>
+  {%- for mod_name in shop.metafields.globals.swatch_name -%}
+    {%- assign mod_hex = shop.metafields.globals.swatch_hex[forloop.index0] -%}
+    {%- assign mod_image = shop.metafields.globals.swatch_image[forloop.index0] -%}
+
+    {%- if mod_name != blank -%}
+      {%- if mod_hex != blank -%}
+        .colour-swatch-{{- mod_name | downcase -}} {
+          background-color: {{- mod_hex -}}
+        }
+      {%- endif -%}
+      {%- if mod_image != blank -%}
+        {%- assign mod_image_src = mod_image | image_url: 'small' -%}
+        .colour-swatch-{{- mod_name | downcase -}} {
+          background-image: {{- mod_image_src -}}
+        }
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</style>

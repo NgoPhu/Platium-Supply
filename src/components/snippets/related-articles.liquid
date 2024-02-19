@@ -1,0 +1,71 @@
+{%- liquid
+  assign title = article.metafields.related_article.title
+  assign cta_text = article.metafields.related_article.cta_text
+  assign cta_link = article.metafields.related_article.cta_link
+  assign article_cta_link = article.metafields.related_article.article_cta_text | default: '+ Read'
+  assign mod_articles = article.metafields.related_article.article | split: '|'
+  assign class = 'w-full flex flex-col'
+  assign image_wrapper_class = 'rounded-tl-[32px] rounded-br-[32px] aspect-[280/178] md:rounded-tl-[40px] md:rounded-br-[40px] md:aspect-[410/260]'
+  assign title_class = 'mb-auto text-base text-grey-900 font-medium font-body line-clamp-[2] truncate !whitespace-normal hover:text-clip md:text-xl'
+-%}
+
+{%- if mod_articles.size > 0 -%}
+  <div class="bg-grey-100 ">
+    <div class="container relative featured-articles pb-8 lg:pb-[72px] overflow-hidden">
+      {%- capture carousel_options -%}
+        {
+          "slidesPerView": "auto",
+          "spaceBetween": 16,
+          "scrollbar": {
+            "draggable": true
+          },
+          "breakpoints": {
+            "768": {
+              "slidesPerView": "2",
+              "spaceBetween": 24
+            },
+            "1024": {
+              "slidesPerView": "3",
+              "spaceBetween": 24
+            }
+          }
+        }
+      {%- endcapture -%}
+
+      {%- capture carousel_content -%}
+        {%- for article in mod_articles -%}
+          {%- assign mod_article = articles[article] -%}
+          <swiper-slide class="flex flex-shrink-0 carousel-item md-max:max-w-[280px]">
+            {%- render 'article-card',
+              article: mod_article,
+              cta_text: article_cta_link,
+              image_wrapper_class: image_wrapper_class,
+              class: class,
+              title_class: title_class
+            -%}
+          </swiper-slide>
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      <div class="flex items-center justify-between pb-4 md:pb-6">
+        {%- if title != blank -%}
+          <h2 class="font-body h4">{{- title -}}</h2>
+        {%- endif -%}
+        {%- if cta_text != blank and cta_link -%}
+          {%- render 'button',
+            link_url: cta_link,
+            link_text: cta_text,
+            link_class: 'text-secondary hover:text-secondary-hover text-sm font-bold font-body'
+          -%}
+        {%- endif -%}
+      </div>
+
+      {%- render 'carousel-swiper',
+        options: carousel_options,
+        contents: carousel_content,
+        include_scrollbar: true,
+        class: 'carousel-swiper-feature-article'
+      -%}
+    </div>
+  </div>
+{%- endif -%}

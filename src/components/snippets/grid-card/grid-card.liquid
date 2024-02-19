@@ -1,0 +1,57 @@
+{%- liquid
+  assign card_class = 'flex flex-col w-full bg-grey-100 rounded-tr-[40px] rounded-bl-[40px]'
+  assign image_wrapper_class = 'relative aspect-[344/200] lg:aspect-[616/308] w-full rounded-tr-[40px] overflow-hidden'
+  assign card_wrapper_class = 'grid gap-6 py-8 lg:py-[72px] lg:grid-cols-2 lg:gap-12'
+  assign class_content = 'p-6 lg:p-12'
+  assign class_title = 'text-grey-900 font-bold font-body text-2xl lg:text-3xl'
+  assign class_description = 'text-intro-text text-grey-600 mt-2 lg:mt-4'
+
+  if blocks.size > 3
+    assign card_wrapper_class = card_wrapper_class | replace: 'lg:grid-cols-2 lg:gap-12', 'lg:grid-cols-4 lg:gap-6'
+    assign image_wrapper_class = image_wrapper_class | replace: 'lg:aspect-[616/308]', 'lg:aspect-[302/248]'
+    assign class_content = 'p-6'
+    assign class_title = class_title | replace: 'text-2xl lg:text-3xl', 'text-2xl'
+    assign class_description = class_description | replace: 'mt-2 lg:mt-4', 'mt-2'
+  elsif blocks.size > 2
+    assign card_wrapper_class = card_wrapper_class | replace: 'lg:grid-cols-2 lg:gap-12', 'lg:grid-cols-3 lg:gap-8'
+    assign image_wrapper_class = image_wrapper_class | replace: 'lg:aspect-[616/308]', 'lg:aspect-[405/308]'
+    assign class_content = 'p-6'
+  endif
+-%}
+
+{%- if blocks.size > 0 -%}
+  <div class="container">
+    <div class="{{ card_wrapper_class }}">
+      {%- for block in blocks -%}
+        <div class="{{ card_class }}">
+          <div class= "{{ image_wrapper_class }}">
+            {%- if block.settings.cta_link != blank -%}
+              <a class="block w-full h-full" href="{{- block.settings.cta_link -}}">
+            {%- endif -%}
+              {%- render 'image',
+                image: block.settings.image,
+                class: 'hover:zoom duration-300 fit'
+              -%}
+            {%- if block.settings.cta_link != blank -%}
+              </a>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.title != blank -%}
+            <div class="{{ class_content }}">
+              <h3 class="{{ class_title }}">
+                {%- if block.settings.cta_link != blank -%}
+                  <a class="hover:text-secondary" href="{{- block.settings.cta_link -}}">{{- block.settings.title -}}</a>
+                {%- else -%}
+                  {{- block.settings.title -}}
+                {%- endif -%}
+              </h3>
+              {%- if block.settings.description != blank -%}
+                <div class="{{ class_description }}">{{- block.settings.description -}}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

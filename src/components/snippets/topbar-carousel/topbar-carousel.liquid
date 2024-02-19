@@ -1,0 +1,48 @@
+{%- if enable and blocks.size > 0 -%}
+  {%- if blocks.size > 2 -%}
+    {%- assign class_item = 'flex items-center gap-2 justify-center first:lg:justify-start last:lg:justify-end ' -%}
+  {%- else -%}
+    {%- assign class_item = 'flex items-center gap-2 justify-center ' -%}
+  {%- endif -%}
+  {%- capture carousel_contents -%}
+    {%- for block in blocks -%}
+      {%- liquid
+        assign icon = block.settings.icon
+        assign title = block.settings.title
+      -%}
+      <swiper-slide class="{{ class_item }}">
+        {%- if icon != blank -%}
+          {%- render 'icon' with icon, class: 'w-5 h-4 text-accent-1' -%}
+        {%- endif -%}
+        {%- if title != blank -%}
+          <div class="text-med font-semibold text-white [&>p>strong]:font-semibold [&>p>strong]:text-accent-1 [&>p>a]:text-accent-1" >{{- title -}}</div>
+        {%- endif -%}
+      </swiper-slide>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- capture carousel_options -%}
+      {
+        "slidesPerView": 1,
+        "spaceBetween": 16,
+        "speed": 1000,
+        "loop": true,
+        "autoplay": {
+          "delay": 6000
+        }
+      }
+    {%- endcapture -%}
+
+  {%- if blocks.size > 0 -%}
+    <div class=" bg-primary ">
+      <div class="container hidden flex-row py-[9px] lg:flex [&>swiper-slide]:w-1/3">{{- carousel_contents -}}</div>
+      {%- render 'carousel-swiper',
+        options: carousel_options,
+        contents: carousel_contents,
+        class_wrap: 'carousel-swiper-topbar relative block lg:hidden',
+        class: 'py-1.5 h-9 lg:h-[42px] lg-max:mx-8 overflow-hidden !w-auto lg:py-[9px] lg:container',
+        include_navigation: true
+      -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

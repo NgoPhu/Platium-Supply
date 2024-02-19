@@ -1,0 +1,29 @@
+{%- liquid
+  assign description = description | replace: ' data-mce-fragment="1"', ''
+  assign split_description = description | replace: '<h4>', '`<h4>' | split: '`'
+  assign product_description = split_description[0]
+  assign product_accordion_list = description | replace: product_description, '' | replace: '<h4>', '`<h4>' | split: '`'
+-%}
+
+{%- if product_accordion_list.size > 0 -%}
+  {%- capture accordion_items -%}
+    {%- for accordion_item in product_accordion_list -%}
+      {%- assign accordion_title = accordion_item | split: '</h4>' | first | replace: '<h4>', '' | downcase -%}
+      {%- assign accordion_content = accordion_item | split: '</h4>' | last -%}
+      {%- if accordion_title and accordion_content -%}
+        {%- render 'accordion-item',
+          title: accordion_title,
+          description: accordion_content,
+          class: '',
+          title_class: 'text-base font-bold capitalize',
+          enable_wysiwyg: true,
+          wysiwyg_class: 'wysiwyg-product'
+        -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- if accordion_items -%}
+  {%- render 'accordion-list', items: accordion_items, class: 'block border-t border-default' -%}
+{%- endif -%}

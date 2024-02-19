@@ -1,0 +1,66 @@
+{% liquid
+  assign type = type | default: 'text'
+  assign show_placeholder = show_placeholder | default: true
+  assign show_icon = show_icon | default: false
+  assign class_icon_base = class_icon_base | default: 'button-icon w-8 h-8'
+  assign class = class | default: ''
+  assign id = id | default: ''
+  assign id = id | default: ''
+  assign name = name | default: ''
+  assign class_input = class_input | default: ''
+  assign label = label | default: ''
+  assign value = value | default: ''
+  assign placeholder = placeholder | default: ''
+  assign autocomplete = autocomplete | default: nil
+  assign required = required | default: nil
+  assign disabled = disabled | default: nil
+  assign class_icon_wrapper = class_icon_wrapper | default: ''
+  assign class_icon_base = class_icon_base | default: ''
+  assign class_icon = class_icon | default: ''
+  assign class_svg = class_svg | default: ''
+  assign error = error | default: nil
+%}
+
+{%- if type == 'password' -%}
+  <custom-input-password>
+{%- endif -%}
+  <div class="relative {{ class }}">
+    <input
+      class="peer input no-autocomplete {{ class_input }} "
+      id="{{ id }}"
+      type="{{ type }}"
+      name="{{ name }}"
+      aria-label="{{ label }}"
+      {%- if value != blank -%}
+        value="{{ value }}"
+      {%- endif -%}
+      {% if show_placeholder %}placeholder="{{ placeholder }}"{% endif %}
+      autocomplete="{{ autocomplete }}"
+      {% if required %}required{% endif %}
+      {% if disabled %}
+      disabled
+      {% endif %}
+    />
+    {%- if type == 'text' or type == 'email' or type == 'password' or type == 'tel' or type == 'date' -%}
+      <label class="input-label" for="{{ id }}">
+        {{ label }}
+        {%- if required -%}*{%- endif -%}
+      </label>
+    {%- endif -%}
+    {%- if show_icon -%}
+      <div class="input__icon-wrapper {{ class_icon_wrapper }}">
+        <button class="{{ class_icon_base }} {{ class_icon }}">
+          <span class="flex">{%- render 'icon' with icon, class: class_svg -%}</span>
+        </button>
+      </div>
+    {%- endif -%}
+    {%- if required -%}
+      {%- render 'icon' with icon_error, class: class_icon_error -%}
+    {%- endif -%}
+    {%- if error != blank -%}
+      <p class="input-error">{{- error -}}</p>
+    {%- endif -%}
+  </div>
+{%- if type == 'password' -%}
+  </custom-input-password>
+{%- endif -%}

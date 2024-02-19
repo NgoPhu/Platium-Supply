@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "template": {
+      "type": "contact",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Image_4_75ecbf25-1168-4fd9-8e58-bf2df5fed8f6.png",
+        "banner_title": "Contact Us",
+        "title_left": "Feel free to contact us directly",
+        "content_left": "<p><strong>PH:<\/strong> <a href=\"tel:03 6407 7001\" target=\"_blank\" title=\"tel:03 6407 7001\">03 6407 7001<\/a><\/p><p><strong>Email: <\/strong><a href=\"mailto:sales@platinumhealthsupply.com.au\" target=\"_blank\" title=\"mailto:sales@platinumhealthsupply.com.au\">sales@platinumhealthsupply.com.au<\/a><\/p><p><strong>Address:<\/strong> 111 Scanlon Drive, Epping, 3076, VIC<\/p>",
+        "content_right": "Get in contact with us using the form below, and one of our representatives will get back to you shortly.",
+        "industry_options": "NDIS| Home Caring| Healthcare| Aged Care| Government| Education| Distributor| Manufacturers| Retail | Construction| Logistics |"
+      }
+    }
+  },
+  "order": [
+    "template"
+  ]
+}

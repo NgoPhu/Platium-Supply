@@ -1,0 +1,46 @@
+{%- comment -%}
+  Render a notice
+  Accepts:
+    - content
+    - class: {String}
+    - content_class: {String}
+    - btn_close_class: {String}
+    - type: {String}
+{%- endcomment -%}
+
+{%- liquid
+  assign content = content
+  assign class = class | append: ' notice-default'
+  assign content_class = content_class | default: 'block'
+  assign btn_close_class = btn_close_class | default: 'w-4 h-4'
+  assign icon_class = 'w-4 h-4'
+
+  if type != blank
+    assign type_handle = type_handle | append: ' notice-' | append: type
+  endif
+  assign class = class | append: type_handle
+
+  case type
+    when 'error'
+      assign notice_message = 'Holy smokes!'
+    when 'success'
+      assign notice_message = 'Success!'
+    when 'warning'
+      assign notice_message = 'Be warned!'
+    else
+  endcase
+-%}
+
+{%- if content != blank -%}
+  <notice-main class="notice-main {{ class }} {% if auto_close_notice %} js-auto-close-notice{% endif %}">
+    <div class="notice-main-content {{ content_class }}">
+      {%- if notice_message -%}
+        <span class="mr-1 text-sm font-semibold">{{- notice_message -}}</span>
+      {%- endif -%}
+      {{ content }}
+    </div>
+    <button type="button" class="notice-main-icon js-close-notice {{ btn_close_class }}">
+      {%- render 'icon' with 'icon-notice-close-outline' -%}
+    </button>
+  </notice-main>
+{%- endif -%}

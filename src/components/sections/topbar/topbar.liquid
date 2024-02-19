@@ -1,0 +1,40 @@
+<div class="topbar js-sticky-topbar">
+  {%- render 'topbar-carousel',
+    enable: section.settings.topbar_enable,
+    blocks: section.blocks
+  -%}
+</div>
+
+{% schema %}
+{
+  "name": "Topbar",
+  "class": "shopify-section--topbar z-40 relative",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "topbar_enable",
+      "label": "Enable Topbar",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3
+}
+{% endschema %}

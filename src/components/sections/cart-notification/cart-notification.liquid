@@ -1,0 +1,32 @@
+{%- liquid
+  assign cart_count = cart.item_count
+  if cart_count < 1
+    assign cart_count_text = cart_count | append: ' Item'
+  else
+    assign cart_count_text = cart_count | append: ' Items'
+  endif
+-%}
+
+<cart-notification>
+  <modal-dialog data-target="CartNotification" id="CartNotificationSlideout" data-type="slideout" class="modal-dialog-mini-cart" data-scroll-target=".js-mini-cart-content">
+    <div class="lg:container lg:h-full">
+      <div class="modal-dialog-content js-content-modal-dialog pt-4 px-4 pb-6 border-y w-full overflow-y-auto overflow-x-hidden shadow-base lg:px-6 lg:py-6 lg:rounded-[10px] lg:border">
+        <div class="relative flex items-center justify-between mb-5">
+          <div class="flex items-center">
+            <h1 class="flex-auto text-base font-body font-bold text-grey-900">{{- 'general.cart.item_added' | t -}}</h1>
+          </div>
+          <button type="button" class="js-close-modal-dialog" aria-label="close mini cart">
+            {%- render 'icon' with 'icon-close-bold', class: 'w-6 h-6 text-grey-900' -%}
+          </button>
+        </div>
+        {%- render 'cart-notification-item' -%}
+      </div>
+    </div>
+  </modal-dialog>
+</cart-notification>
+
+{%- capture src_url -%}
+  {{- 'section-cart-notification.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, type: 'defer' -%}

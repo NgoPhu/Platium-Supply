@@ -1,0 +1,42 @@
+{%- if settings.predictive_search_enabled -%}
+  <search-bar-native class="[&.is-open>.search-overlay]:block [&.is-open>form>.js-trigger-close]:block">
+{%- endif -%}
+  <form class="relative z-10 search-bar-native lg-max:mt-4" action="{{ routes.search_url }}" method="get" role="search" id="SearchSuggestionForm">
+    <div class="flex items-center justify-between border rounded-full bg-grey-100">
+      <input
+        placeholder="{{- 'search.search' | t -}}"
+        class="js-search-bar-input h-[46px] w-full px-5 py-0 text-sm font-medium bg-transparent border-none focus:shadow-0 text-grey-700 placeholder-grey-600 appearance-none focus:placeholder-transparent focus:outline-none !ring-0"
+        id="SearchSuggestion"
+        type="search"
+        name="q"
+        value=""
+        {%- if settings.predictive_search_enabled -%}
+          role="combobox"
+          aria-expanded="false"
+          aria-owns="predictive-search-results-list"
+          aria-controls="predictive-search-results-list"
+          aria-haspopup="listbox"
+          aria-autocomplete="list"
+          autocorrect="off"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        {%- endif -%}
+      />
+      <input type="hidden" name="options[prefix]" value="last">
+      <button class="bg-primary rounded-full px-6 py-[11px]" aria-label="{{- 'search.search' | t -}}">
+        {%- render 'icon' with 'icon-search', class: 'text-white' -%}
+      </button>
+    </div>
+    <button class="absolute top-1/2 -translate-y-1/2 right-[84px] lg:right-[88px] hidden js-trigger-close">
+      {%- render 'icon' with 'icon-close-outline-1' -%}
+    </button>
+    {%- if settings.predictive_search_enabled -%}
+      <div id="SearchSuggestionResults" class="absolute top-[65px] h-0 [&.active]:h-auto [&.active>.js-dropdown]:border-default [&.active>.js-dropdown]:border-x [&.active>.js-dropdown]:border-b [&.active>.js-dropdown]:lg-max:shadow-base [&.active>.js-dropdown]:lg:border [&.active>.js-dropdown]:rounded-[10px] overflow-hidden -left-4 md:-left-6 w-[calc(100%+32px)] md:w-[calc(100%+48px)] lg:left-0 lg:top-[57px] lg:w-[700px] xl:w-[832px] {% if predictive_search.resources.products.size == 0 %}no-results{% endif %}" tabindex="-1" ata-predictive-search>
+      </div>
+    {%- endif -%}
+  </form>
+  <div class="fixed top-0 left-0 hidden w-full h-full z-[1] search-overlay"></div>
+{%- if settings.predictive_search_enabled -%}
+  </search-bar-native>
+{%- endif -%}

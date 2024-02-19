@@ -1,0 +1,130 @@
+{%-liquid
+  assign class_wrapper = 'two-up-' | append: section.id
+  assign class_wrapper_content  = 'w-full rounded-[10px] lg-max:shadow-base overflow-hidden lg:rounded-bl-[40px] lg:rounded-tr-[40px] lg:rounded-br-none lg:rounded-tl-none lg:flex lg:items-center'
+  assign class_cta_button = 'block mt-4 lg:mt-5'
+  assign class_cta_text = 'text-intro-text font-semibold text-secondary hover:text-primary hover:underline'
+
+  if section.settings.is_reversed
+    assign class_wrapper_content = class_wrapper_content | append: ' lg:flex-row-reverse'
+  endif
+
+  if section.settings.cta_as_button
+    assign class_cta_button = 'button-primary mt-4 lg:mt-5'
+    assign class_cta_text = ''
+  endif
+-%}
+
+<style>
+  .{{- class_wrapper -}} {
+    margin-top: {{- section.settings.margin_top_mobile -}}px;
+    margin-bottom: {{- section.settings.margin_bottom_mobile -}}px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .{{- class_wrapper -}} {
+      margin-top: {{- section.settings.margin_top -}}px;
+      margin-bottom: {{- section.settings.margin_bottom -}}px;
+    }
+  }
+</style>
+
+{% render 'two-up',
+  image: section.settings.image,
+  title: section.settings.title,
+  description: section.settings.description,
+  cta_text: section.settings.cta_text,
+  cta_link: section.settings.cta_url,
+  background_colour: section.settings.background_color,
+  class_wrapper_image: 'relative block w-full aspect-[344/200] overflow-hidden lg:w-1/2 lg:aspect-[640/572]',
+  class_image: 'hover:zoom duration-300 fit',
+  class_image_mobile: 'hover:zoom duration-300 fit !object-contain',
+  class_container: 'container',
+  class: class_wrapper,
+  class_wrapper_content: class_wrapper_content,
+  class_inner_content: 'w-full p-6 lg:p-[72px] lg:w-1/2',
+  class_title: 'text-2xl font-body font-bold text-grey900 lg:text-3xl',
+  class_description: 'mt-4 lg:mt-5 text-sm text-grey-600',
+  class_button: class_cta_button,
+  class_text_button: class_cta_text
+%}
+
+{% schema %}
+  {
+    "name": "Two Up",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "is_reversed",
+        "label": "Reverse Content",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#F5F5F6"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Description"
+      },
+      {
+        "type": "checkbox",
+        "id": "cta_as_button",
+        "label": "Display CTA as button"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA URL"
+      },
+      {
+        "type": "number",
+        "id": "margin_top",
+        "label": "Margin Top (px)",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom",
+        "label": "Margin Bottom (px)",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "margin_top_mobile",
+        "label": "Margin Top Mobile (px)",
+        "default": 24
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_mobile",
+        "label": "Margin Bottom Mobile (px)",
+        "default": 24
+      }
+    ],
+    "presets": [
+      {
+        "name": "Two Up"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,16 @@
+<div class="p-6 border-y border-default lg:p-12">
+  <h1 class="text-center h4 lg:h2">
+    {%- if search.terms -%}
+      {{ 'search.search_for_page' | t: terms: search.terms }}
+    {%- else -%}
+      {{ 'search.title' | t }}
+    {%- endif -%}
+  </h1>
+  {%- render 'search-notice' -%}
+</div>
+
+{%- capture src_url -%}
+  {{- 'section-plp.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

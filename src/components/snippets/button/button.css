@@ -1,0 +1,32 @@
+@layer components {
+  .button {
+    @apply label relative inline-block min-h-[48px] overflow-hidden rounded-[50px] border-2 border-solid border-transparent
+    px-[22px] py-2.5 text-center font-bold font-body text-white capitalize transition-colors duration-300 ease-in-out
+    disabled:pointer-events-none disabled:bg-grey-300 disabled:text-grey-400;
+  }
+
+  .button-primary {
+    @apply button bg-primary hover:bg-primary-hover;
+  }
+
+  .button-outlined {
+    @apply button font-semibold border-secondary bg-transparent text-secondary
+    hover:bg-success-bg disabled:bg-transparent disabled:border-default;
+  }
+
+  .button-small {
+    @apply min-h-[42px] py-2;
+  }
+
+  .button-icon {
+    @apply button-primary flex-center;
+  }
+
+  .button-large {
+    @apply min-h-[56px] py-3.5;
+  }
+
+  .button-hidden {
+    @apply hidden opacity-0;
+  }
+}

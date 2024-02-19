@@ -1,0 +1,58 @@
+{%- render 'newsletter-form',
+  newsletter_form_id: 'newsletter-form-footer',
+  newsletter_form_class: 'bg-grey-100 md:pb-12 md:max-w-none',
+  newsletter_wrapper_class: 'md:container',
+  newsletter_inner_class: 'rounded-tl-[40px] px-4 pt-10 pb-8 md:py-16 md:rounded-br-[40px]',
+  newsletter_content_class: 'mx-auto w-full md:max-w-[600px]',
+  title: section.settings.title,
+  description: section.settings.description,
+  cta_text: section.settings.cta_text,
+  newsletter_background: section.settings.newsletter_background,
+  newsletter_background_mobile: section.settings.newsletter_background_mobile,
+  newsletter_title_class: 'text-xl text-white font-bold md:text-3xl',
+  newsletter_description_class: 'text-sm text-white font-body font-bold mt-1',
+  newsletter_input_class: 'hidden [&:nth-child(2)]:block w-full h-[54px] ring-0 mt-4 md:mt-6',
+  newsletter_note_class: 'hidden',
+  input_class: 'input-newsletter-footer',
+  newsletter_body_class: 'relative',
+  newsletter_button_class: 'button-primary button-small w-fit absolute top-[6px] right-[6px]',
+  newsletter_form_cancel_class: 'hidden',
+  notice_global: true
+-%}
+
+{% schema %}
+{
+  "name": "Footer Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Sign up to Our Newsletter"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "description",
+      "default": "Be the first to receive exclusive prices on products we sell."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "image_picker",
+      "id": "newsletter_background",
+      "label": "Newsletter Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "newsletter_background_mobile",
+      "label": "Newsletter Background Mobile"
+    }
+  ]
+}
+{% endschema %}
+

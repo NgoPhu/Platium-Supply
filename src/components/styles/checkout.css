@@ -1,0 +1,13 @@
+@import './lib/typography.css';
+@import './lib/color.css';
+@import './lib/layout.css';
+@import './lib/animation.css';
+@import './lib/utilities.css';
+@import './lib/variables.css';
+
+@import '../snippets/style-checkout/style-checkout.css';
+@import '../snippets/checkbox-input/checkbox-input.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

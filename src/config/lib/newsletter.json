@@ -1,0 +1,14 @@
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter Popup"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_form_dotdigital",
+      "label": "Newsletter Form Dotdigital"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{%- liquid
+  assign text_bnpl = 'product.general.bnpl' | t
+  assign text_bnpl_week = 'product.general.bnpl_week' | t
+-%}
+
+<product-bnpl>
+  <div class="mt-4 flex items-center text-sm text-grey-900">
+    {{- text_bnpl -}}
+    <span class="font-bold px-1">{{- text_bnpl_week -}}</span> 
+     with
+    <button class="js-product-bnpl-trigger" data-target="modal-zip">
+      {%- render 'icon' with 'icon-zip', class: 'w-8 h-3 mx-1' -%} 
+    </button>
+    {%- render 'icon' with 'icon-info-circle', class: 'text-grey-500 w-4 h-4' -%}
+  </div>
+</product-bnpl>
+
+{%- capture src_url -%}
+  {{- 'module-product-bnpl.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

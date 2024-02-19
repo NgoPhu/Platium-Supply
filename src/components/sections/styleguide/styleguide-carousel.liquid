@@ -1,0 +1,17 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+{%- render 'styleguide-carousel' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Carousel",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Carousel"
+    }
+  ]
+}
+{% endschema %}

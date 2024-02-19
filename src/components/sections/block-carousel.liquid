@@ -1,0 +1,103 @@
+{%- liquid
+  assign blocks = section.blocks
+  assign title = section.settings.title
+-%}
+
+{%- if blocks.size > 0 -%}
+  <div class="bg-white py-8 lg:py-[72px] overflow-hidden">
+    <div class="container">
+      <h3 class="mr-24 text-3xl font-bold text-grey-900 font-body">{{- title -}}</h3>
+      <div class="w-full pt-6 lg:pt-8">
+        {%- capture carousel_options -%}
+          {
+            "slidesPerView": "1.104",
+            "spaceBetween": 16,
+            "breakpoints": {
+              "768": {
+                "slidesPerView": "3.184",
+                "spaceBetween": 32
+              }
+            }
+          }
+        {%- endcapture -%}
+
+        {%- capture carousel_content -%}
+          {%- for block in blocks -%}
+            {%- liquid
+              assign mod_image = block.settings.image
+              assign mod_title = block.settings.title
+              assign mod_description = block.settings.description
+              assign mod_url = block.settings.url
+            -%}
+            <swiper-slide>
+              {%- render 'card',
+                image: mod_image,
+                image_wrapper_class: 'relative aspect-[310/308] rounded-tr-[40px] lg:aspect-[380/308]',
+                title: mod_title,
+                title_class: 'mt-6 text-2xl text-grey-900 font-body font-bold',
+                description: mod_description,
+                description_class: 'mt-2 text-intro-text text-grey-600',
+                url: mod_url
+              -%}
+            </swiper-slide>
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- render 'carousel-swiper',
+          options: carousel_options,
+          contents: carousel_content,
+          include_navigation: true,
+          class_wrap: 'carousel-swiper-block'
+        -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Block Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Carousel Title",
+      "default": "Carousel title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Block title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Block Carousel"
+    }
+  ]
+}
+{% endschema %}

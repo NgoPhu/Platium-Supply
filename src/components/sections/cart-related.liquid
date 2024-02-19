@@ -1,0 +1,9 @@
+{%- capture carousel_content -%}
+  {%- for item in (1..10) -%}
+    <div class="flex items-center justify-center flex-shrink-0 w-1/2 border border-b-0 border-r-0 min-h-[200px] lg:w-3/12 border-default carousel-item last:border-r">
+      {{ item }}
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- render 'product-carousel', title: 'You may also like', content: carousel_content -%}

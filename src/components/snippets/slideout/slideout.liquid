@@ -1,0 +1,31 @@
+{%- liquid
+  assign id = id
+  assign class = class | default: 'w-[336px] md:w-[400px]'
+  assign header_class = header_class | default: 'sticky top-0 w-full px-4 py-5 text-center border-b modal-dialog-header border-default'
+  assign title = title | default: 'Heading'
+  assign title_class = title_class | default: 'font-bold'
+  assign close_button = close_button
+  assign close_button_class = close_button_class | default: 'absolute left-6 z-10' | append: ' js-close-modal-dialog'
+  assign content = content
+  assign content_class = content_class | default: 'p-4'
+-%}
+
+<modal-dialog data-target="{{ id }}" data-type="slideout">
+  <div class="{{ class }} modal-dialog-content js-content-modal-dialog">
+    <div class="{{ header_class }}">
+      <button type="button" class="{{ close_button_class }}" aria-label="close modal">
+        {%- if close_button != blank -%}
+          {{ close_button }}
+        {%- else -%}
+          {%- render 'icon' with 'icon-close-outline', class: icon_close_class -%}
+        {%- endif -%}
+      </button>
+      <h6 class="{{ title_class }}">
+        {{ title }}
+      </h6>
+    </div>
+    <div class="{{ content_class }} modal-dialog-inner">
+      {{ content }}
+    </div>
+  </div>
+</modal-dialog>

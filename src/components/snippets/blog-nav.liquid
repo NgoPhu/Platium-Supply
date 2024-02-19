@@ -1,0 +1,34 @@
+{%- liquid
+    capture chevron_left
+      render 'icon' with 'icon-chevron-back-outline', class: 'w-4 h-4 text-secondary'
+    endcapture
+
+    capture chevron_right
+      render 'icon' with 'icon-chevron-forward-outline', class: 'w-4 h-4 text-secondary'
+    endcapture
+  -%}
+
+<div class="pt-3 border-t border-custom lg:pt-5">
+  {%- capture carousel_content -%}
+    <div class="carousel-item snap-start !w-auto mr-2 lg:mr-4">
+      <a href="{{ blog.url }}" class="px-5 py-[7px] text-sm text-grey-900 bg-white whitespace-nowrap rounded-[10px] border border-custom block hover:bg-success-bg hover:text-secondary hover:border-secondary {% if request.path == blog.url %} !bg-success-bg border-secondary text-secondary font-bold{% endif %}">{{ 'general.blog.all' | t }}</a>
+    </div>
+    {%- for tag in blog.all_tags -%}
+      {%- assign tag_handle = tag | handle | prepend: 'tagged/' -%}
+      <div class="carousel-item snap-start !w-auto mr-2 lg:mr-4 last:!mr-0">
+        <a href="{{ blog.url }}/{{ tag_handle }}" class="px-5 py-[7px] text-sm text-grey-900 bg-white whitespace-nowrap rounded-[10px] border border-custom block hover:bg-success-bg hover:text-secondary hover:border-secondary {% if request.path contains tag_handle %} !bg-success-bg border-secondary text-secondary font-bold{% endif %}">{{ tag }}</a>
+      </div>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- render 'carousel',
+    content: carousel_content,
+    class_wrap: 'overflow-hidden',
+    class_main: 'carousel-blog-nav'
+    class: 'carousel-enable flex-1'
+    custom_navigation: true
+    chevron_left: chevron_left,
+    chevron_right: chevron_right,
+    has_container: true
+  -%}
+</div>

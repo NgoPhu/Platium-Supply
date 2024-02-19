@@ -1,0 +1,221 @@
+{
+  "current": {
+    "industry_options": "Pharmaceuticals|Health & Medical|Public Schools",
+    "user_image": "shopify:\/\/shop_images\/Platinum-team.png",
+    "user_info": "Chat with our Customer Care team!",
+    "user_email": "<p><a href=\"mailto:customercare@platinumhealthsupply.com.au\" target=\"_blank\" title=\"mailto:customercare@platinumhealthsupply.com.au\">customercare@platinumhealthsupply.com.au<\/a><\/p>",
+    "user_button_first": "<p><a href=\"tel:03 6407 7001\" target=\"_blank\" title=\"tel:03 6407 7001\">Call Customer Care<\/a><\/p>",
+    "user_button_second": "<p>Live Chat<\/p>",
+    "account_ndis_logo": "shopify:\/\/shop_images\/image_2_7eba95df-18b6-47be-8931-4c3d48f32a68.png",
+    "cart_threhold_amount": "200",
+    "cart_threhold_trade_pricing_amount": "3000",
+    "ndis_form_title": "NDIS claims are enabled",
+    "ndis_form_description": "<p>Proceed through to checkout to claim payment through the NDIS Portal.<\/p>",
+    "ndis_logo": "shopify:\/\/shop_images\/image_2_18373fa5-8bb8-460a-9de0-2ab7dcd9409b.png",
+    "per_page": 16,
+    "apple_touch_icon": "shopify:\/\/shop_images\/Platinum-Logo-1080x1080-1.png",
+    "favicon_png_32": "shopify:\/\/shop_images\/Platinum-Logo-1080x1080-1.png",
+    "favicon_png_16": "shopify:\/\/shop_images\/Platinum-Logo-1080x1080-1.png",
+    "logo": "shopify:\/\/shop_images\/Platinum-Health-Logo-Horizontal_37d025ea-fc13-4766-939c-9634487ee8b6.png",
+    "newsletter_form_dotdigital": "<script src=\"\/\/r3.dotdigital-pages.com\/resources\/sharing\/popoverv2.js?sharing=lp-popover&domain=r3.dotdigital-pages.com&id=7L45-9F6%2Fget-10-off%22&delay=0&mobile=&keydismiss=true&width=800\"><\/script>",
+    "page_sidebar_menu": "page-sidebar",
+    "enable_estimate_shipping": false,
+    "sale_image": "shopify:\/\/shop_images\/Platinum-team.png",
+    "sale_question": "Have any questions?",
+    "sale_description": "Our experts will get back to you in less than 24 hours.",
+    "sale_image_logged": "shopify:\/\/shop_images\/Platinum-team.png",
+    "sale_title_mobile": "Customer Care Team",
+    "sale_info_logged": "Chat with our Customer Care team!",
+    "sale_description_logged": "<p><a href=\"mailto:customercare@platinumhealthsupply.com.au\" target=\"_blank\" title=\"mailto:customercare@platinumhealthsupply.com.au\">customercare@platinumhealthsupply.com.au<\/a><\/p>",
+    "sale_phone_number": "<p><a href=\"tel:03 6407 7001\" target=\"_blank\" title=\"tel:03 6407 7001\">Call Us<\/a><\/p>",
+    "sale_live_chat": "<p>Live Chat<\/p>",
+    "social_facebook_link": "https:\/\/www.facebook.com\/platinumhealthsupply\/",
+    "social_linkedin_link": "https:\/\/www.linkedin.com\/company\/platinum-health-supply-group",
+    "social_instagram_link": "https:\/\/www.instagram.com\/platinumhealthsupply\/",
+    "cta_link_wishlist_empty": "shopify:\/\/collections\/test-collection",
+    "sale_info": "Have any questions?",
+    "sale_link_text": "Call Emily",
+    "sale_link_url": "tel:1234567890",
+    "sale_link_text_second": "Live Chat",
+    "sections": {
+      "topbar": {
+        "type": "topbar",
+        "blocks": {
+          "51c15114-793d-4082-994d-e35e958e7ac1": {
+            "type": "message",
+            "settings": {
+              "title": "<p>Free Shipping on Orders Over <strong>$399 *Exclusions Apply*<\/strong><\/p>",
+              "icon": "icon-truck"
+            }
+          },
+          "740146e8-6e6d-46f0-9a6c-6719be893bb7": {
+            "type": "message",
+            "settings": {
+              "title": "<p>Have a question? Call <strong>03 6407 7001<\/strong><\/p>",
+              "icon": ""
+            }
+          },
+          "b8e0741f-c600-4c24-8e41-082d9e937381": {
+            "type": "message",
+            "settings": {
+              "title": "<p>Bulk Orders? <a href=\"https:\/\/platinum-health-supply-b2b.myshopify.com\/pages\/wholesale-registration-v2\" title=\"https:\/\/platinum-health-supply-b2b.myshopify.com\/pages\/wholesale-registration-v2\"><strong>Apply Now<\/strong><\/a><\/p>",
+              "icon": ""
+            }
+          }
+        },
+        "block_order": [
+          "51c15114-793d-4082-994d-e35e958e7ac1",
+          "740146e8-6e6d-46f0-9a6c-6719be893bb7",
+          "b8e0741f-c600-4c24-8e41-082d9e937381"
+        ],
+        "custom_css": [
+
+        ],
+        "settings": {
+          "topbar_enable": true
+        }
+      },
+      "site-header": {
+        "type": "site-header",
+        "settings": {
+          "menu": "main-menu",
+          "cta_text": "Login For Trade Pricing",
+          "cta_link": "#",
+          "menu_second": "mega-menu-secondary"
+        }
+      },
+      "footer-main": {
+        "type": "footer-main",
+        "blocks": {
+          "60824ec7-1c3a-47a9-96e7-a46117ee3796": {
+            "type": "SEO",
+            "settings": {
+              "seo": "Platinum Health Supply Group is an Australian owned & operated company that focuses on providing quality healthcare products that improve quality of life",
+              "certification_logo": "shopify:\/\/shop_images\/image_1_48bc97e1-5eb7-4213-b89f-67f37b118981.png"
+            }
+          }
+        },
+        "block_order": [
+          "60824ec7-1c3a-47a9-96e7-a46117ee3796"
+        ],
+        "settings": {
+          "footer_menu": "footer"
+        }
+      },
+      "footer-bottom": {
+        "type": "footer-bottom",
+        "settings": {
+          "copyright": "© Platinum Health Supply Group",
+          "copyright_url": "",
+          "text_link": "<p><a href=\"\/pages\/refund-policy\" title=\"Refund Policy\">Privacy Policy<\/a><\/p><p><a href=\"#\" title=\"#\">Terms of Service<\/a><\/p>"
+        }
+      },
+      "cart-slideout": {
+        "type": "cart-slideout",
+        "settings": {
+        }
+      },
+      "colour-swatch": {
+        "type": "colour-swatch",
+        "settings": {
+        }
+      },
+      "footer-newsletter": {
+        "type": "footer-newsletter",
+        "settings": {
+          "title": "Sign up to Our Newsletter",
+          "description": "Be the first to receive exclusive prices on products we sell.",
+          "cta_text": "Subscribe"
+        }
+      },
+      "footer-usp": {
+        "type": "footer-usp",
+        "blocks": {
+          "c3b233f8-c3a4-4f5b-bb79-e61109744ff9": {
+            "type": "item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/lotus_1.svg",
+              "title": "Lowest \u2028Prices",
+              "url": "#"
+            }
+          },
+          "05a40d65-3390-4e03-9542-09eb5c314cec": {
+            "type": "item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/lotus_copy_6.svg",
+              "title": "Express Delivery",
+              "url": "#"
+            }
+          },
+          "b8449993-7339-455e-a7c4-d4587ced6ad6": {
+            "type": "item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/lotus_copy_2_1.svg",
+              "title": "Australian Owned",
+              "url": ""
+            }
+          },
+          "ad7b3ae7-a6c2-4046-9f3f-b05511ad3a5f": {
+            "type": "item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/lotus_copy_3_1.svg",
+              "title": "Secure Payments",
+              "url": ""
+            }
+          },
+          "9b444fe0-8c4d-4a5c-828e-c0101f50dba4": {
+            "type": "item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/lotus_copy_4_2.svg",
+              "title": "Customer Centric",
+              "url": ""
+            }
+          },
+          "9b658c43-57da-44f1-8084-6f97805f4174": {
+            "type": "item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/lotus_copy_5_2.svg",
+              "title": "Community Support",
+              "url": ""
+            }
+          }
+        },
+        "block_order": [
+          "c3b233f8-c3a4-4f5b-bb79-e61109744ff9",
+          "05a40d65-3390-4e03-9542-09eb5c314cec",
+          "b8449993-7339-455e-a7c4-d4587ced6ad6",
+          "ad7b3ae7-a6c2-4046-9f3f-b05511ad3a5f",
+          "9b444fe0-8c4d-4a5c-828e-c0101f50dba4",
+          "9b658c43-57da-44f1-8084-6f97805f4174"
+        ],
+        "settings": {
+        }
+      },
+      "cart-notification": {
+        "type": "cart-notification",
+        "settings": {
+        }
+      }
+    },
+    "content_for_index": [
+
+    ],
+    "blocks": {
+      "9776720720251544092": {
+        "type": "shopify:\/\/apps\/helium-customer-fields\/blocks\/app-embed\/bab58598-3e6a-4377-aaaa-97189b15f131",
+        "disabled": false,
+        "settings": {
+          "registration_form_id": "",
+          "edit_account_form_id": "",
+          "edit_account_link_text": "Edit account",
+          "edit_account_heading": "Edit account",
+          "edit_account_back_link_text": "Back to account",
+          "enable_js_api": false,
+          "js_api_version": ""
+        }
+      }
+    }
+  },
+  "presets": {
+  }
+}

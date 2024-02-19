@@ -1,0 +1,36 @@
+{%- liquid
+  assign description = article.metafields.article_top.description | default: article.content
+  assign image = article.metafields.article_top.image | first
+  assign image_mobile = article.metafields.article_top.image_mobile | first
+-%}
+
+<div class="mx-auto max-w-[1140px] md:px-4">
+  <div class="mx-auto max-w-[862px] px-4">
+    <div class="flex-items-center justify-center">
+      {%- for tag in shop.metafields.globals.tags_name -%}
+        {%- assign tags_Name = shop.metafields.globals.tags_name[forloop.index0] -%}
+        {%- assign text_color = shop.metafields.globals.text_color[forloop.index0] -%}
+        {%- assign bg_color = shop.metafields.globals.background_color[forloop.index0] -%}
+        {%- for tag in article.tags -%}
+          {%- if tags_Name == tag -%}
+            <span class="badge mr-2 last:mr-0" style="background-color: {{- bg_color -}}; color: {{- text_color -}}">{{ tags_Name }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+    <h2 class="h3 lg:h2 mt-4 text-center">{{- article.title -}}</h2>
+    <div class="mt-2 text-center text-xl">
+      {{- description -}}
+    </div>
+  </div>
+  {%- if image != blank and image_mobile != blank -%}
+    {%-
+      render 'hero',
+      class: 'aspect-[376/324] md:aspect-[1108/560] mt-6 lg:mt-12',
+      image_acf: image,
+      image_mobile_acf: image_mobile,
+    -%}
+  {%- else -%}
+    {% render 'image', image: article.image, class: 'aspect-[376/324] md:aspect-[1108/560] mt-6 lg:mt-12' %}
+  {%- endif -%}
+</div>

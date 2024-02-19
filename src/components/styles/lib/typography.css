@@ -1,0 +1,58 @@
+@layer base {
+  html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Apply typography styles to content using utility classes or .wysiwyg container */
+@layer components {
+  .h1,
+  .wysiwyg h1 {
+    @apply text-3xl font-bold text-grey-900 md:text-5xl;
+  }
+
+  .h2,
+  .wysiwyg h2 {
+    @apply text-2xl font-bold text-grey-900 md:text-4xl;
+  }
+
+  .h3,
+  .wysiwyg h3 {
+    @apply text-2xl font-bold text-grey-900 md:text-3xl;
+  }
+
+  .h4,
+  .wysiwyg h4 {
+    @apply text-xl font-bold text-grey-900 md:text-2xl;
+  }
+
+  .h5,
+  .wysiwyg h5 {
+    @apply text-lg font-bold text-grey-900 md:text-xl;
+  }
+
+  .h6,
+  .wysiwyg h6 {
+    @apply text-base font-bold text-grey-900 md:text-lg;
+  }
+
+  body,
+  .wysiwyg p {
+    @apply text-sm text-grey-900;
+  }
+
+  .label,
+  .wysiwyg label {
+    @apply text-sm font-bold uppercase;
+  }
+
+  .link,
+  .wysiwyg a {
+    @apply cursor-pointer text-sm capitalize text-link underline transition-colors;
+
+    &:hover {
+      @apply text-link-hover;
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{%- liquid
+  assign mod_settings = section.settings
+  assign class = 'w-full flex flex-col'
+  assign mod_settings.class_modify = 'blog-cms'
+  assign image_wrapper_class = 'rounded-tl-[32px] rounded-br-[32px] aspect-[280/178] md:rounded-tl-[40px] md:rounded-br-[40px] md:aspect-[410/260]'
+  assign title_class = 'mb-auto text-base text-grey-900 font-medium font-body line-clamp-[2] truncate !whitespace-normal hover:text-clip md:text-xl'
+-%}
+
+{%- capture carousel_options -%}
+  {
+    "slidesPerView": "auto",
+    "spaceBetween": 16,
+    "scrollbar": {
+      "draggable": true
+    },
+    "breakpoints": {
+      "768": {
+        "slidesPerView": "2",
+        "spaceBetween": 24
+      },
+      "1024": {
+        "slidesPerView": "3",
+        "spaceBetween": 24
+      }
+    }
+  }
+{%- endcapture -%}
+
+{%- if mod_settings.blog.articles != blank or section.blocks.size > 0 -%}
+  <div class="bg-grey-100 ">
+    <div class="container relative pb-8 lg:pb-[72px] featured-articles overflow-hidden {{ mod_settings.class_modify }}">
+      {%- capture carousel_content -%}
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <swiper-slide class="flex flex-shrink-0 carousel-item md-max:max-w-[280px]">
+              {%- render 'article-card',
+                article: block.settings.article,
+                cta_text: mod_settings.cta_text_item,
+                image_wrapper_class: image_wrapper_class,
+                class: class,
+                title_class: title_class
+              -%}
+            </swiper-slide>
+          {%- endfor -%}
+        {%- elsif mod_settings.blog != blank -%}
+          {%- for article in mod_settings.blog.articles -%}
+            <swiper-slide class="flex flex-shrink-0 carousel-item lg-max:max-w-[280px]">
+              {%- render 'article-card',
+                article: article,
+                cta_text: mod_settings.cta_text_item,
+                image_wrapper_class: image_wrapper_class,
+                class: class
+                title_class: title_class
+              -%}
+            </swiper-slide>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endcapture -%}
+
+      <div class="flex items-center justify-between pb-4 md:pb-6">
+        {%- if mod_settings.title != blank -%}
+          <h2 class="font-body h4">{{- mod_settings.title -}}</h2>
+        {%- endif -%}
+        {%- if mod_settings.cta_text != blank and mod_settings.cta_link -%}
+          {%- render 'button',
+            link_url: mod_settings.cta_link,
+            link_text: mod_settings.cta_text,
+            link_class: 'text-secondary hover:text-secondary-hover text-sm font-bold font-body'
+          -%}
+        {%- endif -%}
+      </div>
+
+      {%- render 'carousel-swiper',
+        options: carousel_options,
+        contents: carousel_content,
+        include_scrollbar: true,
+        class: 'carousel-swiper-feature-article'
+      -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Recent News",
+  "settings": [
+    {
+      "type": "text",
+      "id": "class_modify",
+      "label": "Class Modify"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Recent News"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_item",
+      "label": "Label of Button Item",
+      "default": "+ Read"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent News"
+    }
+  ]
+}
+{% endschema %}

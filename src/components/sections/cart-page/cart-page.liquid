@@ -1,0 +1,9 @@
+<cart-page class="block bg-grey-100">
+  {%- render 'cart-main' -%}
+</cart-page>
+
+{%- capture src_url -%}
+  {{- 'section-cart-page.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

@@ -1,0 +1,83 @@
+{%- liquid
+  assign class_wrapper = 'flex items-stretch justify-center flex-col lg:flex-row'
+  assign banner_class = 'block relative w-full overflow-hidden aspect-[376/272] lg:w-[calc(924/1440*100%)] lg:aspect-[924/548]'
+  assign content_class = 'flex bg-grey-100 flex-col w-full lg:w-[calc(516/1440*100%)] text-white p-6 md:p-8 lg:p-10 xl:p-20'
+  assign title_class = 'font-bold font-body text-grey-900 text-3xl mt-6 lg:text-4xl'
+  if section.settings.is_reversed
+    assign class_wrapper = class_wrapper | replace: 'flex-col lg:flex-row', 'flex-col lg:flex-row-reverse'
+  endif
+-%}
+
+{%- if section.settings.image != blank and section.settings.title != blank -%}
+  <div class="{{ class_wrapper }}">
+    {%- if section.settings.cta_link != blank -%}
+      <a href="{{- section.settings.cta_link -}}" class="{{ banner_class }}" aria-label="two up banner">
+    {%- else -%}
+      <div class="{{ banner_class }}">
+    {%- endif -%}
+      {% render 'image',
+        image: section.settings.image,
+        class: 'fit object-cover object-center mx-auto hover:zoom transition',
+        mobile_width: 414
+      %}
+    {%- if section.settings.cta_link != blank -%}
+      </a>
+    {%- else -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.title != blank or section.settings.description != blank -%}
+      <div class="{{ content_class }}">
+        {%- if section.settings.icon != blank -%}
+          {%- render 'image', image: section.settings.icon, class: 'w-12 aspect-1' -%}
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="{{ title_class }}">{{- section.settings.title -}}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="mt-4 font-sans text-intro-text text-grey-600">{{- section.settings.description -}}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "30/70 Block",
+  "class": "bg-primary",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "is_reversed",
+      "label": "Reverse Content",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "30/70 Block"
+    }
+  ]
+}
+{% endschema %}

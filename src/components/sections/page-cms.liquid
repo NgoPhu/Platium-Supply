@@ -1,0 +1,33 @@
+{%- render 'breadcrumbs',
+  class: 'py-4 lg:py-8',
+  title_class: 'text-sm',
+  item_class: 'text-med text-link [&>a]:no-underline',
+  item_current_class: 'text-med text-secondary underline'
+-%}
+
+<div class="pt-5 pb-8 lg:pt-0 lg:px-0 lg:pb-[72px]">
+  <h1 class="container pb-3 font-body lg:hidden h4">{{ page.title }}</h1>
+  <div class="container flex flex-col justify-between gap-4 lg:flex-row lg:gap-10 ">
+    {%- if settings.page_sidebar_menu != blank -%}
+      {%- render 'page-sidebar', sidebar_menu: settings.page_sidebar_menu -%}
+    {%- endif -%}
+    <div class="p-4 border border-default bg-white shadow-base rounded-[10px] lg:p-10">
+      <h1 class="hidden pb-8 h4 font-body lg:block">{{ page.title }}</h1>
+      <div class="wysiwyg wysiwyg-cms">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "CMS Policies",
+  "class": "bg-grey-100",
+  "presets": [
+    {
+      "name": "CMS Policies"
+    }
+  ]
+}
+{% endschema %}

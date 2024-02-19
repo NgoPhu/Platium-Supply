@@ -1,0 +1,17 @@
+{%- capture content -%}
+  <h3 class="text-xl font-bold md:text-2xl text-grey-900">
+    Share product
+  </h3>
+  {%- assign share_url = shop.url | append: product.url -%}
+  {%- assign share_image = product.featured_image | image_url -%}
+  <div class="flex flex-row justify-center pt-4 md:pt-6">
+    {%- render 'social-share',
+      class: 'mr-6 last:mr-0',
+      share_url: share_url,
+      share_image: share_image,
+      share_title: product.title
+    -%}
+  </div>
+{%- endcapture -%}
+
+{%- render 'modal-dialog', id: 'product-share-modal', icon_close_class: 'w-5 h-5 text-grey-500', content: content -%}

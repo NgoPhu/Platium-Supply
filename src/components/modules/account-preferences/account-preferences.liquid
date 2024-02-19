@@ -1,0 +1,42 @@
+{%- liquid
+  assign title = 'customer.preferences.title' | t
+  assign description = 'customer.preferences.description' | t
+  assign subscribe_label = 'customer.preferences.subscribe' | t
+  assign submit_label = 'customer.preferences.submit' | t
+  assign cancel_label = 'customer.preferences.cancel' | t
+-%}
+
+<account-preferences class="account-preferences">
+  <div class="header mb-4 flex flex-col">
+    {%- if title != blank -%}
+      <h1 class="h5 lg:h4">{{- title -}}</h1>
+    {%- endif -%}
+    {%- if description != blank -%}
+      <p class="text-sm text-grey-900">{{- description -}}</p>
+    {%- endif -%}
+  </div>
+  <div class="fields">
+    <form action="" id="customer_update" class="flex flex-wrap">
+      <div class="mb-4 flex w-full gap-4">
+        {%- render 'checkbox-input',
+          id: 'customer_accepts_marketing',
+          name: 'customer[accepts_marketing]',
+          label: subscribe_label,
+          class: '!items-start',
+          value: customer.accepts_marketing
+        -%}
+      </div>
+      <div class="flex w-full gap-4">
+        <button class="button-primary lg-max:w-full" type="submit">{{- submit_label -}}</button>
+        <a href="/account" class="button-outlined lg-max:w-full">{{- cancel_label -}}</a>
+      </div>
+    </form>
+  </div>
+</account-preferences>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-account-preferences.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

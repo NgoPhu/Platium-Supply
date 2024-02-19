@@ -1,0 +1,27 @@
+@layer base {
+  .is-loading-page {
+    @apply relative;
+  }
+
+  #shopify-section-site-header {
+    @apply sticky top-0 z-30;
+
+    &.is-sticky {
+      @apply lg:top-0;
+
+      & .is-search-opened {
+        & .search-bar {
+          @apply xl:fixed xl:py-[15px];
+        }
+
+        & .search-bar__form {
+          @apply xl:!py-2.5;
+        }
+
+        & .search-bar__close {
+          @apply xl:block;
+        }
+      }
+    }
+  }
+}

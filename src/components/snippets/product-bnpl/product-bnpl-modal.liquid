@@ -1,0 +1,38 @@
+{%- liquid
+  assign zip_desktop = shop.metafields.payment_security.image | first
+  assign zip_mobile = shop.metafields.payment_security.image_mobile | first | default: zip_desktop
+  assign zip_url = shop.metafields.payment_security.url_zip
+  assign icon_class = 'text-grey-900'
+-%}
+
+{%- capture content_modal_zip -%}
+  {%- if zip_desktop != blank and zip_mobile != blank -%}
+    {%- if zip_url != blank -%}
+      <a href="{{- zip_url -}}">
+    {%- else -%}
+      <div>
+    {%- endif -%}
+      {%- render 'image-acf',
+        image: zip_desktop,
+        class: 'hidden lg:block w-[820px] h-[600px] !object-contain'
+      -%} 
+      {%- render 'image-acf',
+        image: zip_mobile,
+        class: 'lg:hidden w-[344px] aspect-[344/450] !object-contain'
+      %}
+    {%- if zip_url != blank -%}
+      </a>
+    {%- else -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- render 'modal-dialog'
+  content: content_modal_zip,
+  icon_close_class: icon_class,
+  content_class: 'rounded-none max-h-[93vh] overflow-y-auto js-content-modal',
+  class: 'z-50',
+  id: 'modal-zip',
+  scroll_target: '.js-content-modal'
+-%}

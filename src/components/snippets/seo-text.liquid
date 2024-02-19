@@ -1,0 +1,10 @@
+<div class="seo-text">
+  {%- if title != blank -%}
+    <h2 class="{{ class_title }}">{{ title }}</h2>
+  {%- endif -%}
+  {%- if description != blank -%}
+    <read-more class="wysiwyg wysiwyg--seo-text {{ readmore_class }}" data-more="+ More" data-less="- Less" data-dot>
+      {{ description }}
+    </read-more>
+  {%- endif -%}
+</div>

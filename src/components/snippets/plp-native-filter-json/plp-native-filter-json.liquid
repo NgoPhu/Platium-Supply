@@ -1,0 +1,34 @@
+{%- assign item = item -%}
+{%- assign mod_label = item.label -%}
+{%- assign mod_prefix = '' -%}
+
+{%- if prefix != blank and label != blank -%}
+  {%- assign mod_label = label -%}
+  {%- assign mod_prefix = prefix -%}
+
+  {%- capture values -%}
+    {%- for value in item.values -%}
+      {%- if value.value contains prefix -%}
+        ,{%- render 'plp-native-filter-value-json', item: value -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+{%- else -%}
+  {%- capture values -%}
+    {%- for value in item.values -%}
+      ,{%- render 'plp-native-filter-value-json', item: value -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+{%- endif -%}
+
+{
+  "label": {{ mod_label | json }},
+  "field": {{ item.param_name | json }},
+  "multiple": "multiple-intersect",
+  "range": [0, {{ item.range_max | divided_by: 100.00 | round | default: 0 }}],
+  "type": {{ item.type | json }},
+  "prefix": {{ mod_prefix | json }},
+  "values": [
+    {{ values | remove_first: ',' }}
+  ]
+}

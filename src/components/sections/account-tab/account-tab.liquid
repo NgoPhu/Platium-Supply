@@ -1,0 +1,48 @@
+{%- liquid
+  assign tab_class = "relative py-4 lg:py-6 cursor-pointer [&.active]:text-grey-900 [&.active]:after:content-[''] [&.active]:after:absolute [&.active]:after:-bottom-[1px] [&.active]:after:block [&.active]:after:w-full [&.active]:after:border-b-[3px] [&.active]:after:border-b-secondary [&.active]:after:border-default js-tab-label"
+  assign tab_class_typo = 'text-sm font-bold text-center uppercase text-grey-500 tracking-[0.5px]'
+  assign sign_in_label = 'customer.login_page.sign_in' | t
+  assign register_label = 'customer.login_page.register' | t
+-%}
+
+{%- if request.path contains 'register' -%}
+  {%- assign current_page = 'register' -%}
+{%- else -%}
+  {%- assign current_page = 'login' -%}
+{%- endif -%}
+
+<account-tab class="relative flex bg-grey-100 py-6 sm:py-16">
+  {%- assign bg_url = null -%}
+  {%- if settings.login_image != blank and current_page == 'login' -%}
+    {%- assign bg_url = settings.login_image -%}
+  {%- elsif settings.register_image != blank and current_page == 'register' -%}
+    {%- assign bg_url = settings.register_image -%}
+  {%- endif -%}
+
+  {%- if bg_url != blank -%}
+    {%- render 'image', image: bg_url, class: 'hidden md:block fit [.recover-form-active_&]:hidden' -%}
+  {%- endif -%}
+  <div class="container">
+    <div class="relative z-10 mx-auto max-w-[616px] rounded border border-default bg-white">
+      <nav class="js-account-tab-header grid grid-cols-2 border-b border-default" aria-label="Tabs">
+        <a href="/account/login" title="{{- sign_in_label -}}" class="{{ tab_class_typo }} {{ tab_class }} {% if current_page == 'login' %}active{% endif %}">
+          {{- sign_in_label -}}
+        </a>
+        <a
+          href="/account/register"
+          title="{{- register_label -}}"
+          class="{{ tab_class_typo }} {{ tab_class }} {% if current_page == 'register' %}active{% endif %}"
+        >
+          {{- register_label -}}
+        </a>
+      </nav>
+      <div class="p-6 sm:p-12">
+        {%- if current_page == 'login' -%}
+          {%- render 'account-login' -%}
+        {%- elsif current_page == 'register' -%}
+          {%- render 'account-register' -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</account-tab>

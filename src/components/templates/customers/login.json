@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "login_form": {
+      "type": "account-form",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "login_form"
+  ]
+}

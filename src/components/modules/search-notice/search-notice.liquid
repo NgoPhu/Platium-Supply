@@ -1,0 +1,9 @@
+<h2 id="search-notice"></h2>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-search-notice.js' | asset_url -}}
+  {%- endcapture -%}
+
+  {%- render 'atom_script', src: src_url, priority: 'noraml', type: 'defer' -%}
+{%- endunless -%}

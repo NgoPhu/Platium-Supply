@@ -1,0 +1,162 @@
+{%- liquid
+  assign mod_media = product.media
+-%}
+
+{% if enable_zoom %}
+  {{- 'module-image-zoom.css' | asset_url | stylesheet_tag -}}
+{% endif %}
+
+{%- if mod_media.size > 0 -%}
+  {%- assign mod_media_size = mod_media.size -%}
+  {%- assign media_size_modulo = mod_media_size | modulo: 2 -%}
+  {%- assign class = "relative lg-max:before:content-none before:content-[''] before:absolute before:-bottom-[1px] before:left-0 before:w-full before:h-[1px] before:bg-defaul " -%}
+  <product-gallery class="product-gallery {% if mod_media.size > 2 %}{{ class }}{% endif %} {% if template contains 'gift-card' or product.gift_card? %}before:!content-none{% endif %}" {%- if enable_zoom -%}data-enable-zoom{%- endif -%}>
+    {%- capture carousel_contents -%}
+      {%- for media in product.media -%}
+        {%- assign mod_media_item_class = 'w-full lg:w-1/2 flex-shrink-0' -%}
+        {%- assign mod_media_image_class = 'aspect-[1/1] w-full' -%}
+        {%- if media_size_modulo != 0 -%}
+          {%- if forloop.first -%}
+            {%- assign mod_media_item_class = 'w-full lg:px-[94.5px] flex-shrink-0' -%}
+          {%- else -%}
+          {%- assign mod_media_item_class = mod_media_item_class | append: ' md:aspect-[1/1] lg:border-t border-default' -%}
+          {%- endif -%}
+        {%- else -%}
+          {%- if forloop.index0 < 2 -%}
+            {%- assign mod_media_item_class = mod_media_item_class | append: ' md:aspect-[1/1] border-default' -%}
+          {%- else -%}
+            {%- assign mod_media_item_class = mod_media_item_class | append: ' md:aspect-[1/1] lg:border-t border-default' -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- liquid
+          if mod_media_size > 1 and media_size_modulo != 0
+            unless forloop.first
+              assign mod_media_item_class = mod_media_item_class | append: ' lg:odd:border-l'
+            endunless
+          else
+            assign mod_media_item_class = mod_media_item_class | append: ' lg:even:border-l'
+            assign product_image_wrapper = 'relative block aspect-[1/1] max-w-[820px] mx-auto w-full'
+          endif
+        -%}
+
+        <div class="product-gallery-item cursor-zoom-in select-none flex justify-center items-center px-4 pt-[30px] md:p-4 lg:p-8 {{ mod_media_item_class }} snap-start js-gallery-item" data-media-type="{{ media.media_type }}" data-media-id="{{ media.id }}">
+          {% case media.media_type %}
+            {% when 'image' %}
+              <div class="{{ product_image_wrapper }}">
+                {%- render 'image',
+                  image: media,
+                  loading: 'eager',
+                  class: mod_media_image_class
+                -%}
+              </div>
+            {% when 'external_video' %}
+              <video-player class="aspect-[1/1]" src="{{ media.src }}" data-video-type="{{ media.host }}" data-thumbnail="{{ media.preview_image | image_url }}" data-external-id="{{ media.external_id }}" controls="true" muted playsinline loop></video-player>
+            {% when 'video' %}
+              {%- assign sources = media.sources | where: 'format', 'mp4' | first -%}
+              <video-player class="aspect-[1/1]" src="{{ sources.url }}" data-video-type="mp4" data-thumbnail="{{ media.preview_image | image_url }}" controls="true" muted playsinline loop></video-player>
+            {% when 'model' %}
+              {{ media | model_viewer_tag }}
+              </div>
+            {% else %}
+              {{ media | media_tag }}
+          {% endcase %}
+        </div>
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if mod_media.size <= 1 -%}
+      {%- assign class_buttons = '!hidden' -%}
+    {%- endif -%}
+    {%- assign class_carousel_wrap = 'max-w-[1140px] mx-auto 3xl:max-w-none' -%}
+    {%- if mod_media_size <= 2 -%}
+      {%- assign class_carousel = 'sticky top-[74px] h-fit' -%}
+    {%- endif -%}
+    {%- if mod_media_size == 2 -%}
+      {%- assign class_carousel_wrap = class_carousel_wrap | append: " relative lg-max:before:content-none before:content-[''] before:absolute before:-bottom-[1px] before:left-0 before:w-full before:h-[1px] before:bg-default lg-max:after:content-none after:content-[''] after:absolute after:-top-[1px] after:left-0 after:w-full after:h-[1px] after:bg-default" -%}
+    {%- endif -%}
+    {%- render 'carousel',
+      class_wrap: class_carousel_wrap,
+      class: 'md:flex-wrap carousel-mobile',
+      content: carousel_contents,
+      class_custom_button: class_buttons,
+      class_main: 'pt-0',
+      class_icon: 'w-4 h-4 text-black',
+      custom_dots: true,
+      class_custom_dots: 'md:hidden mt-4',
+      class_carousel: class_carousel
+    -%}
+    <div class="product-gallery-zoom">
+      <modal-dialog>
+        <button type="button" class="absolute z-10 top-6 right-6 js-close-modal" aria-label="close modal">
+          {%- render 'icon' with 'icon-close-outline', class: "text-grey-500" -%}
+        </button>
+        <div class="w-full h-full modal-dialog-content js-content-modal-dialog">
+          <div class="h-full flex-center lg:px-10">
+            <div class="flex-col hidden pr-12 mr-6 product-gallery-zoom-thumb lg:flex-justify-center">
+              {%- assign media_index = 0 -%}
+              {%- for media in product.media -%}
+                {%- if media.media_type == 'image' -%}
+                  <div class="w-24 mb-6 last:mb-0 cursor-pointer border-[3px] border-transparent [&.is-active]:border-secondary js-zoom-thumb-item" data-media-type="{{ media.media_type }}" data-media-id="{{ media.id }}" data-index="{{ media_index }}">
+                    {%- render 'image',
+                      image: media,
+                      class: 'aspect-[1/1]'
+                    -%}
+                  </div>
+                  {%- assign media_index = media_index | plus: 1 -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <div class="h-full product-gallery-zoom-main js-gallery-zoom-main flex-center">
+              {%- assign slide_counter = 0 -%}
+              {%- capture carousel_gallery_zoom -%}
+                {%- for media in product.media -%}
+                  {%- if media.media_type == 'image' -%}
+                    {%- assign slide_counter = slide_counter | plus: 1 -%}
+                    <div class="h-full w-full aspect-[1/1] flex-shrink-0 snap-start flex-center overflow-hidden" data-index="{{ forloop.index0 }}" data-media-type="{{ media.media_type }}" data-media-id="{{ media.id }}">
+                      {{ media | image_url: width: 2040 | image_tag: is: 'image-zoom', data-zoom-on-double-click: 'true', data-zoom-on-pinch: true, data-zoom-on-wheel: true }}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {%- if slide_counter <= 1 -%}
+                {%- assign class_button_zoom = '!hidden' -%}
+              {%- endif -%}
+              {%- render 'carousel',
+                class: 'carousel-enable',
+                class_wrap: 'lg:p-32'
+                content: carousel_gallery_zoom,
+                class_buttons: class_button_zoom,
+                class_main: 'pt-0 md:-mx-4',
+                class_icon: 'w-4 h-4 text-black',
+                custom_dots: true,
+                class_custom_dots: 'mt-auto lg:hidden mb-4'
+              -%}
+            </div>
+          </div>
+        </div>
+      </modal-dialog>
+    </div>
+  </product-gallery>
+
+  {%- capture src_url -%}
+    {{- 'module-product-gallery.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script',
+    src: src_url,
+    priority: 'important',
+    type: "defer"
+  -%}
+
+  {%- if enable_zoom -%}
+    {%- capture zoom_url -%}
+      {{- 'module-image-zoom.js' | asset_url -}}
+    {%- endcapture -%}
+    {%- render 'atom_script',
+      src: zoom_url,
+      priority: 'normal',
+      type: "defer"
+    -%}
+  {%- endif -%}
+
+{%- endif -%}

@@ -1,0 +1,19 @@
+{%- assign isLogged = customer | default: false -%}
+
+<script>
+  var userConfig = {
+    "salePhoneNumber": {{ settings.sale_phone_number | json }},
+    "saleLiveChat": {{ settings.sale_live_chat | json }},
+    "isLogged": {{ isLogged | json }},
+    {%- if isLogged -%}
+      "saleTitleMobile": {{ settings.sale_title_mobile | json }},
+      "saleImage": {{ settings.sale_image_logged | json }},
+      "saleInfo": {{ settings.sale_info_logged | json }},
+      "saleDescription": {{ settings.sale_description_logged | json }}
+      {%- else -%}
+        "saleImage": {{ settings.sale_image | json }},
+        "saleInfo": {{ settings.sale_question | json }},
+        "saleDescription": {{ settings.sale_description | json }}
+    {%- endif -%}
+  }
+</script>

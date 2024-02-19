@@ -1,0 +1,124 @@
+{%- assign main_menu = section.settings.menu.links | default: 'main-menu' -%}
+
+<site-header id="site-header" class="relative z-30">
+  <div class="relative z-30 bg-white border-b border-default text-grey-900">
+    <div class="container">
+      <div class="flex items-center flex-wrap justify-between py-4 lg:py-[13px] lg:gap-8">
+        <div class="flex items-center justify-between gap-3 lg:gap-14 lg:w-[480px] xl:w-[630px] 2xl:w-[785px]">
+          {%- render 'logo', class: 'w-[121px] lg:w-[151px]' -%}
+          <div class="hidden js-search-bar lg:block lg:flex-1">
+            {%- render 'search-bar' -%}
+          </div>
+        </div>
+        <div class="relative flex items-center justify-end gap-4 lg:w-auto lg:flex-1">
+          {%- liquid
+            assign class_account = 'text-sm text-grey-900'
+            assign class_wrapper = 'flex items-center rounded-lg [&.is-active]:lg:border-primary lg:border lg:border-default lg:px-4 lg:gap-3 lg:h-[54px] lg:relative'
+            if customer
+              assign class_wrapper = class_wrapper | append: ' border !border-focus gap-1 h-[34px] pl-1 pr-[9px] js-account-trigger'
+            endif
+          -%}
+          {%- if shop.customer_accounts_enabled -%}
+            <div class="{{ class_wrapper }} {% if template.name == 'register' or template.name == 'login' %}active-account{% endif %}">
+              <a href="{{- routes.account_login_url -}}" class="{% if customer %}pointer-events-none{% endif %}">
+                {%- render 'icon' with 'icon-user-circle', class: 'h-7 w-7 text-secondary' -%}
+              </a>
+              {%- if customer -%}
+                <div class="flex items-center gap-3">
+                  <div class="hidden lg:max-w-[102px] lg:truncate lg:flex lg:flex-col">
+                    <span class="text-xs">{{ 'general.header.account' | t }}</span>
+                    <span class="mt-0.5 font-bold text-sm">{{ 'general.header.welcome' | t }}, {{ customer.first_name | first }}{{ customer.last_name | first }}</span>
+                  </div>
+                  {%- render 'icon' with 'icon-chevron-down-bold', class: 'w-4 h-4 text-secondary [.is-active_&]:rotate-180' -%}
+                </div>
+              {%- else -%}
+                <div class="hidden lg:max-w-[119px] lg:truncate lg:flex lg:flex-col">
+                  <span class="text-xs">{{ 'general.header.account' | t }}</span>
+                  <span class="text-sm"
+                    ><a href="{{ routes.account_login_url }}" class="font-bold">{{ 'general.header.login' | t }}</a> or <a href="{{ routes.account_register_url }}" class="font-bold">
+                      {{- 'general.header.sign_up' | t -}}
+                    </a></span
+                  >
+                </div>
+              {%- endif -%}
+              <div class="absolute flex flex-col gap-3 w-full bg-white z-[11] top-[50px] left-0 p-5 rounded-lg border shadow-base opacity-0 invisible transition-all duration-200 ease-in-out [&.is-active]:opacity-100 [&.is-active]:visible lg:top-[62px] js-account-list">
+                {%- if customer -%}
+                  <a href="{{- routes.account_url -}}" class="{{- class_account -}}">{{ 'general.header.dashboard' | t }}</a>
+                {%- else -%}
+                  <a href="{{- routes.account_login_url -}}" class="{{- class_account -}}">{{ 'general.header.dashboard' | t }}</a>
+                {%- endif -%}
+                <a href="https://shopify.com/{{ shop.id }}/account" class="{{- class_account -}}">{{ 'general.header.trade' | t }}</a>
+                <a href="{{- routes.account_addresses_url -}}" class="{{- class_account -}}">{{ 'general.header.addresses' | t }}</a>
+                <a href="/wishlist" class="{{- class_account -}}">{{ 'general.header.wishlist' | t }}</a>
+                <a href="{{- routes.account_logout_url -}}" class="{{ class_account }} js-account-logout-header">{{ 'general.header.logout' | t }}</a>
+              </div>
+            </div>
+          {%- endif -%}
+          <wishlist-header></wishlist-header>
+          {%- render 'cart-count', id_button: 'MiniCart', icon_class: 'w-7 h-7' -%}
+          <button
+            class="relative flex flex-col justify-between h-7 w-7 focus:outline-none lg:hidden js-menu-trigger"
+            type="button"
+            aria-label="open menu"
+          >
+            {%- render 'icon' with 'icon-menu', class: 'absolute fit w-full h-full opacity-100 transition text-secondary [.is-active>&]:opacity-0' -%}
+            {%- render 'icon' with 'icon-close-outline',
+              class: 'absolute fit w-full h-full opacity-0 transition text-secondary [.is-active>&]:opacity-100'
+            -%}
+          </button>
+        </div>
+        <div class="relative w-full lg:hidden js-search-bar">
+          {%- render 'search-bar' -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- render 'menu-navigation', main_menu: main_menu -%}
+</site-header>
+
+{%- render 'mega-menu-data', settings: section.settings, blocks: section.blocks -%}
+
+{%- capture src_url -%}
+  {{- 'section-site-header.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+
+{%- capture wishlist_header_src -%}
+  {{- 'module-wishlist-header.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script', src: wishlist_header_src, priority: 'normal', type: 'defer' -%}
+
+{% schema %}
+{
+  "name": "Site Header",
+  "class": "shopify-section-site-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Mega menu"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_second",
+      "label": "Navigation Menu Second"
+    }
+  ]
+}
+{% endschema %}

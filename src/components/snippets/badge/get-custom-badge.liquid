@@ -1,0 +1,20 @@
+{%- capture custom_badge -%}
+  [
+    {%- for mod_tag in shop.metafields.custom_badge.tag -%}
+      {%- assign mod_text = shop.metafields.custom_badge.text[forloop.index0] -%}
+      {%- assign mod_background_color = shop.metafields.custom_badge.background_color[forloop.index0] -%}
+      {%- assign mod_text_color = shop.metafields.custom_badge.text_colour[forloop.index0] -%}
+      {
+        tag: {{- mod_tag | json -}},
+        text: {{- mod_text | json -}},
+        backgroundColor: {{- mod_background_color | json -}},
+        textColor: {{- mod_text_color | json -}},
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+{%- endcapture -%}
+
+{
+  "items": {{- custom_badge -}},
+  "tags": {{ shop.metafields.custom_badge.tag | json }}
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Products",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Estimate Shipping"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_estimate_shipping",
+      "label": "Enable Estimate Shipping",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Modal Preorder"
+    },
+    {
+      "type": "text",
+      "id": "heading_modal_preorder",
+      "label": "Heading Modal Preorder",
+      "default": "Preorder notice"
+    },
+    {
+      "type": "richtext",
+      "id": "description_modal_preorder",
+      "label": "Description Modal Preorder",
+      "default": "<p>We wanted to inform you that the product you have added to your cart is currently available for preorder only. This means that although you can add it to your cart now, it will not be shipped immediately. Instead, we will notify you as soon as the product is released and available for shipping.<\/p><p>Preordering a product can be a great way to ensure that you are one of the first to receive it when it becomes available. It can also help you avoid the frustration of finding out that a product you want is out of stock or on backorder.<\/p><p>If you have any questions or concerns about preordering, please don't hesitate to reach out to us. We'll be happy to provide you with more information and help you navigate the process.<\/p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "product_afterpay_enable",
+      "label": "Enable Product Afterpay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Low stock"
+    },
+    {
+      "type": "number",
+      "id": "low_stock_threshold",
+      "label": "Threshold"
+    },
+    {
+      "type": "text",
+      "id": "low_stock_message",
+      "label": "Message",
+      "default": "Order now and it ships today"
+    },
+    {
+      "type": "header",
+      "content": "Product Note"
+    },
+    {
+      "type": "richtext",
+      "id": "product_note_shipping",
+      "label": "Shipping"
+    },
+    {
+      "type": "richtext",
+      "id": "product_note_order",
+      "label": "Bulk Orders"
+    }
+  ]
+}

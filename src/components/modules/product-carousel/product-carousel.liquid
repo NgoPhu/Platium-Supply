@@ -1,0 +1,184 @@
+{%- liquid
+  assign product_class = 'flex flex-row-reverse items-center h-full rounded-[10px] overflow-hidden md:p-7 md:gap-2 card-hover'
+  assign image_wrapper_class = '!w-[calc(164/344*100%)] md-max:h-[210px] md:aspect-1 md:!w-[calc(234/572*100%)]'
+  assign product_title_class = '!text-lg lg:!text-3xl [.is-product-odd_&]:text-primary [.is-product-even_&]:text-white h-[72px] overfow-hidden truncate !whitespace-normal line-clamp-3 lg:line-clamp-2 hover:text-clip'
+  assign product_price_class = 'text-xl md:!text-3xl [.is-product-odd_&]:text-primary [.is-product-even_&]:text-white'
+  assign product_sale_class = 'text-xl md:text-3xl [.is-product-odd_&]:text-secondary [.is-product-even_&]:text-accent-1'
+  assign product_label_class = '[.is-product-odd_&]:text-white [.is-product-odd_&]:bg-primary [.is-product-even_&]:text-primary [.is-product-even_&]:bg-accent-1'
+  assign content_class = 'flex-1 flex flex-col px-4 h-full justify-center'
+  assign moneyFormat = false
+  
+  assign is_acf = is_acf | default: false
+  if is_acf == true
+    assign heading = product.metafields.product_highlight.heading | default: "Product Highlight"
+    assign mod_products = product.metafields.product_highlight.product
+    assign mod_bg_colors = product.metafields.product_highlight.background_color
+    assign mod_images = product.metafields.product_highlight.image
+    assign mod_image_mobiles = product.metafields.product_highlight.image_mobile
+    assign mod_titles = product.metafields.product_highlight.titlle
+    assign mod_prices = product.metafields.product_highlight.price
+    assign mod_price_sales = product.metafields.product_highlight.price_sale
+    assign mod_urls = product.metafields.product_highlight.url
+  endif
+-%}
+
+{%- capture carousel_contents -%}
+  {%- unless is_acf == true -%}
+    {%- if blocks.size > 0 -%}
+      {%- for block in blocks -%}
+        <swiper-slide class="!h-auto md-max:!h-[calc((100%-16px)/2)]">
+          {%- if block.settings.image != blank -%}
+            {%- liquid
+              assign index = forloop.index | plus: 2
+              assign result = index | modulo: 2
+              if result == 1
+                assign class = product_class | prepend: 'is-product-odd '
+              else
+                assign class = product_class | prepend: ' is-product-even '
+              endif
+            -%}
+            {%- if block.settings.product != blank -%}
+              {%- assign mod_product = all_products[block.settings.product] -%}
+              {%- assign product_price = mod_product.compare_at_price -%}
+              {%- assign product_price_sale = mod_product.price -%}
+              {%- assign product_title = mod_product.title -%}
+              {%- assign product_url = mod_product.url -%}
+              {%- assign moneyFormat = true -%}
+            {%- else -%}
+              {%- assign product_title = block.settings.title -%}
+              {%- assign product_url = block.settings.url -%}
+              {%- assign  product_price = block.settings.price -%}
+              {%- assign product_price_sale = block.settings.price_sale -%}
+              {%- assign moneyFormat = false -%}
+            {%- endif -%}
+            {%- if product_title != blank -%}
+              {%- render 'product-card',
+                image: block.settings.image,
+                image_mobile: block.settings.image_mobile,
+                title: product_title,
+                url: product_url,
+                image_wrapper_class: image_wrapper_class,
+                background_color: block.settings.bg_color,
+                class: class,
+                price: product_price,
+                price_sale: product_price_sale,
+                content_class: content_class,
+                title_class: product_title_class,
+                price_class: product_price_class,
+                sale_price_class: product_sale_class,
+                label_class: product_label_class,
+                object_fit: 'contain',
+                moneyFormat: moneyFormat
+              -%}
+            {%- endif -%}
+          {%- endif -%}
+        </swiper-slide>
+      {%- endfor -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- if mod_images != blank -%}
+      {%- for item in mod_images -%}
+        {%- liquid
+          assign handle_product = mod_products[forloop.index0]
+          assign mod_bg_color = mod_bg_colors[forloop.index0]
+          assign mod_image = mod_images[forloop.index0] | first
+          assign mod_image_mobile = mod_image_mobiles[forloop.index0] | first | default: mod_image
+          assign mod_title = mod_titles[forloop.index0]
+          assign mod_price = mod_prices[forloop.index0]
+          assign mod_price_sale = mod_price_sales[forloop.index0]
+          assign mod_url = mod_urls[forloop.index0]
+
+          if handle_product != blank
+            assign mod_product = all_products[handle_product]
+            assign product_price = mod_product.compare_at_price
+            assign product_price_sale = mod_product.price
+            assign product_title = mod_product.title
+            assign product_url = mod_product.url
+            assign moneyFormat = true
+          else
+            assign product_price = mod_prices[forloop.index0]
+            assign product_price_sale = mod_price_sales[forloop.index0]
+            assign product_title = mod_titles[forloop.index0]
+            assign product_url = mod_urls[forloop.index0]
+            assign moneyFormat = true
+          endif
+
+          assign index = forloop.index | plus: 2
+          assign result = index | modulo: 2
+          if result == 1
+            assign class = product_class | prepend: 'is-product-odd '
+          else
+            assign class = product_class | prepend: ' is-product-even '
+          endif
+        -%}
+        <swiper-slide class="!h-auto md-max:!h-[calc((100%-16px)/2)]">
+          {%- if product_title != blank -%}
+            {%- render 'product-card',
+              is_acf: is_acf,
+              image: mod_image,
+              image_mobile: mod_image_mobile,
+              title: product_title,
+              url: product_url,
+              image_wrapper_class: image_wrapper_class,
+              background_color: mod_bg_color,
+              class: class,
+              price: product_price,
+              price_sale: product_price_sale,
+              content_class: content_class,
+              title_class: product_title_class,
+              price_class: product_price_class,
+              sale_price_class: product_sale_class,
+              label_class: product_label_class,
+              object_fit: 'contain',
+              moneyFormat: moneyFormat
+            -%}
+          {%- endif -%}
+        </swiper-slide>
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endunless -%}
+{%- endcapture -%}
+
+{%- capture carousel_options -%}
+  {
+    "grid": {
+      "rows": 2,
+      "fill": "column"
+    },
+    "direction": "horizontal",
+    "slidesPerView": 1,
+    "spaceBetween": 16,
+    "breakpoints": {
+      "768": {
+        "slidesPerView": "2",
+        "spaceBetween": 24,
+        "grid": {
+          "rows": 1,
+          "fill": "row"
+        },
+        "centerInsufficientSlides": true
+      }
+    }
+  }
+{%- endcapture -%}
+
+{%- if carousel_contents != blank -%}
+  <div class="product-carousel bg-grey-100 {{ class_main }}">
+    <div class="container pb-8 lg:pb-[72px]">
+      {%- if heading != blank -%}
+        <h2 class="h4 font-body">{{- heading -}}</h2>
+      {%- endif -%}
+      {%- assign class_wrap_carousel = 'flex carousel-swiper-product' -%}
+      {%- if blocks.size <= 2 -%}
+        {%- assign class_wrap_carousel = class_wrap_carousel | append: ' [&_.swiper-button]:hidden' -%}
+      {%- endif -%}
+      {%- render 'carousel-swiper',
+        contents: carousel_contents,
+        options: carousel_options,
+        class: 'md-max:block overflow-hidden mt-6 md:mt-9 md-max:h-[436px]',
+        class_wrap: class_wrap_carousel,
+        include_navigation: true 
+      -%}
+    </div>
+  </div>
+{%- endif -%}

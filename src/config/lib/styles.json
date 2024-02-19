@@ -1,0 +1,17 @@
+{
+  "name": "Global Styles",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Web fonts"
+    },
+    {
+      "type": "text",
+      "id": "google_fonts_uri",
+      "label": "Google Fonts Family",
+      "default": "Inter:400,500,600,700|Muli",
+      "info": "Load fonts from Google Fonts. E.g. if your Google Fonts URL is https:\/\/fonts.google.com\/selection?selection.family=Raleway:400,500,600,700, then the Google Fonts Family is Raleway:400,500,600,700.",
+      "placeholder": "Poppins:300,400,700|Muli|Poppins:400,600"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "name": "Account",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Login \/ Register"
+    },
+    {
+      "type": "image_picker",
+      "id": "login_image",
+      "label": "Login Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "register_image",
+      "label": "Register Image"
+    },
+    {
+      "type": "text",
+      "id": "industry_options",
+      "label": "Options of Industry",
+      "default": "Male|Female"
+    },
+    {
+      "type": "header",
+      "content": "Account address"
+    },
+    {
+      "type": "text",
+      "id": "address_note",
+      "label": "Address note"
+    },
+    {
+      "type": "image_picker",
+      "id": "user_image",
+      "label": "User Image"
+    },
+    {
+      "type": "text",
+      "id": "user_info",
+      "label": "User Info",
+      "default": "Your sales contact is Emily Smith"
+    },
+    {
+      "type": "richtext",
+      "id": "user_email",
+      "label": "User Email"
+    },
+    {
+      "type": "richtext",
+      "id": "user_button_first",
+      "label": "Button First"
+    },
+    {
+      "type": "richtext",
+      "id": "user_button_second",
+      "label": "Button Second"
+    },
+    {
+      "type": "header",
+      "content": "Account NDIS"
+    },
+    {
+      "type": "image_picker",
+      "id": "account_ndis_logo",
+      "label": "Account NDIS Logo"
+    },
+    {
+      "type": "text",
+      "id": "account_ndis_add_title",
+      "label": "Account NDIS Add Title",
+      "default": "Add your NDIS Account"
+    },
+    {
+      "type": "text",
+      "id": "account_ndis_edit_title",
+      "label": "Account NDIS Edit Title",
+      "default": "NDIS claims are enabled"
+    },
+    {
+      "type": "text",
+      "id": "form_ndis_plan_managed",
+      "label": "NDIS Plan Managed Form ID",
+      "default": "54tlB4"
+    },
+    {
+      "type": "text",
+      "id": "form_ndis_self_managed",
+      "label": "NDIS Self Managed Form ID",
+      "default": "r9t3xK"
+    },
+    {
+      "type": "text",
+      "id": "form_agency_plan_managed",
+      "label": "NDIS Agency Managed Form ID",
+      "default": "2qtRAw"
+    }
+  ]
+}

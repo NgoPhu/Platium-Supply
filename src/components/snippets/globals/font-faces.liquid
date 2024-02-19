@@ -1,0 +1,76 @@
+{%- if settings.use_typekit and settings.typekit_id != blank -%}
+  <link rel="stylesheet" href="https://use.typekit.net/{{- settings.typekit_id -}}.css" media="print" onload="this.media='all'; this.onload=null;">
+{%- endif -%}
+
+{%- if settings.use_custom_fonts -%}
+  {%- render 'custom-fonts' -%}
+{%- endif -%}
+
+{% if settings.google_fonts_uri != blank %}
+  {% assign fonts = settings.google_fonts_uri | split: '|' %}
+  {%- capture _fonts_param -%}
+  {%- for _font in fonts -%}
+    &family={{- _font -}}
+  {%- endfor -%}
+{%- endcapture -%}
+  <link
+    rel="preload"
+    href="https://fonts.googleapis.com/css?{{- _fonts_param -}}&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css?{{- _fonts_param -}}&display=swap"
+      rel="stylesheet"
+      type="text/css"
+    >
+  </noscript>
+{% endif %}
+
+{%- comment %}
+  Generates @face-face declarations for Shopify fonts
+{%- endcomment %}
+{%- if settings.headings_font != blank and settings.headings_typekit_font_family == blank and settings.headings_custom_font_family == blank -%}
+  {%- assign headings_font = settings.headings_font -%}
+  {%- assign headings_font_medium = headings_font | font_modify: 'weight', '500' -%}
+  {%- assign headings_font_bold = headings_font | font_modify: 'weight', 'bolder' -%}
+  {%- assign headings_font_italic = headings_font | font_modify: 'style', 'italic' -%}
+  {%- assign headings_font_bold_italic = headings_font_bold | font_modify: 'style', 'italic' -%}
+
+  <style media="screen">
+    {{- headings_font | font_face -}}
+    {{- headings_font_medium | font_face -}}
+    {{- headings_font_bold | font_face -}}
+    {{- headings_font_italic | font_face -}}
+    {{- headings_font_bold_italic | font_face -}}
+  </style>
+{%- endif -%}
+
+{%- if settings.body_font != blank and settings.body_typekit_font_family == blank and settings.body_custom_font_family == blank -%}
+  {%- assign body_font = settings.body_font -%}
+  {%- assign body_font_bold = body_font | font_modify: 'weight', 'bolder' -%}
+  {%- assign body_font_italic = body_font | font_modify: 'style', 'italic' -%}
+  {%- assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic' -%}
+
+  <style media="screen">
+    {{- body_font | font_face -}}
+    {{- body_font_bold | font_face -}}
+    {{- body_font_italic | font_face -}}
+    {{- body_font_bold_italic | font_face -}}
+  </style>
+{%- endif -%}
+
+{%- if settings.buttons_font != blank and settings.buttons_typekit_font_family == blank and settings.buttons_custom_font_family == blank -%}
+  {%- assign buttons_font = settings.buttons_font -%}
+  {%- assign buttons_font_bold = buttons_font | font_modify: 'weight', 'bolder' -%}
+  {%- assign buttons_font_italic = buttons_font | font_modify: 'style', 'italic' -%}
+  {%- assign buttons_font_bold_italic = buttons_font_bold | font_modify: 'style', 'italic' -%}
+
+  <style media="screen">
+    {{- buttons_font | font_face -}}
+    {{- buttons_font_bold | font_face -}}
+    {{- buttons_font_italic | font_face -}}
+    {{- buttons_font_bold_italic | font_face -}}
+  </style>
+{%- endif -%}

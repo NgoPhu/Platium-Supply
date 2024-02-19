@@ -1,0 +1,9 @@
+{{- 'module-mega-menu.css' | asset_url | stylesheet_tag -}}
+
+<mega-menu></mega-menu>
+
+{%- capture src_url -%}
+  {{- 'module-mega-menu.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

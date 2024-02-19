@@ -1,0 +1,31 @@
+<section class="bg-grey-100 {{ class_wrap }}">
+  {%- render 'breadcrumbs' -%}
+  {%- if image != blank or image_mobile != blank or image_acf != blank or image_mobile_acf != blank -%}
+    {%- capture content -%}
+      <div class="container">
+        <h1 class="text-2xl md:text-3xl text-white font-semibold">{{- heading -}}</h1>
+        {%- if description != blank -%}
+          <div class="description text-white text-base mt-4">
+            {{- description -}}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endcapture -%}
+    {%- render 'hero',
+      image: image,
+      image_mobile: image_mobile,
+      image_acf: image_acf,
+      image_mobile_acf: image_mobile_acf,
+      content: content,
+      content_class: 'absolute fit flex items-center justify-center text-center',
+      url: link_image,
+      class: 'aspect-[376/200] md:aspect-[1440/360]'
+    -%}
+  {%- else -%}
+    <div class="container">
+      {%- if heading != blank -%}
+        <h1 class="h3 pb-5 text-2xl md:pb-6 md:pt-10 md:text-3xl {{ class_title }}">{{- heading -}}</h1>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>

@@ -1,0 +1,214 @@
+{%- liquid
+  assign sidebar_menu = settings.page_sidebar_menu
+  assign image = section.settings.image
+  assign banner_title = section.settings.banner_title | default: page.title
+  assign industry_options = section.settings.industry_options | split: '|'
+  render 'breadcrumbs'
+-%}
+
+<div class="bg-grey-100 pb-8 lg:pb-[72px]">
+  <h1 class="container block pt-5 pb-3 h4 font-body lg:hidden">{{ banner_title }}</h1>
+  <div class= "container flex flex-col justify-between gap-4 lg:gap-6 xl:gap-10 lg:flex-row">
+    {%- if sidebar_menu != blank -%}
+      {%- render "page-sidebar",
+        sidebar_menu: sidebar_menu
+      -%}
+    {%- endif -%}
+
+    <section class="flex-1 bg-white rounded-[10px] w-full p-4 shadow-base border border-default lg:p-6 xl:p-10 lg:w-[calc(940/1280*100%)]">
+      {%- if image != blank -%}
+        {%- capture content -%}
+          <div class="container flex items-center justify-start h-full p-14" >
+            <h2 class="relative text-3xl font-bold text-white font-body">{{- banner_title -}}</h2>
+          </div>
+        {%- endcapture -%}
+        {%- render 'hero',
+          class: 'relative w-full overflow-hidden aspect-[860/230] rounded-tr-[40px] rounded-bl-[40px] lg-max:hidden',
+          image: image,
+          image_mobile: image,
+          content: content
+        -%}
+      {%- endif -%}
+      <div class="flex flex-col justify-center lg:gap-4 lg:mt-8 lg:flex-row xl:gap-8">
+        {%- if section.settings.content_left != blank or section.settings.title_left != blank -%}
+          <div class="content-left w-full lg:w-[calc(406/858*100%)]">
+            <h4 class="mb-3 text-base font-bold text-grey-900 font-body lg:mb-4 lg:text-lg">{{- section.settings.title_left -}}</h4>
+            <div class="flex flex-col gap-3 text-sm text-grey-900 lg:gap-4">
+              {{- section.settings.content_left -}}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="flex-1 content-right lg-max:pt-6 lg-max:mt-6 lg-max:border-t lg-max:border-default">
+          <div class="text-sm text-grey-900">{{- section.settings.content_right -}}</div>
+          <validate-form class="block mt-4">
+            {%- form 'contact' -%}
+              {%- if form.errors -%}
+                {%- capture content_error -%}
+                  {{ 'templates.contact.form.posted_error' | t }}
+                {%- endcapture -%}
+                {%- render 'notice-main', class: "my-4", content: content_error, type: 'error' -%}
+              {%- elsif form.posted_successfully? -%}
+                {%- capture content_success -%}
+                  {{ 'templates.contact.form.posted_success' | t }}
+                {%- endcapture -%}
+                {%- render 'notice-main', class: "my-4", content: content_success, type: 'success' -%}
+              {%- endif -%}
+              {%- liquid
+                assign name_label = 'general.contact_form.name' | t
+                assign company_label = 'general.contact_form.company' | t
+                assign email_label = 'general.contact_form.email' | t
+                assign industry_label = 'general.contact_form.industry' | t
+                assign phone_label = 'general.contact_form.phone_number' | t
+                assign job_label = 'general.contact_form.job' | t
+                assign message_label = 'general.contact_form.message' | t
+                assign submit_label = 'general.contact_form.submit' | t
+              -%}
+              <div class="block">
+                <div class="flex flex-col items-baseline justify-center gap-4 mb-4 lg:flex-row">
+                  {%- render 'text-input',
+                    class: 'w-full lg:w-1/2',
+                    id: 'contact_name',
+                    name: 'contact[name]',
+                    type: 'text',
+                    label: name_label,
+                    placeholder: name_label,
+                    show_label: true,
+                    required: true
+                  -%}
+                  {%- render 'text-input',
+                    class: 'w-full lg:w-1/2',
+                    id: 'contact_company',
+                    name: 'contact[company]',
+                    type: 'text',
+                    label: company_label,
+                    placeholder: company_label,
+                    show_label: true,
+                    required: true
+                  -%}
+                </div>
+                <div class="flex flex-col items-baseline justify-center gap-4 mb-4 lg:flex-row">
+                  {%- render 'text-input',
+                    class: 'w-full lg:w-1/2',
+                    id: 'contact_email',
+                    name: 'contact[email]',
+                    type: 'email',
+                    label: email_label,
+                    placeholder: email_label,
+                    show_label: true,
+                    required: true
+                  -%}
+                  {%- render 'text-input',
+                    class: 'w-full lg:w-1/2',
+                    id: 'contact_phone',
+                    name: 'contact[phone]',
+                    type: 'tel',
+                    label: phone_label,
+                    placeholder: phone_label,
+                    show_label: true,
+                    required: true
+                  -%}
+                </div>
+                {%- if industry_options != blank -%}
+                  {%- capture industry_options_html -%}
+                    {%- for option in industry_options -%}
+                      <option
+                        value="{{ option }}"
+                      >{{- option -}}</option>
+                    {%- endfor -%}
+                  {%- endcapture -%}
+                  {%- render 'select-input',
+                    class: 'w-full',
+                    class_input: 'select-industry'
+                    name: 'contact[industry]',
+                    id: 'contact_industry',
+                    options: industry_options_html,
+                    label: industry_label,
+                    placeholder: industry_label,
+                    show_label: true,
+                    required: true
+                  -%}
+                {%- endif -%}
+                {%- render 'text-input',
+                  class: 'mt-4 w-full',
+                  id: 'contact_job',
+                  name: 'contact[job]',
+                  label: job_label,
+                  placeholder: job_label,
+                  show_label: true,
+                  required: false
+                -%}
+                {%- render 'text-area',
+                  id: 'contact_message',
+                  name: 'contact[message]',
+                  class: 'mt-4',
+                  class_input: 'input-form w-full resize-none h-[120px]',
+                  label: message_label,
+                  show_placeholder: true,
+                  placeholder: message_label,
+                  required: true
+                %}
+              </div>
+              <div class="mt-4">
+                <button
+                  class="w-full button-primary normal-case lg:w-fit lg:min-w-[177px]"
+                  type="submit"
+                >
+                  {{ submit_label }}
+                </button>
+              </div>
+            {%- endform -%}
+          </validate-form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact us",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Banner Title"
+    },
+    {
+      "type": "header",
+      "content": "Content Left"
+    },
+    {
+      "type": "text",
+      "id": "title_left",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "content_left",
+      "label": "Content Left"
+    },
+    {
+      "type": "header",
+      "content": "Content Right"
+    },
+    {
+      "type": "textarea",
+      "id": "content_right",
+      "label": "Content Right"
+    },
+    {
+      "type": "text",
+      "id": "industry_options",
+      "label": "Options of industry",
+      "info": "Example: 'Ex1|Ex2|Ex3'"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,276 @@
+{
+  "sections": {
+    "1193e462-8614-4f53-94d1-6efdbd5df163": {
+      "type": "full-width-banner",
+      "settings": {
+        "enable_background": false,
+        "background_color": "",
+        "content_position_vertical": "items-center",
+        "content_position_horizontal": "justify-center",
+        "title": "",
+        "subtitle": "",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_text_second": "",
+        "cta_link_second": "",
+        "image_mobile": "shopify:\/\/shop_images\/Veterans-Hero-Banner-Mobile_06792ef1-bcce-4d87-90a5-d241b2324412.png",
+        "image": "shopify:\/\/shop_images\/Veterans-Hero-Banner-Desktop_35c81a35-dd38-4704-bd06-603085411350.png"
+      }
+    },
+    "790e991d-8573-42f7-b3c0-728ddd023b68": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/AboutUs_Veterans_02.jpg",
+        "title": "Platinum Health Supply Group & Veterans Community Social Impact",
+        "description": "",
+        "cta_link": ""
+      }
+    },
+    "a90a5180-6552-4b55-ac09-ba5f474de798": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Veterans-Image-01_31e03385-7b9e-4b55-8c49-7248de561fdd.png",
+        "is_reversed": false,
+        "background_color": "#ffffff",
+        "title": "Our Mission: Sustainable futures for Veterans",
+        "description": "Platinum Health Supply Group is a veteran-founded company that is dedicated to creating sustainable futures for veterans transitioning to civilian life, as well as veterans and their families who are currently employed in civilian roles. Our goal is to employ as many veterans and veteran family members as possible through partnerships with veteran recruitment agencies and the community. We also place a strong emphasis on providing financial, health, and wellness education, personal and professional development, and mentorship to veterans and their families, with the aim of having a lasting and positive impact on not only the veteran community, but also the wider community. Our social enterprise strategy is centered around supporting the versatile, resilient, and determined veterans who are seeking new opportunities in life.",
+        "cta_as_button": false,
+        "cta_text": "",
+        "cta_url": "",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "bc7d1bef-d8f9-4c39-822a-9400223e5a51": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Veterans-Image-02_a559dc6d-1794-4b20-ba84-ba6b5dab2eb4.png",
+        "is_reversed": true,
+        "background_color": "#ffffff",
+        "title": "Our Impact: Platinum Health Supply Group has invested over $1,500,000 into creating employment opportunities for Veterans",
+        "description": "These investments have allowed us to establish and maintain sustainable employment within our company and among our clients. Many veterans have held long-term positions at Platinum Health and received support in transitioning from military to civilian life, providing a source of income as they seek out careers in their desired industries.\n\nAs we continue to grow and expand as a business, we will remain committed to initiatives that support our staff, such as providing career pathways in the Australian Army Reserves, as part of our ongoing efforts to embody and promote our social mission beyond direct employment.",
+        "cta_as_button": false,
+        "cta_text": "",
+        "cta_url": "",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "bc4682eb-5ea7-40cd-abe0-723969be03e4": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Meet-Dylan_82c42785-1b61-4804-a866-96b9d099bd09.png",
+        "is_reversed": false,
+        "background_color": "#ffffff",
+        "title": "Meet Dylan",
+        "description": "Dylan enlisted in the army in 2013 and has recently joined the Australian Army Reserves, completing his training in Wagga Wagga, New South Wales. He currently holds the position of Chief Growth Officer at Platinum Health Supply Group. Dylan in his most recent Military service has distinguished himself and the company by being awarded the Staff Choice Award among 62 Soldiers.",
+        "cta_as_button": false,
+        "cta_text": "",
+        "cta_url": "",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "b6056d46-3f5e-4fdb-a24b-8fd20498eff8": {
+      "type": "icon-with-text",
+      "blocks": {
+        "template--21585692131648__b6056d46-3f5e-4fdb-a24b-8fd20498eff8-item-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_5_e9e72c57-d912-4eca-b4d8-89af58b443f3.png",
+            "title": "",
+            "description": "<p>Creating Employment Opportunities<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        },
+        "template--21585692131648__b6056d46-3f5e-4fdb-a24b-8fd20498eff8-item-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_5_5.svg",
+            "title": "",
+            "description": "<p>Contributions to Veteran Employment<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        },
+        "template--21585692131648__b6056d46-3f5e-4fdb-a24b-8fd20498eff8-item-3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_5_6.svg",
+            "title": "",
+            "description": "<p>Silver Sponsors of the Prime Ministers Veteran Employment Awards 2021<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        },
+        "596b7f2a-d930-4b9b-9d1a-5cd374770e13": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_5_7.svg",
+            "title": "",
+            "description": "<p>Ongoing Support For Veterans<\/p>",
+            "content_position_vertical": "items-center",
+            "icon_position": "flex-row"
+          }
+        }
+      },
+      "block_order": [
+        "template--21585692131648__b6056d46-3f5e-4fdb-a24b-8fd20498eff8-item-1",
+        "template--21585692131648__b6056d46-3f5e-4fdb-a24b-8fd20498eff8-item-2",
+        "template--21585692131648__b6056d46-3f5e-4fdb-a24b-8fd20498eff8-item-3",
+        "596b7f2a-d930-4b9b-9d1a-5cd374770e13"
+      ],
+      "settings": {
+        "title": ""
+      }
+    },
+    "6cd13f65-f239-4eef-b6f3-30b041e90580": {
+      "type": "icon-text-module",
+      "blocks": {
+        "b2ddba56-e5e0-4f7d-9d68-47c2c4663161": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/image_5_4.svg",
+            "title": "Creating Employment Opportunities"
+          }
+        },
+        "a6b8977d-ffbf-4f1b-9cb4-af8852613c7b": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/image_5_5.svg",
+            "title": "Contributions to Veteran Employment"
+          }
+        },
+        "60cf35a0-8c0e-48e7-9ad8-9ac3a76c9361": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/image_5_6.svg",
+            "title": "Silver Sponsors of the Prime Ministers Veteran Employment Awards 2021"
+          }
+        },
+        "70d8f51e-8ee4-4460-8905-a3acda9c4ea8": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/image_5_7.svg",
+            "title": "Ongoing Support For Veterans"
+          }
+        }
+      },
+      "block_order": [
+        "b2ddba56-e5e0-4f7d-9d68-47c2c4663161",
+        "a6b8977d-ffbf-4f1b-9cb4-af8852613c7b",
+        "60cf35a0-8c0e-48e7-9ad8-9ac3a76c9361",
+        "70d8f51e-8ee4-4460-8905-a3acda9c4ea8"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "#142039",
+        "text_color": "#ffffff"
+      }
+    },
+    "bf41f9c9-348a-4358-b468-a6555368078e": {
+      "type": "column-banner",
+      "settings": {
+        "class_modify": "",
+        "bg_color": "#f5f5f6",
+        "image_mobile": "shopify:\/\/shop_images\/Veterans-Column-Banner-Mobile-01.png",
+        "image": "shopify:\/\/shop_images\/Veterans-Column-Banner-02.png",
+        "url": ""
+      }
+    },
+    "1948c611-b555-45bb-a22c-85ebe2b8eeb5": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Meed-Dylan-05.jpg",
+        "title": "Meet Dylan",
+        "description": "<p>Dylan enlisted in the army in 2013 and has recently joined the Australian Army Reserves, completing his training in Wagga Wagga, New South Wales. He currently holds the position of Chief Growth Officer at Platinum Health Supply Group. Dylan in his most recent Military service has distinguished himself and the company by being awarded the Staff Choice Award among 62 Soldiers.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "5c834bd2-03b2-4c2c-89b5-e657b32d2264": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Meed-Jake-01.jpg",
+        "title": "Meet Jake",
+        "description": "<p>Jake joined the army in 2013 and completed his training as an Operations Mover. In this role, he worked with the Army, Navy, and Airforce to transport military personnel and equipment to and from operational areas. Jake was deployed twice during his time in the military and also took part in international exercises. He was discharged in 2019 at the rank of Corporal and is now employed at Platinum Health Supply Group as the Warehouse & Logistics Manager.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "5a1ec212-d1df-4aa0-9947-b1581d9f80c3": {
+      "type": "two-columns-cms",
+      "blocks": {
+        "5607eb67-6e91-4a40-bf1b-925fd2d1790a": {
+          "type": "block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_2_88bd6b5e-8fc8-4268-b050-d33edbaff034.svg",
+            "title": "Meet Dylan",
+            "description": "Dylan enlisted in the army in 2013 and has recently joined the Australian Army Reserves, completing his training in Wagga Wagga, New South Wales. He currently holds the position of Chief Growth Officer at Platinum Health Supply Group. Dylan in his most recent Military service has distinguished himself and the company by being awarded the Staff Choice Award among 62 Soldiers.",
+            "cta_url": "#"
+          }
+        },
+        "4cb9e136-3912-4af3-bdff-73fa80ac3c57": {
+          "type": "block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_3_b147d336-f382-48ea-88f3-a4400c01ed63.svg",
+            "title": "Meet Jake",
+            "description": "Jake joined the army in 2013 and completed his training as an Operations Mover. In this role, he worked with the Army, Navy, and Airforce to transport military personnel and equipment to and from operational areas. Jake was deployed twice during his time in the military and also took part in international exercises. He was discharged in 2019 at the rank of Corporal and is now employed at Platinum Health Supply Group as the Warehouse & Logistics Manager.",
+            "cta_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "5607eb67-6e91-4a40-bf1b-925fd2d1790a",
+        "4cb9e136-3912-4af3-bdff-73fa80ac3c57"
+      ],
+      "disabled": true,
+      "settings": {
+        "class_modify": "two-column-cms-meet"
+      }
+    },
+    "d19d7581-e0d2-406e-bbbb-121c13b8eacf": {
+      "type": "contact-module",
+      "settings": {
+        "text_color": "#343f57",
+        "heading": "Employment",
+        "description": "<p>Are you a Veteran currently serving or discharged and looking for a new career pathway? Send an email to <a href=\"mailto:customercare@platinumhealthsupply.com.au\">customercare@platinumhealthsupply.com.au<\/a> to discuss further about your entitlements you may or may not currently be aware of or fill out the form below and let us know if you are interested in an opportunity with Platinum, we will then be in contact with you. In addition our VESC will support with you directly in regards to current employment opportunities in your region.<\/p>",
+        "form_script": "<script src=\"\/\/customercare.platinumhealthsupply.com.au\/resources\/sharing\/embed.js?sharing=lp-embed&domain=customercare.platinumhealthsupply.com.au&id=7L45-A2R%2F%22\"><\/script>"
+      }
+    },
+    "82d3bfa0-6a02-43ea-9a64-e42e11c52d36": {
+      "type": "column-banner",
+      "disabled": true,
+      "settings": {
+        "class_modify": "",
+        "bg_color": "#ffffff",
+        "image_mobile": "shopify:\/\/shop_images\/PHS-Veterans-Logo-Section-Mobile-02.png",
+        "image": "shopify:\/\/shop_images\/PHS-Veterans-Logo-Section.png",
+        "url": ""
+      }
+    }
+  },
+  "order": [
+    "1193e462-8614-4f53-94d1-6efdbd5df163",
+    "790e991d-8573-42f7-b3c0-728ddd023b68",
+    "a90a5180-6552-4b55-ac09-ba5f474de798",
+    "bc7d1bef-d8f9-4c39-822a-9400223e5a51",
+    "bc4682eb-5ea7-40cd-abe0-723969be03e4",
+    "b6056d46-3f5e-4fdb-a24b-8fd20498eff8",
+    "6cd13f65-f239-4eef-b6f3-30b041e90580",
+    "bf41f9c9-348a-4358-b468-a6555368078e",
+    "1948c611-b555-45bb-a22c-85ebe2b8eeb5",
+    "5c834bd2-03b2-4c2c-89b5-e657b32d2264",
+    "5a1ec212-d1df-4aa0-9947-b1581d9f80c3",
+    "d19d7581-e0d2-406e-bbbb-121c13b8eacf",
+    "82d3bfa0-6a02-43ea-9a64-e42e11c52d36"
+  ]
+}

@@ -1,0 +1,44 @@
+<div class="py-2">
+  <div class="container">
+    <div class="grid gap-6 md:grid-cols-4">
+      <div class="flex flex-col items-start">
+        <h4 class="mb-2 h5">Notifications</h4>
+        {%- render 'notice-main', class: 'mb-3', content: 'Standard notification' -%}
+        {%- render 'notice-main', class: 'mb-3 notice-error', content: 'Error notification', type: 'error' -%}
+        {%- render 'notice-main', class: 'mb-3 notice-success', content: 'Success notification', type: 'success' -%}
+        {%- render 'notice-main', class: 'mb-3 notice-warning', content: 'Warning notification', type: 'warning' -%}
+        {%- render 'notice-main', class: 'mb-3', content: 'Toaster notification' -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="mb-2 h5">Slideout</h4>
+        <div>
+          <button id="styleguide-slideout" class="button-primary js-modal-dialog-trigger">Slideout 1</button>
+        </div>
+        {%- render 'slideout',
+          id: 'styleguide-slideout',
+          title: 'Heading 1',
+          trigger_button: 'Open a slideout 1',
+          close_button: 'Close',
+          content: 'Content slideout 1'
+        -%}
+        <div>
+          <button id="styleguide-slideout-2" class="mt-2 button-secondary js-modal-dialog-trigger">Slideout 2</button>
+        </div>
+        {%- render 'slideout', id: 'styleguide-slideout-2', title: 'Heading 2', trigger_button: 'Open a slideout 2', content: 'Content slideout 2' -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="mb-2 h5">Modal dialog</h4>
+        <div>
+          <button id="styleguide-modal-dialog" class="button-primary js-modal-dialog-trigger">Modal dialog</button>
+        </div>
+        {%- render 'modal-dialog', id: 'styleguide-modal-dialog', content: 'Content modal' -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="mb-2 h5">Quantity Counter</h4>
+        <div>
+          {%- render 'quantity-item' -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

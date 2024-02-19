@@ -1,0 +1,60 @@
+{% liquid
+  if template contains 'gift-card' or product.gift_card?
+    assign class_inner = 'pt-5 pb-8'
+  else
+    assign class_inner = 'py-8'
+  endif
+  assign title = 'product.general.recently_viewed' | t
+%}
+
+{%- assign isLogged = customer | default: false -%}
+
+<product-main
+  class="container flex flex-col js-anchor-section js-product-main lg:flex-row"
+  id="product-details"
+  data-title="Details"
+  data-handle="{{- product.handle -}}"
+>
+  <div class="flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-8 xl:gap-x-10 pb-8 lg:pb-[72px]">
+    <div class="bg-grey-300 border border-default rounded-[10px] shadow-base h-fit overflow-hidden lg-max:mb-4 lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2">
+      {%- render 'carousel-gallery', enable_zoom: section.settings.enable_gallery_zoom -%}
+    </div>
+    <div class="flex-shrink-0 w-full lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-3 lg:h-fit lg:sticky lg:top-[172px] z-[2]">
+      <div class="mb-4 p-5 bg-white border border-default rounded-[10px] shadow-base lg:mb-6 lg:p-8">
+        {%- render 'product-info' -%}
+        {%- render 'product-form' -%}
+      </div>
+      {% render 'plp-user' %}
+    </div>
+    <div class="lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3">
+      {%- liquid
+        render 'product-tabs'
+        if settings.enable_estimate_shipping
+          render 'estimate-shipping'
+        endif
+        render 'product-payment'
+      -%}
+    </div>
+  </div>
+</product-main>
+
+{%- capture src_url -%}
+  {{- 'section-product-main.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+
+{% schema %}
+{
+  "name": "Product main",
+  "class": "bg-grey-100 relative js-section-product-main",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_gallery_zoom",
+      "label": "Enable gallery zoom",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

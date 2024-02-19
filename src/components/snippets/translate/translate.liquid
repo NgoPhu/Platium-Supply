@@ -1,0 +1,58 @@
+<script type="text/javascript">
+  var translate = {
+    collection: {
+      apllyFilter: {{ 'collection.filter.apply_filter' | t | json }},
+      filters: {{ 'collection.filter.filters' | t | json }},
+      clearSelections: {{ 'collection.filter.clear_selections' | t | json }},
+      noOptionFilter: {{ 'collection.filter.no_option_filter' | t | json }},
+      noProducts: {{ 'collection.filter.no_product' | t | json }},
+      noResults: {{ 'search.no_results' | t | json }},
+      previousPagination: {{ 'collection.pagination.previous' | t | json }},
+      nextPagination: {{ 'collection.pagination.next' | t | json }},
+      showItems: {{ 'collection.pagination.show_item' | t | json }},
+      loadMore: {{ 'collection.pagination.load_more' | t | json }},
+      selectOption: {{ 'collection.general.select_options' | t | json }},
+      selectSize: {{ 'collection.product.select_size' | t | json }},
+      soldOut: {{ 'collection.product.sold_out' | t | json }}
+    },
+    search: {
+      didYouMean: {{ 'search.did_you_mean' | t | json }},
+      suggestionForSearch: {{ 'search.suggestion_for_search' | t | json }}
+    },
+    general: {
+      addToCart: {{ 'product.general.add_to_cart' | t | json }},
+      notifyMe: {{ 'product.general.notify_me' | t | json }}
+    },
+    cart: {
+      view_bag: {{ 'cart.view_bag' | t | json }},
+      subtotal: {{ 'cart.subtotal' | t | json }},
+      total: {{ 'cart.total' | t | json }},
+      hide_selections: {{ 'cart.hide_selections' | t | json }},
+      view_selections: {{ 'cart.view_selections' | t | json }},
+      go_to_checkout: {{ 'cart.go_to_checkout' | t | json }},
+      checkout: {{ 'cart.checkout' | t | json }},
+      empty_cart: {{ 'cart.empty' | t | json }},
+      empty_description: {{ 'cart.empty_description' | t | json }},
+      continue_shopping: {{ 'cart.continue_shopping' | t | json }},
+      continue_shopping_cart: {{ 'cart.continue_shopping_cart' | t | json }},
+      taxes_and_shipping_at_checkout: {{ 'cart.taxes_and_shipping_at_checkout' | t | json }},
+      my_bag: {{ 'cart.my_bag' | t | json }},
+      heading: {{ 'general.cart.heading' | t | json }},
+      spend: {{ 'cart.spend' | t | json }},
+      to_receive_free_shipping: {{ 'cart.to_receive_free_shipping' | t | json }},
+      get_free_shipping: {{ 'cart.get_free_shipping' | t | json }}
+    },
+    product: {
+      notifyMe: {{ 'product.general.notify_me' | t | json }},
+      notifyMeWhenAvailable: {{ 'product.general.notify_me_when_available' | t | json }},
+      subtextNotifyMe: {{ 'product.general.subtext_notify_me' | t | json }},
+      soldOut: {{ 'product.general.sold_out' | t | json }},
+      info: {{ 'product.general.info' | t | json }},
+      outStock: {{ 'product.general.out_stock' | t | json }},
+      lowStock: {{ 'product.general.low_stock' | t | json }},
+      inStock: {{ 'product.general.in_stock' | t | json }},
+      headingModalPreorder: {{ settings.heading_modal_preorder | json }},
+      descriptionModalPreorder: {{ settings.description_modal_preorder | json }},
+    }
+  }
+</script>

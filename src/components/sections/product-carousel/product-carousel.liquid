@@ -1,0 +1,71 @@
+{%- render 'product-carousel',
+  heading: section.settings.heading,
+  blocks: section.blocks
+-%}
+
+{% schema %}
+  {
+    "name": "Product Carousel",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "product",
+        "type": "product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image Mobile"
+          },
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background Color"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "price",
+            "label": "Price"
+          },
+          {
+            "type": "text",
+            "id": "price_sale",
+            "label": "Price Sale"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Carousel",
+        "category": "Carousel"
+      }
+    ]
+  }
+{% endschema %}

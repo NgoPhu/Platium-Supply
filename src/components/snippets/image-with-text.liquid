@@ -1,0 +1,55 @@
+{%- liquid
+  assign container_class = container_class | append: ' container py-8'
+  assign section_class = section_class | append: ' w-full mx-auto'
+  assign class_wrapper = class_wrapper | append: ' flex justify-center items-center gap-8'
+  assign banner_class = banner_class | append: ' block relative w-full overflow-hidden'
+  assign content_class = content_class | append: ' flex flex-col w-full gap-5'
+  assign title_class = title_class | append: ' font-bold font-body text-white'
+  assign cta_link = cta_link
+  assign image = image
+  assign title = title
+  assign description = description
+  assign cta_text = cta_text
+  assign icon = icon
+-%}
+
+<div class="{{ container_class }}">
+  <div class="{{ section_class }}">
+    <div class="{{ class_wrapper }}">
+      {%- if cta_link != blank -%}
+        <a href="{{- cta_link -}}" class="{{ banner_class }}" aria-label="two up banner">
+      {%- else -%}
+        <div class="{{ banner_class }}">
+      {%- endif -%}
+        {% render 'image',
+          image: image,
+          class: 'fit object-cover object-center mx-auto hover:zoom transition',
+          mobile_width: 414
+        %}
+      {%- if cta_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+      {%- if title != blank or description != blank or cta_text != blank -%}
+        <div class="{{ content_class }}">
+          {%- if icon != blank -%}
+            {%- render 'image', image: icon, class: 'w-12 aspect-1' -%}
+          {%- endif -%}
+          {%- if title != blank -%}
+            <h2 class="{{ title_class }}">
+              {%- if cta_link != blank -%}
+                <a href="{{- cta_link -}}" class="hover:text-secondary">{{- title -}}</a>
+              {%- else -%}
+                {{- title -}}
+              {%- endif -%}
+            </h2>
+          {%- endif -%}
+          {%- if description != blank -%}
+            <div class="text-intro-text text-white font-body font-medium [&>p>strong]:text-accent-1 [&>p>strong]:font-semibold">{{- description -}}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

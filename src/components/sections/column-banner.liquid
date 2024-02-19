@@ -1,0 +1,61 @@
+{%- liquid
+  assign class_modify = section.settings.class_modify
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign url = section.settings.url
+  assign class = 'relative w-full overflow-hidden rounded-tr-3xl rounded-bl-3xl aspect-[344/200] lg:rounded-tr-[40px] lg:rounded-bl-[40px] lg:aspect-[1280/360] ' | append: class_modify
+-%}
+
+{%- if image != blank -%}
+  <div style="background-color: {{ section.settings.bg_color }}" class="column-banner">
+    <div class='container pb-8 lg:pb-[72px] {% if page.template_suffix == 'starlight' %}pt-8 lg:pt-[72px]{% endif %}'>
+      {%- render 'hero',
+        class: class,
+        image_class: 'md:!hidden lg:!block hover:zoom transition',
+        image_mobile_class: ' md:!block lg:!hidden hover:zoom transition',
+        image: image,
+        image_mobile: image_mobile,
+        url: url
+      -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Column Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "class_modify",
+      "label": "Class Modify"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F5F5F6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Url"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Column Banner"
+    }
+  ]
+}
+{% endschema %}

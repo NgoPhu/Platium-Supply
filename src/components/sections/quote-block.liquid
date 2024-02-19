@@ -1,0 +1,98 @@
+{%- liquid
+  assign blocks = section.blocks
+  assign content_color = section.settings.content_color
+  assign bg_color = section.settings.bg_color
+-%}
+
+{%- if blocks.size > 0 -%}
+  <div class="py-8 lg:py-20" {%- if bg_color != blank -%} style="background-color: {{- bg_color -}};"{%- endif -%}>
+    <div class="px-6 overflow-hidden lg:container">
+      {%- capture carousel_options -%}
+        {
+          "slidesPerView": "1",
+          "spaceBetween": 24,
+          "scrollbar": {
+            "draggable": true
+          },
+          "breakpoints": {
+            "768": {
+              "slidesPerView": "3",
+              "spaceBetween": 64
+            }
+          }
+        }
+      {%- endcapture -%}
+
+      {%- capture carousel_content -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign image = block.settings.image
+            assign content = block.settings.image
+          -%}
+
+          {%- if image != blank or content != blank -%}
+            <swiper-slide class="flex flex-col items-center justify-center gap-5" {%- if content_color != blank -%} style="color: {{- content_color -}};"{%- endif -%}>
+              {%- render 'image',
+                image: block.settings.image,
+                class: 'w-12 h-12 aspect-1'
+              -%}
+              <div class="text-xl font-bold text-center font-body lg:text-2xl">
+                {{- block.settings.content -}}
+              </div>
+            </swiper-slide>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      {%- render 'carousel-swiper',
+        options: carousel_options,
+        contents: carousel_content,
+        class: 'carousel-swiper-quote'
+      -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Quote Block",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#343F57"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Block"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+<div class="py-2">
+  <div class="container">
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Pagination</h4>
+        {% paginate collections.all.products by 4 %}
+          {%- render 'pagination', pagination: paginate -%}
+        {% endpaginate %}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Breadcrumbs</h4>
+        {%- render 'breadcrumbs' -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Accordion</h4>
+        {%- capture accordion_text -%}
+          <p>Here is space for body copy that answers the question above. There is no character limit and can go as long as needed.</p>
+          <p>Here is more space for body copy, underneath a sub-dividing line within each section.</p>
+        {%- endcapture -%}
+        {%- capture accordion_items -%}
+          {%- assign tab_title = 'Title for a section of dropdown 1' -%}
+          {%- render 'accordion-item',
+            title: tab_title,
+            description: accordion_text
+          -%}
+          {%- assign tab_title = 'Title for a section of dropdown 2' -%}
+          {%- render 'accordion-item',
+            title: tab_title,
+            description: accordion_text
+          -%}
+          {%- assign tab_title = 'Title for a section of dropdown 3' -%}
+          {%- render 'accordion-item',
+            title: tab_title,
+            description: accordion_text
+          -%}
+          {%- assign tab_title = 'Title for a section of dropdown 4' -%}
+          {%- render 'accordion-item',
+            title: tab_title,
+            description: accordion_text
+          -%}
+        {%- endcapture -%}
+        {%- render 'accordion-list', items: accordion_items, class: 'accordion--default' -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Badge & label</h4>
+        <table>
+          <thead>
+            <tr>
+              <th class="border p-4 text-left">Display</th>
+              <th class="border p-4 text-left">Token</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="h1 border p-4">
+                <span class="badge">Badge</span>
+              </td>
+              <td class="border p-4">
+                <span class="rounded-md bg-grey-100 p-2">badge</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

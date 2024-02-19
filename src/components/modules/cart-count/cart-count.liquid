@@ -1,0 +1,41 @@
+{%- liquid
+  assign id_button = id_button | default: 'MiniCart'
+  if cart.item_count < 1
+    assign class_count = 'hidden'
+  else
+    assign class_count = 'flex'
+  endif
+-%}
+
+<button
+  is="cart-count"
+  type="button"
+  class="js-modal-dialog-trigger relative flex items-center lg:gap-3 lg:px-3.5 lg:h-[54px] lg:border lg:rounded-lg [&.active]:lg:bg-success-bg [&.active]:lg:border-secondary {% if cart.item_count > 0 %}cart-count-active border-focus{% endif %}"
+  id="{{- id_button -}}"
+  aria-label="open mini cart"
+>
+  {%- render 'icon' with 'icon-shopping-bag', class: 'w-7 h-7 text-secondary' -%}
+  <div class="hidden lg:flex lg:gap-3 lg:items-center">
+    <div class="">
+      <div class="flex items-center text-xs">
+        <p class="mr-0.5">Cart</p>
+        <cart-count class="{{ class_count }}" id="CartCount">({{ cart.item_count }})</cart-count>
+      </div>
+      <div id="CartTotal" class="text-sm font-bold text-grey-900">{{ cart.total_price | money }}</div>
+    </div>
+    {%- render 'icon' with 'icon-chevron-down-bold', class: 'w-4 h-4 text-secondary' -%}
+  </div>
+  <div class="lg:hidden">
+    <cart-count
+      id="CartCount"
+      class="{{ class_count }} absolute -top-1 -right-1 h-6 px-1 min-w-[24px] items-center justify-center rounded-full bg-primary text-xs font-bold text-white"
+    >
+      {{ cart.item_count }}
+    </cart-count>
+  </div>
+</button>
+
+{%- capture src_url -%}
+  {{- 'module-cart-count.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

@@ -1,0 +1,145 @@
+.mega-menu {
+  @apply fixed top-0 right-0 transition-all duration-300 ease-in-out w-full h-full z-40 pointer-events-none
+    lg:top-[calc(141px_+_var(--header-offset-top))] lg:-z-10 lg:justify-start lg:h-auto
+    [&.active]:pointer-events-auto [&.active]:z-40;
+}
+
+.mega-menu-overlay {
+  @apply fixed top-0 right-0 bottom-0 left-0 w-full h-full z-40 bg-overlay opacity-0 invisible transition-all duration-300 ease-in-out [.active_&]:opacity-100 [.active_&]:visible lg:top-[calc(141px_+_var(--header-offset-top))];
+}
+
+.mega-menu-container {
+  @apply flex justify-end h-full pointer-events-none lg-max:p-0 lg:justify-start lg:pl-[var(--position-left)] lg:max-w-none;
+}
+
+.mega-menu-inner {
+  @apply relative pointer-events-auto z-50 w-full max-w-[320px] h-full max-h-full overflow-hidden bg-white transition-all duration-300 ease-in-out
+    before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-white
+    [.mega-menu.active_&]:lg:transform-none lg:translate-y-6 lg:opacity-0 [.mega-menu.active_&]:lg:opacity-100
+    lg:h-[504px] lg:max-h-[70dvh]
+    lg:px-3 lg:py-1 lg:before:border lg:before:border-grey-300 lg:before:content-['']
+    lg-max:flex lg-max:flex-col [.active_&]:lg-max:right-0 lg-max:-right-full
+    lg-max:overflow-x-hidden lg-max:!overflow-y-auto lg-max:!max-h-[100dvh];
+}
+
+.menu-sub-title {
+  @apply relative z-40 flex justify-between items-center w-full text-sm text-left font-bold text-grey-900 bg-white px-5 transition-all
+    lg:px-3 lg:pt-[15px] lg:pb-4 lg:border-t lg:border-default lg:first:border-t-0
+    lg-max:mb-6 lg-max:last:mb-0;
+
+  &.active-sub {
+    @apply after:w-full after:h-full after:rounded-[10px] after:bg-success-bg
+      lg:border-t-transparent lg:after:content-[''] lg:after:absolute lg:after:z-[-1] lg:after:top-0 lg:after:left-0
+      lg-max:after:content-none;
+
+    & + .menu-sub-panel + .menu-sub-title {
+      @apply border-t-transparent;
+    }
+  }
+
+  &:hover {
+    @apply after:w-full after:h-full after:rounded-[10px] after:bg-success-bg
+      lg:border-t-transparent lg:after:content-[''] lg:after:absolute lg:after:z-[-1] lg:after:top-0 lg:after:left-0
+      lg-max:after:content-none;
+
+    & + .menu-sub-panel + .menu-sub-title,
+    & + .menu-sub-title {
+      @apply border-t-transparent;
+    }
+  }
+
+  &.menu-sub-title-view-all {
+    @apply lg-max:justify-start;
+  }
+}
+
+.menu-sub-panel-title {
+  @apply px-8;
+}
+
+.menu-sub-panel {
+  @apply fixed top-0 -right-full transition-all duration-300 ease-in-out pointer-events-none w-full h-full max-h-full z-50
+    lg:top-[calc(141px_+_var(--header-offset-top))] lg:left-0 lg:right-auto lg:hidden lg:h-[504px] lg:-z-30 [.mega-menu.active_&]:lg:block lg:max-h-[70dvh];
+}
+
+.menu-sub-panel-container {
+  @apply flex justify-end h-full pointer-events-none lg-max:p-0 lg:justify-start lg:pl-[var(--position-left)] lg:max-w-none;
+}
+
+.menu-sub-panel-inner {
+  @apply relative pointer-events-auto transition-all duration-300 ease-in-out overflow-x-hidden overflow-y-auto w-full max-w-[320px] h-full bg-white lg:left-0;
+
+  &.menu-sub-panel-inner-1 {
+    @apply relative overflow-hidden lg:px-3 lg:py-1 after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-white after:z-[-1] after:content-[''] after:border after:border-grey-300 after:!border-l-0
+    lg-max:overflow-x-hidden lg-max:overflow-y-auto lg-max:max-h-[100dvh] lg-max:after:content-none;
+
+    &.scrollbar-custom-wrapper {
+      & .menu-sub-panel-content.scrollbar-custom {
+        @apply lg-max:after:content-none lg:after:absolute lg:after:content-[''] after:top-0 after:right-7 after:w-[1px] after:h-full after:bg-default;
+      }
+    }
+
+    & .menu-sub-title:not(.menu-sub-title-view-all) {
+      @apply !font-normal;
+    }
+  }
+
+  &.menu-sub-panel-inner-2 {
+    @apply relative overflow-hidden lg:px-3 lg:py-1 lg:border lg:!border-l-0 lg:border-grey-300;
+  }
+}
+
+.menu-sub-panel .menu-sub-panel {
+  @apply lg:-z-40;
+}
+
+.menu-sub-panel .menu-sub-panel.active .menu-sub-panel-inner {
+  @apply lg:left-[640px];
+}
+
+.menu-sub-panel.active {
+  @apply lg-max:right-0;
+}
+
+.menu-sub-panel.active .menu-sub-panel-inner-1 {
+  @apply lg:left-80 z-40 opacity-100
+}
+
+.menu-sub-panel-heading {
+  @apply relative py-4 px-5 text-center text-base font-bold text-grey-900 bg-grey-100 lg:hidden;
+}
+
+.menu-sub-panel-back {
+  @apply absolute top-1/2 left-5 -translate-y-1/2;
+}
+
+.menu-sub-panel-content {
+  @apply lg:overflow-hidden opacity-0 [.menu-sub-panel.active_&]:opacity-100 lg-max:py-5;
+}
+
+.scrollbar-custom-wrapper {
+  @apply lg-max:after:content-none lg:after:absolute lg:after:content-[''] after:top-0 after:right-7 after:w-[1px] after:h-full after:bg-default;
+
+  & .scrollbar-custom {
+    @apply lg:w-full lg:h-full lg:overflow-x-hidden lg:overflow-y-scroll lg:pr-3;
+
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      @apply lg:h-full lg:w-1 lg:rounded-t-[10px];
+    }
+
+    &::-webkit-scrollbar-track {
+      @apply lg:bg-grey-100 lg:rounded-t-[10px];
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply lg:bg-grey-400 lg:rounded-[10px];
+    }
+
+    & .scrollbar-custom-inner {
+      @apply lg:pr-3;
+    }
+  }
+}

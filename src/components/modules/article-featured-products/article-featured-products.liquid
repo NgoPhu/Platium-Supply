@@ -1,0 +1,45 @@
+{% liquid
+  assign title = article.metafields.featured_products.title
+  assign mod_products = article.metafields.featured_products.products | split: '|'
+  assign mod_collection = article.metafields.featured_products.collection
+  assign is_show = false
+%}
+
+{%- if mod_products.size > 0 -%}
+  <script>
+    var articleFeaturedProducts = [
+      {%- for product in mod_products -%}
+        {%- assign mod_product = all_products[product] -%}
+        {%- if mod_product != nil -%}
+          {%- render 'product-json', item: mod_product -%}
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
+  </script>
+  {%- assign is_show = true -%}
+{%- elsif collections[mod_collection].products.size > 0 -%}
+  <script>
+    var articleFeaturedProducts = [
+      {%- for mod_product in collections[mod_collection].products -%}
+        {%- if mod_product != nil -%}
+          {%- render 'product-json', item: mod_product -%}
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
+  </script>
+  {%- assign is_show = true -%}
+{%- endif -%}
+
+{%- if is_show -%}
+  <div class="{{ class }}">
+    <article-featured-products title="{{- title -}}"></article-featured-products>
+  </div>
+  {%- unless ignore_script == true -%}
+    {%- capture src_url -%}
+      {{- 'module-article-featured-products.js' | asset_url -}}
+    {%- endcapture -%}
+    {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+  {%- endunless -%}
+{%- endif -%}

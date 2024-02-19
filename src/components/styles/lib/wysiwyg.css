@@ -1,0 +1,281 @@
+@layer base {
+  :root {
+    --heading-color: #343F57;
+    --text-color: #445069;
+  }
+}
+
+@layer components {
+  .wysiwyg-footer-bottom {
+    @apply !text-white text-sm font-sans flex flex-row justify-center md-max:!leading-6 md-max:mt-5;
+
+    & p {
+      @apply relative ml-8 md-max:first:ml-0;
+
+      &::before {
+        @apply content-[''] absolute w-px h-4 bg-primary-hover top-1 -left-4;
+      }
+
+      &:first-child {
+        @apply md-max:before:content-none;
+      }
+    }
+
+    & a {
+      @apply link text-inherit whitespace-nowrap no-underline hover:underline md-max:text-xs md-max:!leading-6;
+    }
+  }
+
+  .wysiwyg--seo-text {
+    & p {
+      @apply inline text-sm font-normal text-grey-600;
+    }
+
+    & span {
+      @apply  pt-1.5 block text-sm font-body font-bold no-underline text-secondary xl:font-semibold
+    }
+  }
+
+  .wysiwyg--image-text {
+    & p {
+      @apply mb-2.5 text-base font-normal text-grey-900 last:mb-0;
+
+      & strong {
+        @apply font-bold text-grey-900;
+      }
+    }
+
+    & a,
+    & span {
+      @apply text-base text-grey-500;
+    }
+
+    & strong {
+      @apply mb-2.5 block;
+    }
+
+    &.read-more p:nth-last-child(-n + 2) {
+      display: inline;
+    }
+
+    &.read-more.is-active p:nth-last-child(-n + 2) {
+      display: block;
+    }
+  }
+
+  .wysiwyg-product {
+    & p {
+      @apply mb-2;
+    }
+
+    & table {
+      @apply w-full;
+    }
+  }
+
+  .wysiwyg--product-description {
+    & .read-more-button {
+      @apply underline;
+    }
+
+    & p {
+      @apply inline;
+    }
+  }
+
+  .wysiwyg--afterpay {
+    & p {
+      @apply relative pl-6 text-sm text-grey-900 before:absolute before:left-2 before:content-['\2022'];
+    }
+  }
+
+  .wysiwyg--banner {
+    & p {
+      @apply text-xl;
+    }
+  }
+
+  .wysiwyg-article {
+    & p {
+      @apply mt-2 text-sm text-grey-600 first:mt-0;
+    }
+
+    & h4 {
+      @apply mt-6 text-base font-bold font-body text-grey-900 first:mt-0 lg:mt-8;
+    }
+
+    & ul {
+      @apply pl-6 text-base list-disc;
+
+      & li {
+        @apply mb-2.5 last:mb-0;
+      }
+    }
+
+    & table {
+      @apply my-6 text-left;
+
+      & thead {
+        & th {
+          @apply pb-2.5 text-base font-bold text-grey-900;
+        }
+      }
+
+      & tbody {
+        & td {
+          &:first-child {
+            @apply pr-1;
+          }
+
+          &:last-child {
+            @apply pl-1;
+          }
+        }
+
+        & p {
+          @apply text-base font-normal text-grey-900;
+        }
+      }
+
+      & p:last-child {
+        @apply mb-0;
+      }
+    }
+  }
+
+  .wysiwyg--image-with-text {
+    @apply text-white;
+
+    & p {
+      @apply text-base font-normal text-white;
+
+      & + p {
+        @apply mt-4;
+      }
+    }
+
+    & > span {
+      @apply text-white underline link;
+    }
+  }
+
+  .wysiwyg--text {
+    & * {
+      @apply !text-base md:!text-lg;
+    }
+
+    & p {
+      @apply mb-2.5 font-normal text-grey-900 last:mb-0;
+    }
+  }
+
+  .wysiwyg--icon-with-text {
+    & p > a {
+      @apply font-medium underline text-secondary hover:text-secondary-hover;
+    }
+  }
+
+  .wysiwyg-cms{
+    & h5{
+      @apply pt-6 pb-2 text-base font-body first:pt-0 lg:text-base lg:pt-8;
+    }
+
+    & h6{
+      @apply pt-2 font-sans text-sm text-grey-600 font-bold
+    }
+
+    & p {
+      @apply font-sans text-sm text-grey-600;
+
+      & + p {
+        @apply mt-2
+      }
+
+      & > a {
+        @apply lowercase text-link-hover
+      }
+    }
+
+    & p + ul {
+      @apply font-bold
+    }
+
+    & ol {
+      @apply pl-6 text-sm list-decimal;
+
+      & li {
+        @apply  last:mb-0
+      }
+    }
+
+    & ul {
+      @apply pl-6 text-base list-disc;
+
+      & li {
+        @apply first:pt-1 last:pb-1;
+        /* mb-2 last:mb-1.5; */
+      }
+    }
+  }
+
+  .wysiwyg-image-with-text {
+    & h1,
+    & h2,
+    & h3 {
+      @apply text-2xl font-bold font-body mb-4 text-[var(--heading-color)] lg:text-3xl;
+    }
+
+    & h4,
+    & h5,
+    & h6 {
+      @apply text-2xl font-bold font-body mb-4 text-[var(--heading-color)];
+    }
+
+    & p {
+      @apply text-intro-text font-sans font-normal mb-4 last:mb-0 text-[var(--text-color)];
+
+      & strong {
+        @apply text-base font-bold text-[var(--heading-color)] lg:text-intro-text;
+      }
+    }
+  }
+
+  .wysiwyg--product-tabs {
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6 {
+      @apply text-base font-bold text-grey-900 font-body;
+
+      & + p {
+        @apply mt-2;
+      }
+
+      & + ul {
+        @apply mt-1.5;
+      }
+    }
+
+    & p {
+      @apply text-sm text-grey-600;
+
+      & + p {
+        @apply mt-2.5;
+      }
+
+      & + h1,
+      & + h2,
+      & + h3,
+      & + h5,
+      & + h6 {
+        @apply mt-[14px];
+      }
+    }
+
+    & ul {
+      @apply list-disc pl-[26px];
+    }
+  }
+}

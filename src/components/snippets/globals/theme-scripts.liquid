@@ -1,0 +1,28 @@
+{%- comment -%}
+  Renders the scripts of the theme
+{%- endcomment -%}
+<script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+<!--
+  {%- if template.name == 'index' -%}
+    <script src="{{- 'template-index.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'product' -%}
+    <script src="{{- 'template-product.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'collection' -%}
+    <script src="{{- 'template-collection.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'search' -%}
+    <script src="{{- 'template-search.js' | asset_url -}}" defer></script>
+  {%- elsif template contains 'customers' -%}
+    <script src="{{- 'template-account.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'article' -%}
+    <script src="{{- 'template-article.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'blog' -%}
+    <script src="{{- 'template-blog.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'cart' -%}
+    <script src="{{- 'template-cart.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'page' -%}
+    <script src="{{- 'template-page.js' | asset_url -}}" defer></script>
+  {%- elsif template.name == 'list-collections' -%}
+    <script src="{{- 'template-collection-list.js' | asset_url -}}" defer></script>
+  {%- endif -%}
+-->

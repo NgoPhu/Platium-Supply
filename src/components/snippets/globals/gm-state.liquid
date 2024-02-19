@@ -1,0 +1,69 @@
+<script type="text/javascript" id="globals-script">
+  var GM_STATE = {
+    cart: {
+      initCart: {%- render 'cart-json' -%},
+      miniEnable: {{- settings.enable_mini_cart -}},
+      noteEnable: {{- settings.cart_notes_enable -}},
+      threholdEnable: {{- settings.cart_threhold_enable | json -}},
+      threholdAmount: {{- settings.cart_threhold_amount | plus: 0 | default: 200 | json -}},
+      threholdTradePricingText: {{- settings.cart_threhold_trade_pricing_text | json -}},
+      threholdTradePricingAmount: {{- settings.cart_threhold_trade_pricing_amount | plus: 0 | default: 200 | json -}},
+      templateName: {{ template.name | json }},
+      ndisFormTitle: {{- settings.ndis_form_title | json -}},
+      ndisFormDescription: {{- settings.ndis_form_description | json -}},
+      ndisLogo: {{- settings.ndis_logo | json -}},
+      enableEstimateShipping: {{- settings.enable_estimate_shipping | json -}}
+    },
+    customer: {
+      logged: {%- if customer -%}true{%- else -%}false{%- endif -%},
+      id: {{ customer.id | default: '' | json }},
+      name: {{ customer.name | json }},
+      ndisEnable: {{ customer.metafields.customer_fields.ndis_type | json }}
+    },
+    shopify: {
+      shop: {{ shop.permanent_domain | split: '.' | first | json }},
+      templateName: {{ template.name | json }},
+      defaultCurrency: {{ settings.currency_code_iso_default | json }},
+      moneyFormat: {{ shop.money_format | json }},
+      defaultImage: {%- if settings.default_image != blank -%}"{{- settings.default_image | image_url: 'master' -}}"{%- else -%}"{{- 'great-success.png' | asset_url -}}"{%- endif -%},
+    },
+    routes: {
+      cart_add_url: '{{ routes.cart_add_url }}',
+      cart_change_url: '{{ routes.cart_change_url }}',
+      cart_update_url: '{{ routes.cart_update_url }}',
+      cart_url: '{{ routes.cart_url }}',
+      predictive_search_url: '{{ routes.predictive_search_url }}'
+    },
+    apis: {
+      storefrontAccessToken: {{ settings.storefront_access_token | json }},
+      graphQlEndpoint: "https://{{ shop.permanent_domain }}/api/2023-01/graphql.json",
+    },
+    apps: {
+      backInStock: {
+        url: {{ settings.klaviyo_bis_url | json }}
+      },
+      klaviyo: {
+        publicKey: {{ settings.klaviyo_public_key | json }}
+      }
+    },
+    integrations: {
+      {%- if settings.searchspring_enable and settings.searchspring_site_id != blank -%}
+      searchSpringConfig: {% render 'searchspring-config' %}
+      {%- endif -%}
+    },
+    customs: {
+      badge: {% render 'get-custom-badge' %}
+    },
+    account: {
+      formPlanManaged: {{ settings.form_ndis_plan_managed | json }},
+      formSelfManaged: {{ settings.form_ndis_self_managed | json }},
+      formAgencyManaged: {{ settings.form_agency_plan_managed | json }}
+    }
+  };
+</script>
+
+{%- capture src_url -%}
+  {{- 'module-global-scripts.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

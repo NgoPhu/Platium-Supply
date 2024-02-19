@@ -1,0 +1,204 @@
+{%- assign blocks = section.blocks -%}
+
+{%- if blocks.size > 0 -%}
+  <div class="hero container pt-4 pb-8 overflow-hidden lg:pt-10 lg:pb-[72px]">
+    <div class="bg-white rounded-bl-3xl rounded-tr-3xl lg:rounded-bl-[40px] lg:rounded-tr-[40px]">
+      {%- capture carousel_contents -%}
+        {%- for block in blocks -%}
+          <div class="w-full carousel-item snap-start shrink-0">
+            <div class="flex flex-col-reverse w-full h-fit lg:h-full lg:flex-row lg:items-center">
+              {%- if block.settings.title != blank -%}
+                <div class="flex flex-col gap-4 lg:gap-2 xl:gap-5 p-6 pb-14 xl:px-14 lg:py-8 xl:py-0 w-full lg:max-w-[493px]">
+                  {%- if block.settings.subtitle != blank -%}
+                    <p class="w-fit px-4 py-[5px] text-base text-secondary font-body font-bold bg-success-bg rounded-tl-xl rounded-br-xl">{{- block.settings.subtitle -}}</p>
+                  {%- endif -%}
+                  <h2 class="text-2xl font-bold font-body text-grey-900 xl:text-3xl">{{- block.settings.title -}}</h2>
+                  {%- if block.settings.description != blank -%}
+                    <div class="text-base text-link">{{- block.settings.description -}}</div>
+                  {%- endif -%}
+                  {%- if block.settings.button_first != blank and block.settings.button_first_url != blank -%}
+                    <div class="flex gap-4">
+                      {%- render 'button',
+                        class: 'button-primary md-max:w-full md-max:w-1/2',
+                        link_text: block.settings.button_first,
+                        link_url: block.settings.button_first_url
+                      -%}
+                      {%- if block.settings.button_second != blank and block.settings.button_second_url != blank -%}
+                        {%- render 'button',
+                          class: 'button-outlined normal-case md-max:w-full md-max:w-1/2',
+                          link_text: block.settings.button_second,
+                          link_url: block.settings.button_second_url
+                        -%}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.image_desktop != blank -%}
+                  {%- render 'hero',
+                    class: "w-full h-full xl:max-w-[787px] relative aspect-[344/210] md-max:max-w-[100%] md-max:before:content-[''] md-max:before:fit md-max:before:w-full md-max:before:block md-max:before:pt-[calc(210/344*100%)] lg:aspect-[787/480] lg:flex-1",
+                    image: block.settings.image_desktop,
+                    image_mobile: block.settings.image_mobile,
+                    use_video: block.settings.use_video,
+                    video_type: block.settings.video_type,
+                    video_url: block.settings.video_url,
+                    video_type_mobile: block.settings.video_type_mobile,
+                    video_url_mobile: block.settings.video_url_mobile,
+                    url: block.settings.image_url,
+                    video_autoplay: true,
+                    play_intersection: true,
+                    image_class: ' hover:zoom transition',
+                    image_mobile_class: ' hover:zoom transition',
+                    banner_class: 'relative block w-full h-full overflow-hidden rounded-tr-3xl lg:rounded-tr-[40px] [&>.video>video]:object-fill'
+                  -%}
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      {%- capture carousel_options -%}
+        {
+          "slidesPerView": "1",
+          "spaceBetween": 16,
+          "pagination": {
+            "clickable": true
+          }
+        }
+      {%- endcapture -%}
+
+      {%- if carousel_contents != blank -%}
+        {%- render 'carousel',
+          class: 'carousel-full carousel-enable carousel-swiper-hero bg-white rounded-tr-[40px] rounded-bl-[40px]',
+          content: carousel_contents,
+          class_custom_button: 'w-6 h-6',
+          class_dots: 'flex items-center justify-center',
+          loop: true,
+          autoplay: 6000,
+          class_buttons: '!hidden',
+          class_carousel: 'carousel-hero'
+        -%}
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero",
+  "class": "bg-grey-100",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Save 20%"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Hand Protection for all environments"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "button_first",
+          "label": "Button First",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_first_url",
+          "label": "Button First Url"
+        },
+        {
+          "type": "text",
+          "id": "button_second",
+          "label": "Button Second",
+          "default": "Buy in Bulk"
+        },
+        {
+          "type": "url",
+          "id": "button_second_url",
+          "label": "Button Second Url"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "Image desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image mobile"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "Image Url"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_video",
+          "label": "Use background video",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "video_type",
+          "label": "Video's type desktop",
+          "options": [
+            { "value": "mp4", "label": "MP4" },
+            { "value": "youtube", "label": "Youtube" },
+            { "value": "vimeo", "label": "Vimeo" }
+          ],
+          "default": "mp4"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video's url desktop"
+        },
+        {
+          "type": "select",
+          "id": "video_type_mobile",
+          "label": "Video's type mobile",
+          "options": [
+            { "value": "mp4", "label": "MP4" },
+            { "value": "youtube", "label": "Youtube" },
+            { "value": "vimeo", "label": "Vimeo" }
+          ],
+          "default": "mp4"
+        },
+        {
+          "type": "text",
+          "id": "video_url_mobile",
+          "label": "Video's url mobile"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

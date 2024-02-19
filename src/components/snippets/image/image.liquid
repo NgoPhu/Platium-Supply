@@ -1,0 +1,67 @@
+{%- comment -%}
+  Parameters
+  * class
+  * image
+  * mobile_width - Max display width of image within mobile breakpoint
+  * sm_width - Max display width of image within sm breakpoint
+  * md_width - Max display width of image within md breakpoint
+  * lg_width - Max display width of image within lg breakpoint
+  * max_width - Max display width of image
+  * object_fit
+{%- endcomment -%}
+
+{%- unless image -%}
+  {%- assign image = settings.default_image -%}
+{%- endunless -%}
+
+{% liquid
+  assign loading = loading | default: 'lazy'
+  assign class = class
+  assign object_fit = object_fit | default: 'object-cover'
+  assign image_attributes = image_attributes
+  assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
+  assign image_widths = image_widths | default: '132,155,180,300,360,375,540,640,720,800,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024' | split: ','
+  if object_fit == 'contain'
+    assign object_fit_class = 'object-contain'
+  else
+    assign object_fit_class = 'object-cover'
+  endif
+  capture image_widths
+    for width in image_widths
+      assign width_num = width | plus: 0 | round
+      if image.width >= width_num
+        echo width_num
+        echo ','
+      endif
+    endfor
+    echo image.width
+  endcapture
+  assign image_widths = image_widths | strip
+
+  if image_alt == blank
+    assign image_alt = image.alt
+  endif
+%}
+
+{%- if image -%}
+  <img
+    class="{% if loading == 'lazy' %}lazyload{% endif %} {{ class }} {{ object_fit_class }}"
+    {% if loading == 'lazy' %}
+      src="{{ image | image_url: width: 50 }}"
+      data-sizes="auto"
+      data-widths="[{{ image_widths }}]"
+      data-src="{{ img_url }}"
+      loading="lazy"
+    {% else %}
+      src="{{ image | image_url }}"
+    {% endif %}
+    alt="{{ image_alt }}"
+    width="{{- image.width -}}"
+    height="{{- image.height -}}"
+    {{ image_attributes }}
+  >
+{%- else -%}
+  <div class="{{ class }}">
+    <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-[#f0f0f0] to-[#9b9b9b]"></span>
+  </div>
+{%- endif -%}

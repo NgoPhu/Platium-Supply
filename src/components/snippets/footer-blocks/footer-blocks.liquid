@@ -1,0 +1,28 @@
+{%- liquid
+  assign menu_footer = menu_footer | default: nil 
+-%}
+
+<div class="block md:hidden footer-blocks{% if class %} {{ class }}{% endif %}">
+  {%- capture accordion_items -%}
+    {%- for link in menu_footer -%}
+      {%- assign tab_title = link.title -%}
+      {%- capture accordion_text -%}
+        {%- for child_link in link.links -%}
+          <div class="mb-2 last:mb-0">
+            <a href="{{- child_link.url -}}" class="font-sans text-sm text-white hover:underline hover:text-link-hover" title="{{- child_link.title -}}" target="_self" rel="noopener">
+              {{- child_link.title -}}
+            </a>
+          </div>
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- render 'accordion-item',
+        title: tab_title,
+        description: accordion_text,
+        class: 'border-b border-primary-hover accortion-item-footer',
+        title_class: 'text-base text-white font-bold font-body',
+        enable_wysiwyg: false
+      -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- render 'accordion-list', items: accordion_items, class: 'accordion--default' -%}
+</div>

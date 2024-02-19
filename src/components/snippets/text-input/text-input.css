@@ -1,0 +1,112 @@
+@layer base {
+  :root {
+    --height-input: 48px;
+  }
+}
+
+@layer components {
+  .input {
+    @apply relative block w-full rounded-[100px] border border-default px-5 pb-0.5 pt-5 text-sm text-grey-900 placeholder-transparent transition-[border] duration-300 ease-in-out
+      focus:border-focus focus:!shadow-0 focus:invalid:border-focus
+      disabled:border-default disabled:bg-grey-100 disabled:text-grey-500
+      [&.is-invalid]:!border-error;
+  }
+
+  .input-label {
+    @apply pointer-events-none absolute top-1.5 left-5 w-[calc(100%-2rem)] bg-transparent text-xs text-grey-500 transition-all duration-300 ease-in-out
+      peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm
+      after:content-[''] after:absolute after:-top-2 after:left-0 after:h-2 after:w-full after:bg-transparent peer-focus:after:-top-[7px]
+      peer-focus:top-1.5
+      peer-focus:w-[calc(100%-2.5rem)]
+      peer-focus:text-xs
+      peer-disabled:bg-grey-100 peer-disabled:after:bg-grey-100 [.is-invalid~&]:!text-error-content;
+  }
+
+  textarea.input {
+    @apply rounded-[10px] resize-none;
+  }
+
+  .input[type='date'] {
+    @apply uppercase;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-date-and-time-value {
+      text-align: left;
+    }
+  }
+
+  .input__icon-wrapper {
+    @apply absolute top-[50%] right-2 z-[2] lg:right-2;
+  }
+
+  .input-error {
+    @apply relative pt-1.5 text-xs text-error-content;
+  }
+
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea {
+    @apply focus:shadow-none;
+  }
+
+  input[type='range'] {
+    &::-webkit-slider-thumb {
+      pointer-events: all;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      pointer-events: all;
+      cursor: pointer;
+    }
+  }
+  [type="search"]::-webkit-search-cancel-button,
+  [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .is-show-password {
+    @apply before:absolute before:top-[9px] before:left-0 before:h-0.5 before:w-5 before:rotate-[145deg] before:bg-primary-hover;
+  }
+
+  .input-newsletter-footer {
+    @apply h-[54px] pt-[18px] pb-1.5 pl-6 pr-[148px] [&.is-invalid]:focus:!border-error;
+
+    &:placeholder-shown + .input-label {
+      @apply !top-3.5;
+    }
+
+    & + .input-label {
+      @apply !top-2 !left-6;
+    }
+
+    &:focus {
+      @apply !border-white;
+
+      & + .input-label {
+        @apply !top-2;
+      }
+    }
+  }
+
+  .input[type="phone"] {
+    @apply !ring-0 !shadow-none !outline-none;
+  }
+}

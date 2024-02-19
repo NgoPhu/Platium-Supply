@@ -1,0 +1,31 @@
+{%- liquid
+  assign class = class | default: null
+  assign input = input | default: null
+  assign id = id | default: null
+  assign name = name | default: null
+  assign value = value | default: null
+  assign label = label | default: null
+  assign checked = checked | default: false
+  assign disabled = disabled | default: false
+-%}
+
+<div class="radio-input flex items-center {{ class }}">
+  {% if input %}
+    {{ input }}
+  {% else %}
+    <input
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      type="radio"
+      class="radio-input__input"
+      {% if checked %}
+        checked
+      {% endif %}
+      {% if disabled %}
+        disabled
+      {% endif %}
+    >
+  {% endif %}
+  <label for="{{ id }}" class="radio-input__label">{{ label }}</label>
+</div>

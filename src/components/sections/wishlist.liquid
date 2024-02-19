@@ -1,0 +1,18 @@
+{%- render 'breadcrumbs' -%}
+{% render 'wishlist-translate' %}
+
+<script>
+  var wishlistPageTranslate = {
+    shareWishlist: {{ 'wishlist.share_wishlist' | t | json }},
+    emptyList: {{ 'wishlist.empty_list' | t | json }}
+  }
+</script>
+
+<section class="bg-grey-100">
+  <wishlist-page></wishlist-page>
+</section>
+
+{%- capture src_url -%}
+  {{- 'module-wishlist-page.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

@@ -1,0 +1,6 @@
+{% if settings.google_maps_key != blank %}
+  {% if template == 'index' or template == 'cart' or template contains 'product' %}
+    {% capture google_map_url %}//maps.googleapis.com/maps/api/js?key={{ settings.google_maps_key }}&libraries=places{% endcapture %}
+    {{ google_map_url | script_tag }}
+  {% endif %}
+{% endif %}

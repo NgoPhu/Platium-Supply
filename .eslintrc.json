@@ -1,0 +1,16 @@
+{
+  "parser": "@babel/eslint-parser",
+  "extends": ["prettier", "standard"],
+  "rules": {
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "space-before-function-paren": "off",
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "multiline-ternary": "off"
+  },
+  "settings": {
+    "react": {
+      "pragma": "h"
+    }
+  }
+}

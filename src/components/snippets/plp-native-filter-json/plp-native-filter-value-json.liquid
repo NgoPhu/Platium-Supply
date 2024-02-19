@@ -1,0 +1,11 @@
+{%- assign item = item -%}
+{%- if item != blank and item.value != blank -%}
+  {
+    "active": {{ item.active | default: false }},
+    "count": {{ item.count | default: 0 }},
+    "label": {{ item.label | json }},
+    "value": {{ item.value | json }}
+  }
+{%- else -%}
+  null
+{%- endif -%}

@@ -1,0 +1,51 @@
+.cf-react-target {
+  .cf-field-container {
+    @apply mb-4;
+
+    .cf-field {
+      @apply p-0 my-0 relative !border-0;
+
+      &[data-cf-invalid=true] {
+        @apply bg-transparent border-none rounded-none;
+
+        input,
+        select {
+          @apply !border-error !shadow-none ring-0;
+        }
+
+        label {
+          @apply !text-error-content;
+        }
+      }
+
+      label {
+        @apply z-[1] pointer-events-none absolute top-1.5 left-5 w-[calc(100%-2rem)] bg-transparent text-xs text-grey-500 transition-all duration-300 ease-in-out;
+      }
+
+      input {
+        @apply relative block w-full rounded-[100px] border border-default px-5 pb-0.5 pt-5 text-sm text-grey-900 placeholder-transparent transition-[border] duration-300 ease-in-out
+          focus:border-focus focus:!shadow-0 focus:invalid:border-focus
+          disabled:border-default disabled:bg-grey-100 disabled:text-grey-500;
+      }
+
+      &:has(input:focus) label {
+        @apply !top-1.5 !w-[calc(100%-2.5rem)] !text-xs;
+      }
+
+      &:has(input:placeholder-shown) label {
+        @apply top-3 text-sm;
+      }
+    }
+  }
+
+  .cf-form-actions {
+    @apply !mt-2;
+
+    button {
+      @apply w-full relative inline-block min-h-[48px] overflow-hidden rounded-[50px] border-2 border-solid border-transparent
+        px-[22px] py-2.5 text-center font-bold font-body text-white capitalize transition-colors duration-300 ease-in-out
+        disabled:pointer-events-none disabled:bg-grey-300 disabled:text-grey-400
+        bg-primary hover:bg-primary-hover !mb-0;
+    }
+  }
+}

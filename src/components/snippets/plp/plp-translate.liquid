@@ -1,0 +1,30 @@
+{%- capture search_title -%}
+  {%- if search.terms -%}
+    {{ 'search.search_for_page' | t: terms: search.terms | json }}
+  {%- else -%}
+    {{ 'search.title' | t | json }}
+  {%- endif -%}
+{%- endcapture -%}
+
+<script type="text/javascript">
+  var plpState = {
+    translates: {
+      inCartLabel: {{ 'collection.general.in_cart_label' | t | json }},
+      apllyFilter: {{ 'collection.filter.apply_filter' | t | json }},
+      filters: {{ 'collection.filter.filters' | t | json }},
+      clearSelections: {{ 'collection.filter.clear_selections' | t | json }},
+      noOptionFilter: {{ 'collection.filter.no_option_filter' | t | json }},
+      noProducts: {{ 'collection.filter.no_product' | t | json }},
+      noResults: {{ 'search.no_results' | t | json }},
+      previousPagination: {{ 'collection.pagination.previous' | t | json }},
+      nextPagination: {{ 'collection.pagination.next' | t | json }},
+      showItems: {{ 'collection.pagination.show_item' | t | json }},
+      loadMore: {{ 'collection.pagination.load_more' | t | json }},
+      selectOption: {{ 'collection.general.select_options' | t | json }},
+      selectSize: {{ 'collection.product.select_size' | t | json }},
+      soldOut: {{ 'collection.product.sold_out' | t | json }},
+    },
+    title: {{ collection.title | json }},
+    searchTitle: {{ search_title }}
+  }
+</script>

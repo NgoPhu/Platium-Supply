@@ -1,0 +1,30 @@
+{
+  "name": "Social media",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Social media options"
+    },
+    {
+      "type": "checkbox",
+      "id": "social_enable",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_facebook_link",
+      "label": "Facebook"
+    },
+    {
+      "type": "text",
+      "id": "social_linkedin_link",
+      "label": "Linkedin"
+    },
+    {
+      "type": "text",
+      "id": "social_instagram_link",
+      "label": "Instagram"
+    }
+  ]
+}

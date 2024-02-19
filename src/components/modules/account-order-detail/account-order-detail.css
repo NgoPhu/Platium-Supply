@@ -1,0 +1,10 @@
+@media print {
+  site-header,
+  account-sidebar,
+  footer,
+  newsletter-form,
+  .topbar,
+  .footer-bottom {
+    @apply !hidden;
+  }
+}

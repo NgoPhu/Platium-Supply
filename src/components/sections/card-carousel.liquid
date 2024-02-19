@@ -1,0 +1,92 @@
+{%- capture carousel_contents -%}
+  {% for block in section.blocks %}
+    {%- render 'card',
+      class: 'carousel-item snap-start shrink-0 flex flex-col w-full text-center items-center pt-6 md:w-1/2 md:px-4 lg:w-1/4 lg:pt-0',
+      image_wrapper_class: 'relative aspect-[1/1] w-[108px] my-0 mx-auto',
+      image: block.settings.image,
+      image_class: 'fit object-cover',
+      title: block.settings.title,
+      title_class: 'mt-2 text-xl font-bold text-grey-900',
+      description: block.settings.description,
+      description_class: 'mt-0.5 font-normal mb-auto'
+    -%}
+  {% endfor %}
+{%- endcapture -%}
+
+{%- if carousel_contents != blank -%}
+  <div class="card-carousel border-t border-solid border-default p-12 md:py-8 lg:px-0 lg:py-12 lg:py-16">
+    <div class="lg:container">
+      {%- if section.settings.title != blank -%}
+        <h3 class="text-center text-3xl font-bold text-grey-900 lg:text-4xl">{{- section.settings.title -}}</h3>
+      {%- endif -%}
+      {%- render 'carousel',
+        class_wrap: 'max-w-[1140px] mx-auto 3xl:max-w-none',
+        class: 'md:flex-wrap carousel-mobile',
+        content: carousel_contents,
+        class_buttons: '-bottom-12 -translate-x-1/2 top-auto right-auto left-[50%] border-none md:hidden',
+        class_main: 'pt-0 md:-mx-4 lg:pt-8',
+        class_icon: 'w-4 h-4 text-black',
+        custom_dots: true,
+        class_custom_dots: 'mt-6 md:hidden'
+      -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Why Convert Digital",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Convert Digital",
+      "category": "Carousel",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

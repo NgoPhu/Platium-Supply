@@ -1,0 +1,64 @@
+{% liquid
+  assign blocks = section.blocks
+  assign copyright = section.settings.copyright
+  assign copyright_url = section.settings.copyright_url
+  assign text_link = section.settings.text_link
+%}
+
+<div class="footer-bottom bg-primary md:border-t md:border-primary-hover">
+  <div class="container">
+    <div class="flex flex-col-reverse items-center justify-center gap-5 pt-5 pb-8 md-max:border-t md-max:border-primary-hover md:py-12">
+      {%- if copyright != blank or text_link != blank -%}
+        <div class="flex flex-col mx-auto text-center md:w-auto md:mt-0 md:mx-0 md:flex-row">
+          {%- if copyright_url != blank -%}
+            <a class="copyright_urllink text-white font-sans underline md-max:text-xs md-max:!leading-6">{{- copyright -}}</a>
+          {%- else -%}
+            <p class="text-sm text-white font-sans underline md-max:text-xs md-max:!leading-6">{{- copyright -}}</p>
+          {%- endif -%}
+          <div class="wysiwyg-footer-bottom">{{- text_link -}}</div>
+        </div>
+      {%- endif -%}
+      {%- render 'payment', blocks: blocks -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Footer bottom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright"
+    },
+    {
+      "type": "url",
+      "id": "copyright_url",
+      "label": "Copyright URL"
+    },
+    {
+      "type": "richtext",
+      "id": "text_link",
+      "label": "Text Link"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Payment method",
+      "type": "payment_method",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "icon_link",
+          "label": "Icon link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

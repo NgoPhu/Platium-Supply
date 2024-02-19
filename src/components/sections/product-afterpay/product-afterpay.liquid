@@ -1,0 +1,100 @@
+{%- liquid
+  assign blocks = section.blocks
+  assign slideout_button = 'product.general.info' | t
+  assign slideout_heading = 'product.general.bnpl' | t
+-%}
+
+{%- capture content -%}
+  {%- for block in blocks -%}
+    <div class="py-5 md:py-6 border-b border-default [&:last-child]:border-none [&:last-child]:pb-0">
+      {%- if block.settings.cta_link != blank -%}
+        <a href="{{ block.settings.cta_link }}" class="inline-block">
+      {%- endif -%}
+        <img class="max-w-[91px] max-h-8" src="{{ block.settings.image | image_url: 'master' }}" width="{{ block.settings.image_width }}" height="{{ block.settings.image_height }}" loading="lazy" alt={{ block.settings.image.alt }} />
+      {%- if block.settings.cta_link != blank -%}
+        </a>
+      {%- endif -%}
+      {%- if block.settings.description != blank -%}
+        <div class="wysiwyg--afterpay pt-4">
+          {{ block.settings.description }}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if settings.product_afterpay_enable -%}
+  <div class="flex flex-row items-center">
+    {%- render 'slideout',
+      id: 'afterpay-slideout',
+      class: 'w-[340px] md:w-[368px]',
+      title: slideout_heading,
+      title_class: 'text-xl text-grey-900 font-bold text-center'
+      close_button_class: 'absolute top-[25px] right-6 z-10'
+      icon_close_class: 'w-4 h-4 text-grey-900',
+      content: content,
+      content_class: 'px-4 md:px-6'
+    -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Afterpay",
+  "settings": [
+    {
+      "type": "text",
+      "id": "available_icon",
+      "label": "Available Icon"
+    },
+    {
+      "type": "text",
+      "id": "available_message",
+      "label": "Available Message"
+    },
+    {
+      "type": "text",
+      "id": "afterpay_icon",
+      "label": "Afterpay Icon"
+    },
+    {
+      "type": "text",
+      "id": "afterpay_message",
+      "label": "Afterpay Message"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"block",
+      "name":"Block",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "number",
+          "id": "image_width",
+          "label": "Image Width"
+        },
+        {
+          "type": "number",
+          "id": "image_height",
+          "label": "Image Height"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

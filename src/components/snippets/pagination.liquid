@@ -1,0 +1,33 @@
+{%- liquid
+  assign pagination = pagination
+  assign class = class | default: 'my-8 lg:mt-14' | prepend: 'flex items-center justify-center '
+  assign part_active_class = part_active_class | prepend: "flex flex-col justify-center items-center flex-wrap w-10 h-10 rounded-full relative text-sm mx-1 text-white font-bold bg-secondary pointer-events-none"
+  assign part_class = part_class | prepend: 'flex flex-col justify-center items-center flex-wrap w-10 h-10 rounded-full text-sm mx-1 text-grey-900 font-bold bg-grey-300 hover:text-white hover:bg-secondary'
+  assign class_pagination_next = class_pagination_next | default: ' w-4 h-4 text-secondary'
+  assign class_pagination_previous = class_pagination_previous | default: ' w-4 h-4 text-secondary rotate-180'
+-%}
+{%- if pagination.pages > 1 -%}
+  <nav class="{{ class }}" role="navigation">
+    {%- if pagination.previous -%}
+      <a href="{{ pagination.previous.url }}" class="p-3 mr-1 rounded-full bg-grey-300">
+        {%- render 'icon' with 'icon-chevron-forward-outline', class: class_pagination_previous -%}
+      </a>
+    {%- endif -%}
+
+    {%- for part in pagination.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}" class="{{ part_class }}">{{ part.title }}</a>
+      {%- elsif part.is_link == false and part.title == '&hellip;' -%}
+        <span class="{{ part_class }}">{{ part.title }}</span>
+      {%- else -%}
+        <span class="{{ part_active_class }}">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if pagination.next -%}
+      <a href="{{ pagination.next.url }}" class="p-3 ml-1 rounded-full bg-grey-300">
+        {%- render 'icon' with 'icon-chevron-forward-outline', class: class_pagination_next -%}
+      </a>
+    {%- endif -%}
+  </nav>
+{%- endif -%}

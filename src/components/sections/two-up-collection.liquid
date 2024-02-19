@@ -1,0 +1,136 @@
+{% liquid
+  assign container_class = "flex flex-col md:flex-row justify-center items-center"
+  assign content_alignment_class = "md:ml-6 xl:ml-24 xl:mr-auto"
+  if section.settings.is_reversed
+    assign container_class = container_class | replace: 'md:flex-row', 'md:flex-row-reverse'
+    assign content_alignment_class = "md:mr-6 xl:ml-auto xl:mr-24"
+  endif
+  if section.settings.image == blank and section.settings.image_mobile == blank
+    assign content_alignment_class = "mx-auto"
+  endif
+  assign banner_class = "fit object-center mx-auto md:rounded-2xl hover:zoom transition"
+  assign desktop_banner_class = banner_class
+  assign mobile_banner_class = banner_class
+  assign desktop_banner_class = banner_class | append: ' hidden lg:block'
+  assign mobile_banner_class = banner_class | append: ' block lg:hidden'
+  assign image_banner_class = "block relative w-full md:w-[calc(396/720*100%)] lg:w-[calc(848/1376*100%)] aspect-[376/310] md:aspect-[396/380] lg:aspect-[576/560] xl:aspect-[848/730] overflow-hidden md:rounded-2xl"
+  if section.settings.small_image == blank and section.settings.title == blank and section.settings.description == blank and section.settings.cta_text == blank
+    assign image_banner_class = image_banner_class | append: ' mx-auto'
+  endif
+%}
+
+<div class="two-up-collection pb-6 md:py-8 lg:py-12 md:border-t md:border-default">
+  <div class="md:px-6 xl:px-8 {{ container_class }}">
+    {%- if section.settings.cta_link != blank -%}
+      <a href="{{- section.settings.cta_link -}}" class="{{ image_banner_class }}" aria-label="two up collection">
+    {%- else -%}
+      <div class="{{ image_banner_class }}">
+    {%- endif -%}
+    {% render 'image',
+      image: section.settings.image,
+      class: desktop_banner_class
+    %}
+    {% render 'image',
+      image: section.settings.image_mobile,
+      class: mobile_banner_class
+    %}
+    {%- if section.settings.cta_link != blank -%}
+      </a>
+    {%- else -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.title != blank or section.settings.description != blank or section.settings.cta_text != blank -%}
+      <div class="flex flex-col items-center w-full md:max-w-[300px] lg:max-w-[376px] md:w-auto text-center pt-4 md:pt-0 px-4 md:px-0 {{ content_alignment_class }}">
+        {%- if section.settings.small_image != blank -%}
+          {%- if section.settings.cta_link != blank -%}
+            <a href="{{- section.settings.cta_link -}}" class="block relative overflow-hidden md:rounded-2xl aspect-[1/1] w-[124px] md:w-[164px]" aria-label="{{- section.settings.title -}}">
+          {%- endif -%}
+            {% render 'image',
+              image: section.settings.small_image,
+              class: 'fit object-center mx-auto rounded-2xl hover:zoom transition'
+            %}
+          {%- if section.settings.cta_link != blank -%}
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="h3 lg:h2 mt-4">{{- section.settings.title -}}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="mt-2 lg:text-xl">{{- section.settings.description -}}</div>
+        {%- endif -%}
+        {%- if section.settings.cta_text != blank -%}
+          {%- render 'button',
+            class: 'button-outlined w-full md:w-auto mt-6 rounded',
+            link_text: section.settings.cta_text,
+            link_url: section.settings.cta_link
+          -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Two up Collection",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "is_reversed",
+      "label": "Reverse two up",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Two up Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Two up Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "small_image",
+      "label": "Small Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Banner",
+      "name": "Two up Collection"
+    }
+  ]
+}
+{% endschema %}

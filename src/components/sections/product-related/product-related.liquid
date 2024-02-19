@@ -1,0 +1,61 @@
+{% liquid
+  assign product_sku = ''
+
+  if template.name == 'product'
+    assign product_sku = product.selected_or_first_available_variant.sku
+  endif
+
+  assign heading = section.settings.title | default: 'Products Related'
+  assign profile = section.settings.profile | default: 'api-test'
+%}
+{%- unless template contains 'gift-card' or product.gift_card? -%}
+  <product-related
+    borders="{{- section.settings.has_border_bottom -}}"
+    disabled="{{ section.settings.disable_carousel_mobile }}"
+    heading="{{- heading -}}"
+    profile="{{- profile -}}"
+    sku="{{- product_sku -}}"
+  ></product-related>
+{%- endunless -%}
+
+{%- capture src_url -%}
+  {{- 'section-product-related.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+
+{% schema %}
+{
+  "name": "Product Recommended",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "profile",
+      "label": "Profile(Tag)"
+    },
+    {
+      "type": "checkbox",
+      "id": "has_border_bottom",
+      "label": "Has Border Bottom",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_carousel_mobile",
+      "label": "Disable carousel mobile",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products Recommended",
+      "category": "Carousel"
+    }
+  ]
+}
+{% endschema %}

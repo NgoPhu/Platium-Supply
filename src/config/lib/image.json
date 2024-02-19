@@ -1,0 +1,10 @@
+{
+  "name": "Default Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "default_image",
+      "label": "Image"
+    }
+  ]
+}

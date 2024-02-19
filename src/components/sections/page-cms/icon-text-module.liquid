@@ -1,0 +1,60 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="py-8 lg:py-[72px]" style="--text-color: {{ section.settings.text_color }}; background-color: {{ section.settings.bg_color }}">
+    <div class="container">
+      <div class="flex flex-col flex-wrap justify-center gap-8 md:flex-row lg:gap-12">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.icon != blank and block.settings.title != blank -%}
+            <div class="w-full md:w-[calc(50%-16px)] lg:w-[calc(25%-36px)] flex flex-col items-center justify-start text-center card-hover">
+              {%- render 'image', image: block.settings.icon, class: 'w-20 h-20 lg:w-[124px] lg:h-[124px]' -%}
+              <p class="mt-6 text-base font-sans font-semibold text-[var(--text-color)] md-max:max-w-[344px] lg:mt-12">{{- block.settings.title -}}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Icon Text Module",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ECECEF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#3D1466"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Image Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon Text Module"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+{%- render 'styleguide-colour' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Colours",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Colours"
+    }
+  ]
+}
+{% endschema %}

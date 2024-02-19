@@ -1,0 +1,16 @@
+{
+  "name": "Localization",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Currency",
+      "info": "This is Currency Code (from ISO 4217)"
+    },
+    {
+      "type": "text",
+      "id": "currency_code_iso_default",
+      "label": "Currency Code Default",
+      "default": "AUD"
+    }
+  ]
+}

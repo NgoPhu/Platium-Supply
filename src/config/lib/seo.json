@@ -1,0 +1,15 @@
+{
+  "name": "SEO config",
+  "settings": [
+    {
+      "type":"header",
+      "content": "Google Tags Manager"
+    },
+    {
+      "type": "text",
+      "id": "gtm_id",
+      "label": "Google Tags Manager ID",
+      "placeholder": "GTM-xxxxxxx"
+    }
+  ]
+}

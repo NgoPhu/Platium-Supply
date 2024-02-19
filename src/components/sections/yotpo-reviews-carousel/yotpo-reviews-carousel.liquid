@@ -1,0 +1,57 @@
+{% liquid
+  if template.name == 'index'
+    render 'yotpo-reviews-carousel-snippet'
+  endif
+  assign title = section.settings.title
+  assign number_reviews = section.settings.number_reviews
+%}
+
+{{- 'section-yotpo-reviews-carousel.css' | asset_url | stylesheet_tag -}}
+
+<div
+  class="yotpo yotpo-reviews-carousel"
+  data-header-customisation-enabled="1"
+  data-header-customisation-text="{{ title }}"
+  data-background-color="transparent"
+  data-mode="most_recent"
+  data-type="product"
+  data-count="{{ number_reviews }}"
+  data-show-bottomline="1"
+  data-show-navigation="1"
+></div>
+
+{% schema %}
+{
+  "name": "Yotpo Reviews Carousel",
+  "class": "shopify-section--reviews-carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Latest reviews"
+    },
+    {
+      "type": "range",
+      "id": "number_reviews",
+      "label": "Number of Reviews",
+      "min": 4,
+      "max": 9,
+      "step": 1,
+      "default": 9
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yotpo Reviews Carousel",
+      "category": "Carousel"
+    }
+  ]
+}
+{% endschema %}
+
+{%- capture src_url -%}
+  {{- 'section-yotpo-reviews-carousel.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

@@ -1,0 +1,37 @@
+{%- liquid
+  assign settings = settings
+  assign blocks = blocks
+  assign main_menu = settings.menu.links | default: 'main-menu'
+  assign menu_second = settings.menu_second.links | default: nil
+-%}
+
+{%- capture menu_blocks -%}
+  {%- for block in blocks -%}
+    ,{
+      "title": "{{ block.settings.title }}",
+      "menu": {% render 'mega-menu-json', menu: block.settings.menu_item.links, level: 1 %}
+    }
+  {%- endfor -%}
+{%- endcapture -%}
+
+<script>
+  const menuData = {
+    mainMenu: {
+      title: 'Mega Menu',
+      children: {% render 'mega-menu-json', menu: main_menu %}
+    },
+    secondMenu: {% render 'mega-menu-json', menu: menu_second %},
+    blocks: [{{ menu_blocks | remove_first: ',' }}],
+    settings: {
+      {% if settings.cta_text != blank %}ctaText: {{ settings.cta_text | json }},{% endif %}
+      {% if settings.cta_link != blank %}ctaLink: {{ settings.cta_link | json }},{% endif %}
+      hideLevel1: false,
+      type: {
+        level0: 'panel',
+        level1: 'panel',
+        level2: 'panel',
+        level3: 'panel'
+      }
+    }
+  }
+</script>

@@ -1,0 +1,31 @@
+{%- liquid
+  assign enable = section.settings.topbar_enable
+  assign blocks = section.blocks
+  assign message_class = message_class | append: ' whitespace-nowrap text-xs font-bold flex-items-center text-text-xs h-fit text-white'
+  assign icon_class = 'inline-block relative w-[18px] aspect-[1/1] mr-2'
+-%}
+
+{%- if enable and blocks.size > 0 -%}
+  {%- assign max_blocks = 10 | at_least: blocks.size -%}
+  <div class="relative py-2 lg:py-3 {{ class_background }}">
+    <div class="relative mx-auto flex overflow-hidden">
+      {%- for i in (1..3) -%}
+        <div class="animation-translate relative flex">
+          {%- for i in (1..max_blocks) -%}
+            {%- assign mod_index = i | modulo: blocks.size -%}
+            {%- if blocks[mod_index].settings.message != blank -%}
+              <p class="{{ message_class }}">
+                {%- if blocks[mod_index].settings.icon != null -%}
+                  <span class="{{ icon_class }}">
+                    {%- render 'image', image: blocks[mod_index].settings.icon, class: 'fit', alt: 'Topbar icon', loading: 'eager' -%}
+                  </span>
+                {%- endif -%}
+                {{- blocks[mod_index].settings.message | upcase -}}
+              </p>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

@@ -1,0 +1,135 @@
+<div class="py-2">
+  <div class="container">
+    <h5 class="mb-2">Carousel Fullwidth</h5>
+  </div>
+  {%- capture carousel_contents_1 -%}
+      {% for index in (1..10) %}
+        <div class="carousel-item snap-start bg-primary shrink-0 w-full odd:bg-primary-hover">
+          <div class="relative w-full">
+            <div class="w-full flex justify-center items-center h-48 text-white">
+              Slide {{ index }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {%- endcapture -%}
+
+  {%- render 'carousel', class: 'carousel-full carousel-enable', content: carousel_contents_1 -%}
+
+  <div class="container">
+    <h5 class="mb-2 mt-6">Carousel Grid</h5>
+  </div>
+
+  {%- capture carousel_contents_2 -%}
+      {% for index in (1..10) %}
+        <div class="carousel-item snap-start bg-primary shrink-0 w-1/2 odd:bg-primary-hover">
+          <div class="relative w-full border-x border-solid border-default">
+            <div class="w-full flex justify-center items-center h-48 text-white">
+              Slide {{ index }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {%- endcapture -%}
+
+  <div class="container">
+    {%- render 'carousel', class: 'carousel-enable', class_wrap: 'relative', class_inner: '', has_container: true, content: carousel_contents_2 -%}
+  </div>
+
+  <div class="container">
+    <h5 class="mb-2 mt-6">Carousel Hide dots</h5>
+  </div>
+
+  {%- capture carousel_contents_3 -%}
+      {% for index in (1..10) %}
+        <div class="carousel-item snap-start bg-primary shrink-0 w-full odd:bg-primary-hover">
+          <div class="relative w-full">
+            <div class="w-full flex justify-center items-center h-48 text-white">
+              Slide {{ index }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {%- endcapture -%}
+
+  <div class="container">
+    {%- render 'carousel', class_wrap: '', class_main: '', class_inner: '', class: 'carousel-enable', class_dots: 'hidden', content: carousel_contents_3 -%}
+  </div>
+
+  <div class="container">
+    <h5 class="mb-2 mt-6">Carousel Disabled</h5>
+  </div>
+  {%- capture carousel_contents_4 -%}
+      {% for index in (1..4) %}
+        <div class="carousel-item snap-start bg-primary shrink-0 w-[250px] md:w-1/4 odd:bg-primary-hover">
+          <div class="relative w-full">
+            <div class="w-full flex justify-center items-center h-48 text-white">
+              Slide {{ index }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {%- endcapture -%}
+
+  <div class="container">
+    {%- render 'carousel', class_wrap: '', class_inner: '', class_main: '', class: 'carousel-enable', content: carousel_contents_4 -%}
+  </div>
+
+  <div class="container">
+    <h5 class="mb-2 mt-6">Carousel Hide naviation</h5>
+  </div>
+  {%- capture carousel_contents_5 -%}
+      {% for index in (1..10) %}
+        <div class="flex carousel-item snap-start bg-primary flex-shrink-0 w-1/2 md:w-1/4 odd:bg-primary-hover">
+          <div class="relative w-full">
+            <div class="w-full flex justify-center items-center h-48 text-white">
+              Slide {{ index }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {%- endcapture -%}
+
+  {%- render 'carousel', class_wrap: '', class_inner: '', class_main: '', class: 'carousel-enable', class_buttons: '!hidden', content: carousel_contents_5 -%}
+
+  <div class="container">
+    <h5 class="mt-6 mb-2">Carousel Swiper</h5>
+  </div>
+  {%- capture carousel_options -%}
+    {
+      "slidesPerView": "2",
+      "spaceBetween": 16,
+      "pagination": {
+        "clickable": true
+      },
+      "scrollbar": {
+        "draggable": true
+      },
+      "breakpoints": {
+        "1024": {
+          "slidesPerView": "4",
+          "spaceBetween": 24
+        }
+      }
+    }
+  {%- endcapture -%}
+  {%- capture carousel_contents -%}
+      {% for index in (1..10) %}
+        <swiper-slide class="flex flex-shrink-0 w-1/2 bg-grey-100 md:w-1/4 odd:bg-grey-100 carousel-item">
+          <div class="relative w-full">
+            <div class="flex items-center justify-center w-full h-48 text-primary">
+              Slide {{ index }}
+            </div>
+          </div>
+        </swiper-slide>
+      {% endfor %}
+    {%- endcapture -%}
+
+  {%- render 'carousel-swiper',
+    options: carousel_options,
+    contents: carousel_contents,
+    include_pagination: true,
+    include_navigation: true,
+    include_scrollbar: true
+  -%}
+</div>

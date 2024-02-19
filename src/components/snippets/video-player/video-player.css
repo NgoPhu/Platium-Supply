@@ -1,0 +1,21 @@
+@layer components {
+  video-player {
+    & iframe,
+    & video {
+      @apply h-full w-full;
+    }
+
+    &.video-cms {
+      video::-webkit-media-controls-enclosure {
+        display: none;
+      }
+    }
+  }
+
+  .video-product-tabs {
+    & iframe,
+    & video {
+      @apply absolute fit h-full w-full object-cover;
+    }
+  }
+}

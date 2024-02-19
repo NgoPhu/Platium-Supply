@@ -1,0 +1,42 @@
+{%- if settings.searchspring_enable and settings.searchspring_site_id != blank -%}
+  {% if cart.item_count > 0 %}
+    <script type="text/javascript">
+      window.addEventListener('load',function () {
+        setTimeout(function () {
+          window.SLS.asyncLoad([
+            {
+              url: '//cdn.searchspring.net/intellisuggest/is.min.js',
+              callback: function () {
+                if (IntelliSuggest) {
+                  try {
+                    var seed = [];
+                    {% for item in cart.items %}
+                      {% if item.product.variants[0].sku != blank %}
+                        seed.push("{{ item.product.variants[0].sku }}");
+                      {% endif %}
+                    {% endfor %}
+                    IntelliSuggest.init({
+                      siteId: window.GM_STATE.integrations.searchSpringConfig.siteId,
+                      context:"Basket",
+                      seed:seed
+                    });
+                    {% for item in cart.items %}
+                    IntelliSuggest.haveItem({
+                      sku:"{{ item.product.variants[0].sku }}",
+                      qty:"{{ item.quantity }}",
+                      price:"{{ item.price | money_without_currency }}"
+                    });
+                    {% endfor %}
+                    IntelliSuggest.inBasket({});
+                  } catch(err) {
+                    console.error('Intellisuggest error, cart snippet', err)
+                  }
+                }
+              }
+            }
+          ]);
+        }, 500);
+      }, { once: true });
+    </script>
+  {% endif %}
+{% endif %}

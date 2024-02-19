@@ -1,0 +1,133 @@
+{%- liquid
+  assign form_class = form_class | prepend: 'relative '
+  assign title_class = 'block text-center h5 lg:h4 mb-4'
+  assign first_name_label = 'customer.register.first_name' | t
+  assign last_name_label = 'customer.register.last_name' | t
+  assign email_label = 'customer.register.email' | t
+  assign password_label = 'customer.register.password' | t
+  assign postal_code_label = 'customer.register.postal_code' | t
+  assign phone_number_label = 'customer.register.phone_number' | t
+  assign gender_label = 'customer.register.gender' | t
+  assign submit_label = 'customer.register.submit' | t
+  assign birthday_label = 'customer.register.birthday' | t
+  assign gender_options = settings.gender_options | split: '|'
+-%}
+<div>
+  <validate-form data-submit-delay>
+    <account-form-custom>
+      {%- form 'create_customer', class: form_class -%}
+        <h1 class="{{ title_class }}">{{- 'customer.register.title' | t -}}</h1>
+        {% comment %}theme-check-disable{% endcomment %}
+        <div class="flex flex-col gap-4">
+          <div class="row flex w-full gap-4">
+            {%- render 'text-input',
+              class: 'w-1/2',
+              id: 'customer_first_name',
+              name: 'customer[first_name]',
+              type: 'text',
+              label: first_name_label,
+              placeholder: first_name_label,
+              show_label: true,
+              required: true
+            -%}
+            {%- render 'text-input',
+              class: 'w-1/2',
+              id: 'customer_last_name',
+              name: 'customer[last_name]',
+              type: 'text',
+              label: last_name_label,
+              placeholder: last_name_label,
+              show_label: true,
+              required: true
+            -%}
+          </div>
+          <div class="row w-full">
+            {%- render 'text-input',
+              name: 'customer[email]',
+              id: 'customer_email',
+              type: 'email',
+              label: email_label,
+              placeholder: email_label,
+              show_label: true,
+              required: true
+            -%}
+          </div>
+          <div class="row w-full">
+            {%- render 'text-input',
+              name: 'customer[password]',
+              id: 'customer_password',
+              type: 'password',
+              label: password_label,
+              placeholder: password_label,
+              show_label: true,
+              required: true
+            -%}
+          </div>
+          <div class="row w-full">
+            {%- render 'text-input',
+              name: 'customer[default_address][zip]',
+              id: 'customer_zip',
+              type: 'text',
+              label: postal_code_label,
+              placeholder: postal_code_label,
+              show_label: true,
+              required: true
+            -%}
+          </div>
+          <div class="row w-full">
+            {%- render 'text-input',
+              name: 'customer[phone]',
+              id: 'customer_phone',
+              type: 'text',
+              label: phone_number_label,
+              placeholder: phone_number_label,
+              show_label: true,
+              required: true
+            -%}
+          </div>
+          <div class="row w-full">
+            {%- capture gender_options_html -%}
+            {%- for option in gender_options -%}
+              <option value="{{ option }}">{{- option -}}</option>
+            {%- endfor -%}
+            {%- endcapture -%}
+            {%- render 'select-input',
+              name: 'customer[gender]',
+              id: 'customer_gender',
+              options: gender_options_html,
+              label: gender_label,
+              placeholder: gender_label,
+              show_label: true,
+              required: true
+            -%}
+            <p class="mt-2 text-xs text-grey-900">{{- 'customer.register.another_micro_message' | t -}}</p>
+          </div>
+          <div class="row w-full">
+            {%- assign _now = 'now' | date: '%Y-%m-%d' -%}
+            {%- render 'text-input',
+              name: 'customer[birthday]',
+              id: 'customer_birthday',
+              type: 'date',
+              show_label: true,
+              required: true,
+              label: birthday_label,
+              placeholder: birthday_label,
+              value: _now
+            -%}
+            <p class="mt-2 text-xs text-grey-900">{{- 'customer.register.text_birthday' | t -}}</p>
+          </div>
+        </div>
+        <button type="submit" class="button-primary mt-4 w-full">
+          <span>{{- submit_label -}}</span>
+        </button>
+
+        {% comment %}theme-check-enable{% endcomment %}
+      {%- endform -%}
+    </account-form-custom>
+  </validate-form>
+</div>
+
+{%- capture src_url -%}
+  {{- 'section-account-form.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

@@ -1,0 +1,10 @@
+{
+  "name": "Gift Card",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_gift_card",
+      "label": "Image Gift Card"
+    }
+  ]
+}

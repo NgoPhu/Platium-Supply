@@ -1,0 +1,280 @@
+{
+  "sections": {
+    "1efd6616-a4e7-4c78-afc7-0290cea870c8": {
+      "type": "full-width-banner",
+      "settings": {
+        "enable_background": false,
+        "background_color": "",
+        "content_position_vertical": "items-center",
+        "content_position_horizontal": "justify-center",
+        "title": "",
+        "subtitle": "",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_text_second": "",
+        "cta_link_second": "",
+        "image_mobile": "shopify:\/\/shop_images\/About-Us-Hero-Banner-Mobile_0d76a127-a0ac-4552-9d1a-219f1701d1c3.png",
+        "image": "shopify:\/\/shop_images\/About-Us-Hero-Banner-Desktop_4a2e9250-a23c-4908-a3f3-dc9e5c96cba3.png"
+      }
+    },
+    "b8f0ec62-e8b5-4a38-a503-4196d79d4b97": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/AboutUs_MainBanner_01.jpg",
+        "title": "About Platinum Health Supply Group",
+        "description": "<p>Platinum Health Supply Group, an Australian-owned and operated company, is your trusted partner for quality healthcare products that enhance the quality of life.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "deee0907-cee8-4ae4-b244-d37c4b03ed93": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Image01_AboutUs_2.png",
+        "is_reversed": false,
+        "background_color": "#ffffff",
+        "title": "Who we are",
+        "description": "Platinum Health Supply Group, an Australian-owned and operated company, is your trusted partner for quality healthcare products that enhance the quality of life. Established with a strong commitment to improving the well-being of individuals and communities, we've become a leading name in the healthcare industry. With a focus on giving back, we have partnered with organisations like the Starlight Children's Foundation to ensure we are having a positive impact on the greater community.",
+        "cta_as_button": false,
+        "cta_text": "",
+        "cta_url": "#",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "717adecf-5ff8-40ad-b822-05ce6cf0ab12": {
+      "type": "two-up-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/28ee71de5567bcfbde3ed430ec7a2562.png",
+        "icon": "shopify:\/\/shop_images\/Quotes_91e56b61-bb7c-44f9-b222-ba6325cccc90.png",
+        "title": "Platinum Health Supply Group is an Australian owned & operated company that focuses on providing quality healthcare products that improve quality of life.",
+        "description": "<p>With a focus on giving back, we have partnered with organisations like the Starlight Children's Foundation to ensure we are having a positive impact on the greater community.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "604e26ed-78a8-43ca-8d29-91c1a446967d": {
+      "type": "full-width-banner",
+      "disabled": true,
+      "settings": {
+        "enable_background": false,
+        "background_color": "rgba(0,0,0,0)",
+        "content_position_vertical": "items-center",
+        "content_position_horizontal": "justify-start",
+        "title": "",
+        "subtitle": "",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_text_second": "",
+        "cta_link_second": "",
+        "image_mobile": "shopify:\/\/shop_images\/Veterans-AboutUs-Banner-Mobile.png",
+        "image": "shopify:\/\/shop_images\/Veterans-Hero-Banner-About-Us-Page_5bd9b799-9890-4c95-a93a-0b6903633d6c.png"
+      }
+    },
+    "48814610-fb64-4be6-9467-43551110087c": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Our-Vission_Image.png",
+        "is_reversed": true,
+        "background_color": "#ffffff",
+        "title": "Our Vision",
+        "description": "Platinum Health Supply Group is an award winning Australian-owned & operated company that focuses on providing essential healthcare products that improve the quality of life. Because your health is our priority.",
+        "cta_as_button": false,
+        "cta_text": "",
+        "cta_url": "",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "b9c52897-7c50-4418-8224-75cb800bb61b": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/AboutUs_Veterans_02.jpg",
+        "title": "Veterans Community Social Impact",
+        "description": "<p>Platinum Health Supply Group was founded with a noble purpose - to create sustainable futures for veterans transitioning to civilian life, serving personnel, and veteran family members. We honour their dedication and service by supporting their successful transition into civilian roles.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "7f9136e3-5f5c-4960-bf2f-f8d62f1aeed2": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Starlight_AboutUs.png",
+        "is_reversed": false,
+        "background_color": "#ffffff",
+        "title": "Starlight Children's Foundation Partnership",
+        "description": "Platinum Health’s aim is to help the Starlight foundation through its customers In an effort to put smiles on the faces of kids whose battles to be, well simply can’t be put on hold – even during a pandemic.",
+        "cta_as_button": true,
+        "cta_text": "Learn More",
+        "cta_url": "shopify:\/\/pages\/starlight-v2",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "b545b681-2124-4d59-83a9-fdd40c954cab": {
+      "type": "two-up",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Veterans_AboutUs.png",
+        "is_reversed": true,
+        "background_color": "#ffffff",
+        "title": "Veterans Community Social Impact",
+        "description": "Platinum Health Supply Group was established to create sustainable futures for Veterans transitioning to civilian life who are still in service, currently employed in civilian roles as well as Veteran family members.",
+        "cta_as_button": true,
+        "cta_text": "Learn More",
+        "cta_url": "shopify:\/\/pages\/veterans-community-v2",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24
+      }
+    },
+    "cc96b2d8-a957-425d-9866-da41f51dcdbb": {
+      "type": "icon-with-text",
+      "blocks": {
+        "template--20155439841600__cc96b2d8-a957-425d-9866-da41f51dcdbb-item-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Social-Care_150px.png",
+            "title": "Serving Over 75,000 Customers Nationwide",
+            "description": "<p>We take pride in catering to a vast network of customers across the nation, addressing diverse healthcare needs.<\/p>",
+            "content_position_vertical": "items-start",
+            "icon_position": "flex-row"
+          }
+        },
+        "template--20155439841600__cc96b2d8-a957-425d-9866-da41f51dcdbb-item-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Australia_150px.png",
+            "title": "Top 100 Young Entrepreneurs in Australia",
+            "description": "<p>Our passion for innovation and excellence has earned us recognition among the top young entrepreneurs in Australia.<\/p>",
+            "content_position_vertical": "items-start",
+            "icon_position": "flex-row"
+          }
+        },
+        "template--20155439841600__cc96b2d8-a957-425d-9866-da41f51dcdbb-item-3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Medal_150px.png",
+            "title": "ISO 9001 Certified Company",
+            "description": "<p>Our dedication to quality is evident through our ISO 9001 certification, assuring you of the highest standards in every product and service we offer.<\/p>",
+            "content_position_vertical": "items-start",
+            "icon_position": "flex-row"
+          }
+        }
+      },
+      "block_order": [
+        "template--20155439841600__cc96b2d8-a957-425d-9866-da41f51dcdbb-item-1",
+        "template--20155439841600__cc96b2d8-a957-425d-9866-da41f51dcdbb-item-2",
+        "template--20155439841600__cc96b2d8-a957-425d-9866-da41f51dcdbb-item-3"
+      ],
+      "settings": {
+        "title": "Our Impact and Commitment"
+      }
+    },
+    "36b68dfb-a2a2-48f7-ba88-13f5564a6453": {
+      "type": "two-up-reverse-cms",
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/AboutUs_Starlight_02.jpg",
+        "title": "Partnering with Starlight Children's Foundation",
+        "description": "<p>Our commitment to giving back extends to our partnership with the Starlight Children's Foundation. Through your support, we bring smiles to the faces of children facing unimaginable challenges. Even in the midst of a pandemic, we believe that every child's dreams should shine bright.<\/p>",
+        "cta_link": ""
+      }
+    },
+    "9cada779-2beb-4d31-b96a-d37d8aba0038": {
+      "type": "full-width-banner",
+      "disabled": true,
+      "settings": {
+        "enable_background": false,
+        "background_color": "",
+        "content_position_vertical": "items-center",
+        "content_position_horizontal": "justify-center",
+        "title": "",
+        "subtitle": "",
+        "cta_text": "",
+        "cta_link": "",
+        "cta_text_second": "",
+        "cta_link_second": "",
+        "image_mobile": "shopify:\/\/shop_images\/Starlight-About-US-Banner-Mobile.png",
+        "image": "shopify:\/\/shop_images\/Starlight-Hero-Banner-AboutUsPage.png"
+      }
+    },
+    "3fd13721-f115-4f83-b800-884b7469cf8e": {
+      "type": "two-up-reverse-cms",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/image_1_2.png",
+        "icon": "shopify:\/\/shop_images\/location-outline_f9c5639d-be9e-4d62-ba29-1572efed2b91.png",
+        "title": "Our Footprint is Nationwide",
+        "description": "<p><strong>5 Warehouses<\/strong><br\/>2 - VIC<br\/>1 - NSW<br\/>1 - QLD<br\/>1 - WA<\/p>",
+        "cta_link": ""
+      }
+    },
+    "0121a442-9cf8-4752-a5a5-912581cdb7a4": {
+      "type": "text-block",
+      "settings": {
+        "heading": "Your Health Is Our Priority",
+        "subheading": "",
+        "content": ""
+      }
+    },
+    "e1ba5e7c-b5f3-4bdb-ac8c-6d1cd6212a57": {
+      "type": "featured-articles",
+      "blocks": {
+        "7b94272c-ee78-4abe-a721-d7bc0c5bc4fc": {
+          "type": "article",
+          "settings": {
+            "article": "all\/platinum-health-supply-is-now-an-ndis-registered-provider"
+          }
+        },
+        "ce842df1-019e-4f91-8a49-c28594bc2f68": {
+          "type": "article",
+          "settings": {
+            "article": "all\/platinum-health-supply-group-is-now-iso-9001-certifed"
+          }
+        },
+        "eeedea7e-29a1-40a7-9657-6a4cd620cc4a": {
+          "type": "article",
+          "settings": {
+            "article": "all\/platinum-health-supply-group-partners-with-starlight-childrens-foundation"
+          }
+        }
+      },
+      "block_order": [
+        "7b94272c-ee78-4abe-a721-d7bc0c5bc4fc",
+        "ce842df1-019e-4f91-8a49-c28594bc2f68",
+        "eeedea7e-29a1-40a7-9657-6a4cd620cc4a"
+      ],
+      "settings": {
+        "class_modify": "",
+        "blog": "",
+        "title": "Recent News",
+        "cta_text": "View All",
+        "cta_link": "",
+        "cta_text_item": "+ Read"
+      }
+    }
+  },
+  "order": [
+    "1efd6616-a4e7-4c78-afc7-0290cea870c8",
+    "b8f0ec62-e8b5-4a38-a503-4196d79d4b97",
+    "deee0907-cee8-4ae4-b244-d37c4b03ed93",
+    "717adecf-5ff8-40ad-b822-05ce6cf0ab12",
+    "604e26ed-78a8-43ca-8d29-91c1a446967d",
+    "48814610-fb64-4be6-9467-43551110087c",
+    "b9c52897-7c50-4418-8224-75cb800bb61b",
+    "7f9136e3-5f5c-4960-bf2f-f8d62f1aeed2",
+    "b545b681-2124-4d59-83a9-fdd40c954cab",
+    "cc96b2d8-a957-425d-9866-da41f51dcdbb",
+    "36b68dfb-a2a2-48f7-ba88-13f5564a6453",
+    "9cada779-2beb-4d31-b96a-d37d8aba0038",
+    "3fd13721-f115-4f83-b800-884b7469cf8e",
+    "0121a442-9cf8-4752-a5a5-912581cdb7a4",
+    "e1ba5e7c-b5f3-4bdb-ac8c-6d1cd6212a57"
+  ]
+}

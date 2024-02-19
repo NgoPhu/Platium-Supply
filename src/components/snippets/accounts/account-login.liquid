@@ -1,0 +1,120 @@
+{%- capture content_for_query_string -%}{{ content_for_header }}{%- endcapture -%}
+{%- liquid
+  assign form_class = form_class | prepend: 'relative '
+  assign hidden_form_class = form_class | append: ' hidden'
+  assign title_class = 'text-center h5 lg:h4 mb-4 block'
+  assign notice_class = 'mb-3'
+  assign email_label = 'customer.login_page.email' | t
+  assign password_label = 'customer.login_page.password' | t
+  assign sign_in_label = 'customer.login_page.sign_in' | t
+  assign submit_label = 'customer.login_page.submit' | t
+  assign page_url_with_host = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | replace: '%2C', ','
+  assign urls = page_url_with_host | split: '&'
+  for mod_url in urls
+    assign key = mod_url | split: '=' | first
+    if key contains 'handle'
+      assign product_handle = mod_url | split: '=' | last
+    endif
+  endfor
+-%}
+
+<validate-form>
+  {%- form 'recover_customer_password', class: hidden_form_class, id: 'recover' -%}
+    {%- liquid
+      assign recover_success = form.posted_successfully?
+      assign form_recover = form
+      assign class_input = 'js-recover-email'
+      assign error = ''
+      if form_recover.errors
+        assign class_input = class_input | append: ' is-invalid'
+        assign error = form_recover.errors.messages.form
+      endif
+    -%}
+    <h1 class="{{- title_class -}}">{{- 'customer.recover_password.title' | t -}}</h1>
+    <account-recover-form
+      {% if recover_success %}
+        data-active
+      {% endif %}
+    >
+      {%- render 'text-input',
+        class: 'mb-4',
+        class_input: class_input,
+        name: 'email',
+        id: 'customer_reset_email',
+        type: 'email',
+        label: email_label,
+        placeholder: email_label,
+        show_label: true,
+        error: error,
+        required: true
+      -%}
+      {%- if recover_success == true -%}
+        {%- assign recover_success_message = 'customer.recover_password.success' | t -%}
+        {%- render 'form-notice', form: form_recover, class: notice_class, success_message: recover_success_message -%}
+      {%- endif -%}
+      {%- if form_recover.errors -%}
+        {%- capture notice_content -%}
+          <a href="/account/login" class="link" title="Create an account">{{- 'customer.login_page.click_here' | t -}}</a> to create an account.
+        {%- endcapture -%}
+        {%- render 'notice-main', content: notice_content, class: 'mb-4 w-full mx-auto', icon: 'icon-faild' -%}
+      {%- endif -%}
+      {%- render 'button',
+        class: 'w-full button-primary mb-4 js-recover-button',
+        link_tag: 'button',
+        link_text: submit_label,
+        link_style: 'dark',
+        attr: 'type="submit"'
+      -%}
+    </account-recover-form>
+    <account-recover-cancel-link>
+      <a href="{{- routes.account_login_url -}}" class="link normal-case">{{- 'customer.login_page.cancel' | t -}}</a>
+    </account-recover-cancel-link>
+  {%- endform -%}
+
+  <account-form-custom class="relative">
+    {%- form 'customer_login', class: form_classs -%}
+      <h1 class="{{ title_class }}">{{- 'customer.login_page.title' | t -}}</h1>
+      {%- render 'form-notice', form: form, class: notice_class -%}
+      {%- if product_handle != blank -%}
+        <input type="hidden" name="return_to" value="/products/{{ product_handle }}">
+      {%- endif -%}
+      {%- render 'text-input',
+        class: 'mb-4',
+        name: 'customer[email]',
+        id: 'customer_email',
+        type: 'email',
+        label: email_label,
+        placeholder: email_label,
+        show_label: true,
+        required: true
+      -%}
+      {%- render 'text-input',
+        class: 'mb-4',
+        name: 'customer[password]',
+        id: 'customer_password',
+        type: 'password',
+        label: password_label,
+        placeholder: password_label,
+        show_label: true,
+        required: true
+      -%}
+      <p class="mb-4">
+        <account-recover-link>
+          <a href="#forgot-password" class="link normal-case">{{- 'customer.login_page.forgot_password' | t -}}</a>
+        </account-recover-link>
+      </p>
+      {%- render 'button',
+        class: 'button-primary w-full js-submit-recover',
+        link_tag: 'button',
+        link_text: sign_in_label,
+        link_style: 'dark',
+        attr: 'type="submit"'
+      -%}
+    {%- endform -%}
+  </account-form-custom>
+</validate-form>
+
+{%- capture src_url -%}
+  {{- 'section-account-form.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

@@ -1,0 +1,29 @@
+{%- comment -%}
+  Parameters
+  * link_text
+  * link_url
+  * link_style
+  * link_tag
+  * attr
+  * class
+{%- endcomment -%}
+{% liquid
+  if class
+    assign link_class = link_class | append: ' ' | append: class
+  endif
+%}
+
+{% if link_tag and link_tag != 'a' %}
+  <{{ link_tag }}
+    class="{{ link_class | strip_newlines | strip }}"
+    {{ attr }}
+    {% if onclick %}
+      onclick="{{ onclick }}"
+    {% endif %}
+    ><span class="{{ class_text }}">{{- link_text -}}</span></{{ link_tag }}
+  >
+{% else %}
+  <a href="{{- link_url -}}" class="{{ link_class | strip_newlines | strip }}" {{ attr }}
+    ><span class="{{ class_text }}">{{- link_text -}}</span></a
+  >
+{% endif %}

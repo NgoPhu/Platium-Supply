@@ -1,0 +1,13 @@
+.account-sidebar-scrollbar {
+  &::-webkit-scrollbar {
+    @apply h-[124px] w-1;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-grey-400;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-gray-700;
+  }
+}

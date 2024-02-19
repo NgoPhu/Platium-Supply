@@ -1,0 +1,142 @@
+{%- liquid
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign class = 'aspect-[376/480] md:aspect-[768/300] lg:aspect-[1440/480]'
+  assign title = section.settings.title
+  assign title_class = 'text-3xl text-white lg:text-5xl font-bold font-body mb-3 md-max:max-w-[300px]'
+  assign subtitle = section.settings.subtitle
+  assign subtitle_class = 'text-lg font-semibold text-white mb-8 md:max-w-[800px]'
+  assign cta_text = section.settings.cta_text
+  assign cta_link = section.settings.cta_link
+  assign class_button_first = 'flex justify-center items-center h-full min-h-[60px] button-primary w-full max-w-[151px]'
+  assign cta_text_second = section.settings.cta_text_second
+  assign cta_link_second = section.settings.cta_link_second
+  assign class_button_second = 'flex justify-center items-center h-full min-h-[60px] button-outlined border-white text-white hover:text-secondary w-full max-w-[151px]'
+  assign content_position_vertical = section.settings.content_position_vertical
+  assign content_position_horizontal = section.settings.content_position_horizontal
+  assign enable_background = section.settings.enable_background
+  assign content_inner_class = 'w-full rounded-tr-[40px]'
+
+  if enable_background
+    assign background = section.settings.background_color
+    assign class = 'aspect-[376/524] md:aspect-[768/280] lg:aspect-[1440/524]'
+    assign content_inner_class = content_inner_class | append: ' px-6 py-8 lg:p-12'
+    assign title_class = title_class | replace: 'text-white lg:text-5xl', 'text-grey-900 lg:text-4xl'
+    assign subtitle_class = subtitle_class | replace: 'font-semibold text-white mb-8 md:max-w-[800px]', 'font-normal text-grey-600 mb-6 lg:mb-8'
+    assign class_button_first = class_button_first | append: ' md-max:w-full md-max:w-1/2'
+    assign class_button_second = class_button_second | replace: 'border-white text-white hover:text-secondary', 'border-secondary text-secondary'
+    assign content_inner_class = content_inner_class | append: ' lg:max-w-[546px]'
+  endif
+-%}
+
+{%- render 'full-banner',
+  image: image,
+  image_mobile: image_mobile,
+  class: class,
+  title: title,
+  subtitle: subtitle,
+  cta_text: cta_text,
+  cta_link: cta_link,
+  class_button: class_button,
+  class_button_first: class_button_first,
+  cta_text_second: cta_text_second,
+  cta_link_second: cta_link_second,
+  class_button_second: class_button_second,
+  content_position_vertical: content_position_vertical,
+  content_position_horizontal: content_position_horizontal,
+  content_class: ' px-6 md:px-8 xl:px-20 py-7 md:py-11 lg:py-8 xl:py-16 ',
+  title_class: title_class,
+  subtitle_class: subtitle_class,
+  background_color: background,
+  content_inner_class: content_inner_class
+-%}
+
+{% schema %}
+{
+  "name": "Full Width Banner",
+  "class": "shopify-section--full-width-banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_background",
+      "label": "Enable content background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Content's background color"
+    },
+    {
+      "type": "select",
+      "id": "content_position_vertical",
+      "label": "Position of content vertically",
+      "options": [
+        { "value": "items-start", "label": "Top" },
+        { "value": "items-center", "label": "Center" },
+        { "value": "items-end", "label": "Bottom" }
+      ],
+      "default": "items-center"
+    },
+    {
+      "type": "select",
+      "id": "content_position_horizontal",
+      "label": "Position of content horizontally",
+      "options": [
+        { "value": "justify-start", "label": "Left" },
+        { "value": "justify-center", "label": "Center" },
+        { "value": "justify-end", "label": "Right" }
+      ],
+      "default": "justify-center"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_second",
+      "label": "CTA Text Second"
+    },
+    {
+      "type": "url",
+      "id": "cta_link_second",
+      "label": "CTA Link Second"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full Width Banner",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}

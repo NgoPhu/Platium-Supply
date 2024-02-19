@@ -1,0 +1,20 @@
+{%- liquid
+  assign mod_title = collection.metafields.seo_text.title
+  assign mod_description = collection.metafields.seo_text.description
+-%}
+
+{%- if mod_title != blank and mod_description != blank -%}
+  <div class="container">
+    <div class="border-b border-custom lg:border-y py-8 lg:py-[72px]">
+      {%- render 'seo-text', title: mod_title, class_title: 'pb-2 font-body font-bold text-base lg:text-2xl', description: mod_description -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Seo Text",
+  "class": "bg-grey-100",
+  "presets": [{ "name": "Seo Text" }]
+}
+{% endschema %}

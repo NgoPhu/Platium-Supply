@@ -1,0 +1,31 @@
+{%- unless template contains 'gift-card' or product.gift_card? -%}
+<div class="overflow-hidden bg-grey-100">
+  <product-recently heading="{{- section.settings.title -}}" {%- if template.name == 'product' -%}handle="{{- product.handle -}}"{% endif %}></product-recently>
+</div>
+{%- endunless -%}
+
+{%- capture src_url -%}
+  {{- 'section-product-recently.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+
+{% schema %}
+  {
+    "name": "Product Recently",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Recently Viewed"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Recently",
+        "category": "Carousel"
+      }
+    ]
+  }
+{% endschema %}

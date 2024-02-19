@@ -1,0 +1,26 @@
+<div class="bg-grey-100 relative z-[1]">
+  <div id="reviewCarouselWidget">
+    <div id="reviewCarouselWidgetInner" class="stjr-widget"></div>
+  </div>
+</div>
+{{- section.settings.embed_code -}}
+
+{% schema %}
+{
+  "name": "Review Carousel",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "embed_code",
+      "label": "Embed Code",
+      "default": "<script>(function(d,s,id,c){var js,r=0,t=d.getElementsByTagName(s)[0];js=d.createElement(s);js.id=id;js.src='https://static.sitejabber.com/js/widget.min.1625675086.js';js.onload=js.onreadystatechange=function(){if(!r&&(!this.readyState||this.readyState[0]=='c')){r=1;c();}};t.parentNode.insertBefore(js,t);}(document,'script','sj-widget',function(){new STJR.ReviewCarouselWidget({id:'reviewCarouselWidget',url:'platinumhealthsupply.com.au'}).render();}));</script>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Carousel",
+      "category": "Carousel"
+    }
+  ]
+}
+{% endschema %}

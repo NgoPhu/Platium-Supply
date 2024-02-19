@@ -1,0 +1,70 @@
+{%- liquid
+  assign mod_settings = section.settings
+-%}
+{%- if mod_settings.image_desktop != blank or mod_settings.image_mobile != blank -%}
+  <div class="hero-cms">
+    {%- assign url = null -%}
+    {%- capture content -%}
+      <div class="container flex items-center justify-center h-full px-8 py-8 lg:py-10 md:px-16 xl:px-20" >
+        <div class="items-center justify-center text-center content-inner w-full max-w-[800px] mx-auto">
+          {%- if  mod_settings.subtitle != blank -%}
+            <p class="mb-4 text-base font-bold uppercase font-body text-accent-1 lg:text-xl">{{- mod_settings.subtitle -}}</p>
+          {%- endif -%}
+          {%- if mod_settings.title != blank -%}
+            <h2 class="relative text-3xl font-bold text-white font-body lg:text-5xl">{{- mod_settings.title -}}</h2>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endcapture -%}
+
+    {%- render 'hero',
+      image: mod_settings.image_desktop,
+      image_mobile: mod_settings.image_mobile,
+      class: 'aspect-[376/400] md:aspect-[1440/480]',
+      content: content,
+      content_class: 'absolute fit pointer-events-none',
+      url: mod_settings.url,
+      image_class: ' !relative',
+      image_mobile_class: ' !relative'
+    -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero CMS",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Image desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero CMS",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}

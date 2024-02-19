@@ -1,0 +1,420 @@
+{%- capture content_for_query_string -%}{{ content_for_header }}{%- endcapture -%}
+{%- liquid
+  assign form_class = 'grid w-full mx-auto px-4 py-5 bg-white rounded-[10px] border border-default shadow-base lg:p-10 lg:max-w-[600px]'
+  assign hidden_form_class = form_class | append: ' hidden'
+  assign title_class = 'text-center text-xl font-body font-bold normal-case text-grey-900 md:text-2xl'
+  assign subtext_class = 'text-center my-2 text-grey-700'
+  assign notice_class = 'w-full mt-4'
+
+  assign first_name_label = 'customer.register.first_name' | t
+  assign last_name_label = 'customer.register.last_name' | t
+  assign email_label = 'customer.register.email' | t
+  assign password_label = 'customer.register.password' | t
+  assign submit_label = 'customer.register.submit' | t
+
+  assign country_label = 'customer.addresses.country' | t
+  assign country_id = 'address_country_' | append: address_id
+
+  assign province_label = 'customer.addresses.province' | t
+  assign province_id = 'address_province_' | append: address_id
+
+  assign industry_arrays = settings.industry_options | split: '|'
+
+  assign page_url_with_host = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | replace: '%2C', ','
+  assign urls = page_url_with_host | split: '&'
+  for mod_url in urls
+    assign key = mod_url | split: '=' | first
+    if key contains 'redirect'
+      assign wishlist_redirect = mod_url | split: '=' | last
+    endif
+  endfor
+-%}
+
+{%- capture all_countries_tags -%}
+  {{ country_option_tags }}
+{%- endcapture -%}
+{%- assign all_countries_tags = all_countries_tags | split: '<option value="---" data-provinces="[]">---</option>' -%}
+{%- assign all_countries_tags = all_countries_tags[1] -%}
+
+{%- capture options_industry -%}
+  {%- for option in industry_arrays -%}
+    <option value="{{- option -}}">{{- option -}}</option>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- render 'breadcrumbs', class: 'py-4 bg-grey-100 lg:py-8', item_class: 'text-med text-link [&>a]:no-underline', item_current_class: 'text-med text-secondary underline' -%}
+
+<validate-form>
+  {%- case template.name -%}
+    {%- when 'register' -%}
+      {%- liquid
+        assign first_name_label = 'customer.register.first_name' | t
+        assign last_name_label = 'customer.register.last_name' | t
+        assign company_label = 'customer.register.company' | t
+        assign abnacn_label = 'customer.register.abnacn' | t
+        assign job_label = 'customer.register.job' | t
+        assign birthday_label = 'customer.register.birthday' | t
+        assign date_label = 'customer.register.date' | t
+        assign industry_label = 'customer.register.industry' | t
+        assign email_label = 'customer.register.email' | t
+        assign password_label = 'customer.register.password' | t
+        assign submit_label = 'customer.register.submit' | t
+        assign form_class = form_class | append: ' account-form account-form--register'
+      -%}
+      <div class="flex flex-col-reverse items-center justify-center pb-8 bg-grey-100 lg:flex-row lg:pb-20">
+        <div class="w-full px-4">
+          {%- unless ignore_script == true -%}
+            {%- capture src_url -%}
+              {{- 'module-account-address-form.js' | asset_url -}}
+            {%- endcapture -%}
+            {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+          {%- endunless -%}
+          {%- form 'create_customer', class: form_class -%}
+            {%- assign default_country = form.country_code | default: shop.address.country_code -%}
+            {%- assign default_conntry_value = address.country | default: 'Australia' -%}
+            <h1 class="{{ title_class }}">{{- 'customer.register.title' | t -}}</h1>
+            <a href="{{- routes.account_login_url -}}" class="mt-2 text-sm font-normal text-center underline normal-case text-link hover:text-secondary">{{- 'customer.register.sign_in' | t -}}</a>
+            {% comment %}theme-check-disable{% endcomment %}
+            {%- render 'form-notice',
+              form: form,
+              class: notice_class
+            -%}
+            {%- if wishlist_redirect != blank -%}
+              <input type="hidden" name="return_to" value="/pages/wishlist">
+            {%- endif -%}
+            <div class="flex flex-col w-full gap-4 my-4 lg:flex-row lg:mt-6">
+              {%- render 'text-input',
+                class: 'w-full lg:w-1/2',
+                id: 'customer_first_name',
+                name: 'customer[first_name]',
+                type: 'text',
+                label: first_name_label,
+                placeholder: first_name_label,
+                show_label: true,
+                required: true
+              -%}
+              {%- render 'text-input',
+                class: 'w-full lg:w-1/2',
+                id: 'customer_last_name',
+                name: 'customer[last_name]',
+                type: 'text',
+                label: last_name_label,
+                placeholder: last_name_label,
+                show_label: true,
+                required: true
+              -%}
+            </div>
+            {%- render 'text-input',
+              class: 'mb-4',
+              name: 'customer[company]',
+              id: 'customer_company',
+              type: 'text',
+              label: company_label,
+              placeholder: company_label,
+              show_label: true,
+              required: true
+            -%}
+            {%- render 'text-input',
+              class: 'mb-4',
+              name: 'customer[abnacn]',
+              id: 'customer_abnacn',
+              type: 'text',
+              label: abnacn_label,
+              placeholder: abnacn_label,
+              show_label: true
+            -%}
+            <account-address-form>
+              {%- render 'select-input',
+                class: 'mb-4 w-full',
+                class_input: 'js-address-country',
+                id: country_id,
+                name: 'address[country]',
+                label: country_label,
+                placeholder: country_label,
+                options: all_countries_tags,
+                value: default_conntry_value,
+                autocomplete: 'country',
+                default: default_country,
+                required: true
+              -%}
+              {%- render 'select-input',
+                class: 'mb-4 w-full',
+                class_input: 'js-address-province',
+                id: province_id,
+                name: 'address[province]',
+                value: address.province,
+                label: province_label,
+                placeholder: province_label,
+                autocomplete: 'address-level1',
+                default: address.province_code,
+                required: true
+              -%}
+            </account-address-form>
+            {%- render 'text-input',
+              class: 'w-full mb-4',
+              id: 'customer_job',
+              name: 'customer[job]',
+              type: 'text',
+              label: job_label,
+              placeholder: job_label,
+              show_label: true,
+              required: true
+            -%}
+            {%- render 'select-input',
+              class: 'mb-4 w-full',
+              id: 'customer_industry',
+              name: 'address[industry]',
+              label: industry_label,
+              options: options_industry,
+              placeholder: industry_label,
+            -%}
+            {%- render 'text-input',
+              class: 'w-full mb-4'
+              id: 'customer_birth_date'
+              name: 'customer[birth_date]',
+              type: 'date',
+              label: birthday_label,
+              placeholder: birthday_label,
+              show_label: true
+            -%}
+            {%- render 'text-input',
+              class: 'mb-4',
+              name: 'customer[email]',
+              id: 'customer_email',
+              type: 'email',
+              label: email_label,
+              placeholder: email_label,
+              show_label: true,
+              required: true
+            -%}
+            {%- render 'text-input',
+              class: 'mb-4',
+              name: 'customer[password]',
+              id: 'customer_password',
+              type: 'password',
+              label: password_label,
+              placeholder: password_label,
+              show_label: true,
+              required: true
+            -%}
+            {%- render 'checkbox-input',
+              class: 'mb-4',
+              name: 'customer[accepts_marketing]',
+              id: 'customer_accepts_marketing',
+              label: 'Join our mailing list for exclusive offers'
+            -%}
+            {%- render 'button',
+              class: 'button-primary button-medium',
+              link_tag: 'button',
+              link_text: submit_label,
+              link_style: 'dark',
+              attr: 'type="submit"'
+            -%}
+            {% comment %}theme-check-enable{% endcomment %}
+          {%- endform -%}
+        </div>
+        {%- if settings.register_image != blank -%}
+          <div class="w-full lg:h-auto lg:w-1/2 {% if settings.register_image_mobile %} lg-max:hidden{% endif %}">
+            {%- render 'image',
+              image: settings.register_image,
+              class: 'aspect-[376/200] h-full lg:aspect-[720/600]'
+            -%}
+          </div>
+        {%- endif -%}
+        {%- if settings.register_image_mobile != blank -%}
+          <div class="w-full lg:hidden">
+            {%- render 'image',
+              image: settings.register_image_mobile,
+              class: 'aspect-[376/200] w-full lg:aspect-[720/600]'
+            -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- when 'login' -%}
+      {%- liquid
+        assign email_label = 'customer.login_page.email' | t
+        assign password_label = 'customer.login_page.password' | t
+        assign sign_in_label = 'customer.login_page.sign_in' | t
+        assign submit_label = 'customer.login_page.submit' | t
+        assign form_class = form_class | append: ' account-form account-form--login'
+      -%}
+      <div class="flex flex-col-reverse items-center justify-center pb-8 bg-grey-100 lg:flex-row lg:pb-20">
+        <div class="w-full px-4">
+          {%- form 'recover_customer_password', class: hidden_form_class, id: 'AccountRecovery' -%}
+            <h1 class="{{- title_class -}}">{{- 'customer.recover_password.title' | t -}}</h1>
+            <p class="{{- subtext_class -}}">{{- 'customer.recover_password.subtext' | t -}}</p>
+            {% assign recover_success = form.posted_successfully? %}
+            {% assign form_recover = form %}
+            {%- render 'form-notice',
+              form: form,
+              class: notice_class
+            -%}
+            {%- render 'text-input',
+              class: 'my-4 lg:mt-6',
+              name: 'email',
+              id: 'customer_reset_email',
+              type: 'email',
+              label: email_label,
+              placeholder: email_label,
+              show_label: true,
+              required: true
+            -%}
+            {%- render 'button',
+              class: 'button-primary button-medium mb-4',
+              link_tag: 'button',
+              link_text: submit_label,
+              link_style: 'dark',
+              attr: 'type="submit"'
+            -%}
+            <account-recover-cancel-link>
+              <p class="flex items-center justify-center"><a href="{{- routes.account_login_url -}}" class="normal-case link text-grey-700">{{- 'customer.login_page.cancel' | t -}}</a></p>
+            </account-recover-cancel-link>
+          {%- endform -%}
+          {%- form 'customer_login', class: form_class -%}
+            <h1 class="{{ title_class }}">{{- 'customer.login_page.title' | t -}}</h1>
+            <p class="gap-1 mt-2 text-sm font-normal flex-center text-link">Or <a href="{{- routes.account_register_url -}}" class="text-sm underline normal-case text-link hover:text-secondary">{{- 'customer.login_page.create_account' | t -}}</a></p>
+            {%- if wishlist_redirect != blank -%}
+              <input type="hidden" name="return_to" value="/pages/wishlist">
+            {%- endif -%}
+            {%- if recover_success == true -%}
+              {%- assign recover_success_message = 'customer.recover_password.success' | t -%}
+              {%- render 'form-notice',
+                form: form_recover,
+                class: notice_class,
+                success_message: recover_success_message
+              -%}
+            {%- endif -%}
+            {%- render 'form-notice',
+              form: form,
+              class: notice_class
+            -%}
+            {%- render 'text-input',
+              class: 'my-4 lg:mt-6',
+              name: 'customer[email]',
+              id: 'customer_email',
+              type: 'email',
+              label: email_label,
+              placeholder: email_label,
+              show_label: true,
+              required: true
+            -%}
+            {%- render 'text-input',
+              class: 'mb-4',
+              name: 'customer[password]',
+              id: 'customer_password',
+              type: 'password',
+              label: password_label,
+              placeholder: password_label,
+              show_label: true,
+              required: true
+            -%}
+            <p class="mb-4">
+              <account-recover-link>
+                <a href="#forgot-password" class="text-sm underline normal-case text-link hover:text-secondary">{{- 'customer.login_page.forgot_password' | t -}}</a>
+              </account-recover-link>
+            </p>
+            {%- render 'button',
+              class: 'button-primary',
+              link_tag: 'button',
+              link_text: sign_in_label,
+              link_style: 'dark',
+              attr: 'type="submit"'
+            -%}
+          {%- endform -%}
+        </div>
+        {%- if settings.login_image != blank -%}
+          <div class="w-full lg:h-auto lg:w-1/2 {% if settings.login_image_mobile != blank %} lg-max:hidden{% endif %}">
+            {%- render 'image',
+              image: settings.login_image,
+              class: 'aspect-[376/200] h-full lg:aspect-[720/600]'
+            -%}
+          </div>
+        {%- endif -%}
+        {%- if settings.login_image_mobile != blank -%}
+          <div class="w-full lg:hidden">
+            {%- render 'image',
+              image: settings.login_image_mobile,
+              class: 'aspect-[376/200] w-full lg:aspect-[720/600]'
+            -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- when 'activate_account' -%}
+      {%- liquid
+        assign password_label = 'customer.activate_account.password' | t
+        assign password_confirm_label = 'customer.activate_account.password_confirm' | t
+        assign submit_label = 'customer.activate_account.submit' | t
+        assign cancel_label = 'customer.activate_account.cancel' | t
+      -%}
+      <div class="pb-8 bg-grey-100 lg:pb-20">
+        {%- form 'activate_customer_password', class: form_class -%}
+          <h1 class="{{- title_class -}}">{{- 'customer.activate_account.title' | t -}}</h1>
+          <p class="{{- subtext_class -}}">{{- 'customer.activate_account.subtext' | t -}}</p>
+          {%- render 'form-notice', form: form, class: notice_class -%}
+          {%- render 'text-input',
+            class: 'mb-4',
+            name: 'customer[password]',
+            id: 'customer_password',
+            type: 'password',
+            label: password_label,
+            placeholder: password_label,
+            required: true
+          -%}
+          {%- render 'text-input',
+            class: 'mb-4',
+            name: 'customer[password_confirmation]',
+            id: 'customer_password_confirmation',
+            type: 'password',
+            label: password_confirm_label,
+            placeholder: password_confirm_label,
+            required: true
+          -%}
+          {%- render 'button', link_class: 'button-primary mb-4', link_tag: 'button', link_text: submit_label, attr: 'type="submit"' -%}
+          {%- render 'button',
+            link_class: 'button-primary',
+            link_tag: 'button',
+            link_text: cancel_label,
+            link_style: 'light',
+            attr: 'type="submit" name="decline"'
+          -%}
+        {%- endform -%}
+      </div>
+    {%- when 'reset_password' -%}
+      {%- liquid
+        assign password_label = 'customer.reset_password.password' | t
+        assign password_confirm_label = 'customer.reset_password.password_confirm' | t
+        assign submit_label = 'customer.reset_password.submit' | t
+      -%}
+      <div class="pb-8 bg-grey-100 lg:pb-20">
+        {%- form 'reset_customer_password', class: form_class, id: 'reset_password' -%}
+          <h1 class="{{- title_class -}}">{{- 'customer.reset_password.title' | t -}}</h1>
+          <p class="{{- subtext_class -}}">{{- 'customer.reset_password.subtext' | t -}}</p>
+          {%- render 'form-notice', form: form, class: notice_class -%}
+          {%- render 'text-input',
+            class: 'my-4',
+            name: 'customer[password]',
+            id: 'customer_password',
+            type: 'password',
+            label: password_label,
+            placeholder: password_label,
+            required: true
+          -%}
+          {%- render 'text-input',
+            class: 'mb-4',
+            name: 'customer[password_confirmation]',
+            id: 'customer_password_confirmation',
+            type: 'password',
+            label: password_confirm_label,
+            placeholder: password_confirm_label,
+            required: true
+          -%}
+          {%- render 'button', link_class: 'button-primary', link_tag: 'button', link_text: submit_label, link_style: 'dark', attr: 'type="submit"' -%}
+        {%- endform -%}
+      </div>
+  {%- endcase -%}
+</validate-form>
+
+{%- capture src_url -%}
+  {{- 'section-account-form.js' | asset_url -}}
+{%- endcapture -%}
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}

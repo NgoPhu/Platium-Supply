@@ -1,0 +1,23 @@
+{%- liquid
+  assign id = id
+  assign class = class | default: 'w-[344px] md:w-[460px] p-8 md:p-[60px] bg-white rounded-default relative'
+  assign close_button = close_button
+  assign close_button_class = close_button_class | default: 'absolute top-4 right-4 md:top-6 md:right-6 z-10' | append: ' js-close-modal-dialog'
+  assign content = content
+  assign content_class = content_class | default: 'text-center'
+-%}
+
+<modal-dialog data-scroll-target="{{ scroll_target }}" data-target="{{ id }}" data-type="modal">
+  <div class="{{ class }} modal-dialog-content js-content-modal-dialog">
+    <button type="button" class="{{ close_button_class }}" aria-label="close modal">
+      {%- if close_button != blank -%}
+        {{ close_button }}
+      {%- else -%}
+        {%- render 'icon' with 'icon-close-outline', class: icon_close_class -%}
+      {%- endif -%}
+    </button>
+    <div class="{{ content_class }} modal-dialog-inner">
+      {{ content }}
+    </div>
+  </div>
+</modal-dialog>

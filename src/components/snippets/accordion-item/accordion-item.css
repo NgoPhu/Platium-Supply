@@ -1,0 +1,97 @@
+@layer components {
+  .accordion-item {
+    @apply flex flex-col border-b border-solid border-b-default;
+
+    &[open='true'] {
+      & .accordion-item-icon-open {
+        @apply opacity-0;
+      }
+
+      & .accordion-item-icon-close {
+        @apply opacity-100;
+      }
+    }
+
+    &[open='false'] {
+      & .accordion-item-icon-open {
+        @apply opacity-100;
+      }
+
+      & .accordion-item-icon-close {
+        @apply opacity-0;
+      }
+    }
+  }
+
+  .accordion-item-icon-close {
+    @apply opacity-0;
+  }
+
+  .accordion-item-title {
+    @apply relative flex items-center justify-between py-6 text-left font-bold text-grey-900 transition-all duration-300 ease-in-out [&[aria-expanded='true']]:pb-4;
+  }
+
+  .accordion-item-description {
+    @apply max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out;
+  }
+
+  .accordion-item-description-content {
+    @apply text-sm;
+
+    & p {
+      @apply text-sm;
+    }
+  }
+
+  .accordion-item-icon {
+    @apply relative h-5 w-5;
+  }
+
+  .accordion-item-icon-open,
+  .accordion-item-icon-close {
+    @apply fit absolute text-grey-900 transition-all;
+  }
+
+  .accordion-heading-capitalize {
+    & .accordion-item-title {
+      @apply capitalize;
+    }
+  }
+}
+
+.accortion-item-footer {
+  @apply pt-1;
+
+  & .accordion-item-icon-open, & .accordion-item-icon-close {
+    @apply stroke-2 text-accent-1 w-5 h-5;
+  }
+
+  & .accordion-item-title {
+    @apply py-5;
+  }
+}
+
+.accordion-product-tabs {
+  & .accordion-item-icon {
+    & svg {
+      @apply text-secondary stroke-[1.5px];
+    }
+  }
+}
+
+.accordion-plp-filter {
+  .scrollbar-custom {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.accordion-estimate-shipping {
+  .estimate-shipping-footer {
+    @apply !pb-0;
+  }
+}

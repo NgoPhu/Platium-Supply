@@ -1,0 +1,11 @@
+{
+  siteId: {{ settings.searchspring_site_id | json }},
+  enable: {{ settings.searchspring_enable | json }},
+  perPage: {{ settings.searchspring_products_per_page | json }},
+  collectionFilters: {{ shop.metafields.search_spring.collection_filters | json }},
+  labelSuggestions: {{ 'search.suggestions' | t | json }},
+  labelCollections: {{ 'search.collections' | t | json }},
+  labelPages: {{ 'search.pages' | t | json }},
+  textAllResults: {{ 'search.all_results' | t | json }},
+  textNoResult: {{ 'search.no_result' | t | json }}
+}

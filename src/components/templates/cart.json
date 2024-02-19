@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "main": {
+      "type": "cart-page",
+      "settings": {
+      }
+    },
+    "8282adf8-725f-4bc3-9b01-4b56e9eb30c4": {
+      "type": "featured-products",
+      "blocks": {
+        "45798860-400f-4c9f-bbfa-e3c0a1403df1": {
+          "type": "product",
+          "settings": {
+            "product": "convert-test-7"
+          }
+        },
+        "04eb029b-46b0-4e0c-90f8-79d20397b996": {
+          "type": "product",
+          "settings": {
+            "product": "product-test"
+          }
+        },
+        "f96ac54e-f8ac-4da4-b6bf-ce6bdc334ce1": {
+          "type": "product",
+          "settings": {
+            "product": "copy-of-aqium-antibacterial-hand-sanitiser-with-glycerin-and-pro-vit-2"
+          }
+        }
+      },
+      "block_order": [
+        "45798860-400f-4c9f-bbfa-e3c0a1403df1",
+        "04eb029b-46b0-4e0c-90f8-79d20397b996",
+        "f96ac54e-f8ac-4da4-b6bf-ce6bdc334ce1"
+      ],
+      "settings": {
+        "title": "You may also like",
+        "collection": "test-collection"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "8282adf8-725f-4bc3-9b01-4b56e9eb30c4"
+  ]
+}

@@ -1,0 +1,24 @@
+{%- liquid
+  assign cart_count = cart.item_count
+  if cart_count < 1
+    assign cart_count_text = cart_count | append: ' Item'
+  else
+    assign cart_count_text = cart_count | append: ' Items'
+  endif
+-%}
+
+<cart-slideout>
+  <modal-dialog data-target="MiniCart" id="MiniCartSlideout" data-type="slideout" class="modal-dialog-mini-cart" data-scroll-target=".js-content-modal-dialog">
+    <div class="lg:container lg:h-full">
+      <div class="modal-dialog-content js-content-modal-dialog pt-4 border-y w-full overflow-y-auto overflow-x-hidden lg:rounded-[10px] lg:border shadow-base">
+        {%- render 'mini-cart' -%}
+      </div>
+    </div>
+  </modal-dialog>
+</cart-slideout>
+
+{%- capture src_url -%}
+  {{- 'section-cart-slideout.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, type: 'defer' -%}

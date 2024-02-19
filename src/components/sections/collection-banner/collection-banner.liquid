@@ -1,0 +1,56 @@
+{%- liquid
+  assign image = collection.metafields.hero.background_image | first
+  assign image_mobile = collection.metafields.hero.background_image_mobile | first
+  assign title = collection.metafields.hero_banner.title | default: collection.title
+  assign description = collection.metafields.hero_banner.description | default: collection.content
+  assign cta_link = collection.metafields.hero_banner.cta_link
+  assign bg_color = collection.metafields.hero.copy_background
+  assign hide_desc = collection.metafields.hero_banner.hide_description | default: false
+  assign desc_class = 'text-base font-normal md:text-lg text-white mt-1.5'
+  if hide_desc == 'true'
+    assign desc_class = desc_class | append: ' hidden'
+  endif
+
+  assign content_class = 'relative w-full h-full translate-y-16 md:absolute md:!w-fit md:!h-fit md:!top-1/2 md:-translate-y-1/2 text-center'
+  assign content_position_horizontal = collection.metafields.hero.copy_alignment
+
+  case content_position_horizontal
+    when 'Left'
+      assign content_class = content_class | append: ' md:!left-10 md:text-left'
+    when 'Center'
+      assign content_class = content_class | append: ' md!left-1/2 md:-translate-x-1/2 md:text-center'
+    when 'Right'
+      assign content_class = content_class | append: ' md:!right-10 md:text-right'
+    else
+      assign content_class = content_class | append: ' md:!left-1/2 md:-translate-x-1/2 md:text-center'
+  endcase
+-%}
+
+{%- if title != blank or description != blank -%}
+  {%- capture hero_content -%}
+    <div class="w-auto md:w-[490px] h-full md:mx-auto px-4 pb-4 md:px-0 md:pb-0 flex justify-center items-end md:items-center">
+      <div class="px-8 pb-8 md:my-auto md:px-10 pt-7 md:pt-9 md:pb-10 bg-primary md:bg-transparent" {%- if bg_color != blank -%}style="background-color: {{- bg_color -}};"{%- endif -%}>
+        {%- if title != blank -%}
+          <h2 class="text-2xl font-bold text-white md:text-4xl">{{- title -}}</h2>
+        {%- endif -%}
+        {%- if description != blank -%}
+          <div class="{{ desc_class }}">{{- description -}}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- if image != blank or image_mobile != blank -%}
+  {%- render 'hero',
+    class: 'aspect-[1/1] md:aspect-[768/364] lg:aspect-[1024/400] xl:aspect-[1440/480] md:overflow-hidden mb-16 md:mb-0',
+    image_acf: image,
+    image_mobile_acf: image_mobile,
+    url: cta_link,
+    content_class: content_class,
+    content: hero_content,
+    loading: 'eager'
+  -%}
+{%- else -%}
+  <h1 class="h3 lg:h1 w-full py-4 text-center lg:py-8">{{ title }}</h1>
+{%- endif -%}

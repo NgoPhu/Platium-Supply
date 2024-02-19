@@ -1,0 +1,56 @@
+{%- liquid
+  assign wrapper_class = 'text-center py-12 px-6 lg:p-20 bg-grey-100'
+  assign heading_class = 'text-3xl font-body font-bold pb-6 lg:text-4xl'
+  assign subheading_class = 'text-lg font-body font-bold pb-3 text-grey-600 lg:text-xl'
+  assign content_class = 'text-intro-text text-grey-600 lg:px-40'
+-%}
+
+<section>
+  <div class="{{ wrapper_class }}">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="{{ heading_class }}">
+        {{- section.settings.heading -}}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <h3 class="{{ subheading_class }}">
+        {{- section.settings.subheading -}}
+      </h3>
+    {%- endif -%}
+
+    {%- if section.settings.content != blank -%}
+      <p class="{{ content_class }}">
+        {{- section.settings.content -}}
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text blocks"
+    }
+  ]
+}
+{% endschema %}

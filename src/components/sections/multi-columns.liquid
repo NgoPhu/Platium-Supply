@@ -1,0 +1,109 @@
+{%- liquid
+  assign blocks = section.blocks
+  assign class = "w-full flex flex-col lg:flex-row-reverse bg-white shadow-base rounded-[10px]"
+  assign content_class = "multi-column-content flex flex-col grow justify-center w-full p-6 border-x border-b border-default lg:border-r-0 lg:border-t"
+  assign title_class = "text-lg font-bold font-body"
+  case blocks.size
+    when 1
+      assign content_class = content_class | append: ' lg:px-10'
+    when 2
+      assign class_wrapper = 'lg:grid-cols-2'
+      assign image_wrapper_class = 'aspect-[344/200] lg:max-w-[281px] lg:aspect-[281/444]'
+      assign content_class = content_class | append: ' xl:px-10'
+      assign title_class = title_class | append: ' w-full lg:max-w-[245px] lg:text-3xl'
+      assign description_class = 'pt-2 text-sm'
+    when 3
+      assign class_wrapper = 'lg:grid-cols-2'
+      assign class = class | append: ' multi-column justify-between'
+      assign image_wrapper_class = 'aspect-[344/200] lg:max-w-[359px] lg:aspect-[359/210]'
+      assign content_class = content_class | append: ' w-full lg:max-w-[269px]'
+      assign description_class = 'pt-1 text-sm'
+  endcase
+-%}
+
+<div class="container">
+  <div class="relative grid grid-cols-1 gap-4 lg:gap-6 pb-8 lg:pb-[72px] {{ class_wrapper }}">
+    {%- for block in blocks -%}
+      {%- render 'card',
+        url: block.settings.cta_url,
+        class: class,
+        content_class: content_class,
+        image_wrapper_class: image_wrapper_class,
+        image: block.settings.image,
+        mobile_width: 440,
+        title: block.settings.title,
+        title_class: title_class,
+        description: block.settings.description,
+        description_class: description_class,
+        cta_text: block.settings.cta_text,
+        cta_class: 'mt-4 text-sm font-body font-bold text-secondary text-left hover:text-secondary-hover',
+        info_button: block.settings.info_button,
+        info_button_class: 'pt-2 text-xs text-link'
+      -%}
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Multi Columns",
+  "class": "bg-grey-100",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Cta text"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Cta url"
+        },
+        {
+          "type": "text",
+          "id": "info_button",
+          "label": "Info Button"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi Columns",
+      "category": "Card Grid",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,5 @@
+:root {
+  --header-height-desktop: 130px;
+  --header-sticky-height-desktop: 65px;
+  --header-height-mobile: 128px;
+}

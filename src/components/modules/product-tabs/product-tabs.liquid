@@ -1,0 +1,126 @@
+{%- liquid
+  assign mod_description = product.description
+  assign product_wraning = product.metafields.custom.product_warning | metafield_tag
+  assign mod_download = product.metafields.custom.product_download
+  assign mod_video = product.metafields.custom.product_video.value
+
+  assign product_details_label = 'product.general.product_details' | t
+  assign product_download_label = 'product.general.product_download' | t
+  assign product_wraning_label = 'product.general.product_wraning' | t
+
+-%}
+
+{%- capture product_wraning_content -%}
+  {%- if product_wraning != blank -%}
+    <div class="p-5 !bg-success-bg mt-5 rounded-[10px] overflow-hidden">
+      <h3 class="flex items-center !text-sm !font-bold !text-secondary !font-sans">
+        {% render 'icon' with 'icon-exclamation-triangle', class: 'w-[14px] h-[22px] mr-2' %}
+        {{ product_wraning_label }}
+      </h3>
+      <div class="mt-2 text-sm [&_p]:!text-secondary font-bold">
+        {{ product_wraning }}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if product_wraning_content != blank -%}
+  {%- assign mod_description = mod_description | append: product_wraning_content -%}
+{%- endif -%}
+
+{%- capture product_download_content -%}
+  {%- if mod_download != blank -%}
+    {%- for file_download in mod_download.value -%}
+      <a class="link flex items-start mb-4 lg:mb-6 last-of-type:mb-0" href="{{ file_download.url_file_download }}" download target="_blank">
+        {% render 'icon' with 'icon-download', class: 'w-6 h-6 mr-3' %}
+        {{ file_download.name_file_download }}
+      </a>
+    {%- endfor -%}
+  {%- endif -%}
+  {%- if mod_video != blank -%}
+    {%- if mod_video.video_type != blank and mod_video.video_url != blank and mod_video.image_thumbnail != blank -%}
+      {%- assign image_thumble = mod_video.image_thumbnail.value -%}
+      {%- render 'video-thumbnail',
+        video_url: mod_video.video_url,
+        video_type: mod_video.video_type,
+        is_acf: false,
+        thumbnail: image_thumble,
+        class: 'w-full relative aspect-[312/199] video-product-tabs mt-4 rounded-[10px] overflow-hidden lg:mt-8 lg:aspect-[556/296]'
+      -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture tab_titles -%}
+  {%- assign class_title = 'text-base p-4 font-bold text-grey-900 font-body font-medium flex-1 text-center cursor-pointer border-b [&.active]:border-b-2 [&.active]:border-secondary [&.active]:font-bold' -%}
+  {%- if mod_description != blank or product_download_content != blank -%}
+    <div class="flex items-center w-full">
+      {%- if mod_description != blank -%}
+        <tab-title class="{{ class_title }}">{{- product_details_label -}}</tab-title>
+      {%- endif -%}
+      {%- if product_download_content != blank -%}
+        <tab-title class="{{ class_title }}">{{- product_download_label -}}</tab-title>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture tab_contents -%}
+  {%- assign class_content = 'hidden p-8 [&.active]:block wysiwyg wysiwyg--product-tabs' -%}
+  {%- if mod_description != blank or product_download_content != blank -%}
+    {%- if mod_description != blank -%}
+      <tab-content class="{{ class_content }}">{{- mod_description -}}</tab-content>
+    {%- endif -%}
+    {%- if product_download_content != blank -%}
+      <tab-content class="{{ class_content }}">{{- product_download_content -}}</tab-content>
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture accordion_items -%}
+  {%- assign title_class = 'text-base font-bold font-body text-grey-900' -%}
+  {%- if mod_description != blank -%}
+    {%- render 'accordion-item',
+      title: product_details_label,
+      description: mod_description,
+      title_class: title_class,
+      class: 'accordion-product-tabs last:border-b-0',
+      description_class: 'wysiwyg wysiwyg--product-tabs'
+    -%}
+  {%- endif -%}
+  {%- if product_download_content != blank -%}
+    {%- render 'accordion-item',
+      title: product_download_label,
+      description: product_download_content,
+      title_class: title_class,
+      class: 'accordion-product-tabs last:border-b-0'
+    -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture accordion_download -%}{%- endcapture -%}
+
+{%- if accordion_items != blank -%}
+  <div class="lg:hidden my-4">
+    <div class="bg-white px-4 rounded-[10px] border shadow-base">
+      {%- render 'accordion-list',
+        items: accordion_items,
+        class: ''
+      -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{%- if tab_titles != blank and tab_contents -%}
+  <div class="hidden lg:block mt-6">
+    <div class="">
+      <div class="border border-default bg-white rounded-[10px] overflow-hidden shadow-base">
+        {%- render 'tabs',
+          class: 'w-full product-tabs',
+          title: tab_titles,
+          content: tab_contents
+        -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

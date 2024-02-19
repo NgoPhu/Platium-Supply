@@ -1,0 +1,43 @@
+{%- if settings.searchspring_enable and settings.searchspring_site_id != blank -%}
+  <script type="text/javascript">
+    window.addEventListener('load',function () {
+      setTimeout(function () {
+        window.SLS.asyncLoad([
+          {
+            url: '//cdn.searchspring.net/intellisuggest/is.min.js',
+            callback: function () {
+              if (IntelliSuggest) {
+                try {
+                  var product_code = {{ product.selected_or_first_available_variant.sku | json }};
+                  IntelliSuggest.init({
+                    siteId: window.GM_STATE.integrations.searchSpringConfig.siteId,
+                    context:'Product/' + product_code,
+                    seed:[product_code]
+                  });
+                  IntelliSuggest.viewItem({ sku:product_code });
+                  // on variant change
+                  document.addEventListener('product.selectVariant', function (e) {
+                    const variant = e.detail
+                    try {
+                      const variantSku = variant.sku
+                      IntelliSuggest.init({
+                        siteId: window.GM_STATE.integrations.searchSpringConfig.siteId,
+                        context: 'Product/' + variantSku,
+                        seed: [variantSku]
+                      })
+                      IntelliSuggest.viewItem({ sku: variantSku })
+                    } catch (errors) {
+                      console.error('Intellisuggest error, product form', errors)
+                    }
+                  })
+                } catch(err) {
+                  console.error('Intellisuggest error, related products', err)
+                }
+              }
+            }
+          }
+        ]);
+      }, 500);
+    }, { once: true });
+  </script>
+{%- endif -%}

@@ -1,0 +1,40 @@
+{%- assign share_url = share_url | default: shop.url -%}
+
+{%- assign share_title = share_title | url_param_escapelue -%}
+{%- assign subject_text = 'Check out Convert Digital’s ' | append: share_title -%}
+
+{%- if settings.social_sharing_enable -%}
+  {%- if settings.share_facebook -%}
+    <a class="{{- class -}}" target="_blank" href="//www.facebook.com/sharer.php?u={{- share_url | append: share_permalink -}}">
+      {%- render 'icon' with 'icon-facebook-square', class: 'text-grey-900 w-[15px] h-6' -%}
+      {{ 'general.social.article.share' | t }}
+    </a>
+  {%- endif -%}
+  {%- if settings.share_pinterest -%}
+    <a
+      class="{{- class -}}"
+      target="_blank"
+      href="//pinterest.com/pin/create/button/?url={{ share_url | append: share_permalink }}&amp;media={{ share_image | image_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}"
+    >
+      {%- render 'icon' with 'icon-pinterest', class: 'text-grey-900 w-[15px] h-6' -%}
+      {{ 'general.social.article.pin' | t }}
+    </a>
+  {%- endif -%}
+  {%- if settings.share_twitter -%}
+    <a
+      class="{{- class -}}"
+      target="_blank"
+      href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url=%0a{{ share_url | append: share_permalink }}"
+    >
+      {%- render 'icon' with 'icon-twitter', class: 'text-grey-900 w-[15px] h-6' -%}
+      {{ 'general.social.article.tweet' | t }}
+    </a>
+  {%- endif -%}
+  {%- if settings.share_email -%}
+    {%- assign copy_test_email = '' | append: share_url | append: share_permalink -%}
+    <a class="{{- class -}}" target="_blank" href="mailto:?&subject={{ subject_text }}&body={{ copy_test_email }}">
+      {%- render 'icon' with 'icon-envelope', class: 'text-grey-900 w-[15px] h-6' -%}
+      {{ 'general.social.article.email' | t }}
+    </a>
+  {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,70 @@
+{
+  "name": "Wishlist",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_wishlist",
+      "label": "Enable Wishlist",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "wishlist_heading",
+      "label": "Wishlist Heading",
+      "default": "Wishlist"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_guest",
+      "label": "Wishlist Guest",
+      "default": "Guest Shopper"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_save",
+      "label": "Wishlist Save",
+      "default": "Save your list"
+    },
+    {
+      "type": "text",
+      "id": "title_wishlist_empty",
+      "label": "Title wishlist empty",
+      "default": "Love it? Add to My Wishlist"
+    },
+    {
+      "type": "richtext",
+      "id": "description_wishlist_empty",
+      "label": "Description wishlist empty",
+      "default": "<p>My Wishlist allows you to keep track of all of your favourites and shopping activity whether you're on your computer, phone, or tablet. You won't have to waste time searching all over again for that item you loved on your phone the other day - it's all here in one place!<p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_wishlist_empty",
+      "label": "CTA text wishlist empty",
+      "default": "Continue shopping"
+    },
+    {
+      "type": "url",
+      "id": "cta_link_wishlist_empty",
+      "label": "CTA link wishlist empty"
+    },
+    {
+      "type": "text",
+      "id": "save_wishlist_title",
+      "label": "Save Wishlist Title",
+      "default": "Save your list"
+    },
+    {
+      "type": "text",
+      "id": "save_wishlist_description",
+      "label": "Save Wishlist Description",
+      "default": "You are currently shopping anonymously. Login to save your wishlist items."
+    },
+    {
+      "type": "text",
+      "id": "save_wishlist_cta_text",
+      "label": "Save Wishlist Button",
+      "default": "Log In"
+    }
+  ]
+}

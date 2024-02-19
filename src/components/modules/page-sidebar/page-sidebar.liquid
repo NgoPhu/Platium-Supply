@@ -1,0 +1,35 @@
+{%- if sidebar_menu != blank -%}
+  <page-sidebar>
+    <div class="hidden py-4 w-[240px] rounded-[10px] bg-white border border-default shadow-base lg:block xl:w-[300px]">
+      <h3 class="px-6 py-3 text-base font-bold font-body text-grey-900">{{ 'page.helpful' | t }}</h3>
+      <ul>
+        {%- for link in linklists[sidebar_menu].links -%}
+          <li class="relative text-grey-900 hover:text-link-hover hover:underline {% if link.active %}font-bold bg-success-bg border-l-[6px] border-secondary hover:text-grey-900 hover:no-underline{% endif %}">
+            <a href="{{- link.url -}}" class="block px-6 py-3 w-full text-sm no-underline {% if link.active %}pl-[18px]{% endif %}">
+              <span class="flex-1">{{- link.title -}}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="block pl-[18px] py-[14px] text-sm text-grey-900 font-semibold rounded-lg border-2 border-default bg-white lg:hidden">
+      <select class="select-sidebar w-full border-0 bg-transparent p-0 appearance-none focus:ring-0 bg-[right_18px_center] js-select">
+        {%- for link in linklists[sidebar_menu].links -%}
+          <option value="{{- link.url -}}" class="js-option">
+            {{- link.title -}}
+          </option>
+        {%- endfor -%}
+      </select>
+    </div>
+  </page-sidebar>
+{%- endif -%}
+
+{%- capture src_url -%}
+  {{- "module-page-sidebar.js" | asset_url -}}
+{%- endcapture -%}
+{%- render "atom_script",
+  src: src_url,
+  priority: "important",
+  type: "defer"
+-%}

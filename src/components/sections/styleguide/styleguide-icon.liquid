@@ -1,0 +1,17 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+{%- render 'styleguide-icon' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Icons",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Icons"
+    }
+  ]
+}
+{% endschema %}

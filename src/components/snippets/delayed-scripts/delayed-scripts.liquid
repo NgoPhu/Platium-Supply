@@ -1,0 +1,24 @@
+{%- comment -%}
+  Prevent loading third party scripts until a user has scrolled, along with some timeout.
+
+  https://www.gatsbyjs.com/blog/2019-08-30-speed-up-your-time-to-interactive-by-delaying-third-party-scripts/
+{%- endcomment -%}
+
+<script>
+  window.SLS = window.SLS || {}
+  window.SLS.asyncLoad = function (urls) {
+    for (var i = 0; i < urls.length; i++) {
+      var s = document.createElement('script')
+      s.type = 'text/javascript'
+      s.defer = true
+      if (typeof urls[i] === 'string') {
+        s.src = urls[i]
+      } else {
+        s.src = urls[i].url
+        s.onload = urls[i].callback
+      }
+      var x = document.getElementsByTagName('script')[0]
+      x.parentNode.insertBefore(s, x)
+    }
+  }
+</script>

@@ -1,0 +1,18 @@
+{%- render 'styleguide-heading', heading: section.settings.title -%}
+
+{%- render 'styleguide-additional' -%}
+
+{% schema %}
+{
+  "name": "Styleguide Additional",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Additionals"
+    }
+  ]
+}
+{% endschema %}

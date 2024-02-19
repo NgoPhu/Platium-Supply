@@ -1,0 +1,52 @@
+{%- if section.settings.form_script != blank -%}
+  <div class="bg-grey-100 py-8 lg:py-[72px]" style="--text-color: {{ section.settings.text_color }}">
+    <div class="container">
+      <div class="w-full max-w-[724px] mx-auto">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="text-3xl lg:text-4xl font-bold font-body text-[var(--text-color)] text-center mb-4">{{- section.settings.heading -}}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="text-intro-text text-center font-sans text-grey-600 [&>p>a]:text-secondary [&>p>a]:underline [&>p>a]:hover:text-secondary-hover">{{- section.settings.description -}}</div>
+        {%- endif -%}
+        <div class="mt-6 lg:mt-12">
+          {{- section.settings.form_script -}}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Contact Module",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color Heading",
+      "default": "#3D1466"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "form_script",
+      "label": "Contact Form Dotdigital",
+      "default": "<script src=\"\/\/customercare.platinumhealthsupply.com.au\/resources\/sharing\/embed.js?sharing=lp-embed&domain=customercare.platinumhealthsupply.com.au&id=7L45-A2R%2F%22\"><\/script>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Module"
+    }
+  ]
+}
+{% endschema %}

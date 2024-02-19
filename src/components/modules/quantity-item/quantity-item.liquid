@@ -1,0 +1,15 @@
+<h2 id="quantity-item" class="{{- class -}}"></h2>
+
+{% comment %}
+  <---------------- Section JS handling ---------------->
+  The below code will create a minified js version of preact code.
+  The render script accepts 3 variables: srcUrl, priority of load, and async or defer
+{% endcomment %}
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-quantity-item.js' | asset_url -}}
+  {%- endcapture -%}
+
+  {%- render 'atom_script', src: src_url, type: 'defer' -%}
+{%- endunless -%}

@@ -1,0 +1,63 @@
+@layer components {
+  .toggle-input__input {
+    @apply invisible absolute -ml-20;
+
+    &:checked {
+      & + .toggle-input__label {
+        &::before {
+          @apply border-transparent bg-secondary;
+        }
+
+        &::after {
+          @apply translate-x-4;
+        }
+      }
+    }
+
+    &:disabled {
+      & + .toggle-input__label {
+        @apply pointer-events-none;
+
+        &::before {
+          @apply border-default bg-default;
+        }
+
+        &::after {
+          @apply bg-grey-400;
+        }
+      }
+    }
+  }
+
+  .toggle-input__label {
+    @apply relative block cursor-pointer select-none pl-11 outline-none text-grey-600;
+
+    &::before {
+      @apply absolute top-1/2 left-0 block h-5 w-9 -translate-y-1/2 rounded-full border-[1px] border-solid border-default bg-default transition-all content-[""];
+    }
+
+    &::after {
+      @apply absolute top-1/2 left-1 block h-[14px] w-[14px] -translate-y-1/2 rounded-full bg-white transition-transform content-[""];
+    }
+  }
+
+  .toggle-input-ndis {
+    .toggle-input__label {
+      @apply text-sm text-grey-600 ml-2;
+    }
+
+    .toggle-input__input {
+      &:checked {
+        & + .toggle-input__label {
+          &::before {
+            @apply border-transparent bg-custom-2;
+          }
+  
+          &::after {
+            @apply translate-x-4;
+          }
+        }
+      }
+    }
+  }
+}
